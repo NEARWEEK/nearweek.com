@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "editions",
+  "info": {
+    "singularName": "edition",
+    "pluralName": "editions",
+    "displayName": "Edition",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Resume": {
+      "type": "richtext",
+      "maxLength": 600
+    },
+    "Images": {
+      "type": "component",
+      "repeatable": false,
+      "component": "images.images"
+    },
+    "Body": {
+      "type": "richtext",
+      "required": true
+    },
+    "views": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "likes": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    }
+  }
+}
