@@ -1,0 +1,11 @@
+.header{
+    min-height: 32px;
+    border-bottom: 2px solid #ccc;
+}
+
+.nav-container{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
