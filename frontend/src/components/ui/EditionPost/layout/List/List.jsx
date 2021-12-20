@@ -28,7 +28,7 @@ const List = ({ data }) => {
       flex: 0.55,
       borderRadius: "0 12px 12px 0",
       background: "#f7f7f7",
-      padding: "24px 0 0 24px",
+      padding: "16px 0 0 24px",
     },
     postDate: {
       color: "#2013fb",
@@ -37,8 +37,8 @@ const List = ({ data }) => {
     },
     postTitle: {
       fontSize: "28px",
-      marginTop: "12px",
-      marginBottom: "12px",
+      marginTop: "6px",
+      marginBottom: "6px",
     },
     postNumber: {
       color: "#2013fb",

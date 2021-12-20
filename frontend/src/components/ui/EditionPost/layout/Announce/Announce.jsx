@@ -7,14 +7,12 @@ import {
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Image from "./Image/image";
-import { useMatch } from "react-router-dom";
 
 const Announce = ({ edition }) => {
-  let match = useMatch("/editions/:editionId");
   const useStyles = makeStyles(() => ({
     latestPost: {
       marginTop: "24px",
-      marginBottom: "24px",
+      marginBottom: "36px",
       width: "100%",
       background: "#dbd9d7",
       borderRadius: "12px",

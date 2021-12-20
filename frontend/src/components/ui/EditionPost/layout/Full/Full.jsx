@@ -4,20 +4,38 @@ import { useMatch } from "react-router";
 import { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faCommentAlt,
+  faEye,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TOKEN = process.env.REACT_APP_API_KEY;
 
 const Full = () => {
   const useStyles = makeStyles(() => ({
-    container: {
+    contentContainer: {
       width: 900,
       margin: "0 auto",
       position: "relative",
     },
     headerBlock: {
-      marginTop: "32px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      height: "100%",
+      minHeight: "calc(302px - 6px)",
+    },
+    headerBlockFooter: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: "36px",
+      color: "#fff",
+      fontSize: "14px",
     },
     link: {
       color: "#fff",
@@ -27,8 +45,9 @@ const Full = () => {
     },
     breadcrumb: {
       color: "#ffffff99",
+      marginTop: "32px",
     },
-    header: {
+    headerContainer: {
       position: "absolute",
       top: "76px",
       width: "100%",
@@ -45,6 +64,21 @@ const Full = () => {
     img: {
       width: "100%",
       height: "320px",
+    },
+    postTitle: {
+      fontSize: "48px",
+      color: "#fff",
+      margin: "4px 0",
+    },
+    postDate: {
+      marginRight: "24px",
+    },
+    postWidgets: {
+      display: "flex",
+      alignItems: "center",
+    },
+    postWidget: {
+      paddingRight: "24px",
     },
   }));
   const match = useMatch(`/editions/:editionId`);
@@ -75,12 +109,17 @@ const Full = () => {
   }, []);
   const classes = useStyles();
 
+  console.log(edition);
   return (
     <>
       <Navbar />
       {edition && (
         <>
-          <Box display="flex" flexDirection="row" className={classes.header}>
+          <Box
+            display="flex"
+            flexDirection="row"
+            className={classes.headerContainer}
+          >
             <div
               style={{
                 backgroundImage: `url('${edition.attributes.Image.data.attributes.url}')`,
@@ -92,9 +131,9 @@ const Full = () => {
               className={"banner " + classes.img}
             />
           </Box>
-          <Box className={classes.container}>
+          <Box className={classes.contentContainer}>
             <Box className={classes.headerBlock}>
-              <span className={classes.breadcrumb}>
+              <Box className={classes.breadcrumb}>
                 <a className={classes.link} href="/editions">
                   <FontAwesomeIcon
                     className={classes.icon}
@@ -105,7 +144,34 @@ const Full = () => {
                 <span className={classes.current}>
                   {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
                 </span>
-              </span>
+              </Box>
+              <Box>
+                <h2 className={classes.postTitle}>
+                  {" "}
+                  {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
+                </h2>
+                <Box className={classes.headerBlockFooter}>
+                  <Box display="inline-flex">
+                    <span className={classes.postDate}>
+                      29 NOV – 5 DEC 2021
+                    </span>
+                    <div className={classes.postWidgets}>
+                      <span className={classes.postWidget}>
+                        <FontAwesomeIcon icon={faEye} />{" "}
+                        {edition.attributes.views}
+                      </span>
+                      <span className={classes.postWidget}>
+                        <FontAwesomeIcon icon={faThumbsUp} />{" "}
+                        {edition.attributes.likes}
+                      </span>
+                      <span className={classes.postWidget}>
+                        <FontAwesomeIcon icon={faCommentAlt} /> 0
+                      </span>
+                    </div>
+                  </Box>
+                  <Box>Actions</Box>
+                </Box>
+              </Box>
             </Box>
           </Box>
         </>
