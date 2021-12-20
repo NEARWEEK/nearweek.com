@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_highlight_highlights",
+  "info": {
+    "displayName": "Highlight",
+    "icon": "external-link-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Link": {
+      "type": "richtext",
+      "maxLength": 1
+    }
+  }
+}
