@@ -11,7 +11,7 @@ const Image = ({ data }) => {
   }));
 
   let medium;
-  const url = process.env.REACT_APP_BACKEND_URL;
+  const url = "/uploads/";
   if (data) {
     medium = `${
       url + data.attributes.Image.data.attributes.formats.medium.url

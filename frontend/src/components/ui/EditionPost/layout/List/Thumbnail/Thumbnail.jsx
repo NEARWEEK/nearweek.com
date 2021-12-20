@@ -16,7 +16,7 @@ const Thumbnail = ({ data }) => {
   let small;
   let medium;
   let large;
-  const url = process.env.REACT_APP_BACKEND_URL;
+  const url = "/uploads/";
   if (Image) {
     thumbnail = `${url + Image.data.attributes.formats.thumbnail.url}`;
     small = `${url + Image.data.attributes.formats.small.url}`;

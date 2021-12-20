@@ -11,7 +11,6 @@ import { useMatch } from "react-router-dom";
 
 const Announce = ({ edition }) => {
   let match = useMatch("/editions/:editionId");
-  console.log("match", match);
   const useStyles = makeStyles(() => ({
     latestPost: {
       marginTop: "24px",
