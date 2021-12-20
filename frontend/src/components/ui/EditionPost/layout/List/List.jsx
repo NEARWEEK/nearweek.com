@@ -10,7 +10,6 @@ import Thumbnail from "./Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
 
 const List = ({ data }) => {
-  const url = process.env.REACT_APP_BACKEND_URL;
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
