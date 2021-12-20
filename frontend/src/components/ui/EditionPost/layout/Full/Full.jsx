@@ -137,7 +137,7 @@ const Full = () => {
       const curr = ids.indexOf(edition.id);
       if (curr !== ids.length - 1) {
         navigate(`/editions/${ids[curr + 1]}`);
-        location.reload();
+        window.location.reload();
       }
     }
   };
@@ -148,7 +148,7 @@ const Full = () => {
       const curr = ids.indexOf(edition.id);
       if (curr !== 0) {
         navigate(`/editions/${ids[curr - 1]}`);
-        location.reload();
+        window.location.reload();
       }
     }
   };
