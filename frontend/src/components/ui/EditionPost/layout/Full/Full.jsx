@@ -50,7 +50,6 @@ const Full = () => {
   const match = useMatch(`/editions/:editionId`);
 
   const [edition, setEdition] = useState(null);
-  const url = process.env.REACT_APP_BACKEND_URL;
 
   const loadEdition = async () => {
     const headers = new Headers({
@@ -84,9 +83,7 @@ const Full = () => {
           <Box display="flex" flexDirection="row" className={classes.header}>
             <div
               style={{
-                backgroundImage: `url('${
-                  url + edition.attributes.Image.data.attributes.url
-                }')`,
+                backgroundImage: `url('${edition.attributes.Image.data.attributes.url}')`,
                 backgroundSize: "cover",
                 backgroundPosition: "50% 50%",
                 width: "100%",
