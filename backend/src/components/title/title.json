@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_title_titles",
+  "info": {
+    "displayName": "Title",
+    "icon": "info",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "default": "Edition"
+    },
+    "Number": {
+      "type": "integer"
+    }
+  }
+}

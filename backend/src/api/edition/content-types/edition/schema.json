@@ -12,17 +12,9 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
-      "type": "string"
-    },
     "Resume": {
       "type": "richtext",
-      "maxLength": 600
-    },
-    "Images": {
-      "type": "component",
-      "repeatable": false,
-      "component": "images.images"
+      "maxLength": 300
     },
     "Body": {
       "type": "richtext",
@@ -37,6 +29,28 @@
       "type": "integer",
       "min": 0,
       "default": 0
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "Title": {
+      "displayName": "Title",
+      "type": "component",
+      "repeatable": false,
+      "component": "title.title",
+      "required": true
+    },
+    "Highlights": {
+      "type": "component",
+      "repeatable": true,
+      "component": "highlight.highlight"
     }
   }
 }
