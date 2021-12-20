@@ -11,11 +11,8 @@ const Image = ({ data }) => {
   }));
 
   let medium;
-  const url = "/uploads/";
   if (data) {
-    medium = `${
-      url + data.attributes.Image.data.attributes.formats.medium.url
-    }`;
+    medium = `${data.attributes.Image.data.attributes.formats.medium.url}`;
   }
   const classes = useStyles();
   return (
