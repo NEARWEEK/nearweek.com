@@ -16,16 +16,15 @@ const Thumbnail = ({ data }) => {
   let small;
   let medium;
   let large;
-  const url = "/uploads/";
   if (Image) {
-    thumbnail = `${url + Image.data.attributes.formats.thumbnail.url}`;
-    small = `${url + Image.data.attributes.formats.small.url}`;
+    thumbnail = `${Image.data.attributes.formats.thumbnail.url}`;
+    small = `${Image.data.attributes.formats.small.url}`;
     medium = Image.data.attributes.formats.medium
-      ? `${url + Image.data.attributes.formats.medium.url}`
-      : `${url + Image.data.attributes.formats.small.url}`;
+      ? `${Image.data.attributes.formats.medium.url}`
+      : `${Image.data.attributes.formats.small.url}`;
     large = Image.data.attributes.formats.large
-      ? `${url + Image.data.attributes.formats.large.url}`
-      : `${url + Image.data.attributes.formats.medium.url}`;
+      ? `${Image.data.attributes.formats.large.url}`
+      : `${Image.data.attributes.formats.medium.url}`;
   }
   const classes = useStyles();
   return (
