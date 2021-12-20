@@ -30,7 +30,6 @@ module.exports = createCoreController("api::edition.edition", ({ strapi }) => ({
   },
 
   async find(ctx, populate) {
-    console.log(populate);
     // some custom logic here
     ctx.query = { ...ctx.query, local: "en" };
 
@@ -58,6 +57,10 @@ module.exports = createCoreController("api::edition.edition", ({ strapi }) => ({
       .service("api::edition.edition")
       .findOne(id, query);
 
+    const allEditions = await strapi.service("api::edition.edition").find({});
+
+    const ids = allEditions.results.map((item) => item.id);
+
     const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
 
     const increaseView = Number(sanitizedEntity.views) + 1;
@@ -71,7 +74,6 @@ module.exports = createCoreController("api::edition.edition", ({ strapi }) => ({
         },
       }
     );
-
-    return this.transformResponse(sanitizedEntity);
+    return this.transformResponse(sanitizedEntity, { ids: ids });
   },
 }));
