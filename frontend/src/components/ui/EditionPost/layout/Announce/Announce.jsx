@@ -8,7 +8,7 @@ import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Image from "./Image/image";
 
-const Announce = ({ edition }) => {
+const Announce = ({ edition, ids }) => {
   const useStyles = makeStyles(() => ({
     latestPost: {
       marginTop: "24px",

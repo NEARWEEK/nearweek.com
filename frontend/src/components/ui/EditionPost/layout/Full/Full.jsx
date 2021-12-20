@@ -11,6 +11,11 @@ import {
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const TOKEN = process.env.REACT_APP_API_KEY;
 
@@ -80,10 +85,25 @@ const Full = () => {
     postWidget: {
       paddingRight: "24px",
     },
+    actionButton: {
+      padding: "12px !important",
+      backgroundColor: " #cccccc85 !important",
+      borderRadius: "8px !important",
+      margin: "0 6px !important",
+      fontSize: "12px !important",
+      fontWeight: "600 !important",
+      letterSpacing: "1.25px !important",
+    },
+    actionIcon: {
+      color: "#fff",
+      fontSize: "14px !important",
+    },
   }));
   const match = useMatch(`/editions/:editionId`);
 
   const [edition, setEdition] = useState(null);
+  const [ids, setIds] = useState([]);
+  const navigate = useNavigate();
 
   const loadEdition = async () => {
     const headers = new Headers({
@@ -102,14 +122,39 @@ const Full = () => {
   };
 
   useEffect(async () => {
-    const { data } = await loadEdition();
+    const { data, meta } = await loadEdition();
     if (data) {
       setEdition(data);
+      if (meta) {
+        setIds(meta.ids);
+      }
     }
   }, []);
+
+  const handleForward = (e) => {
+    e.preventDefault();
+    if (ids) {
+      const curr = ids.indexOf(edition.id);
+      if (curr !== ids.length - 1) {
+        navigate(`/editions/${ids[curr + 1]}`);
+        location.reload();
+      }
+    }
+  };
+
+  const handleBackward = (e) => {
+    e.preventDefault();
+    if (ids) {
+      const curr = ids.indexOf(edition.id);
+      if (curr !== 0) {
+        navigate(`/editions/${ids[curr - 1]}`);
+        location.reload();
+      }
+    }
+  };
+
   const classes = useStyles();
 
-  console.log(edition);
   return (
     <>
       <Navbar />
@@ -169,7 +214,29 @@ const Full = () => {
                       </span>
                     </div>
                   </Box>
-                  <Box>Actions</Box>
+                  <Box>
+                    <IconButton
+                      color="primary"
+                      className={classes.actionButton}
+                      onClick={(e) => handleBackward(e)}
+                    >
+                      <ArrowBackIosIcon className={classes.actionIcon} />
+                    </IconButton>
+                    <Button
+                      className={classes.actionButton}
+                      variant="contained"
+                      disableElevation
+                    >
+                      CURRENT
+                    </Button>
+                    <IconButton
+                      color="primary"
+                      onClick={(e) => handleForward(e)}
+                      className={classes.actionButton}
+                    >
+                      <ArrowForwardIosIcon className={classes.actionIcon} />
+                    </IconButton>
+                  </Box>
                 </Box>
               </Box>
             </Box>

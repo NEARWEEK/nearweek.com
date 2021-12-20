@@ -4,7 +4,7 @@ import styles from "./editions.module.css";
 import Box from "@mui/material/Box";
 import makeStyles from "@mui/styles/makeStyles";
 import { useEffect, useState } from "react";
-import ViewAnnounce from "../components/ui/EditionPost/layout/Announce/Announce";
+import Announce from "../components/ui/EditionPost/layout/Announce/Announce";
 import EditionPost from "../components/ui/EditionPost/EditionPost";
 
 const TOKEN = process.env.REACT_APP_API_KEY;
@@ -50,13 +50,18 @@ const EditionsPage = () => {
       setEditions(data);
     }
   }, []);
-
+  let editionIds = [];
+  if (editions) {
+    editionIds = editions.data.map((item) => {
+      return item.id;
+    });
+  }
   const classes = useStyles();
   return (
     <>
       <Navbar />
       <Box className={classes.mainContainer}>
-        <ViewAnnounce edition={editions.data[0]} />
+        <Announce edition={editions.data[0]} ids={editionIds} />
         <div className={classes.latestEditions}>
           <div className={classes.blockTitle}>Latest Editions</div>
           <div className={styles.editionsList}>
