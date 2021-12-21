@@ -50,18 +50,12 @@ const EditionsPage = () => {
       setEditions(data);
     }
   }, []);
-  let editionIds = [];
-  if (editions) {
-    editionIds = editions.data.map((item) => {
-      return item.id;
-    });
-  }
   const classes = useStyles();
   return (
     <>
       <Navbar />
       <Box className={classes.mainContainer}>
-        <Announce edition={editions.data[0]} ids={editionIds} />
+        <Announce edition={editions.data[0]} />
         <div className={classes.latestEditions}>
           <div className={classes.blockTitle}>Latest Editions</div>
           <div className={styles.editionsList}>
