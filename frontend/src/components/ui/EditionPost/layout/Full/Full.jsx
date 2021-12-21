@@ -10,12 +10,20 @@ import {
   faEye,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import IosShareIcon from "@mui/icons-material/IosShare";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+
+library.add(faDiscord);
 
 const TOKEN = process.env.REACT_APP_API_KEY;
 
@@ -98,6 +106,34 @@ const Full = () => {
       color: "#fff",
       fontSize: "14px !important",
     },
+    postActions: {
+      marginTop: "36px",
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      "& .MuiButton-root": {
+        margin: "0 8px",
+        fontWeight: "700 !important",
+        borderRadius: "10px !important",
+      },
+    },
+    likeBtn: {
+      color: "#0d00ff  !important",
+      backgroundColor: "#e1dff5 !important",
+    },
+    shareBtn: {
+      backgroundColor: "#0d00ff !important",
+    },
+    twitterBtn: {
+      backgroundColor: "#1f9bf0 !important",
+    },
+    telegramBtn: {
+      backgroundColor: "#000000 !important",
+    },
+    discordBtn: {
+      backgroundColor: "#36393e !important",
+    },
   }));
   const match = useMatch(`/editions/:editionId`);
 
@@ -115,8 +151,8 @@ const Full = () => {
       credentials: "include",
     };
     const response = await fetch(
-      `/api/editions/${match.params.editionId}?populate=*`,
-      options
+        `/api/editions/${match.params.editionId}?populate=*`,
+        options
     );
     return await response.json();
   };
@@ -153,97 +189,151 @@ const Full = () => {
     }
   };
 
+  const PostActions = () => {
+    return (
+        <Box className={classes.postActions}>
+          <Box>
+            {" "}
+            <Button
+                className={classes.shareBtn}
+                variant="contained"
+                disableElevation
+                startIcon={<IosShareIcon />}
+            >
+              SHARE
+            </Button>
+            <Button
+                className={classes.twitterBtn}
+                variant="contained"
+                disableElevation
+                startIcon={<TwitterIcon />}
+            >
+              TWITTER
+            </Button>
+            <Button
+                className={classes.telegramBtn}
+                variant="contained"
+                disableElevation
+                startIcon={<TelegramIcon />}
+            >
+              TELEGRAM
+            </Button>
+            <Button
+                className={classes.discordBtn}
+                variant="contained"
+                disableElevation
+                startIcon={<FontAwesomeIcon icon={faDiscord} />}
+            >
+              DISCORD
+            </Button>
+          </Box>
+          <Box>
+            {" "}
+            <Button
+                className={classes.likeBtn}
+                variant="contained"
+                disableElevation
+                startIcon={<ThumbUpIcon />}
+            >
+              Like
+            </Button>
+          </Box>
+        </Box>
+    );
+  };
+
   const classes = useStyles();
 
   return (
-    <>
-      <Navbar />
-      {edition && (
-        <>
-          <Box
-            display="flex"
-            flexDirection="row"
-            className={classes.headerContainer}
-          >
-            <div
-              style={{
-                backgroundImage: `url('${edition.attributes.Image.data.attributes.url}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "50% 50%",
-                width: "100%",
-                height: "100%",
-              }}
-              className={"banner " + classes.img}
-            />
-          </Box>
-          <Box className={classes.contentContainer}>
-            <Box className={classes.headerBlock}>
-              <Box className={classes.breadcrumb}>
-                <a className={classes.link} href="/editions">
-                  <FontAwesomeIcon
-                    className={classes.icon}
-                    icon={faChevronLeft}
-                  />
-                  <span>Editions / </span>
-                </a>
-                <span className={classes.current}>
+      <>
+        <Navbar />
+        {edition && (
+            <>
+              <Box
+                  display="flex"
+                  flexDirection="row"
+                  className={classes.headerContainer}
+              >
+                <div
+                    style={{
+                      backgroundImage: `url('${edition.attributes.Image.data.attributes.url}')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "50% 50%",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    className={"banner " + classes.img}
+                />
+              </Box>
+              <Box className={classes.contentContainer}>
+                <Box className={classes.headerBlock}>
+                  <Box className={classes.breadcrumb}>
+                    <a className={classes.link} href="/editions">
+                      <FontAwesomeIcon
+                          className={classes.icon}
+                          icon={faChevronLeft}
+                      />
+                      <span>Editions / </span>
+                    </a>
+                    <span className={classes.current}>
                   {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
                 </span>
-              </Box>
-              <Box>
-                <h2 className={classes.postTitle}>
-                  {" "}
-                  {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
-                </h2>
-                <Box className={classes.headerBlockFooter}>
-                  <Box display="inline-flex">
+                  </Box>
+                  <Box>
+                    <h2 className={classes.postTitle}>
+                      {" "}
+                      {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
+                    </h2>
+                    <Box className={classes.headerBlockFooter}>
+                      <Box display="inline-flex">
                     <span className={classes.postDate}>
                       29 NOV – 5 DEC 2021
                     </span>
-                    <div className={classes.postWidgets}>
+                        <div className={classes.postWidgets}>
                       <span className={classes.postWidget}>
                         <FontAwesomeIcon icon={faEye} />{" "}
                         {edition.attributes.views}
                       </span>
-                      <span className={classes.postWidget}>
+                          <span className={classes.postWidget}>
                         <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                        {edition.attributes.likes}
+                            {edition.attributes.likes}
                       </span>
-                      <span className={classes.postWidget}>
+                          <span className={classes.postWidget}>
                         <FontAwesomeIcon icon={faCommentAlt} /> 0
                       </span>
-                    </div>
-                  </Box>
-                  <Box>
-                    <IconButton
-                      color="primary"
-                      className={classes.actionButton}
-                      onClick={(e) => handleBackward(e)}
-                    >
-                      <ArrowBackIosIcon className={classes.actionIcon} />
-                    </IconButton>
-                    <Button
-                      className={classes.actionButton}
-                      variant="contained"
-                      disableElevation
-                    >
-                      CURRENT
-                    </Button>
-                    <IconButton
-                      color="primary"
-                      onClick={(e) => handleForward(e)}
-                      className={classes.actionButton}
-                    >
-                      <ArrowForwardIosIcon className={classes.actionIcon} />
-                    </IconButton>
+                        </div>
+                      </Box>
+                      <Box>
+                        <IconButton
+                            color="primary"
+                            className={classes.actionButton}
+                            onClick={(e) => handleBackward(e)}
+                        >
+                          <ArrowBackIosIcon className={classes.actionIcon} />
+                        </IconButton>
+                        <Button
+                            className={classes.actionButton}
+                            variant="contained"
+                            disableElevation
+                        >
+                          CURRENT
+                        </Button>
+                        <IconButton
+                            color="primary"
+                            onClick={(e) => handleForward(e)}
+                            className={classes.actionButton}
+                        >
+                          <ArrowForwardIosIcon className={classes.actionIcon} />
+                        </IconButton>
+                      </Box>
+                    </Box>
                   </Box>
                 </Box>
+                <PostActions />
               </Box>
-            </Box>
-          </Box>
-        </>
-      )}
-    </>
+            </>
+        )}
+      </>
   );
 };
 
