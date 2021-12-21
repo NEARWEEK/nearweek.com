@@ -23,6 +23,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import ReactMarkdown from "react-markdown";
+import Typography from "@mui/material/Typography";
 
 library.add(faDiscord);
 
@@ -33,7 +34,6 @@ const Full = () => {
     pageWrapper: {
       backgroundColor: "#f7f7f7",
       width: "100vw",
-      height: "calc(100vh - 80px)",
     },
     contentContainer: {
       width: 900,
@@ -412,7 +412,7 @@ const Full = () => {
                 </Box>
               </Box>
               <Box>
-                <Box>NEAR’s week by the numbers</Box>
+                <Typography variant="h4">NEAR’s week by the numbers</Typography>
               </Box>
             </Box>
           </Box>
