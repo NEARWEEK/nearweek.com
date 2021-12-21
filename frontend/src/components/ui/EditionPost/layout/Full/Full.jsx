@@ -10,12 +10,20 @@ import {
   faEye,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import IosShareIcon from "@mui/icons-material/IosShare";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+
+library.add(faDiscord);
 
 const TOKEN = process.env.REACT_APP_API_KEY;
 
@@ -98,6 +106,34 @@ const Full = () => {
       color: "#fff",
       fontSize: "14px !important",
     },
+    postActions: {
+      marginTop: "36px",
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      "& .MuiButton-root": {
+        margin: "0 8px",
+        fontWeight: "700 !important",
+        borderRadius: "10px !important",
+      },
+    },
+    likeBtn: {
+      color: "#0d00ff  !important",
+      backgroundColor: "#e1dff5 !important",
+    },
+    shareBtn: {
+      backgroundColor: "#0d00ff !important",
+    },
+    twitterBtn: {
+      backgroundColor: "#1f9bf0 !important",
+    },
+    telegramBtn: {
+      backgroundColor: "#000000 !important",
+    },
+    discordBtn: {
+      backgroundColor: "#36393e !important",
+    },
   }));
   const match = useMatch(`/editions/:editionId`);
 
@@ -151,6 +187,59 @@ const Full = () => {
         window.location.reload();
       }
     }
+  };
+
+  const PostActions = () => {
+    return (
+      <Box className={classes.postActions}>
+        <Box>
+          {" "}
+          <Button
+            className={classes.shareBtn}
+            variant="contained"
+            disableElevation
+            startIcon={<IosShareIcon />}
+          >
+            SHARE
+          </Button>
+          <Button
+            className={classes.twitterBtn}
+            variant="contained"
+            disableElevation
+            startIcon={<TwitterIcon />}
+          >
+            TWITTER
+          </Button>
+          <Button
+            className={classes.telegramBtn}
+            variant="contained"
+            disableElevation
+            startIcon={<TelegramIcon />}
+          >
+            TELEGRAM
+          </Button>
+          <Button
+            className={classes.discordBtn}
+            variant="contained"
+            disableElevation
+            startIcon={<FontAwesomeIcon icon={faDiscord} />}
+          >
+            DISCORD
+          </Button>
+        </Box>
+        <Box>
+          {" "}
+          <Button
+            className={classes.likeBtn}
+            variant="contained"
+            disableElevation
+            startIcon={<ThumbUpIcon />}
+          >
+            Like
+          </Button>
+        </Box>
+      </Box>
+    );
   };
 
   const classes = useStyles();
@@ -240,6 +329,7 @@ const Full = () => {
                 </Box>
               </Box>
             </Box>
+            <PostActions />
           </Box>
         </>
       )}
