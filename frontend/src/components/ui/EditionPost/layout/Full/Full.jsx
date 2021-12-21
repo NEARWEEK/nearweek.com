@@ -22,6 +22,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+import ReactMarkdown from "react-markdown";
 
 library.add(faDiscord);
 
@@ -29,6 +30,11 @@ const TOKEN = process.env.REACT_APP_API_KEY;
 
 const Full = () => {
   const useStyles = makeStyles(() => ({
+    pageWrapper: {
+      backgroundColor: "#f7f7f7",
+      width: "100vw",
+      height: "calc(100vh - 80px)",
+    },
     contentContainer: {
       width: 900,
       margin: "0 auto",
@@ -149,6 +155,26 @@ const Full = () => {
       fontWeight: "bold",
       marginBottom: "24px",
     },
+    blockTitle: {
+      fontSize: "42px",
+      fontWeight: "900",
+      marginBottom: "24px",
+    },
+    highlightItem: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "start",
+      backgroundColor: "#fff",
+      marginBottom: "12px",
+    },
+    highlightTitle: {
+      fontSize: "20px",
+      margin: "0 24px",
+      fontWeight: "bold",
+      "& a": {
+        color: "#0d00ff",
+      },
+    },
   }));
   const match = useMatch(`/editions/:editionId`);
 
@@ -182,6 +208,7 @@ const Full = () => {
     }
   }, []);
 
+  console.log(edition);
   const handleForward = (e) => {
     e.preventDefault();
     if (ids) {
@@ -266,7 +293,7 @@ const Full = () => {
     return (
       <Box className={classes.containerBody}>
         <p className={classes.postBody}>
-          {isReadMore ? text.slice(0, 150) + "..." : text}
+          {isReadMore ? text.slice(0, 230) + "..." : text}
         </p>
         <span
           onClick={toggleReadMore}
@@ -301,72 +328,93 @@ const Full = () => {
               className={"banner " + classes.img}
             />
           </Box>
-          <Box className={classes.contentContainer}>
-            <Box className={classes.headerBlock}>
-              <Box className={classes.breadcrumb}>
-                <a className={classes.link} href="/editions">
-                  <FontAwesomeIcon
-                    className={classes.icon}
-                    icon={faChevronLeft}
-                  />
-                  <span>Editions / </span>
-                </a>
-                <span className={classes.current}>
-                  {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
-                </span>
-              </Box>
-              <Box>
-                <h2 className={classes.postTitle}>
-                  {" "}
-                  {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
-                </h2>
-                <Box className={classes.headerBlockFooter}>
-                  <Box display="inline-flex">
-                    <span className={classes.postDate}>
-                      29 NOV – 5 DEC 2021
-                    </span>
-                    <div className={classes.postWidgets}>
-                      <span className={classes.postWidget}>
-                        <FontAwesomeIcon icon={faEye} />{" "}
-                        {edition.attributes.views}
+          <Box className={classes.pageWrapper}>
+            <Box className={classes.contentContainer}>
+              <Box className={classes.headerBlock}>
+                <Box className={classes.breadcrumb}>
+                  <a className={classes.link} href="/editions">
+                    <FontAwesomeIcon
+                      className={classes.icon}
+                      icon={faChevronLeft}
+                    />
+                    <span>Editions / </span>
+                  </a>
+                  <span className={classes.current}>
+                    {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
+                  </span>
+                </Box>
+                <Box>
+                  <h2 className={classes.postTitle}>
+                    {" "}
+                    {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
+                  </h2>
+                  <Box className={classes.headerBlockFooter}>
+                    <Box display="inline-flex">
+                      <span className={classes.postDate}>
+                        29 NOV – 5 DEC 2021
                       </span>
-                      <span className={classes.postWidget}>
-                        <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                        {edition.attributes.likes}
-                      </span>
-                      <span className={classes.postWidget}>
-                        <FontAwesomeIcon icon={faCommentAlt} /> 0
-                      </span>
-                    </div>
-                  </Box>
-                  <Box>
-                    <IconButton
-                      color="primary"
-                      className={classes.actionButton}
-                      onClick={(e) => handleBackward(e)}
-                    >
-                      <ArrowBackIosIcon className={classes.actionIcon} />
-                    </IconButton>
-                    <Button
-                      className={classes.actionButton}
-                      variant="contained"
-                      disableElevation
-                    >
-                      CURRENT
-                    </Button>
-                    <IconButton
-                      color="primary"
-                      onClick={(e) => handleForward(e)}
-                      className={classes.actionButton}
-                    >
-                      <ArrowForwardIosIcon className={classes.actionIcon} />
-                    </IconButton>
+                      <div className={classes.postWidgets}>
+                        <span className={classes.postWidget}>
+                          <FontAwesomeIcon icon={faEye} />{" "}
+                          {edition.attributes.views}
+                        </span>
+                        <span className={classes.postWidget}>
+                          <FontAwesomeIcon icon={faThumbsUp} />{" "}
+                          {edition.attributes.likes}
+                        </span>
+                        <span className={classes.postWidget}>
+                          <FontAwesomeIcon icon={faCommentAlt} /> 0
+                        </span>
+                      </div>
+                    </Box>
+                    <Box>
+                      <IconButton
+                        color="primary"
+                        className={classes.actionButton}
+                        onClick={(e) => handleBackward(e)}
+                      >
+                        <ArrowBackIosIcon className={classes.actionIcon} />
+                      </IconButton>
+                      <Button
+                        className={classes.actionButton}
+                        variant="contained"
+                        disableElevation
+                      >
+                        CURRENT
+                      </Button>
+                      <IconButton
+                        color="primary"
+                        onClick={(e) => handleForward(e)}
+                        className={classes.actionButton}
+                      >
+                        <ArrowForwardIosIcon className={classes.actionIcon} />
+                      </IconButton>
+                    </Box>
                   </Box>
                 </Box>
               </Box>
+              <PostActions />
+              <ReadMore>{edition.attributes.Body}</ReadMore>
+              <Box>
+                <Box className={classes.blockTitle}>Highlights</Box>
+                <Box>
+                  {edition && edition.attributes.Highlights ? (
+                    <>
+                      {edition.attributes.Highlights.map((item, index) => (
+                        <Box className={classes.highlightItem} key={index}>
+                          <ReactMarkdown className={classes.highlightTitle}>
+                            {item.Link}
+                          </ReactMarkdown>
+                        </Box>
+                      ))}
+                    </>
+                  ) : null}
+                </Box>
+              </Box>
+              <Box>
+                <Box>NEAR’s week by the numbers</Box>
+              </Box>
             </Box>
-            <PostActions />
-            <ReadMore>{edition.attributes.Body}</ReadMore>
           </Box>
         </>
       )}
