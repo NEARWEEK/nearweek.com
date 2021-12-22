@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import moment from "moment";
 import {
   faCommentAlt,
   faEye,
@@ -63,6 +63,11 @@ const List = ({ data }) => {
     },
   }));
 
+  const getPubDate = (period) => {
+    const dateFrom = moment(period.From).format("DD MMM").toUpperCase();
+    const dateTo = moment(period.To).format("DD MMM YYYY").toUpperCase();
+    return `${dateFrom} - ${dateTo}`;
+  };
   const classes = useStyles();
   return (
     <>
@@ -74,7 +79,7 @@ const List = ({ data }) => {
             </div>
             <div className={classes.postContent}>
               <div className={classes.postDate}>
-                <span>22 – 28 NOV 2021</span>
+                <span>{getPubDate(data.attributes.Period)}</span>
               </div>
               <h3 className={classes.postTitle}>
                 <a href={`/editions/${data.id}`}>
