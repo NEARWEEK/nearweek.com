@@ -24,10 +24,9 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import ReactMarkdown from "react-markdown";
 import Typography from "@mui/material/Typography";
+import * as Utils from "../../../../../Utils/Utils";
 
 library.add(faDiscord);
-
-const TOKEN = process.env.REACT_APP_API_KEY;
 
 const Full = () => {
   const useStyles = makeStyles(() => ({
@@ -182,24 +181,10 @@ const Full = () => {
   const [ids, setIds] = useState([]);
   const navigate = useNavigate();
 
-  const loadEdition = async () => {
-    const headers = new Headers({
-      Authorization: `Bearer ${TOKEN}`,
-      "Content-Type": "application/json",
-    });
-    const options = {
-      headers,
-      credentials: "include",
-    };
-    const response = await fetch(
-      `/api/editions/${match.params.editionId}?populate=*`,
-      options
-    );
-    return await response.json();
-  };
-
   useEffect(async () => {
-    const { data, meta } = await loadEdition();
+    const { data, meta } = await Utils.api.getOneEdition(
+      match.params.editionId
+    );
     if (data) {
       setEdition(data);
       if (meta) {
@@ -208,7 +193,6 @@ const Full = () => {
     }
   }, []);
 
-  console.log(edition);
   const handleForward = (e) => {
     e.preventDefault();
     if (ids) {
