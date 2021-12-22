@@ -8,8 +8,7 @@
   "options": {},
   "attributes": {
     "Link": {
-      "type": "richtext",
-      "maxLength": 1
+      "type": "richtext"
     }
   }
 }
