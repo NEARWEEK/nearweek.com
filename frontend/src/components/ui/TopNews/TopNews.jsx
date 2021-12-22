@@ -1,16 +1,58 @@
 import * as React from "react";
-import rootStyles from "../../../pages/app.module.css";
-import styles from "./top_news.module.css";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import Announce from "../EditionPost/layout/Announce/Announce";
+import Box from "@mui/material/Box";
+import { useEffect, useState } from "react";
+import makeStyles from "@mui/styles/makeStyles";
+import EditionPost from "../EditionPost/EditionPost";
+import * as Utils from "../../../Utils/Utils";
 
 const TopNews = () => {
-  const ShowMore = <a href="#">Show more</a>;
+  const useStyles = makeStyles(() => ({
+    wrapper: {},
+    container: {
+      margin: "0 auto",
+      maxWidth: 1280,
+    },
+    latestEditions: {
+      marginTop: "24px",
+      width: "100%",
+    },
+    blockTitle: {
+      fontSize: "42px",
+      fontWeight: "900",
+      marginBottom: "24px",
+    },
+    blockNews: {
+      display: "flex",
+    },
+    blockColumn: {
+      flex: 0.5,
+    },
+  }));
 
+  const ShowMore = <a href="#">Show more</a>;
+  const [editions, setEditions] = useState({ data: [], meta: {} });
+
+  useEffect(async () => {
+    const data = await Utils.api.getAllEditions();
+    if (data) {
+      setEditions(data);
+    }
+  }, []);
+  const classes = useStyles();
   return (
-    <div className={rootStyles.wrapper}>
-      <div className={rootStyles.container}>
+    <div className={classes.wrapper}>
+      <div className={classes.container}>
         <SectionHeader title={"Top News"} link={ShowMore} />
-        <div className={styles.blockNews}></div>
+        <Box className={classes.blockNews}>
+          <Box className={classes.blockColumn}>
+            <Announce edition={editions.data[0]} />
+          </Box>
+          <Box className={classes.blockColumn}></Box>
+        </Box>
+        <SectionHeader title={"Latest Editions"} link={ShowMore} />
+        <EditionPost editions={editions} />
       </div>
     </div>
   );

@@ -6,8 +6,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { useEffect, useState } from "react";
 import Announce from "../components/ui/EditionPost/layout/Announce/Announce";
 import EditionPost from "../components/ui/EditionPost/EditionPost";
-
-const TOKEN = process.env.REACT_APP_API_KEY;
+import * as Utils from "../Utils/Utils";
 
 const EditionsPage = () => {
   const useStyles = makeStyles(() => ({
@@ -28,28 +27,13 @@ const EditionsPage = () => {
 
   const [editions, setEditions] = useState({ data: [], meta: {} });
 
-  const loadEditions = async () => {
-    const headers = new Headers({
-      Authorization: `Bearer ${TOKEN}`,
-      "Content-Type": "application/json",
-    });
-    const options = {
-      headers,
-      credentials: "include",
-    };
-    const response = await fetch(
-      `/api/editions?populate=*&sort=createdAt:desc`,
-      options
-    );
-    return await response.json();
-  };
-
   useEffect(async () => {
-    const data = await loadEditions();
+    const data = await Utils.api.getAllEditions();
     if (data) {
       setEditions(data);
     }
   }, []);
+
   const classes = useStyles();
   return (
     <>
