@@ -6,9 +6,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import Image from "./Image/image";
+import Image from "./Image/Image";
 
-const Announce = ({ edition, ids }) => {
+const Announce = ({ edition }) => {
   const useStyles = makeStyles(() => ({
     latestPost: {
       marginTop: "24px",

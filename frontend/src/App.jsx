@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme } from "@mui/material";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import responsiveFontSizes from "@mui/material/styles/responsiveFontSizes";
-import ViewPost from "./components/ui/EditionPost/layout/Full/Full";
+import EditionPost from "./components/ui/EditionPost/EditionPost";
 
 function App() {
   let theme = React.useMemo(() => createTheme({}));
@@ -20,7 +20,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route exact path="editions" element={<EditionsPage />} />
-            <Route exact path="editions/:editionId" element={<ViewPost />} />
+            <Route exact path="editions/:editionId" element={<EditionPost />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

@@ -6,10 +6,11 @@ import {
   faEye,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
-import Thumbnail from "./Thumbnail/Thumbnail";
+import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
+import { getPubDate } from "../../../../Utils/Utils";
 
-const List = ({ data }) => {
+const ListItem = ({ data }) => {
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
@@ -63,11 +64,6 @@ const List = ({ data }) => {
     },
   }));
 
-  const getPubDate = (period) => {
-    const dateFrom = moment(period.From).format("DD MMM").toUpperCase();
-    const dateTo = moment(period.To).format("DD MMM YYYY").toUpperCase();
-    return `${dateFrom} - ${dateTo}`;
-  };
   const classes = useStyles();
   return (
     <>
@@ -114,4 +110,4 @@ const List = ({ data }) => {
   );
 };
 
-export default List;
+export default ListItem;
