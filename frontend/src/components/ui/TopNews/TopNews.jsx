@@ -1,10 +1,10 @@
 import * as React from "react";
 import SectionHeader from "../SectionHeader/SectionHeader";
-import Announce from "../EditionPost/layout/Announce/Announce";
+import Announce from "../EditionPost/Announce/Announce";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import EditionPost from "../EditionPost/EditionPost";
+import PostList from "../EditionPost/List/PostList";
 import * as Utils from "../../../Utils/Utils";
 
 const TopNews = () => {
@@ -52,7 +52,7 @@ const TopNews = () => {
           <Box className={classes.blockColumn}></Box>
         </Box>
         <SectionHeader title={"Latest Editions"} link={ShowMore} />
-        <EditionPost editions={editions} />
+        <PostList editions={editions} />
       </div>
     </div>
   );
