@@ -19,6 +19,14 @@ async function loadEditions() {
   return await response.json();
 }
 
+async function loadNews() {
+  const response = await fetch(
+    `/api/news?populate=*&sort=createdAt:desc`,
+    options
+  );
+  return await response.json();
+}
+
 async function loadEdition(editionId) {
   const response = await fetch(
     `/api/editions/${editionId}?populate=*`,
@@ -36,4 +44,5 @@ export function getPubDate(period) {
 export const api = {
   getAllEditions: loadEditions,
   getOneEdition: loadEdition,
+  getAllNews: loadNews,
 };

@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import PostList from "../EditionPost/List/PostList";
 import * as Utils from "../../../Utils/Utils";
+import NewsPost from "../NewsPost/NewsPost";
+import NewsList from "../NewsPost/List/NewsList";
 
 const TopNews = () => {
   const useStyles = makeStyles(() => ({
@@ -25,6 +27,7 @@ const TopNews = () => {
     },
     blockNews: {
       display: "flex",
+      gap: "24px",
     },
     blockColumn: {
       flex: 0.5,
@@ -33,6 +36,7 @@ const TopNews = () => {
 
   const ShowMore = <a href="#">Show more</a>;
   const [editions, setEditions] = useState({ data: [], meta: {} });
+  const [news, setNews] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
     const data = await Utils.api.getAllEditions();
@@ -40,6 +44,14 @@ const TopNews = () => {
       setEditions(data);
     }
   }, []);
+
+  useEffect(async () => {
+    const data = await Utils.api.getAllNews();
+    if (data) {
+      setNews(data);
+    }
+  }, []);
+
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
@@ -49,7 +61,9 @@ const TopNews = () => {
           <Box className={classes.blockColumn}>
             <Announce edition={editions.data[0]} />
           </Box>
-          <Box className={classes.blockColumn}></Box>
+          <Box className={classes.blockColumn}>
+            <NewsList news={news} />
+          </Box>
         </Box>
         <SectionHeader title={"Latest Editions"} link={ShowMore} />
         <PostList editions={editions} />

@@ -1,17 +1,18 @@
-import * as React from "react";
+import Thumbnail from "../../Image/Thumbnail/Thumbnail";
+import { getPubDate } from "../../../../Utils/Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentAlt,
   faEye,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
-import Thumbnail from "../../Image/Thumbnail/Thumbnail";
+import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import { getPubDate } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
 
 const ListItem = ({ data }) => {
-  const matchEdition = useMatch(`/editions/:editionId`);
+  console.log(data);
+  const matchEdition = useMatch(`/news/:articleId`);
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {
@@ -67,6 +68,7 @@ const ListItem = ({ data }) => {
   }));
 
   const classes = useStyles();
+
   return (
     <>
       {data ? (
@@ -76,19 +78,11 @@ const ListItem = ({ data }) => {
               <Thumbnail data={data} />
             </div>
             <div className={classes.postContent}>
-              <div className={classes.postDate}>
-                <span>{getPubDate(data.attributes.Period)}</span>
-              </div>
               <h3 className={classes.postTitle}>
-                <a href={`/editions/${data.id}`}>
-                  {data.attributes.Title.Name}{" "}
-                  <span className={classes.postNumber}>
-                    #{data.attributes.Title.Number}
-                  </span>
-                </a>
+                <a href={`/news/${data.id}`}>{data.attributes.Title} </a>
               </h3>
               <p className={classes.postBody}>
-                {data.attributes.Resume.substring(0, 130)}
+                {data.attributes.Body.substring(0, 130)}
               </p>
               <div className={classes.postFooter}>
                 <div className={classes.postWidgets}>

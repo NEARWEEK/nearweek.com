@@ -24,7 +24,7 @@ function App() {
             <Route exact path="editions" element={<EditionsPage />} />
             <Route exact path="editions/:editionId" element={<EditionPost />} />
             <Route exact path="news" element={<News />} />
-            <Route exact path="news/:newsId" element={<NewsPost />} />
+            <Route exact path="news/:articleId" element={<NewsPost />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
