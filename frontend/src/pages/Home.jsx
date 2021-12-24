@@ -3,7 +3,7 @@ import Navbar from "../components/ui/Navbar/Navbar";
 import "./home.module.css";
 import TopNews from "../components/ui/TopNews/TopNews";
 
-const HomePage = () => {
+const Home = () => {
   return (
     <>
       <Navbar />
@@ -14,4 +14,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;

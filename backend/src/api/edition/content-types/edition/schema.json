@@ -4,7 +4,7 @@
   "info": {
     "singularName": "edition",
     "pluralName": "editions",
-    "displayName": "Edition",
+    "displayName": "Editions",
     "description": ""
   },
   "options": {
@@ -57,6 +57,18 @@
       "type": "component",
       "repeatable": false,
       "component": "pub-period.publication-period",
+      "required": true
+    },
+    "DAOs": {
+      "type": "component",
+      "repeatable": true,
+      "required": true,
+      "component": "highlight.highlight"
+    },
+    "DeFI": {
+      "type": "component",
+      "repeatable": true,
+      "component": "highlight.highlight",
       "required": true
     }
   }
