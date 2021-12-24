@@ -24,14 +24,19 @@ const ListItem = ({ data, meta }) => {
       marginBottom: "24px",
     },
     postImage: {
-      flex: 0.45,
+      minWidth: "45%",
       borderRadius: "12px 0 0 12px",
     },
+    itemContainer: {
+      borderRadius: "12px",
+      display: "flex",
+    },
     postContent: {
-      flex: 0.55,
-      borderRadius: "0 12px 12px 0",
+      minWidth: "55%",
       background: matchEdition ? "#fff" : "#f7f7f7",
-      padding: "16px 0 0 24px",
+    },
+    contentBody: {
+      padding: "16px 16px 0 16px",
     },
     postDate: {
       color: "#2013fb",
@@ -51,9 +56,8 @@ const ListItem = ({ data, meta }) => {
       lineHeight: "24px",
       marginTop: 0,
     },
-    postFooter: {
-      paddingTop: "12px",
-      paddingBottom: "12px",
+    contentFooter: {
+      padding: "12px",
       borderTop: "1px solid #c8c6c6",
     },
     postWidgets: {
@@ -73,30 +77,34 @@ const ListItem = ({ data, meta }) => {
       {data ? (
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
-            {data.attributes.Image.data && (
-              <div className={classes.postImage}>
-                <Thumbnail data={data} url={`/news/${data.id}`} />
-              </div>
-            )}
-            <div className={classes.postContent}>
-              <h3 className={classes.postTitle}>
-                <a href={`/news/${data.id}`}>{data.attributes.Title} </a>
-              </h3>
-              <p className={classes.postBody}>
-                {data.attributes.Body.substring(0, 130)}
-              </p>
-              <div className={classes.postFooter}>
-                <div className={classes.postWidgets}>
-                  <span className={classes.postWidget}>
-                    <FontAwesomeIcon icon={faEye} /> {data.attributes.views}
-                  </span>
-                  <span className={classes.postWidget}>
-                    <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                    {data.attributes.likes}
-                  </span>
-                  <span className={classes.postWidget}>
-                    <FontAwesomeIcon icon={faCommentAlt} /> 0
-                  </span>
+            <div className={classes.itemContainer}>
+              {data.attributes.Image.data && (
+                <div className={classes.postImage}>
+                  <Thumbnail data={data} url={`/news/${data.id}`} />
+                </div>
+              )}
+              <div className={classes.postContent}>
+                <div className={classes.contentBody}>
+                  <h3 className={classes.postTitle}>
+                    <a href={`/news/${data.id}`}>{data.attributes.Title} </a>
+                  </h3>
+                  <p className={classes.postBody}>
+                    {data.attributes.Body.substring(0, 130)}
+                  </p>
+                </div>
+                <div className={classes.contentFooter}>
+                  <div className={classes.postWidgets}>
+                    <span className={classes.postWidget}>
+                      <FontAwesomeIcon icon={faEye} /> {data.attributes.views}
+                    </span>
+                    <span className={classes.postWidget}>
+                      <FontAwesomeIcon icon={faThumbsUp} />{" "}
+                      {data.attributes.likes}
+                    </span>
+                    <span className={classes.postWidget}>
+                      <FontAwesomeIcon icon={faCommentAlt} /> 0
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
