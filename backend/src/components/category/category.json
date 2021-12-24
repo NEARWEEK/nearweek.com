@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_category_categories",
+  "info": {
+    "displayName": "Category",
+    "icon": "list-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "unique": true
+    }
+  }
+}
