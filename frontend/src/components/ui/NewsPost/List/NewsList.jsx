@@ -1,10 +1,10 @@
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import ListItem from "./ListItem";
-import { useMatch } from "react-router";
 
 const NewsList = ({ news }) => {
   const useStyles = makeStyles(() => ({}));
+  console.log(news);
 
   let newsList = [];
   if (news) {
@@ -17,7 +17,7 @@ const NewsList = ({ news }) => {
     <>
       {newsList.length > 0
         ? newsList.map((article, i) => {
-            return <ListItem key={i} data={article} />;
+            return <ListItem key={i} data={article} meta={news.meta} />;
           })
         : null}
     </>

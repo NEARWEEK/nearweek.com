@@ -10,8 +10,7 @@ import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { useMatch } from "react-router";
 
-const ListItem = ({ data }) => {
-  console.log(data);
+const ListItem = ({ data, meta }) => {
   const matchEdition = useMatch(`/news/:articleId`);
 
   const useStyles = makeStyles(() => ({
@@ -74,9 +73,11 @@ const ListItem = ({ data }) => {
       {data ? (
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
-            <div className={classes.postImage}>
-              <Thumbnail data={data} />
-            </div>
+            {data.attributes.Image.data && (
+              <div className={classes.postImage}>
+                <Thumbnail data={data} url={`/news/${data.id}`} />
+              </div>
+            )}
             <div className={classes.postContent}>
               <h3 className={classes.postTitle}>
                 <a href={`/news/${data.id}`}>{data.attributes.Title} </a>
