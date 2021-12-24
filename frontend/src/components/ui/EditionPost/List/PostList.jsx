@@ -5,7 +5,7 @@ import { useState } from "react";
 import ListItem from "./ListItem";
 import { useMatch } from "react-router";
 
-const PostList = ({ editions, exclude }) => {
+const PostList = ({ editions }) => {
   const [moreLength, setMoreLength] = useState(5);
   const matchEdition = useMatch(`/editions/:editionId`);
   const matchEditions = useMatch(`/editions`);

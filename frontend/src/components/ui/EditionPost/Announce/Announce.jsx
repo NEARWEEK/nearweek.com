@@ -6,12 +6,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import Image from "./Image/Image";
+import ImageMedium from "../../Image/Medium/ImageMedium";
 
 const Announce = ({ edition }) => {
   const useStyles = makeStyles(() => ({
     latestPost: {
-      marginTop: "24px",
       marginBottom: "36px",
       width: "100%",
       background: "#dbd9d7",
@@ -64,7 +63,7 @@ const Announce = ({ edition }) => {
       {edition ? (
         <div className={classes.latestPost}>
           <div className={classes.image}>
-            <Image data={edition} />
+            <ImageMedium data={edition} />
           </div>
           <div className={classes.content}>
             <div className={classes.postDate}>

@@ -1,7 +1,7 @@
 import makeStyles from "@mui/styles/makeStyles";
 import * as React from "react";
 
-const Image = ({ data }) => {
+const ImageMedium = ({ data }) => {
   const useStyles = makeStyles(() => ({
     img: {
       width: "100%",
@@ -31,4 +31,4 @@ const Image = ({ data }) => {
     </a>
   );
 };
-export default Image;
+export default ImageMedium;
