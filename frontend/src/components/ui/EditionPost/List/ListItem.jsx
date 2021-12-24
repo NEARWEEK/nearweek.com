@@ -73,7 +73,7 @@ const ListItem = ({ data }) => {
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
             <div className={classes.postImage}>
-              <Thumbnail data={data} />
+              <Thumbnail data={data} url={`/editions/${data.id}`} />
             </div>
             <div className={classes.postContent}>
               <div className={classes.postDate}>

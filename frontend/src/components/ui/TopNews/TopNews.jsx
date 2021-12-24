@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import PostList from "../EditionPost/List/PostList";
 import * as Utils from "../../../Utils/Utils";
-import NewsPost from "../NewsPost/NewsPost";
 import NewsList from "../NewsPost/List/NewsList";
 
 const TopNews = () => {
