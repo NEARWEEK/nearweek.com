@@ -390,7 +390,7 @@ const EditionPost = () => {
               <PostActions />
               <ReadMore>{edition.attributes.Body}</ReadMore>
               <Box>
-                <Box className={classes.blockTitle}>Highlights</Box>
+                <Box className={classes.blockTitle}>{"Highlights"}</Box>
                 <Box>
                   {edition && edition.attributes.Highlights ? (
                     <>
@@ -406,7 +406,39 @@ const EditionPost = () => {
                 </Box>
               </Box>
               <Box>
-                <Typography variant="h4">Latest Editions</Typography>
+                <Box className={classes.blockTitle}>{"DAO's"}</Box>
+                <Box>
+                  {edition && edition.attributes.DAOs ? (
+                    <>
+                      {edition.attributes.DAOs.map((item, index) => (
+                        <Box className={classes.highlightItem} key={index}>
+                          <ReactMarkdown className={classes.highlightTitle}>
+                            {item.Link}
+                          </ReactMarkdown>
+                        </Box>
+                      ))}
+                    </>
+                  ) : null}
+                </Box>
+              </Box>
+              <Box>
+                <Box className={classes.blockTitle}>{"DeFI"}</Box>
+                <Box>
+                  {edition && edition.attributes.DeFI ? (
+                    <>
+                      {edition.attributes.DeFI.map((item, index) => (
+                        <Box className={classes.highlightItem} key={index}>
+                          <ReactMarkdown className={classes.highlightTitle}>
+                            {item.Link}
+                          </ReactMarkdown>
+                        </Box>
+                      ))}
+                    </>
+                  ) : null}
+                </Box>
+              </Box>
+              <Box>
+                <Box className={classes.blockTitle}>{"Latest Editions"}</Box>
               </Box>
               <Box>
                 <PostList editions={editions} exclude={[edition.id]} />

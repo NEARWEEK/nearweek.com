@@ -1,6 +1,5 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
 import {
   faCommentAlt,
   faEye,
@@ -9,8 +8,11 @@ import {
 import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
 import { getPubDate } from "../../../../Utils/Utils";
+import { useMatch } from "react-router";
 
 const ListItem = ({ data }) => {
+  const matchEdition = useMatch(`/editions/:editionId`);
+
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
@@ -28,7 +30,7 @@ const ListItem = ({ data }) => {
     postContent: {
       flex: 0.55,
       borderRadius: "0 12px 12px 0",
-      background: "#f7f7f7",
+      background: matchEdition ? "#fff" : "#f7f7f7",
       padding: "16px 0 0 24px",
     },
     postDate: {
