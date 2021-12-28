@@ -23,7 +23,6 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import ReactMarkdown from "react-markdown";
-import Typography from "@mui/material/Typography";
 import * as Utils from "../../../Utils/Utils";
 import PostList from "./List/PostList";
 import { getPubDate } from "../../../Utils/Utils";

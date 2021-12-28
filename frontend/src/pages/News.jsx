@@ -2,21 +2,33 @@ import * as React from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import * as Utils from "../Utils/Utils";
-import NewsList from "../components/ui/NewsPost/List/NewsList";
 import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
 import styles from "./editions.module.css";
 import Announce from "../components/ui/NewsPost/Announce/Announce";
+import NewsGrid from "../components/ui/NewsPost/Grid/NewsGrid";
 
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
-
+  console.log(news);
   const useStyles = makeStyles(() => ({
     mainContainer: {
       margin: "0 auto",
-      maxWidth: 892,
+      maxWidth: 1440,
     },
-    latestEditions: {
+    topContainer: {
+      display: "flex",
+      gap: "24px",
+      "@media screen and (max-width: 1080px)": {
+        flexDirection: "column",
+        marginRight: "16px",
+        marginLeft: "16px",
+      },
+    },
+    blockColumn: {
+      flex: 0.5,
+    },
+    latestArticles: {
       marginTop: "24px",
       width: "100%",
     },
@@ -40,11 +52,18 @@ const News = () => {
     <>
       <Navbar />
       <Box className={classes.mainContainer}>
-        <Announce article={news.data[0]} />
-        <div className={classes.latestEditions}>
+        <Box className={classes.topContainer}>
+          <Box className={classes.blockColumn}>
+            <Announce article={news.data[0]} />
+          </Box>
+          <Box className={classes.blockColumn}>
+            {news && <NewsGrid news={news} />}
+          </Box>
+        </Box>
+        <Box className={classes.latestArticles}>
           <div className={classes.blockTitle}>Latest News</div>
           <div className={styles.editionsList}>
-            <NewsList news={news} />
+            <NewsGrid news={news} />
             <div className={styles.subscribeBlock}>
               <div className={styles.formTitle}>
                 Subscribe to The NEARWEEK newsletter{" "}
@@ -55,7 +74,7 @@ const News = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Box>
       </Box>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, useMemo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import EditionsPage from "./pages/Editions";
@@ -11,7 +11,11 @@ import News from "./pages/News";
 import NewsPost from "./components/ui/NewsPost/NewsPost";
 
 function App() {
-  let theme = React.useMemo(() => createTheme({}));
+  let theme = useMemo(() =>
+    createTheme({
+      overrides: {},
+    })
+  );
   theme = responsiveFontSizes(theme);
 
   return (

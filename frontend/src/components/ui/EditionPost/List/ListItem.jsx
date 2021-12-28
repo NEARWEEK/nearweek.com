@@ -5,10 +5,11 @@ import {
   faEye,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
-import Thumbnail from "../../Image/Thumbnail/Thumbnail";
+import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
 import { getPubDate } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
+import Link from "@mui/material/Link";
 
 const ListItem = ({ data }) => {
   const matchEdition = useMatch(`/editions/:editionId`);
@@ -24,11 +25,10 @@ const ListItem = ({ data }) => {
       marginBottom: "24px",
     },
     postImage: {
-      flex: 0.45,
       borderRadius: "12px 0 0 12px",
     },
     postContent: {
-      flex: 0.55,
+      width: "100%",
       borderRadius: "0 12px 12px 0",
       background: matchEdition ? "#fff" : "#f7f7f7",
       padding: "16px 0 0 24px",
@@ -80,12 +80,16 @@ const ListItem = ({ data }) => {
                 <span>{getPubDate(data.attributes.Period)}</span>
               </div>
               <h3 className={classes.postTitle}>
-                <a href={`/editions/${data.id}`}>
+                <Link
+                  color="inherit"
+                  underline="none"
+                  href={`/editions/${data.id}`}
+                >
                   {data.attributes.Title.Name}{" "}
                   <span className={classes.postNumber}>
                     #{data.attributes.Title.Number}
                   </span>
-                </a>
+                </Link>
               </h3>
               <p className={classes.postBody}>
                 {data.attributes.Resume.substring(0, 130)}

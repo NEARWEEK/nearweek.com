@@ -1,37 +1,41 @@
-import Thumbnail from "./Thumbnail/Thumbnail";
+import * as React from "react";
 import { getPubDate } from "../../../../Utils/Utils";
+import Link from "@mui/material/Link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentAlt,
   faEye,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
-import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { useMatch } from "react-router";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import Thumbnail from "./Thumbnail/Thumbnail";
 
-const ListItem = ({ data, meta }) => {
+const GridItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
-      flexDirection: "column",
+      flex: "1 1 326px",
     },
     postItem: {
       display: "flex",
       flexDirection: "row",
-    },
-    postImage: {
-      borderRadius: "12px 0 0 12px",
+      marginBottom: "24px",
     },
     itemContainer: {
       borderRadius: "12px",
       display: "flex",
+      flexDirection: "column",
+    },
+    postImage: {
+      height: "209px",
+      borderRadius: "12px 0 0 12px",
     },
     postContent: {
+      minHeight: "25%",
       background: matchEdition ? "#fff" : "#f7f7f7",
     },
     contentBody: {
@@ -43,12 +47,14 @@ const ListItem = ({ data, meta }) => {
       fontSize: "14px",
     },
     categoryItem: {
-      marginLeft: "6px",
       marginRight: "6px",
+      marginLeft: "6px",
     },
     postTitle: {
+      fontSize: "20px",
       marginTop: "6px",
       marginBottom: "6px",
+      "& a": {},
     },
     postNumber: {
       color: "#2013fb",
@@ -114,15 +120,12 @@ const ListItem = ({ data, meta }) => {
                   <h3 className={classes.postTitle}>
                     <Link
                       color="inherit"
-                      underline="none"
                       href={`/news/${data.id}`}
+                      underline="none"
                     >
-                      {data.attributes.Title}{" "}
+                      {data.attributes.Title}
                     </Link>
                   </h3>
-                  <p className={classes.postBody}>
-                    {data.attributes.Body.substring(0, 130)}
-                  </p>
                 </div>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>
@@ -130,7 +133,7 @@ const ListItem = ({ data, meta }) => {
                       <FontAwesomeIcon icon={faEye} /> {data.attributes.views}
                     </span>
                     <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faThumbsUp} />{" "}
+                      <FontAwesomeIcon icon={faThumbsUp} />
                       {data.attributes.likes}
                     </span>
                     <span className={classes.postWidget}>
@@ -147,4 +150,4 @@ const ListItem = ({ data, meta }) => {
   );
 };
 
-export default ListItem;
+export default GridItem;
