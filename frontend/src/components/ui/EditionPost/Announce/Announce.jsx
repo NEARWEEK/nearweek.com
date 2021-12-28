@@ -6,14 +6,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import ImageMedium from "../../Image/Medium/ImageMedium";
+import ImageMedium from "../Image/Medium/ImageMedium";
+import Link from "@mui/material/Link";
+import { getPubDate } from "../../../../Utils/Utils";
 
 const Announce = ({ edition }) => {
   const useStyles = makeStyles(() => ({
     latestPost: {
-      marginBottom: "36px",
       width: "100%",
-      background: "#dbd9d7",
+      background: "#f7f7f7",
       borderRadius: "12px",
     },
     content: {
@@ -67,18 +68,22 @@ const Announce = ({ edition }) => {
           </div>
           <div className={classes.content}>
             <div className={classes.postDate}>
-              <span>29 NOV – 5 DEC 2021</span>
+              <span>{getPubDate(edition.attributes.Period)}</span>
             </div>
             <h2 className={classes.postTitle}>
-              <a href={`/editions/${edition.id}`}>
+              <Link
+                color="inherit"
+                href={`/editions/${edition.id}`}
+                underline="none"
+              >
                 {edition.attributes.Title.Name}{" "}
                 <span className={classes.postNumber}>
                   #{edition.attributes.Title.Number}
                 </span>
-              </a>
+              </Link>
             </h2>
             <p className={classes.postBody}>
-              {edition.attributes.Resume.substring(0, 130)}
+              {edition.attributes.Body.substring(0, 130)}
             </p>
           </div>
           <div className={classes.postFooter}>

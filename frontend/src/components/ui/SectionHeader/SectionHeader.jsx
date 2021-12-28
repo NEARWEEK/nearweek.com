@@ -12,12 +12,12 @@ const SectionHeader = ({ title, link }) => {
       justifyContent: "space-between",
     },
     blockTitle: {
-      fontSize: " 1.5rem",
+      fontSize: "2.75rem",
       fontWeight: "900",
     },
     blockLink: {
       textTransform: "uppercase",
-      fontSize: "10px",
+      fontSize: "0.75rem",
       fontWeight: " bold",
       "& a": {
         textDecoration: "none",

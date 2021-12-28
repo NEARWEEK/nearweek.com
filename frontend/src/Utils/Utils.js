@@ -27,6 +27,11 @@ async function loadNews() {
   return await response.json();
 }
 
+async function loadArticle(articleId) {
+  const response = await fetch(`/api/news/${articleId}?populate=*`, options);
+  return await response.json();
+}
+
 async function loadEdition(editionId) {
   const response = await fetch(
     `/api/editions/${editionId}?populate=*`,
@@ -44,5 +49,6 @@ export function getPubDate(period) {
 export const api = {
   getAllEditions: loadEditions,
   getOneEdition: loadEdition,
+  getOneArticle: loadArticle,
   getAllNews: loadNews,
 };

@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from "@mui/material/Link";
 import makeStyles from "@mui/styles/makeStyles";
 
 const Thumbnail = ({ data, url }) => {
@@ -17,18 +18,18 @@ const Thumbnail = ({ data, url }) => {
   return (
     <>
       {Image.data ? (
-        <a href={url}>
+        <Link href={url} underline="none">
           <div
             style={{
               backgroundImage: `url('${thumbnail}')`,
               backgroundSize: "cover",
-              width: "100%",
-              height: "100%",
+              width: "205px",
+              height: "205px",
               backgroundPosition: "50% 50%",
             }}
             className={classes.img}
           />{" "}
-        </a>
+        </Link>
       ) : null}
     </>
   );

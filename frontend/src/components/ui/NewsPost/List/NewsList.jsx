@@ -4,7 +4,6 @@ import ListItem from "./ListItem";
 
 const NewsList = ({ news }) => {
   const useStyles = makeStyles(() => ({}));
-  console.log(news);
 
   let newsList = [];
   if (news) {

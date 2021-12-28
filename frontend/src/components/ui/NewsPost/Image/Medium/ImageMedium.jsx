@@ -6,7 +6,7 @@ const ImageMedium = ({ data }) => {
     img: {
       width: "100%",
       borderRadius: "12px 12px 0 0",
-      minHeight: "502px",
+      minHeight: "362px",
     },
   }));
 
