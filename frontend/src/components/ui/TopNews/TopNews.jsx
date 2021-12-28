@@ -11,7 +11,7 @@ import NewsList from "../NewsPost/List/NewsList";
 const TopNews = () => {
   const useStyles = makeStyles(() => ({
     wrapper: {
-      "@media screen and (max-width: 1080px)": {
+      "@media screen and (max-width: 1280px)": {
         marginRight: "16px",
         marginLeft: "16px",
       },
@@ -32,7 +32,7 @@ const TopNews = () => {
     blockNews: {
       display: "flex",
       gap: "24px",
-      "@media screen and (max-width: 1080px)": {
+      "@media screen and (max-width: 1280px)": {
         flexDirection: "column",
       },
     },

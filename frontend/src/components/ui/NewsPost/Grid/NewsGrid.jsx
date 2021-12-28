@@ -7,7 +7,7 @@ const NewsGrid = ({ news }) => {
   const useStyles = makeStyles(() => ({
     gridContainer: {
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fill,minmax(326px, 1fr))",
+      gridTemplateColumns: "repeat(auto-fill,minmax(306px, 1fr))",
       columnGap: "24px",
     },
   }));

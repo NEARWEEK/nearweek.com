@@ -31,7 +31,6 @@ const GridItem = ({ data }) => {
       flexDirection: "column",
     },
     postImage: {
-      height: "209px",
       borderRadius: "12px 0 0 12px",
     },
     postContent: {
