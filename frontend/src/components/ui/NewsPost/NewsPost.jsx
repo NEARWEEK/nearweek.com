@@ -25,6 +25,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 const NewsPost = () => {
   const [article, setArticle] = useState(null);
   const [news, setNews] = useState([]);
+
   const [ids, setIds] = useState([]);
   const navigate = useNavigate();
 
@@ -189,28 +190,6 @@ const NewsPost = () => {
       setNews(data);
     }
   }, []);
-
-  const handleForward = (e) => {
-    e.preventDefault();
-    if (ids) {
-      const curr = ids.indexOf(article.id);
-      if (curr !== ids.length - 1) {
-        navigate(`/editions/${ids[curr + 1]}`);
-        window.location.reload();
-      }
-    }
-  };
-
-  const handleBackward = (e) => {
-    e.preventDefault();
-    if (ids) {
-      const curr = ids.indexOf(article.id);
-      if (curr !== 0) {
-        navigate(`/editions/${ids[curr - 1]}`);
-        window.location.reload();
-      }
-    }
-  };
 
   const PostActions = () => {
     return (

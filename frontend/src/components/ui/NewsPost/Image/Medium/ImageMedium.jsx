@@ -11,13 +11,13 @@ const ImageMedium = ({ data }) => {
   }));
 
   let medium;
-  if (data) {
+  if (data.attributes.Image.data) {
     medium = `${data.attributes.Image.data.attributes.formats.medium.url}`;
   }
   const classes = useStyles();
   return (
     <a href={`/editions/${data.id}`}>
-      {data ? (
+      {medium ? (
         <div
           style={{
             backgroundImage: `url('${medium}')`,

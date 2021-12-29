@@ -21,7 +21,15 @@ async function loadEditions() {
 
 async function loadNews() {
   const response = await fetch(
-    `/api/news?populate=*&sort=createdAt:desc`,
+    `/api/news?populate=*&sort=createdAt:desc&&filters[categories][name]=News`,
+    options
+  );
+  return await response.json();
+}
+
+async function loadEvents() {
+  const response = await fetch(
+    `/api/news?populate=*&sort=createdAt:desc&&filters[categories][name]=Events`,
     options
   );
   return await response.json();
@@ -46,9 +54,16 @@ export function getPubDate(period) {
   return `${dateFrom} - ${dateTo}`;
 }
 
+async function loadCategories() {
+  const response = await fetch(`/api/categories?populate=*`, options);
+  return await response.json();
+}
+
 export const api = {
   getAllEditions: loadEditions,
   getOneEdition: loadEdition,
   getOneArticle: loadArticle,
   getAllNews: loadNews,
+  getAllEvents: loadEvents,
+  getCategories: loadCategories,
 };
