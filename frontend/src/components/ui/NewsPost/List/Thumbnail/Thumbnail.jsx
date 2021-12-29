@@ -24,7 +24,7 @@ const Thumbnail = ({ data, url }) => {
               backgroundImage: `url('${thumbnail}')`,
               backgroundSize: "cover",
               width: "205px",
-              height: "205px",
+              height: "100%",
               backgroundPosition: "50% 50%",
             }}
             className={classes.img}

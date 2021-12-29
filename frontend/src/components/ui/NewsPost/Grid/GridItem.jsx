@@ -22,7 +22,8 @@ const GridItem = ({ data }) => {
     },
     postItem: {
       display: "flex",
-      flexDirection: "row",
+      flexDirection: "column",
+      width: "100%",
       marginBottom: "24px",
     },
     itemContainer: {
