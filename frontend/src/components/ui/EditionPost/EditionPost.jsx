@@ -24,7 +24,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import ReactMarkdown from "react-markdown";
 import * as Utils from "../../../Utils/Utils";
-import PostList from "./List/PostList";
+import EditionsList from "./List/EditionsList";
 import { getPubDate } from "../../../Utils/Utils";
 
 library.add(faDiscord);
@@ -440,7 +440,7 @@ const EditionPost = () => {
                 <Box className={classes.blockTitle}>{"Latest Editions"}</Box>
               </Box>
               <Box>
-                <PostList editions={editions} exclude={[edition.id]} />
+                <EditionsList editions={editions} exclude={[edition.id]} />
               </Box>
             </Box>
           </Box>

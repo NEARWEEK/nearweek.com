@@ -4,7 +4,8 @@
   "info": {
     "singularName": "video",
     "pluralName": "videos",
-    "displayName": "Video"
+    "displayName": "Video",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,12 +13,24 @@
   "pluginOptions": {},
   "attributes": {
     "Link": {
-      "allowedTypes": [
-        "videos"
-      ],
       "type": "media",
       "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "Title": {
+      "type": "string",
       "required": true
+    },
+    "Likes": {
+      "type": "integer",
+      "default": 0
+    },
+    "Views": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

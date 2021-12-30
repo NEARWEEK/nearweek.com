@@ -26,13 +26,22 @@
       "target": "api::category.category"
     },
     "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "Likes": {
+      "type": "integer",
+      "default": 0
+    },
+    "Views": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

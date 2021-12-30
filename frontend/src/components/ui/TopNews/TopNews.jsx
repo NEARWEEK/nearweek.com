@@ -4,9 +4,10 @@ import Announce from "../EditionPost/Announce/Announce";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import PostList from "../EditionPost/List/PostList";
+import EditionsList from "../EditionPost/List/EditionsList";
 import * as Utils from "../../../Utils/Utils";
 import NewsList from "../NewsPost/List/NewsList";
+import EventsGrid from "../EventPost/Grid/EventsGrid";
 
 const TopNews = () => {
   const useStyles = makeStyles(() => ({
@@ -47,6 +48,7 @@ const TopNews = () => {
   const ShowMore = <a href="#">Show more</a>;
   const [editions, setEditions] = useState({ data: [], meta: {} });
   const [news, setNews] = useState({ data: [], meta: {} });
+  const [events, setEvents] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
     const data = await Utils.api.getAllEditions();
@@ -59,6 +61,13 @@ const TopNews = () => {
     const data = await Utils.api.getAllNews();
     if (data) {
       setNews(data);
+    }
+  }, []);
+
+  useEffect(async () => {
+    const data = await Utils.api.getAllEvents();
+    if (data) {
+      setEvents(data);
     }
   }, []);
 
@@ -75,8 +84,10 @@ const TopNews = () => {
             <NewsList news={news} />
           </Box>
         </Box>
+        <SectionHeader title={"Events"} link={ShowMore} />
+        <EventsGrid events={events} />
         <SectionHeader title={"Latest Editions"} link={ShowMore} />
-        <PostList editions={editions} />
+        <EditionsList editions={editions} />
       </div>
     </div>
   );
