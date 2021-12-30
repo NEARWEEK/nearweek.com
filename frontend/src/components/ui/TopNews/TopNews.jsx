@@ -8,6 +8,7 @@ import EditionsList from "../EditionPost/List/EditionsList";
 import * as Utils from "../../../Utils/Utils";
 import NewsList from "../NewsPost/List/NewsList";
 import EventsGrid from "../EventPost/Grid/EventsGrid";
+import VideoSlider from "../VideoPost/Slider/VideoSlider";
 
 const TopNews = () => {
   const useStyles = makeStyles(() => ({
@@ -20,6 +21,12 @@ const TopNews = () => {
     container: {
       margin: "0 auto",
       maxWidth: 1440,
+    },
+    videoContainer: {
+      display: "flex",
+      flexDirection: "row",
+      gap: "24px",
+      width: 1140,
     },
     latestEditions: {
       marginTop: "24px",
@@ -49,6 +56,7 @@ const TopNews = () => {
   const [editions, setEditions] = useState({ data: [], meta: {} });
   const [news, setNews] = useState({ data: [], meta: {} });
   const [events, setEvents] = useState({ data: [], meta: {} });
+  const [video, setVideo] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
     const data = await Utils.api.getAllEditions();
@@ -71,10 +79,17 @@ const TopNews = () => {
     }
   }, []);
 
+  useEffect(async () => {
+    const data = await Utils.api.getAllVideo();
+    if (data) {
+      setVideo(data);
+    }
+  }, []);
+
   const classes = useStyles();
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.container}>
+    <Box className={classes.wrapper}>
+      <Box className={classes.container}>
         <SectionHeader title={"Top News"} link={ShowMore} />
         <Box className={classes.blockNews}>
           <Box className={classes.blockColumn}>
@@ -84,12 +99,22 @@ const TopNews = () => {
             <NewsList news={news} />
           </Box>
         </Box>
+      </Box>
+      <Box className={classes.container}>
         <SectionHeader title={"Events"} link={ShowMore} />
         <EventsGrid events={events} />
+      </Box>
+      <Box className={classes.container}>
+        <SectionHeader title={"Latest Video"} link={ShowMore} />
+      </Box>
+      <Box>
+        <VideoSlider video={video} />
+      </Box>
+      <Box className={classes.container}>
         <SectionHeader title={"Latest Editions"} link={ShowMore} />
         <EditionsList editions={editions} />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
