@@ -13,6 +13,11 @@ import NewsPost from "./components/ui/NewsPost/NewsPost";
 function App() {
   let theme = useMemo(() =>
     createTheme({
+      palette: {
+        primary: {
+          main: "#0d00ff",
+        },
+      },
       overrides: {},
     })
   );

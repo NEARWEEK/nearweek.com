@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import makeStyles from "@mui/styles/makeStyles";
 import { useEffect, useState } from "react";
 import Announce from "../components/ui/EditionPost/Announce/Announce";
-import PostList from "../components/ui/EditionPost/List/PostList";
+import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import * as Utils from "../Utils/Utils";
 
 const EditionsPage = () => {
@@ -43,7 +43,7 @@ const EditionsPage = () => {
         <div className={classes.latestEditions}>
           <div className={classes.blockTitle}>Latest Editions</div>
           <div className={styles.editionsList}>
-            <PostList editions={editions} />
+            <EditionsList editions={editions} />
             <div className={styles.subscribeBlock}>
               <div className={styles.formTitle}>
                 Subscribe to The NEARWEEK newsletter{" "}

@@ -92,7 +92,7 @@ const ListItem = ({ data }) => {
                 </Link>
               </h3>
               <p className={classes.postBody}>
-                {data.attributes.Resume.substring(0, 130)}
+                {data.attributes.Body.substring(0, 130)}
               </p>
               <div className={classes.postFooter}>
                 <div className={classes.postWidgets}>

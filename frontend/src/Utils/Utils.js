@@ -27,9 +27,17 @@ async function loadNews() {
   return await response.json();
 }
 
+async function _loadEvents() {
+  const response = await fetch(
+    `/api/news?populate=*&sort=createdAt:desc&filters[categories][name]=Events`,
+    options
+  );
+  return await response.json();
+}
+
 async function loadEvents() {
   const response = await fetch(
-    `/api/news?populate=*&sort=createdAt:desc&&filters[categories][name]=Events`,
+    `/api/events?populate=*&sort=createdAt:desc`,
     options
   );
   return await response.json();
@@ -48,15 +56,20 @@ async function loadEdition(editionId) {
   return await response.json();
 }
 
-export function getPubDate(period) {
-  const dateFrom = moment(period.From).format("DD MMM").toUpperCase();
-  const dateTo = moment(period.To).format("DD MMM YYYY").toUpperCase();
-  return `${dateFrom} - ${dateTo}`;
+async function loadVideos() {
+  const response = await fetch(`/api/videos?populate=*`, options);
+  return await response.json();
 }
 
 async function loadCategories() {
   const response = await fetch(`/api/categories?populate=*`, options);
   return await response.json();
+}
+
+export function getPubDate(period) {
+  const dateFrom = moment(period.From).format("DD MMM").toUpperCase();
+  const dateTo = moment(period.To).format("DD MMM YYYY").toUpperCase();
+  return `${dateFrom} - ${dateTo}`;
 }
 
 export const api = {
@@ -66,4 +79,5 @@ export const api = {
   getAllNews: loadNews,
   getAllEvents: loadEvents,
   getCategories: loadCategories,
+  getAllVideo: loadVideos,
 };
