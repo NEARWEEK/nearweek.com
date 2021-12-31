@@ -1,18 +1,25 @@
 import React from "react";
 import { Paper, Button } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import ReactPlayer from "react-player/lazy";
 
 const SliderItem = ({ slide }) => {
   console.log("slide", slide);
+  const useStyles = makeStyles(() => ({
+    slideItem: {
+      width: "100%",
+      height: "100%",
+    },
+  }));
+  const classes = useStyles();
   return (
     <>
       {slide.attributes?.Link ? (
-        <video width="676" controls>
-          {" "}
-          <source
-            src={`${slide.attributes.Link.data.attributes.url}`}
-            type={`${slide.attributes.Link.data.attributes.mime}`}
-          />{" "}
-        </video>
+        <ReactPlayer
+          controls={true}
+          url={`${slide.attributes.Link.data.attributes.url}`}
+          className={classes.slideItem}
+        />
       ) : null}
     </>
   );
