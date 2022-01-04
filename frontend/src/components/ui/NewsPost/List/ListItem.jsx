@@ -1,5 +1,4 @@
 import Thumbnail from "./Thumbnail/Thumbnail";
-import { getPubDate } from "../../../../Utils/Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentAlt,
@@ -11,9 +10,11 @@ import makeStyles from "@mui/styles/makeStyles";
 import { useMatch } from "react-router";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import * as Utils from "../../../../Utils/Utils";
 
 const ListItem = ({ data, meta }) => {
   const matchEdition = useMatch(`/news/:articleId`);
+  const isMobileMatch = Utils.isMobileMatch();
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {
@@ -30,6 +31,7 @@ const ListItem = ({ data, meta }) => {
     itemContainer: {
       borderRadius: "12px",
       display: "flex",
+      flexDirection: !isMobileMatch ? "row" : "column",
     },
     postContent: {
       background: matchEdition ? "#fff" : "#f7f7f7",

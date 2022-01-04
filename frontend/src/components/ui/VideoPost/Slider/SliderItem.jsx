@@ -7,8 +7,8 @@ const SliderItem = ({ slide }) => {
   console.log("slide", slide);
   const useStyles = makeStyles(() => ({
     slideItem: {
-      width: "100%",
-      height: "100%",
+      width: "100% !important",
+      height: "100% !important",
     },
   }));
   const classes = useStyles();

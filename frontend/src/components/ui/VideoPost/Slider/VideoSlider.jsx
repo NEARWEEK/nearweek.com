@@ -12,10 +12,13 @@ import "swiper/css/navigation";
 import SwiperCore, { Pagination, Navigation, EffectCoverflow } from "swiper";
 
 import makeStyles from "@mui/styles/makeStyles";
+import * as Utils from "../../../../Utils/Utils";
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
 const VideoSlider = ({ video }) => {
+  const isMobileMatch = Utils.isMobileMatch();
+
   const useStyles = makeStyles(() => ({
     swiper: {
       width: "100%",
@@ -41,22 +44,11 @@ const VideoSlider = ({ video }) => {
   return (
     <div className={classes.swiperSlide}>
       <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={4}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 72,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        spaceBetween={0}
-        pagination={{
-          clickable: true,
-        }}
+        slidesPerView={isMobileMatch ? 1 : 4}
+        spaceBetween={15}
+        slidesPerGroup={1}
         loop={true}
+        loopFillGroupWithBlank={true}
         navigation={true}
         className="mySwiper"
       >

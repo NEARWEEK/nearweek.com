@@ -1,5 +1,4 @@
 import * as React from "react";
-import styles from "./block_header.module.css";
 import makeStyles from "@mui/styles/makeStyles";
 
 const SectionHeader = ({ title, link }) => {
