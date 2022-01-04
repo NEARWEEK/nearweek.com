@@ -7,13 +7,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
-import { getPubDate } from "../../../../Utils/Utils";
+import { getPubDate, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
 import Link from "@mui/material/Link";
 import * as Utils from "../../../../Utils/Utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const ListItem = ({ data }) => {
-  const isMobileMatch = Utils.isMobileMatch();
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const matchEdition = useMatch(`/editions/:editionId`);
 
   const useStyles = makeStyles(() => ({

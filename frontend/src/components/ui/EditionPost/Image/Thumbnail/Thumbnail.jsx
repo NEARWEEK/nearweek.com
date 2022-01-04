@@ -1,9 +1,11 @@
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import * as Utils from "../../../../../Utils/Utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 
 const Thumbnail = ({ data, url }) => {
-  const isMobileMatch = Utils.isMobileMatch();
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const Image = data?.attributes?.Image || null;
   const useStyles = makeStyles(() => ({
     img: {

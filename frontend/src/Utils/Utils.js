@@ -2,6 +2,7 @@ import moment from "moment";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const TOKEN = process.env.REACT_APP_API_KEY;
+export const MOBILE_WIDTH = "600px";
 
 const headers = new Headers({
   Authorization: `Bearer ${TOKEN}`,
@@ -73,7 +74,7 @@ export function getPubDate(period) {
   return `${dateFrom} - ${dateTo}`;
 }
 
-export function isMobileMatch() {
+export function _isMobileMatch() {
   const isMobileWidth = useMediaQuery("(max-width:600px)");
   return isMobileWidth;
 }

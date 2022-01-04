@@ -11,10 +11,12 @@ import { useMatch } from "react-router";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import * as Utils from "../../../../Utils/Utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 
 const ListItem = ({ data, meta }) => {
   const matchEdition = useMatch(`/news/:articleId`);
-  const isMobileMatch = Utils.isMobileMatch();
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {

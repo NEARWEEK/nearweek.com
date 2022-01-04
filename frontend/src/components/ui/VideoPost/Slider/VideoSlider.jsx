@@ -13,11 +13,13 @@ import SwiperCore, { Pagination, Navigation, EffectCoverflow } from "swiper";
 
 import makeStyles from "@mui/styles/makeStyles";
 import * as Utils from "../../../../Utils/Utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
 const VideoSlider = ({ video }) => {
-  const isMobileMatch = Utils.isMobileMatch();
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
   const useStyles = makeStyles(() => ({
     swiper: {
