@@ -10,8 +10,10 @@ import makeStyles from "@mui/styles/makeStyles";
 import { getPubDate } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
 import Link from "@mui/material/Link";
+import * as Utils from "../../../../Utils/Utils";
 
 const ListItem = ({ data }) => {
+  const isMobileMatch = Utils.isMobileMatch();
   const matchEdition = useMatch(`/editions/:editionId`);
 
   const useStyles = makeStyles(() => ({
@@ -21,11 +23,11 @@ const ListItem = ({ data }) => {
     },
     postItem: {
       display: "flex",
-      flexDirection: "row",
+      flexDirection: !isMobileMatch ? "row" : "column",
       marginBottom: "24px",
     },
     postImage: {
-      borderRadius: "12px 0 0 12px",
+      borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
     },
     postContent: {
       width: "100%",

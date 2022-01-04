@@ -9,8 +9,11 @@ import makeStyles from "@mui/styles/makeStyles";
 import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
 import { getPubDate } from "../../../../Utils/Utils";
+import * as Utils from "../../../../Utils/Utils";
 
 const Announce = ({ edition }) => {
+  const isMobileMatch = Utils.isMobileMatch();
+
   const useStyles = makeStyles(() => ({
     latestPost: {
       width: "100%",

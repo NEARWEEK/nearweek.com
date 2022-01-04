@@ -1,4 +1,5 @@
 import moment from "moment";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const TOKEN = process.env.REACT_APP_API_KEY;
 
@@ -71,6 +72,10 @@ export function getPubDate(period) {
   const dateTo = moment(period.To).format("DD MMM YYYY").toUpperCase();
   return `${dateFrom} - ${dateTo}`;
 }
+
+export const isMobileMatch = () => {
+  return useMediaQuery("(max-width:600px)");
+};
 
 export const api = {
   getAllEditions: loadEditions,

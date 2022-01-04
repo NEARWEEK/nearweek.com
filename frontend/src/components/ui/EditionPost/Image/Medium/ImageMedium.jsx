@@ -1,10 +1,13 @@
 import makeStyles from "@mui/styles/makeStyles";
 import * as React from "react";
+import * as Utils from "../../../../../Utils/Utils";
 
 const ImageMedium = ({ data }) => {
+  const isMobileMatch = Utils.isMobileMatch();
   const useStyles = makeStyles(() => ({
     img: {
       width: "100%",
+      minHeight: isMobileMatch ? "205px" : "419px",
       borderRadius: "12px 12px 0 0",
     },
   }));
@@ -21,8 +24,6 @@ const ImageMedium = ({ data }) => {
           style={{
             backgroundImage: `url('${medium}')`,
             backgroundSize: "cover",
-            minWidth: "676px",
-            minHeight: "419px",
           }}
           className={classes.img}
         />

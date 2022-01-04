@@ -1,12 +1,15 @@
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
+import * as Utils from "../../../../../Utils/Utils";
 
 const Thumbnail = ({ data, url }) => {
+  const isMobileMatch = Utils.isMobileMatch();
   const Image = data?.attributes?.Image || null;
   const useStyles = makeStyles(() => ({
     img: {
-      width: "100%",
-      borderRadius: "12px 0 0 12px",
+      width: isMobileMatch ? "100%" : "362px",
+      height: "205px",
+      borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
     },
   }));
   let thumbnail;
@@ -22,8 +25,6 @@ const Thumbnail = ({ data, url }) => {
             style={{
               backgroundImage: `url('${thumbnail}')`,
               backgroundSize: "cover",
-              width: "362px",
-              height: "205px",
               backgroundPosition: "50% 50%",
             }}
             className={classes.img}
