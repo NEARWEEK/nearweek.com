@@ -73,9 +73,9 @@ export function getPubDate(period) {
   return `${dateFrom} - ${dateTo}`;
 }
 
-export const isMobileMatch = () => {
+export function isMobileMatch() {
   return useMediaQuery("(max-width:600px)");
-};
+}
 
 export const api = {
   getAllEditions: loadEditions,
