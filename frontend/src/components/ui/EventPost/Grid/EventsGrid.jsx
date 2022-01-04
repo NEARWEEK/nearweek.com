@@ -3,9 +3,11 @@ import Box from "@mui/material/Box";
 import * as React from "react";
 import GridItem from "./GridItem";
 import * as Utils from "../../../../Utils/Utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 
 const EventsGrid = ({ events }) => {
-  const isMobileMatch = Utils.isMobileMatch();
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
   const useStyles = makeStyles(() => ({
     gridContainer: {
