@@ -74,7 +74,8 @@ export function getPubDate(period) {
 }
 
 export function isMobileMatch() {
-  return useMediaQuery("(max-width:600px)");
+  const isMobileWidth = useMediaQuery("(max-width:600px)");
+  return isMobileWidth;
 }
 
 export const api = {
