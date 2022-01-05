@@ -71,7 +71,7 @@ const TopNews = () => {
   }, []);
 
   useEffect(async () => {
-    const data = await Utils.api.getAllEvents();
+    const data = await Utils.api.getLatestEvents();
     if (data) {
       setEvents(data);
     }
