@@ -32,14 +32,14 @@ const EditionsList = ({ editions }) => {
 
   let editionsList = [];
   if (editions) {
-    editionsList = [...editions.data];
+    editionsList = [...editions];
     if (matchEdition) {
-      editionsList = editions.data.filter(
+      editionsList = editions.filter(
         (item) => item.id !== Number(matchEdition.params.editionId)
       );
     }
     if (matchEditions) {
-      editionsList = editions.data.slice(1);
+      editionsList = editions.slice(1);
     }
   }
 

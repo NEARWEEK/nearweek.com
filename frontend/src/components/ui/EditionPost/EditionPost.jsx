@@ -179,7 +179,7 @@ const EditionPost = () => {
   const match = useMatch(`/editions/:editionId`);
 
   const [edition, setEdition] = useState(null);
-  const [editions, setEditions] = useState(null);
+  const [editions, setEditions] = useState({ data: [], meta: {} });
   const [ids, setIds] = useState([]);
   const navigate = useNavigate();
 
@@ -440,7 +440,9 @@ const EditionPost = () => {
                 <Box className={classes.blockTitle}>{"Latest Editions"}</Box>
               </Box>
               <Box>
-                <EditionsList editions={editions} exclude={[edition.id]} />
+                {editions.data.length > 0 && (
+                  <EditionsList editions={editions.data} />
+                )}
               </Box>
             </Box>
           </Box>

@@ -28,6 +28,7 @@ const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
   const [categories, setCategories] = useState([]);
   const [sort, setSort] = useState("Latest");
+  const [filterResult, setFilterResult] = useState([]);
 
   const useStyles = makeStyles(() => ({
     mainContainer: {
@@ -165,6 +166,8 @@ const News = () => {
   };
 
   const FilterPanel = () => {
+    const applyFilters = () => {};
+
     return (
       <Box>
         <Box className={classes.filterContainer}>
@@ -231,6 +234,10 @@ const News = () => {
     );
   };
 
+  const FilterResult = () => {
+    return <NewsGrid news={filterResult} />;
+  };
+
   const classes = useStyles();
 
   return (
@@ -238,29 +245,35 @@ const News = () => {
       <Navbar />
       <Box className={classes.mainContainer}>
         <FilterPanel />
-        <Box className={classes.topContainer}>
-          <Box className={classes.blockColumn}>
-            <Announce article={news.data[0]} />
-          </Box>
-          <Box className={classes.blockColumn}>
-            {news && <NewsGrid news={news} />}
-          </Box>
-        </Box>
-        <Box className={classes.latestArticles}>
-          <div className={classes.blockTitle}>Latest News</div>
-          <div className={styles.editionsList}>
-            <NewsGrid news={news} />
-            <div className={styles.subscribeBlock}>
-              <div className={styles.formTitle}>
-                Subscribe to The NEARWEEK newsletter{" "}
+        {!filterResult.length > 0 ? (
+          <>
+            <Box className={classes.topContainer}>
+              <Box className={classes.blockColumn}>
+                <Announce article={news.data[0]} />
+              </Box>
+              <Box className={classes.blockColumn}>
+                {news && <NewsGrid news={news} />}
+              </Box>
+            </Box>
+            <Box className={classes.latestArticles}>
+              <div className={classes.blockTitle}>Latest News</div>
+              <div className={styles.editionsList}>
+                <NewsGrid news={news} />
+                <div className={styles.subscribeBlock}>
+                  <div className={styles.formTitle}>
+                    Subscribe to The NEARWEEK newsletter{" "}
+                  </div>
+                  <div className={styles.formWrapper}>
+                    <input className={styles.formInput} type="text" />
+                    <button className={styles.formBtn}>Subscribe</button>
+                  </div>
+                </div>
               </div>
-              <div className={styles.formWrapper}>
-                <input className={styles.formInput} type="text" />
-                <button className={styles.formBtn}>Subscribe</button>
-              </div>
-            </div>
-          </div>
-        </Box>
+            </Box>
+          </>
+        ) : (
+          <FilterResult />
+        )}
       </Box>
     </>
   );

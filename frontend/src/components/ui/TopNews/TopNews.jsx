@@ -1,8 +1,8 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import Announce from "../EditionPost/Announce/Announce";
 import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import EditionsList from "../EditionPost/List/EditionsList";
 import * as Utils from "../../../Utils/Utils";
@@ -12,15 +12,12 @@ import VideoSlider from "../VideoPost/Slider/VideoSlider";
 
 const TopNews = () => {
   const useStyles = makeStyles(() => ({
-    wrapper: {
-      "@media screen and (max-width: 1280px)": {
-        marginRight: "16px",
-        marginLeft: "16px",
-      },
-    },
+    wrapper: {},
     container: {
       margin: "0 auto",
       maxWidth: 1440,
+      paddingRight: "16px",
+      paddingLeft: "16px",
     },
     videoContainer: {
       display: "flex",
@@ -87,6 +84,12 @@ const TopNews = () => {
     }
   }, []);
 
+  function getLatestEditions() {
+    return editions.data.filter(
+      (edition) => edition.id !== editions.data[0].id
+    );
+  }
+
   const classes = useStyles();
   return (
     <Box className={classes.wrapper}>
@@ -113,7 +116,9 @@ const TopNews = () => {
       </Box>
       <Box className={classes.container}>
         <SectionHeader title={"Latest Editions"} link={ShowMore} />
-        <EditionsList editions={editions} />
+        {editions.data.length > 0 && (
+          <EditionsList editions={getLatestEditions()} />
+        )}
       </Box>
     </Box>
   );
