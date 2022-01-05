@@ -1,6 +1,5 @@
 import * as React from "react";
 import Menu from "./Menu/Menu";
-import styles from "./navbar.module.css";
 import Logo from "./Logo/Logo";
 import makeStyles from "@mui/styles/makeStyles";
 import Connect from "./Actions/Connect";
@@ -30,6 +29,10 @@ const Navbar = () => {
       marginRight: theme.spacing(2),
       marginLeft: theme.spacing(2),
     },
+    header: {
+      minHeight: "32px",
+      borderBottom: "2px solid #ccc",
+    },
   }));
 
   const toggleDrawer = (open) => (event) => {
@@ -48,7 +51,7 @@ const Navbar = () => {
       sx={{ backgroundColor: "#fff" }}
       position="static"
       elevation={0}
-      className={styles.header}
+      className={classes.header}
     >
       <Toolbar className={classes.container}>
         {!isMobileMatch ? (

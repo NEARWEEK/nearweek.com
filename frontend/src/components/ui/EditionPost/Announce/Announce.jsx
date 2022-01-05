@@ -9,7 +9,6 @@ import makeStyles from "@mui/styles/makeStyles";
 import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
 import { getPubDate, MOBILE_WIDTH } from "../../../../Utils/Utils";
-import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Announce = ({ edition }) => {

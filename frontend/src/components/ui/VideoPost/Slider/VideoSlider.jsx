@@ -12,9 +12,9 @@ import "swiper/css/navigation";
 import SwiperCore, { Pagination, Navigation, EffectCoverflow } from "swiper";
 
 import makeStyles from "@mui/styles/makeStyles";
-import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../Utils/Utils";
+import Box from "@mui/material/Box";
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
@@ -22,35 +22,61 @@ const VideoSlider = ({ video }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
   const useStyles = makeStyles(() => ({
-    swiper: {
+    wrapper: {
+      position: "relative",
+      display: "grid",
+      gridTemplateColumns: "100%",
+    },
+    flowLeft: {
+      zIndex: "10",
+      position: "absolute",
       width: "100%",
       height: "100%",
+      visibility: "hidden",
+      display: " flex",
     },
-    swiperSlide: {
+    flowRight: {
+      zIndex: "10",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      visibility: "hidden",
+      display: " flex",
+    },
+    slider: {
       textAlign: "center",
       fontSize: "18px",
       background: "#fff",
-      display: "flex",
-      justifyContent: "center",
+      display: "grid",
+      gridTemplateRows: "1fr",
+      /*      gridTemplateColumns: "auto 640px 640px auto",*/
+      gridTemplateAreas: "'c a b d'",
+      gap: "24px",
+      justifyItems: "center",
       alignItems: "center",
+      "& > div:before": {
+        content: "",
+        position: "absolute",
+        margin: "0 auto",
+        maxWidth: "1440px",
+      },
       "& video": {
         display: "block",
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
       },
     },
   }));
   const classes = useStyles();
-  console.log(video);
   return (
-    <div className={classes.swiperSlide}>
-      <Swiper
-        slidesPerView={isMobileMatch ? 1 : 4}
-        spaceBetween={15}
-        slidesPerGroup={1}
+    <div className={classes.wrapper}>
+      <div className={"slider " + classes.slider}>
+        {/*      <Swiper
+        spaceBetween={24}
+        initialSlide={1}
         loop={true}
-        loopFillGroupWithBlank={true}
+        slidesPerView={isMobileMatch ? 1 : 4}
+        centeredSlides={true}
+        roundLengths={true}
+        loopAdditionalSlides={1}
         navigation={true}
         className="mySwiper"
       >
@@ -61,7 +87,15 @@ const VideoSlider = ({ video }) => {
               </SwiperSlide>
             ))
           : null}
-      </Swiper>
+      </Swiper>*/}
+        {video.data
+          ? video.data.map((item, i) => {
+              return <SliderItem key={i} slide={item} index={i} />;
+            })
+          : null}
+      </div>
+      <div className={classes.flowLeft}>{""}</div>
+      <div className={classes.flowRight}>{""}</div>
     </div>
   );
 };

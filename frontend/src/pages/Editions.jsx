@@ -43,7 +43,7 @@ const EditionsPage = () => {
         <div className={classes.latestEditions}>
           <div className={classes.blockTitle}>Latest Editions</div>
           <div className={styles.editionsList}>
-            <EditionsList editions={editions} />
+            <EditionsList editions={editions.data} />
             <div className={styles.subscribeBlock}>
               <div className={styles.formTitle}>
                 Subscribe to The NEARWEEK newsletter{" "}
