@@ -29,17 +29,17 @@ async function loadNews() {
   return await response.json();
 }
 
-async function _loadEvents() {
+async function loadEvents() {
   const response = await fetch(
-    `/api/news?populate=*&sort=createdAt:desc&filters[categories][name]=Events`,
+    `/api/events?populate=*&sort=createdAt:desc`,
     options
   );
   return await response.json();
 }
 
-async function loadEvents() {
+async function loadLatestEvents(page = 1, size = 3) {
   const response = await fetch(
-    `/api/events?populate=*&sort=createdAt:desc`,
+    `/api/events?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${size}`,
     options
   );
   return await response.json();
@@ -74,17 +74,13 @@ export function getPubDate(period) {
   return `${dateFrom} - ${dateTo}`;
 }
 
-export function _isMobileMatch() {
-  const isMobileWidth = useMediaQuery("(max-width:600px)");
-  return isMobileWidth;
-}
-
 export const api = {
   getAllEditions: loadEditions,
   getOneEdition: loadEdition,
   getOneArticle: loadArticle,
   getAllNews: loadNews,
   getAllEvents: loadEvents,
+  getLatestEvents: loadLatestEvents,
   getCategories: loadCategories,
   getAllVideo: loadVideos,
 };
