@@ -28,6 +28,9 @@ const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
   const [categories, setCategories] = useState([]);
   const [sort, setSort] = useState("Latest");
+  const [filterType, setFilterType] = useState([]);
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [filters, setFilters] = useState([null, null, null]);
   const [filterResult, setFilterResult] = useState([]);
 
   const useStyles = makeStyles(() => ({
@@ -91,6 +94,14 @@ const News = () => {
     setSort(e.target.value);
   };
 
+  const handleFilter = (e) => {
+    console.log(filterType);
+  };
+
+  function getLatestNews() {
+    return news.data.filter((article) => article.id !== news.data[0].id);
+  }
+
   const SortButton = () => {
     return (
       <Box>
@@ -104,6 +115,7 @@ const News = () => {
             onChange={handleSort}
           >
             <MenuItem value="Latest">Latest</MenuItem>
+            <MenuItem value="Popular">Popular</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -112,15 +124,18 @@ const News = () => {
 
   const FilterButton = () => {
     return (
-      <Button size="small" variant="outlined" startIcon={<FilterListIcon />}>
+      <Button
+        size="small"
+        onClick={handleFilter}
+        variant="outlined"
+        startIcon={<FilterListIcon />}
+      >
         Filter
       </Button>
     );
   };
-  const [value, setValue] = React.useState([null, null]);
 
   const FilterType = () => {
-    const [type, setType] = useState([]);
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -132,12 +147,12 @@ const News = () => {
       },
     };
 
-    const handleType = (e) => {
+    const handleFilterType = (e) => {
       e.preventDefault();
       const {
         target: { value },
       } = e;
-      setType(typeof value === "string" ? value.split(",") : value);
+      setFilterType(typeof value === "string" ? value.split(",") : value);
     };
 
     return (
@@ -147,8 +162,8 @@ const News = () => {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={type}
-          onChange={handleType}
+          value={filterType}
+          onChange={handleFilterType}
           input={<OutlinedInput label="Type" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
@@ -156,7 +171,7 @@ const News = () => {
           {categories &&
             categories.map((name) => (
               <MenuItem key={name} value={name}>
-                <Checkbox checked={type.indexOf(name) > -1} />
+                <Checkbox checked={filterType.indexOf(name) > -1} />
                 <ListItemText primary={name} />
               </MenuItem>
             ))}
@@ -166,8 +181,6 @@ const News = () => {
   };
 
   const FilterPanel = () => {
-    const applyFilters = () => {};
-
     return (
       <Box>
         <Box className={classes.filterContainer}>
@@ -195,9 +208,9 @@ const News = () => {
             <DateRangePicker
               startText="Start date"
               endText="End date"
-              value={value}
+              value={dateRange}
               onChange={(newValue) => {
-                setValue(newValue);
+                setDateRange(newValue);
               }}
               renderInput={(startProps, endProps) => (
                 <>
@@ -252,23 +265,25 @@ const News = () => {
                 <Announce article={news.data[0]} />
               </Box>
               <Box className={classes.blockColumn}>
-                {news && <NewsGrid news={news} />}
+                {news.data.length && <NewsGrid news={getLatestNews()} />}
               </Box>
             </Box>
             <Box className={classes.latestArticles}>
               <div className={classes.blockTitle}>Latest News</div>
-              <div className={styles.editionsList}>
-                <NewsGrid news={news} />
-                <div className={styles.subscribeBlock}>
-                  <div className={styles.formTitle}>
-                    Subscribe to The NEARWEEK newsletter{" "}
-                  </div>
-                  <div className={styles.formWrapper}>
-                    <input className={styles.formInput} type="text" />
-                    <button className={styles.formBtn}>Subscribe</button>
+              {news.data.length > 0 ? (
+                <div className={styles.editionsList}>
+                  <NewsGrid news={getLatestNews()} />
+                  <div className={styles.subscribeBlock}>
+                    <div className={styles.formTitle}>
+                      Subscribe to The NEARWEEK newsletter{" "}
+                    </div>
+                    <div className={styles.formWrapper}>
+                      <input className={styles.formInput} type="text" />
+                      <button className={styles.formBtn}>Subscribe</button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : null}
             </Box>
           </>
         ) : (

@@ -12,6 +12,7 @@ import { useMatch } from "react-router";
 import Link from "@mui/material/Link";
 import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Widget from "../../general/Widget/Widget";
 
 const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -99,16 +100,9 @@ const ListItem = ({ data }) => {
               </p>
               <div className={classes.postFooter}>
                 <div className={classes.postWidgets}>
-                  <span className={classes.postWidget}>
-                    <FontAwesomeIcon icon={faEye} /> {data.attributes.views}
-                  </span>
-                  <span className={classes.postWidget}>
-                    <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                    {data.attributes.likes}
-                  </span>
-                  <span className={classes.postWidget}>
-                    <FontAwesomeIcon icon={faCommentAlt} /> 0
-                  </span>
+                  <Widget icon={faEye} data={data.attributes.views} />
+                  <Widget icon={faThumbsUp} data={data.attributes.likes} />
+                  <Widget icon={faCommentAlt} data={"0"} />
                 </div>
               </div>
             </div>

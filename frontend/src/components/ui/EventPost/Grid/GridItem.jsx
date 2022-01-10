@@ -12,6 +12,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import moment from "moment";
 import Typography from "@mui/material/Typography";
+import Widget from "../../general/Widget/Widget";
 
 const GridItem = ({ data }) => {
   const useStyles = makeStyles(() => ({
@@ -127,16 +128,9 @@ const GridItem = ({ data }) => {
                 </Box>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faEye} /> {data.attributes.views}
-                    </span>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faThumbsUp} />
-                      {data.attributes.likes}
-                    </span>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faCommentAlt} /> 0
-                    </span>
+                    <Widget icon={faEye} data={data.attributes.views} />
+                    <Widget icon={faThumbsUp} data={data.attributes.likes} />
+                    <Widget icon={faCommentAlt} data={"0"} />
                   </div>
                 </div>
               </Box>

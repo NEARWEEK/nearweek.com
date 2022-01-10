@@ -5,27 +5,26 @@ import ReactPlayer from "react-player/lazy";
 import Box from "@mui/material/Box";
 
 const SliderItem = (props) => {
-  const indexToArea = {
-    0: "a",
-    1: "b",
-    2: "d",
-    3: "c",
-  };
   const useStyles = makeStyles(() => ({
     slideItem: {
-      width: props.index < 2 ? "100% !important" : "80% !important",
-      height: "100% !important",
-      gridArea: indexToArea[props.index],
+      borderRadius: "24px",
+      "& .react-player": {
+        borderRadius: "24px",
+      },
     },
   }));
   const classes = useStyles();
   return (
     <>
-      {props.slide.attributes?.Link ? (
+      {props.video.attributes?.Link ? (
         <ReactPlayer
+          style={{ margin: "0 24px", borderRadius: "24px" }}
           controls={true}
-          url={`${props.slide.attributes.Link.data.attributes.url}`}
-          className={`item-${props.index} ` + classes.slideItem}
+          light={true}
+          width="auto"
+          height="286px"
+          url={`${props.video.attributes.Link}`}
+          className={classes.slideItem}
         />
       ) : null}
     </>

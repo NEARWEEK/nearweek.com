@@ -1,7 +1,5 @@
 import * as React from "react";
-import { getPubDate } from "../../../../Utils/Utils";
 import Link from "@mui/material/Link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentAlt,
   faEye,
@@ -11,6 +9,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { useMatch } from "react-router";
 import Box from "@mui/material/Box";
 import Thumbnail from "./Thumbnail/Thumbnail";
+import Widget from "../../general/Widget/Widget";
 
 const GridItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
@@ -129,16 +128,9 @@ const GridItem = ({ data }) => {
                 </div>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faEye} /> {data.attributes.views}
-                    </span>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faThumbsUp} />
-                      {data.attributes.likes}
-                    </span>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faCommentAlt} /> 0
-                    </span>
+                    <Widget icon={faEye} data={data.attributes.views} />
+                    <Widget icon={faThumbsUp} data={data.attributes.likes} />
+                    <Widget icon={faCommentAlt} data={"0"} />
                   </div>
                 </div>
               </div>

@@ -78,7 +78,7 @@ const TopNews = () => {
   }, []);
 
   useEffect(async () => {
-    const data = await Utils.api.getAllVideo();
+    const data = await Utils.api.getLatestVideo(1, 4);
     if (data) {
       setVideo(data);
     }
