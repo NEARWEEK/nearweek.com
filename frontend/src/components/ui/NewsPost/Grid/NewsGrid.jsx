@@ -11,10 +11,9 @@ const NewsGrid = ({ news }) => {
       columnGap: "24px",
     },
   }));
-
   let newsList = [];
   if (news) {
-    newsList = [...news.data];
+    newsList = [...news];
   }
 
   const classes = useStyles();
@@ -23,7 +22,7 @@ const NewsGrid = ({ news }) => {
     <Box className={classes.gridContainer}>
       {newsList.length > 0
         ? newsList.map((article, i) => {
-            return <GridItem key={i} data={article} meta={news.meta} />;
+            return <GridItem key={i} data={article} />;
           })
         : null}
     </Box>

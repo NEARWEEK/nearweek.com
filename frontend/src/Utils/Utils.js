@@ -50,6 +50,14 @@ async function loadArticle(articleId) {
   return await response.json();
 }
 
+async function loadLatestNews(page = 1, size = 3) {
+  const response = await fetch(
+    `/api/news?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${size}`,
+    options
+  );
+  return await response.json();
+}
+
 async function loadEdition(editionId) {
   const response = await fetch(
     `/api/editions/${editionId}?populate=*`,
@@ -60,6 +68,14 @@ async function loadEdition(editionId) {
 
 async function loadVideos() {
   const response = await fetch(`/api/videos?populate=*`, options);
+  return await response.json();
+}
+
+async function loadLatestVideo(page = 1, size = 3) {
+  const response = await fetch(
+    `/api/videos?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${size}`,
+    options
+  );
   return await response.json();
 }
 
@@ -79,8 +95,10 @@ export const api = {
   getOneEdition: loadEdition,
   getOneArticle: loadArticle,
   getAllNews: loadNews,
+  getLatestNews: loadLatestNews,
   getAllEvents: loadEvents,
   getLatestEvents: loadLatestEvents,
   getCategories: loadCategories,
   getAllVideo: loadVideos,
+  getLatestVideo: loadLatestVideo,
 };

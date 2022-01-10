@@ -10,6 +10,7 @@ import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
 import { getPubDate, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Widget from "../../general/Widget/Widget";
 
 const Announce = ({ edition }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -91,15 +92,9 @@ const Announce = ({ edition }) => {
           </div>
           <div className={classes.postFooter}>
             <div className={classes.postWidgets}>
-              <span className={classes.postWidget}>
-                <FontAwesomeIcon icon={faEye} /> {edition.attributes.views}
-              </span>
-              <span className={classes.postWidget}>
-                <FontAwesomeIcon icon={faThumbsUp} /> {edition.attributes.likes}
-              </span>
-              <span className={classes.postWidget}>
-                <FontAwesomeIcon icon={faCommentAlt} /> 0
-              </span>
+              <Widget icon={faEye} data={edition.attributes.views} />
+              <Widget icon={faThumbsUp} data={edition.attributes.likes} />
+              <Widget icon={faCommentAlt} data={"0"} />
             </div>
           </div>
         </div>

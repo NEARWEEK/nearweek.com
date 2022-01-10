@@ -13,6 +13,7 @@ import Box from "@mui/material/Box";
 import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../Utils/Utils";
+import Widget from "../../general/Widget/Widget";
 
 const ListItem = ({ data, meta }) => {
   const matchEdition = useMatch(`/news/:articleId`);
@@ -130,16 +131,9 @@ const ListItem = ({ data, meta }) => {
                 </div>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faEye} /> {data.attributes.views}
-                    </span>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                      {data.attributes.likes}
-                    </span>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faCommentAlt} /> 0
-                    </span>
+                    <Widget icon={faEye} data={data.attributes.views} />
+                    <Widget icon={faThumbsUp} data={data.attributes.likes} />
+                    <Widget icon={faCommentAlt} data={"0"} />
                   </div>
                 </div>
               </div>
