@@ -10,22 +10,19 @@ import "react-alice-carousel/lib/alice-carousel.css";
 
 const VideoSlider = ({ video }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const responsive = {
+    0: { items: 1 },
+    568: { items: 2 },
+    900: { items: 3 },
+    1280: { items: 4 },
+  };
+
   return (
     <div>
       <AliceCarousel
         disableButtonsControls={true}
         disableDotsControls={true}
-        responsive={{
-          0: {
-            items: 1,
-          },
-          800: {
-            items: 2,
-          },
-          1024: {
-            items: 4,
-          },
-        }}
+        responsive={responsive}
       >
         {video.data
           ? video.data.map((item, i) => {

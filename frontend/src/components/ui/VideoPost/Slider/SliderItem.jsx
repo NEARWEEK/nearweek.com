@@ -7,9 +7,9 @@ import Box from "@mui/material/Box";
 const SliderItem = (props) => {
   const useStyles = makeStyles(() => ({
     slideItem: {
-      borderRadius: "24px",
-      "& .react-player": {
-        borderRadius: "24px",
+      padding: "0 12px",
+      "& .react-player__preview": {
+        borderRadius: "6px",
       },
     },
   }));
@@ -18,7 +18,6 @@ const SliderItem = (props) => {
     <>
       {props.video.attributes?.Link ? (
         <ReactPlayer
-          style={{ margin: "0 24px", borderRadius: "24px" }}
           controls={true}
           light={true}
           width="auto"

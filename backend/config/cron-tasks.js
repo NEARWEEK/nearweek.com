@@ -1,10 +1,12 @@
+const indexer = require("./functions/indexer");
+
 module.exports = {
-  '10 * * * * *': async ({ strapi }) => {
-    console.log("Cron Job:" + new Date());
-      const subscribers = await strapi.service('api::subscriber.subscriber').find();
-      console.log('subscribers', subscribers.results.length)
-    for(const subscriber of subscribers.results){
-     /* await strapi.plugins['email'].services.email.send({
+  "10 * * * * *": async ({ strapi }) => {
+    const subscribers = await strapi
+      .service("api::subscriber.subscriber")
+      .find();
+    for (const subscriber of subscribers.results) {
+      /* await strapi.plugins['email'].services.email.send({
         to: subscriber.email,
         from: 'no-reply@strapi.io',
         cc: 'no-reply@strapi.io',
@@ -15,6 +17,15 @@ module.exports = {
         html: 'Hello world!',
       });*/
     }
-  }
-}
-
+  },
+  "10 * * * * *": async ({ strapi }) => {
+    try {
+      const elastic = strapi.config.get("server.elastic");
+      if (elastic && elastic.enabled) {
+        indexer.indexDb();
+      }
+    } catch (e) {
+      console.log("Error", e);
+    }
+  },
+};
