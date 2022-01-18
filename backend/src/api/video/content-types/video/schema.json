@@ -12,10 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Link": {
+    "Video": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "videos"
       ]
@@ -31,6 +31,9 @@
     "Views": {
       "type": "integer",
       "default": 0
+    },
+    "Link": {
+      "type": "string"
     }
   }
 }
