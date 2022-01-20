@@ -12,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Resume": {
-      "type": "richtext",
-      "maxLength": 300
-    },
     "Body": {
       "type": "richtext",
       "required": true
@@ -40,13 +36,6 @@
         "videos"
       ]
     },
-    "Title": {
-      "displayName": "Title",
-      "type": "component",
-      "repeatable": false,
-      "component": "title.title",
-      "required": true
-    },
     "Highlights": {
       "type": "component",
       "repeatable": true,
@@ -62,14 +51,25 @@
     "DAOs": {
       "type": "component",
       "repeatable": true,
-      "required": true,
+      "required": false,
       "component": "highlight.highlight"
     },
     "DeFI": {
       "type": "component",
       "repeatable": true,
       "component": "highlight.highlight",
-      "required": true
+      "required": false
+    },
+    "Title": {
+      "type": "string",
+      "required": true,
+      "default": "Edition"
+    },
+    "Number": {
+      "required": true,
+      "min": 0,
+      "default": 0,
+      "type": "integer"
     }
   }
 }

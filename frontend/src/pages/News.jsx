@@ -32,6 +32,7 @@ const News = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [filters, setFilters] = useState([null, null, null]);
   const [filterResult, setFilterResult] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
 
   const useStyles = makeStyles(() => ({
     mainContainer: {
@@ -94,8 +95,9 @@ const News = () => {
     setSort(e.target.value);
   };
 
-  const handleFilter = (e) => {
-    console.log(filterType);
+  const handleShowFilter = (e) => {
+    e.preventDefault();
+    setShowFilter(!showFilter);
   };
 
   function getLatestNews() {
@@ -126,7 +128,7 @@ const News = () => {
     return (
       <Button
         size="small"
-        onClick={handleFilter}
+        onClick={handleShowFilter}
         variant="outlined"
         startIcon={<FilterListIcon />}
       >
@@ -203,46 +205,48 @@ const News = () => {
           </Stack>
           <FilterButton />
         </Box>
-        <Box className={classes.filterActionContainer}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DateRangePicker
-              startText="Start date"
-              endText="End date"
-              value={dateRange}
-              onChange={(newValue) => {
-                setDateRange(newValue);
-              }}
-              renderInput={(startProps, endProps) => (
-                <>
-                  <TextField
-                    {...startProps}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <EventIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <Box sx={{ mx: 2 }}> - </Box>
-                  <TextField
-                    {...endProps}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <EventIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </>
-              )}
-            />
-          </LocalizationProvider>
-          <Box>
-            <FilterType />
+        {showFilter && (
+          <Box className={classes.filterActionContainer}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DateRangePicker
+                startText="Start date"
+                endText="End date"
+                value={dateRange}
+                onChange={(newValue) => {
+                  setDateRange(newValue);
+                }}
+                renderInput={(startProps, endProps) => (
+                  <>
+                    <TextField
+                      {...startProps}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <EventIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <Box sx={{ mx: 2 }}> - </Box>
+                    <TextField
+                      {...endProps}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <EventIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </>
+                )}
+              />
+            </LocalizationProvider>
+            <Box>
+              <FilterType />
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
     );
   };

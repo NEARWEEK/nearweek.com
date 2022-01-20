@@ -2,7 +2,7 @@ import * as React from "react";
 import Menu from "./Menu/Menu";
 import Logo from "./Logo/Logo";
 import makeStyles from "@mui/styles/makeStyles";
-import Connect from "./Actions/Connect";
+import Connect from "./Actions/Connect/Connect";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -11,14 +11,10 @@ import Drawer from "@mui/material/Drawer";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ListItemText from "@mui/material/ListItemText";
-import {
-  Container,
-  Divider,
-  ListItemButton,
-  Box,
-  Toolbar,
-  AppBar,
-} from "@mui/material";
+import { Divider, ListItemButton, Box, Toolbar, AppBar } from "@mui/material";
+
+import Search from "./Actions/Search/Search";
+import Actions from "./Actions/Actions";
 
 const Navbar = () => {
   const isMobileMatch = useMediaQuery("(max-width:860px)");
@@ -61,6 +57,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
+            <Search />
             <IconButton
               edge="start"
               color="inherit"
@@ -107,7 +104,7 @@ const Navbar = () => {
             </Drawer>
           </>
         )}
-        <Connect />
+        <Actions />
       </Toolbar>
     </AppBar>
   );

@@ -17,7 +17,6 @@ import Widget from "../../general/Widget/Widget";
 const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const matchEdition = useMatch(`/editions/:editionId`);
-
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
@@ -89,9 +88,9 @@ const ListItem = ({ data }) => {
                   underline="none"
                   href={`/editions/${data.id}`}
                 >
-                  {data.attributes.Title.Name}{" "}
+                  {data.attributes.Title}{" "}
                   <span className={classes.postNumber}>
-                    #{data.attributes.Title.Number}
+                    #{data.attributes.Number}
                   </span>
                 </Link>
               </h3>

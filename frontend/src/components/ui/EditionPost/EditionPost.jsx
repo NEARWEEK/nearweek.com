@@ -299,7 +299,6 @@ const EditionPost = () => {
     );
   };
   const classes = useStyles();
-
   return (
     <>
       <Navbar />
@@ -333,13 +332,13 @@ const EditionPost = () => {
                     <span>Editions / </span>
                   </a>
                   <span className={classes.current}>
-                    {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
+                    {`${edition.attributes.Title} # ${edition.attributes.Number}`}
                   </span>
                 </Box>
                 <Box>
                   <h2 className={classes.postTitle}>
                     {" "}
-                    {`${edition.attributes.Title.Name} # ${edition.attributes.Title.Number}`}
+                    {`${edition.attributes.Title} # ${edition.attributes.Number}`}
                   </h2>
                   <Box className={classes.headerBlockFooter}>
                     <Box display="inline-flex">
