@@ -1,5 +1,22 @@
 const axios = require("axios");
 
+const indexNews = async () => {
+  try {
+    console.log("Run index News");
+    const HOST = strapi.config.get("server.elastic.host");
+    const news = await strapi
+      .service("api::article.article")
+      .find({ populate: "*" });
+    if (news.results) {
+      for (const article of news.results) {
+        await axios.put(`${HOST}/news/article/${article.id}?pretty`, article);
+      }
+    }
+  } catch (e) {
+    console.log("Error:", e);
+  }
+};
+
 const indexEvents = async () => {
   try {
     console.log("Run index Events");
@@ -39,7 +56,7 @@ const indexEditions = async () => {
 
 const indexDb = () => {
   try {
-    Promise.all([indexEvents(), indexEditions()]);
+    Promise.all([indexEvents(), indexEditions(), indexNews()]);
   } catch (e) {
     console.log("Error", e);
   }
