@@ -12,7 +12,8 @@
       "default": "Edition"
     },
     "Number": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     }
   }
 }

@@ -80,9 +80,9 @@ const Announce = ({ edition }) => {
                 href={`/editions/${edition.id}`}
                 underline="none"
               >
-                {edition.attributes.Title.Name}{" "}
+                {edition.attributes.Title}{" "}
                 <span className={classes.postNumber}>
-                  #{edition.attributes.Title.Number}
+                  #{edition.attributes.Number}
                 </span>
               </Link>
             </h2>

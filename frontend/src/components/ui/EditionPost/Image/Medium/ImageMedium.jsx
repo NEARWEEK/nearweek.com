@@ -13,9 +13,8 @@ const ImageMedium = ({ data }) => {
       borderRadius: "12px 12px 0 0",
     },
   }));
-
   let medium;
-  if (data) {
+  if (data.attributes.Image?.data) {
     medium = `${data.attributes.Image.data.attributes.formats.medium.url}`;
   }
   const classes = useStyles();

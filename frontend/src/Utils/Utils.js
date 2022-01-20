@@ -13,6 +13,24 @@ const options = {
   credentials: "include",
 };
 
+export function groupBy(list, keyGetter) {
+  const map = new Map();
+  const array = [];
+  list.forEach((item) => {
+    const key = keyGetter(item);
+    const collection = map.get(key);
+    if (!collection) {
+      map.set(key, [item]);
+    } else {
+      collection.push(item);
+    }
+  });
+  map.forEach((value, key, map) => {
+    array.push({ type: key, data: value });
+  });
+  return array;
+}
+
 async function loadEditions() {
   const response = await fetch(
     `/api/editions?populate=*&sort=createdAt:desc`,
@@ -23,7 +41,7 @@ async function loadEditions() {
 
 async function loadNews() {
   const response = await fetch(
-    `/api/news?populate=*&sort=createdAt:desc&&filters[categories][name]=News`,
+    `/api/news?populate=*&sort=createdAt:desc`,
     options
   );
   return await response.json();
@@ -90,6 +108,11 @@ export function getPubDate(period) {
   return `${dateFrom} - ${dateTo}`;
 }
 
+async function elasticSearch(query) {
+  const response = await fetch(`/api/search?q="${query}"`, options);
+  return await response.json();
+}
+
 export const api = {
   getAllEditions: loadEditions,
   getOneEdition: loadEdition,
@@ -100,5 +123,6 @@ export const api = {
   getLatestEvents: loadLatestEvents,
   getCategories: loadCategories,
   getAllVideo: loadVideos,
+  search: elasticSearch,
   getLatestVideo: loadLatestVideo,
 };

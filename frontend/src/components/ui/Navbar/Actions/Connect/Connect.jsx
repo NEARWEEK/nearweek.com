@@ -1,10 +1,17 @@
 import * as React from "react";
-import styles from "./connect.module.css";
 import Button from "@mui/material/Button";
+import makeStyles from "@mui/styles/makeStyles";
 
 const Connect = () => {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      marginLeft: "40px",
+    },
+  }));
+  const classes = useStyles();
+
   return (
-    <div className={styles.wrapper}>
+    <div className={classes.root}>
       <Button variant="contained" href="#">
         Connect
       </Button>

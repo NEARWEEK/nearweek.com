@@ -23,7 +23,7 @@ const SliderItem = (props) => {
           width="auto"
           height="286px"
           url={`${props.video.attributes.Link}`}
-          className={classes.slideItem}
+          className={"item " + classes.slideItem}
         />
       ) : null}
     </>
