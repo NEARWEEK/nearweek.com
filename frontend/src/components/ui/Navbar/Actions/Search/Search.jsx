@@ -14,35 +14,34 @@ import Autosuggest from "react-autosuggest";
 import { debounce } from "throttle-debounce";
 import { useState } from "react";
 import * as Utils from "../../../../../Utils/Utils";
-import { groupBy } from "../../../../../Utils/Utils";
+import { getTimeAgo, groupBy } from "../../../../../Utils/Utils";
 
 const Search = () => {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  console.log("suggestions", suggestions);
 
   const useStyles = makeStyles((theme) => ({
     container: {
       marginLeft: "auto",
       "& .react-autosuggest__container ": {
         position: "relative",
+        width: "100%",
       },
       "& .react-autosuggest__input": {
-        width: " 240px",
-        height: " 30px",
+        width: "100%",
+        height: "100%",
         padding: "10px 20px",
-        fontFamily: "Helvetica, sans-serif",
+        background: "transparent",
         fontWeight: 300,
         fontSize: "16px",
-        border: "1px solid #aaa",
-        borderRadius: "4px",
+        border: 0,
       },
       "& .react-autosuggest__input--focused": {
         outline: "none",
       },
       "& .react-autosuggest__input--open": {
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
+        /* borderBottomLeftRadius: 0,*/
+        /*borderBottomRightRadius: 0,*/
       },
       "& .react-autosuggest__suggestions-container": {
         display: "none",
@@ -50,12 +49,13 @@ const Search = () => {
       "& .react-autosuggest__suggestions-container--open ": {
         display: "block",
         position: "absolute",
-        top: "51px",
-        width: "280px",
-        border: "1px solid #aaa",
+        top: "52px",
+        right: "-6px",
+        width: "400px",
+        boxShadow: "4px 4px 8px 0px rgba(34, 60, 80, 0.2)",
+        padding: "0 16px",
         backgroundColor: " #fff",
-        borderBottomLeftRadius: "4px",
-        borderBottomRightRadius: "4px",
+        borderRadius: "8px",
         zIndex: 2,
       },
       "& .react-autosuggest__suggestions-list": {
@@ -63,20 +63,40 @@ const Search = () => {
         padding: 0,
         listStyleType: " none",
       },
-      "& .react-autosuggest__suggestion ": {
+      "& .react-autosuggest__suggestion": {
         cursor: "pointer",
-        padding: "10px 20px",
+        padding: "10px 0px",
       },
       "& .react-autosuggest__suggestion--highlighted": {
-        backgroundColor: "#ddd",
+        /*backgroundColor: "#ddd",*/
       },
     },
     img: {
       width: "48px",
       height: "48px",
+      borderRadius: "8px",
+    },
+    sectionTitle: {
+      "& p:first-letter": {
+        textTransform: "capitalize",
+      },
     },
     result: {
       display: "flex",
+    },
+    resultImage: {
+      marginRight: "24px",
+    },
+    resultBody: {
+      width: "100%",
+      borderBottom: "1px solid #e0e4fb99",
+    },
+    link: {
+      textDecoration: "none",
+    },
+    createdAt: {
+      fontSize: "14px",
+      color: "#555",
     },
   }));
 
@@ -105,26 +125,43 @@ const Search = () => {
   };
 
   const renderSectionTitle = (section) => {
-    return <strong>{section.type}</strong>;
+    return (
+      <div className={classes.sectionTitle}>
+        <p>
+          <strong>{section.type}</strong>
+        </p>
+      </div>
+    );
   };
 
   const renderSuggestion = (suggestion) => {
     return (
       <div className={classes.result}>
-        {suggestion.data.Image.formats.thumbnail && (
-          <a href={`/${suggestion.type}/${suggestion.data.id}`}>
-            <div
-              style={{
-                backgroundImage: `url('${suggestion.data.Image.formats.thumbnail.url}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "50% 50%",
-              }}
-              className={classes.img}
-            />{" "}
-          </a>
+        {suggestion.data.Image?.formats.thumbnail && (
+          <div className={classes.resultImage}>
+            <a href={`/${suggestion.type}/${suggestion.data.id}`}>
+              <div
+                style={{
+                  backgroundImage: `url('${suggestion.data.Image.formats.thumbnail.url}')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "50% 50%",
+                }}
+                className={classes.img}
+              />{" "}
+            </a>
+          </div>
         )}
-        <div>{suggestion.data.Title}</div>
-        {/* <div className="shortCode">{suggestion.Body}</div>*/}
+        <div className={classes.resultBody}>
+          <a
+            className={classes.link}
+            href={`/${suggestion.type}/${suggestion.data.id}`}
+          >
+            <div>{suggestion.data.Title}</div>
+            <div className={classes.createdAt}>
+              {getTimeAgo(suggestion.data.createdAt)}
+            </div>
+          </a>
+        </div>
       </div>
     );
   };
