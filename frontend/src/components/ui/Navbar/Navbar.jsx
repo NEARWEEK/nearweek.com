@@ -57,7 +57,6 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Search />
             <IconButton
               edge="start"
               color="inherit"
@@ -85,6 +84,7 @@ const Navbar = () => {
                   <CloseIcon onClick={toggleDrawer(false)} />
                 </IconButton>
                 <Divider sx={{ mb: 2 }} />
+                <Search />
                 <ListItemButton component={Link} to="/">
                   <ListItemText primary="Home" />
                 </ListItemButton>
