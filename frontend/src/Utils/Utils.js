@@ -13,6 +13,10 @@ const options = {
   credentials: "include",
 };
 
+export function getTimeAgo(date) {
+  return moment(date).fromNow();
+}
+
 export function groupBy(list, keyGetter) {
   const map = new Map();
   const array = [];
