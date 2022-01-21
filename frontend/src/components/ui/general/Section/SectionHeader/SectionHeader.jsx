@@ -11,12 +11,12 @@ const SectionHeader = ({ title, link }) => {
       justifyContent: "space-between",
     },
     blockTitle: {
-      fontSize: "2.75rem",
+      fontSize: "48px",
       fontWeight: "900",
     },
     blockLink: {
       textTransform: "uppercase",
-      fontSize: "0.75rem",
+      fontSize: "14px",
       fontWeight: " bold",
       "& a": {
         textDecoration: "none",
@@ -30,7 +30,9 @@ const SectionHeader = ({ title, link }) => {
   return (
     <div className={classes.blockHeader}>
       <h2 className={classes.blockTitle}>{title}</h2>
-      <div className={classes.blockLink}>{link}</div>
+      <div className={classes.blockLink}>
+        <a href={link}>SHOW MORE</a>
+      </div>
     </div>
   );
 };
