@@ -32,6 +32,9 @@ const ListItem = ({ data }) => {
     },
     postContent: {
       width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      flex: 1,
       borderRadius: "0 12px 12px 0",
       background: matchEdition ? "#fff" : "#f7f7f7",
       padding: "16px 0 0 24px",
@@ -55,6 +58,7 @@ const ListItem = ({ data }) => {
       marginTop: 0,
     },
     postFooter: {
+      marginTop: "auto",
       paddingTop: "12px",
       paddingBottom: "12px",
       borderTop: "1px solid #c8c6c6",

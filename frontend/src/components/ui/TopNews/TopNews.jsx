@@ -15,7 +15,7 @@ const TopNews = () => {
     wrapper: {},
     container: {
       margin: "0 auto",
-      maxWidth: 1440,
+      maxWidth: 1376,
       paddingRight: "16px",
       paddingLeft: "16px",
     },

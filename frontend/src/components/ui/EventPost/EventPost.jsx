@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import * as Utils from "../../../Utils/Utils";
@@ -16,7 +17,7 @@ const EventPost = () => {
 
   const classes = useStyles();
 
-  return <></>;
+  return <>{"Event"}</>;
 };
 
 export default EventPost;

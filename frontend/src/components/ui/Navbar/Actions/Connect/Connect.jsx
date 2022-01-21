@@ -12,7 +12,7 @@ const Connect = () => {
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" href="#">
+      <Button disableElevation={true} variant="contained" href="#">
         Connect
       </Button>
     </div>
