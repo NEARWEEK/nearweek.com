@@ -34,7 +34,7 @@ const Announce = ({ edition }) => {
       fontSize: "14px",
     },
     postTitle: {
-      fontSize: "42px",
+      fontSize: "48px",
       fontWeight: "900",
       marginTop: "12px",
       marginBottom: "12px",
@@ -43,7 +43,7 @@ const Announce = ({ edition }) => {
       color: "#2013fb",
     },
     postBody: {
-      fontSize: "18px",
+      fontSize: "16px",
       lineHeight: "24px",
       marginTop: 0,
     },
@@ -92,9 +92,9 @@ const Announce = ({ edition }) => {
           </div>
           <div className={classes.postFooter}>
             <div className={classes.postWidgets}>
-              <Widget icon={faEye} data={edition.attributes.views} />
-              <Widget icon={faThumbsUp} data={edition.attributes.likes} />
-              <Widget icon={faCommentAlt} data={"0"} />
+              <Widget icon={"Visibility"} data={edition.attributes.views} />
+              <Widget icon={"ThumbUp"} data={edition.attributes.likes} />
+              <Widget icon={"ChatBubble"} data={"0"} />
             </div>
           </div>
         </div>

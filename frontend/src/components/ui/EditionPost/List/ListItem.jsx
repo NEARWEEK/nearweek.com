@@ -13,6 +13,7 @@ import Link from "@mui/material/Link";
 import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -103,9 +104,9 @@ const ListItem = ({ data }) => {
               </p>
               <div className={classes.postFooter}>
                 <div className={classes.postWidgets}>
-                  <Widget icon={faEye} data={data.attributes.views} />
-                  <Widget icon={faThumbsUp} data={data.attributes.likes} />
-                  <Widget icon={faCommentAlt} data={"0"} />
+                  <Widget icon={"Visibility"} data={data.attributes.views} />
+                  <Widget icon={"ThumbUp"} data={data.attributes.likes} />
+                  <Widget icon={"ChatBubble"} data={"0"} />
                 </div>
               </div>
             </div>

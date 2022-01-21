@@ -2,12 +2,12 @@ import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import ListItem from "./ListItem";
 
-const NewsList = ({ news }) => {
+const NewsList = ({ news, limit = 0 }) => {
   const useStyles = makeStyles(() => ({}));
 
   let newsList = [];
   if (news) {
-    newsList = [...news.data];
+    newsList = [...news.data.slice(0, limit)];
   }
 
   const classes = useStyles();

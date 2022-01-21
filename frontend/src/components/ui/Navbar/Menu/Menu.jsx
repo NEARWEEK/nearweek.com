@@ -25,7 +25,7 @@ const Menu = () => {
         textDecoration: "none",
       },
       "& a.active": {
-        color: "blue",
+        color: "#0d00ff",
       },
     },
     menuLink: {

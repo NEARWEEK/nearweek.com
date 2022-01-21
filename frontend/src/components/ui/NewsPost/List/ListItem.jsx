@@ -54,6 +54,7 @@ const ListItem = ({ data, meta }) => {
     postTitle: {
       marginTop: "6px",
       marginBottom: "6px",
+      fontSize: "20px",
     },
     postNumber: {
       color: "#2013fb",
@@ -131,9 +132,9 @@ const ListItem = ({ data, meta }) => {
                 </div>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>
-                    <Widget icon={faEye} data={data.attributes.views} />
-                    <Widget icon={faThumbsUp} data={data.attributes.likes} />
-                    <Widget icon={faCommentAlt} data={"0"} />
+                    <Widget icon={"Visibility"} data={data.attributes.views} />
+                    <Widget icon={"ThumbUp"} data={data.attributes.likes} />
+                    <Widget icon={"ChatBubble"} data={"0"} />
                   </div>
                 </div>
               </div>
