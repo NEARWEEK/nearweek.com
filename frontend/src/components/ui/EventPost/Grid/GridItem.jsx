@@ -118,7 +118,7 @@ const GridItem = ({ data }) => {
                   <h3 className={classes.postTitle}>
                     <Link
                       color="inherit"
-                      href={`/event/${data.id}`}
+                      href={`/events/${data.id}`}
                       underline="none"
                     >
                       {data.attributes.Title}

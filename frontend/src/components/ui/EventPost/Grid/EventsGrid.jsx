@@ -14,7 +14,7 @@ const EventsGrid = ({ events }) => {
       display: "grid",
       gridTemplateColumns: isMobileMatch
         ? "repeat(auto-fill,minmax(326px, 1fr))"
-        : "repeat(auto-fill,minmax(442px, 1fr))",
+        : "repeat(auto-fill,minmax(400px, 1fr))",
       columnGap: "24px",
     },
   }));

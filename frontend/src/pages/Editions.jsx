@@ -8,7 +8,7 @@ import Announce from "../components/ui/EditionPost/Announce/Announce";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import * as Utils from "../Utils/Utils";
 
-const EditionsPage = () => {
+const Editions = () => {
   const useStyles = makeStyles(() => ({
     mainContainer: {
       margin: "0 auto",
@@ -60,4 +60,4 @@ const EditionsPage = () => {
   );
 };
 
-export default EditionsPage;
+export default Editions;

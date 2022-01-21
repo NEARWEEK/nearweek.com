@@ -2,7 +2,6 @@ import * as React from "react";
 import Menu from "./Menu/Menu";
 import Logo from "./Logo/Logo";
 import makeStyles from "@mui/styles/makeStyles";
-import Connect from "./Actions/Connect/Connect";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,12 +21,11 @@ const Navbar = () => {
 
   const useStyles = makeStyles((theme) => ({
     container: {
-      marginRight: theme.spacing(2),
-      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(4),
+      marginLeft: theme.spacing(4),
     },
     header: {
-      minHeight: "32px",
-      borderBottom: "2px solid #ccc",
+      borderBottom: "1px solid #ccc",
     },
   }));
 

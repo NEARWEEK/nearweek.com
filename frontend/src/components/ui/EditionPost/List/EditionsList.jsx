@@ -55,7 +55,7 @@ const EditionsList = ({ editions }) => {
 
   const classes = useStyles();
   return (
-    <div>
+    <div className="section">
       {editionsList.length > 0
         ? editionsList.slice(0, moreLength).map((edition, i) => {
             return <ListItem key={i} data={edition} />;

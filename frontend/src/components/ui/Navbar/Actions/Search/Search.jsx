@@ -9,6 +9,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import CancelIcon from "@mui/icons-material/Cancel";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import Autosuggest from "react-autosuggest";
 import { debounce } from "throttle-debounce";
@@ -172,7 +173,6 @@ const Search = () => {
         elevation={0}
         component="div"
         sx={{
-          p: "2px 4px",
           display: "flex",
           alignItems: "center",
           width: 400,
@@ -180,7 +180,7 @@ const Search = () => {
         }}
       >
         <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-          <SearchIcon />
+          <SearchIcon fontSize="small" />
         </IconButton>
         <Autosuggest
           multiSection={true}
@@ -200,6 +200,13 @@ const Search = () => {
           }}
           highlightFirstSuggestion={true}
         />
+        <IconButton
+          onClick={() => setValue("")}
+          sx={{ p: "10px" }}
+          aria-label="clear"
+        >
+          <CancelIcon fontSize="small" />
+        </IconButton>
       </Paper>
     </Box>
   );
