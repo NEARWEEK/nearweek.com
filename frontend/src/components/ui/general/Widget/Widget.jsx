@@ -1,6 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import * as React from "react";
+import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import * as MuiIcons from "@mui/icons-material";
 

@@ -277,6 +277,11 @@ const EditionPost = () => {
     );
   };
 
+  let imageUrl = "";
+  if (edition) {
+    imageUrl = edition.attributes.Image.data?.attributes.url;
+  }
+
   const ReadMore = ({ children }) => {
     const text = children;
     const [isReadMore, setIsReadMore] = useState(true);
@@ -311,7 +316,7 @@ const EditionPost = () => {
           >
             <div
               style={{
-                backgroundImage: `url('${edition.attributes.Image.data.attributes.url}')`,
+                backgroundImage: imageUrl ? `url('${imageUrl}')` : "none",
                 backgroundSize: "cover",
                 backgroundPosition: "50% 50%",
                 width: "100%",

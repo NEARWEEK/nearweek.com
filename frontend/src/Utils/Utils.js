@@ -36,40 +36,60 @@ export function groupBy(list, keyGetter) {
 }
 
 async function loadEditions() {
-  const response = await fetch(
-    `/api/editions?populate=*&sort=createdAt:desc`,
-    options
-  );
-  return await response.json();
+  try {
+    const response = await fetch(
+      `/api/editions?populate=*&sort=createdAt:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load editions", e);
+  }
 }
 
 async function loadNews() {
-  const response = await fetch(
-    `/api/news?populate=*&sort=createdAt:desc`,
-    options
-  );
-  return await response.json();
+  try {
+    const response = await fetch(
+      `/api/news?populate=*&sort=createdAt:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load news:", e);
+  }
 }
 
 async function loadEvents() {
-  const response = await fetch(
-    `/api/events?populate=*&sort=createdAt:desc`,
-    options
-  );
-  return await response.json();
+  try {
+    const response = await fetch(
+      `/api/events?populate=*&sort=createdAt:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load events", e);
+  }
 }
 
 async function loadLatestEvents(page = 1, size = 3) {
-  const response = await fetch(
-    `/api/events?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${size}`,
-    options
-  );
-  return await response.json();
+  try {
+    const response = await fetch(
+      `/api/events?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${size}`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load latest events:", e);
+  }
 }
 
 async function loadArticle(articleId) {
-  const response = await fetch(`/api/news/${articleId}?populate=*`, options);
-  return await response.json();
+  try {
+    const response = await fetch(`/api/news/${articleId}?populate=*`, options);
+    return await response.json();
+  } catch (e) {
+    console.log("Error load article:", e);
+  }
 }
 
 async function loadLatestNews(page = 1, size = 3) {

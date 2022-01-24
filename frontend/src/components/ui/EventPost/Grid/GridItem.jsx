@@ -130,7 +130,7 @@ const GridItem = ({ data }) => {
                   <div className={classes.postWidgets}>
                     <Widget icon={"Visibility"} data={data.attributes.views} />
                     <Widget icon={"ThumbUp"} data={data.attributes.likes} />
-                    <Widget icon={"ChatBubble"} data={"0"} />
+                    <Widget icon={"ChatBubble"} data={0} />
                   </div>
                 </div>
               </Box>
