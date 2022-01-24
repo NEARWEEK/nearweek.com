@@ -9,6 +9,8 @@ const indexNews = async () => {
       .find({ populate: "*" });
     if (news.results) {
       for (const article of news.results) {
+        delete article.createdBy;
+        delete article.updatedBy;
         await axios.put(`${HOST}/news/article/${article.id}?pretty`, article);
       }
     }
@@ -26,6 +28,8 @@ const indexEvents = async () => {
       .find({ populate: "*" });
     if (events.results) {
       for (const event of events.results) {
+        delete event.createdBy;
+        delete event.updatedBy;
         await axios.put(`${HOST}/events/event/${event.id}?pretty`, event);
       }
     }
@@ -42,7 +46,9 @@ const indexEditions = async () => {
       .service("api::edition.edition")
       .find({ populate: "*" });
     if (editions.results) {
-      for (const edition of editions.results) {
+      for (let edition of editions.results) {
+        delete edition.createdBy;
+        delete edition.updatedBy;
         await axios.put(
           `${HOST}/editions/edition/${edition.id}?pretty`,
           edition

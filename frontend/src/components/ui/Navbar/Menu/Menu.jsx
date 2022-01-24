@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 import makeStyles from "@mui/styles/makeStyles";
-import MenuList from "@mui/material/MenuList";
 
 const Menu = () => {
   const useStyles = makeStyles((theme) => ({
@@ -12,7 +11,8 @@ const Menu = () => {
     menu: {
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "flex-start",
+      gap: "24px",
       fontSize: "14px",
       fontWeight: "bold",
       letterSpacing: "1px",

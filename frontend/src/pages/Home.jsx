@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import makeStyles from "@mui/styles/makeStyles";
 import { useEffect, useState } from "react";
@@ -52,7 +52,6 @@ const Home = () => {
     },
   }));
 
-  const ShowMore = <a href="#">Show more</a>;
   const [editions, setEditions] = useState({ data: [], meta: {} });
   const [news, setNews] = useState({ data: [], meta: {} });
   const [events, setEvents] = useState({ data: [], meta: {} });

@@ -5,6 +5,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 
 const ImageMedium = ({ data }) => {
+  console.log("data", data);
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const useStyles = makeStyles(() => ({
     img: {
@@ -23,7 +24,7 @@ const ImageMedium = ({ data }) => {
       {data ? (
         <div
           style={{
-            backgroundImage: `url('${medium}')`,
+            backgroundImage: medium ? `url('${medium}')` : "none",
             backgroundSize: "cover",
           }}
           className={classes.img}
