@@ -5,12 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import makeStyles from "@mui/styles/makeStyles";
-
 import SwiperCore, { FreeMode, Navigation } from "swiper";
 
 SwiperCore.use([FreeMode, Navigation]);
-
-import "swiper/css/navigation";
 
 const VideoSlider = ({ video }) => {
   const isMobileMatch = useMediaQuery(`(max-width:1024px`);
