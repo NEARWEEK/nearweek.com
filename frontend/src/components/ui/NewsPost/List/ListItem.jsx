@@ -47,6 +47,9 @@ const ListItem = ({ data, meta }) => {
       display: "flex",
       alignItems: "center",
       padding: "16px 16px 0 16px",
+      "& .image-container": {
+        marginBottom: "16px",
+      },
       "& .image-container .image": {
         marginRight: "16px",
       },
