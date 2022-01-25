@@ -12,7 +12,7 @@ const Menu = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "flex-start",
-      gap: "24px",
+      gap: "14px",
       fontSize: "14px",
       fontWeight: "bold",
       letterSpacing: "1px",

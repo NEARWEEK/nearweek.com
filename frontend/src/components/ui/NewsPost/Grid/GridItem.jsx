@@ -10,6 +10,7 @@ import { useMatch } from "react-router";
 import Box from "@mui/material/Box";
 import Thumbnail from "./Thumbnail/Thumbnail";
 import Widget from "../../general/Widget/Widget";
+import { getTimeAgo } from "../../../../Utils/Utils";
 
 const GridItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
@@ -64,6 +65,8 @@ const GridItem = ({ data }) => {
       marginTop: 0,
     },
     contentFooter: {
+      display: "flex",
+      justifyContent: "space-between",
       padding: "12px",
       borderTop: "1px solid #c8c6c6",
     },
@@ -74,6 +77,10 @@ const GridItem = ({ data }) => {
     postWidget: {
       color: "#656364",
       paddingRight: "24px",
+    },
+    footerDate: {
+      fontSize: "12px",
+      color: "#656364",
     },
   }));
 
@@ -131,6 +138,9 @@ const GridItem = ({ data }) => {
                     <Widget icon={"Visibility"} data={data.attributes.views} />
                     <Widget icon={"ThumbUp"} data={data.attributes.likes} />
                     <Widget icon={"ChatBubble"} data={"0"} />
+                  </div>
+                  <div className={classes.footerDate}>
+                    {getTimeAgo(data.attributes.createdAt)}
                   </div>
                 </div>
               </div>
