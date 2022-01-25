@@ -9,6 +9,8 @@ import {
 import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import Widget from "../../general/Widget/Widget";
+import { getTimeAgo } from "../../../../Utils/Utils";
 
 const Announce = ({ article }) => {
   const useStyles = makeStyles(() => ({
@@ -45,6 +47,8 @@ const Announce = ({ article }) => {
       marginTop: 0,
     },
     postFooter: {
+      display: "flex",
+      justifyContent: "space-between",
       padding: "12px 24px",
       borderTop: "1px solid #c8c6c6",
       borderRadius: "0 0 12px 12px",
@@ -56,6 +60,10 @@ const Announce = ({ article }) => {
     postWidget: {
       color: "#656364",
       paddingRight: "24px",
+    },
+    footerDate: {
+      fontSize: "12px",
+      color: "#656364",
     },
     categoryItem: {
       marginRight: "6px",
@@ -107,15 +115,12 @@ const Announce = ({ article }) => {
           </div>
           <div className={classes.postFooter}>
             <div className={classes.postWidgets}>
-              <span className={classes.postWidget}>
-                <FontAwesomeIcon icon={faEye} /> {article.attributes.views}
-              </span>
-              <span className={classes.postWidget}>
-                <FontAwesomeIcon icon={faThumbsUp} /> {article.attributes.likes}
-              </span>
-              <span className={classes.postWidget}>
-                <FontAwesomeIcon icon={faCommentAlt} /> 0
-              </span>
+              <Widget icon={"Visibility"} data={article.attributes.views} />
+              <Widget icon={"ThumbUp"} data={article.attributes.likes} />
+              <Widget icon={"ChatBubble"} data={"0"} />
+            </div>
+            <div className={classes.footerDate}>
+              {getTimeAgo(article.attributes.createdAt)}
             </div>
           </div>
         </div>

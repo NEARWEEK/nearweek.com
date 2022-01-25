@@ -8,9 +8,10 @@ import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
-import { getPubDate, MOBILE_WIDTH } from "../../../../Utils/Utils";
+import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
+import Box from "@mui/material/Box";
 
 const Announce = ({ edition }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -48,6 +49,8 @@ const Announce = ({ edition }) => {
       marginTop: 0,
     },
     postFooter: {
+      display: "flex",
+      justifyContent: "space-between",
       padding: "12px 24px",
       borderTop: "1px solid #c8c6c6",
       borderRadius: "0 0 12px 12px",
@@ -59,6 +62,10 @@ const Announce = ({ edition }) => {
     postWidget: {
       color: "#656364",
       paddingRight: "24px",
+    },
+    footerDate: {
+      fontSize: "12px",
+      color: "#656364",
     },
   }));
 
@@ -95,6 +102,9 @@ const Announce = ({ edition }) => {
               <Widget icon={"Visibility"} data={edition.attributes.views} />
               <Widget icon={"ThumbUp"} data={edition.attributes.likes} />
               <Widget icon={"ChatBubble"} data={"0"} />
+            </div>
+            <div className={classes.footerDate}>
+              {getTimeAgo(edition.attributes.createdAt)}
             </div>
           </div>
         </div>

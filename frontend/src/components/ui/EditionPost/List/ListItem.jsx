@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
-import { getPubDate, MOBILE_WIDTH } from "../../../../Utils/Utils";
+import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
 import Link from "@mui/material/Link";
 import * as Utils from "../../../../Utils/Utils";
@@ -44,6 +44,8 @@ const ListItem = ({ data }) => {
       padding: "16px 16px 0 16px",
     },
     contentFooter: {
+      display: "flex",
+      justifyContent: "space-between",
       marginTop: "auto",
       padding: "12px",
       borderTop: "1px solid #c8c6c6",
@@ -73,6 +75,10 @@ const ListItem = ({ data }) => {
     postWidget: {
       color: "#656364",
       paddingRight: "24px",
+    },
+    footerDate: {
+      fontSize: "12px",
+      color: "#656364",
     },
   }));
 
@@ -111,6 +117,9 @@ const ListItem = ({ data }) => {
                   <Widget icon={"Visibility"} data={data.attributes.views} />
                   <Widget icon={"ThumbUp"} data={data.attributes.likes} />
                   <Widget icon={"ChatBubble"} data={"0"} />
+                </div>
+                <div className={classes.footerDate}>
+                  {getTimeAgo(data.attributes.createdAt)}
                 </div>
               </Box>
             </div>

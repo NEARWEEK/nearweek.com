@@ -12,7 +12,7 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { MOBILE_WIDTH } from "../../../../Utils/Utils";
+import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import Widget from "../../general/Widget/Widget";
 
 const ListItem = ({ data, meta }) => {
@@ -65,6 +65,8 @@ const ListItem = ({ data, meta }) => {
       marginTop: 0,
     },
     contentFooter: {
+      display: "flex",
+      justifyContent: "space-between",
       padding: "12px",
       borderTop: "1px solid #c8c6c6",
     },
@@ -75,6 +77,10 @@ const ListItem = ({ data, meta }) => {
     postWidget: {
       color: "#656364",
       paddingRight: "24px",
+    },
+    footerDate: {
+      fontSize: "12px",
+      color: "#656364",
     },
   }));
 
@@ -135,6 +141,9 @@ const ListItem = ({ data, meta }) => {
                     <Widget icon={"Visibility"} data={data.attributes.views} />
                     <Widget icon={"ThumbUp"} data={data.attributes.likes} />
                     <Widget icon={"ChatBubble"} data={"0"} />
+                  </div>
+                  <div className={classes.footerDate}>
+                    {getTimeAgo(data.attributes.createdAt)}
                   </div>
                 </div>
               </div>
