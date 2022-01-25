@@ -45,6 +45,7 @@ const ListItem = ({ data, meta }) => {
     },
     contentBody: {
       display: "flex",
+      alignItems: "center",
       padding: "16px 16px 0 16px",
       "& .image-container .image": {
         marginRight: "16px",
