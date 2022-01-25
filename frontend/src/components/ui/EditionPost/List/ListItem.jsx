@@ -1,19 +1,11 @@
-import * as React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
 import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
 import Link from "@mui/material/Link";
-import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import Box from "@mui/material/Box";
 
 const ListItem = ({ data }) => {
@@ -37,11 +29,19 @@ const ListItem = ({ data }) => {
       display: "flex",
       flexDirection: "column",
       flex: 1,
-      borderRadius: "0 12px 12px 0",
+      borderRadius: !isMobileMatch ? "0 12px  12px 0" : "12px",
       background: matchEdition ? "#fff" : "#f7f7f7",
     },
     contentBody: {
+      display: "flex",
+      alignItems: "flex-start",
       padding: "16px 16px 0 16px",
+      "& .image-container": {
+        marginBottom: "16px",
+      },
+      "& .image-container .image": {
+        marginRight: "16px",
+      },
     },
     contentFooter: {
       display: "flex",
@@ -56,7 +56,7 @@ const ListItem = ({ data }) => {
       fontSize: "14px",
     },
     postTitle: {
-      fontSize: "28px",
+      fontSize: isMobileMatch ? "16px" : "20px",
       marginTop: "6px",
       marginBottom: "6px",
     },
@@ -88,29 +88,42 @@ const ListItem = ({ data }) => {
       {data ? (
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
-            <div className={classes.postImage}>
-              <Thumbnail data={data} url={`/editions/${data.id}`} />
-            </div>
+            {!isMobileMatch && (
+              <div className={classes.postImage}>
+                <Thumbnail data={data} url={`/editions/${data.id}`} />
+              </div>
+            )}
             <div className={classes.postContent}>
               <Box className={classes.contentBody}>
-                <div className={classes.postDate}>
-                  <span>{getPubDate(data.attributes.Period)}</span>
+                {isMobileMatch && (
+                  <div className="image-container">
+                    <div className={classes.postImage}>
+                      <Thumbnail data={data} url={`/editions/${data.id}`} />
+                    </div>
+                  </div>
+                )}
+                <div className="body-container">
+                  <div className={classes.postDate}>
+                    <span>{getPubDate(data.attributes.Period)}</span>
+                  </div>
+                  <h3 className={classes.postTitle}>
+                    <Link
+                      color="inherit"
+                      underline="none"
+                      href={`/editions/${data.id}`}
+                    >
+                      {data.attributes.Title}{" "}
+                      <span className={classes.postNumber}>
+                        #{data.attributes.Number}
+                      </span>
+                    </Link>
+                  </h3>
+                  {!isMobileMatch && (
+                    <p className={classes.postBody}>
+                      {data.attributes.Body.substring(0, 130)}
+                    </p>
+                  )}
                 </div>
-                <h3 className={classes.postTitle}>
-                  <Link
-                    color="inherit"
-                    underline="none"
-                    href={`/editions/${data.id}`}
-                  >
-                    {data.attributes.Title}{" "}
-                    <span className={classes.postNumber}>
-                      #{data.attributes.Number}
-                    </span>
-                  </Link>
-                </h3>
-                <p className={classes.postBody}>
-                  {data.attributes.Body.substring(0, 130)}
-                </p>
               </Box>
               <Box className={classes.contentFooter}>
                 <div className={classes.postWidgets}>

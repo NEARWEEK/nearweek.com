@@ -31,7 +31,6 @@ const ListItem = ({ data, meta }) => {
     },
     postImage: {
       borderRadius: "12px 0 0 12px",
-      float: "left",
     },
     itemContainer: {
       borderRadius: "12px",
@@ -45,7 +44,7 @@ const ListItem = ({ data, meta }) => {
     },
     contentBody: {
       display: "flex",
-      alignItems: "center",
+      alignItems: "flex-start",
       padding: "16px 16px 0 16px",
       "& .image-container": {
         marginBottom: "16px",
@@ -66,7 +65,7 @@ const ListItem = ({ data, meta }) => {
     postTitle: {
       marginTop: "6px",
       marginBottom: "6px",
-      fontSize: "20px",
+      fontSize: isMobileMatch ? "16px" : "20px",
     },
     postNumber: {
       color: "#2013fb",
