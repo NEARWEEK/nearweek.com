@@ -17,6 +17,15 @@ export function getTimeAgo(date) {
   return moment(date).fromNow();
 }
 
+export function dateRangeFormat(range) {
+  const startDate = moment(range[0]);
+  const endDate = moment(range[1]);
+  return [
+    startDate ? startDate.utc().format() : null,
+    endDate ? endDate.utc().format() : null,
+  ];
+}
+
 export function groupBy(list, keyGetter) {
   const map = new Map();
   const array = [];

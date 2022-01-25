@@ -10,9 +10,12 @@ import * as Utils from "../Utils/Utils";
 
 const Editions = () => {
   const useStyles = makeStyles(() => ({
-    mainContainer: {
+    root: {
       margin: "0 auto",
       maxWidth: 892,
+    },
+    topContainer: {
+      marginTop: "36px",
     },
     latestEditions: {
       marginTop: "24px",
@@ -38,8 +41,10 @@ const Editions = () => {
   return (
     <>
       <Navbar />
-      <Box className={classes.mainContainer}>
-        <Announce edition={editions.data[0]} />
+      <Box className={classes.root}>
+        <Box className={classes.topContainer}>
+          <Announce edition={editions.data[0]} />
+        </Box>
         <div className={classes.latestEditions}>
           <div className={classes.blockTitle}>Latest Editions</div>
           <div className={styles.editionsList}>
