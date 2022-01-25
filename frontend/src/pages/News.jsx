@@ -24,20 +24,34 @@ import ListItemText from "@mui/material/ListItemText";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
+import Chip from "@mui/material/Chip";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import Divider from "@mui/material/Divider";
+import { dateRangeFormat } from "../Utils/Utils";
+import moment from "moment";
+
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
   const [categories, setCategories] = useState([]);
   const [sort, setSort] = useState("Latest");
-  const [filterType, setFilterType] = useState([]);
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [filters, setFilters] = useState([null, null, null]);
-  const [filterResult, setFilterResult] = useState([]);
-  const [showFilter, setShowFilter] = useState(false);
+  const [showFilterPanel, setShowFilterPanel] = useState(false);
+  const [filters, setFilters] = useState({
+    dateRange: [null, null],
+    category: "all",
+    tags: [],
+  });
+  const [filterResult, setFilterResult] = useState({ data: [] });
 
   const useStyles = makeStyles(() => ({
-    mainContainer: {
+    root: {
       margin: "0 auto",
       maxWidth: 1440,
+    },
+    pageWrapper: {
+      marginRight: "16px",
+      marginLeft: "16px",
     },
     topContainer: {
       display: "flex",
@@ -62,17 +76,33 @@ const News = () => {
     },
     filterContainer: {
       display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
       alignItems: "center",
-      marginTop: "8px",
-      marginBottom: "8px",
+      marginTop: "16px",
+      marginBottom: "16px",
       justifyContent: "space-between",
     },
     filterActionContainer: {
       display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
       alignItems: "center",
-      marginTop: "8px",
-      marginBottom: "8px",
+      marginTop: "16px",
+      marginBottom: "16px",
       gap: "24px",
+    },
+    sortSelect: {
+      "& .MuiSelect-select": {
+        padding: "8px",
+        fontSize: "16px",
+        fontWeight: "bold",
+      },
+    },
+    filterCategory: {
+      "& .active": {
+        backgroundColor: "rgba(13, 0, 255, 0.04)",
+      },
     },
   }));
 
@@ -97,24 +127,66 @@ const News = () => {
 
   const handleShowFilter = (e) => {
     e.preventDefault();
-    setShowFilter(!showFilter);
+    setShowFilterPanel(!showFilterPanel);
   };
 
   function getLatestNews() {
     return news.data.filter((article) => article.id !== news.data[0].id);
   }
 
+  useEffect(() => {
+    const applyFilters = () => {
+      let { data } = filterResult.data.length ? filterResult : news;
+      let fData = [];
+      filters.dateRange.forEach((date, index) => {
+        if (date && index === 0) {
+          fData = data.filter((item) => {
+            const pubDate = moment(item.attributes.createdAt);
+            const afterDate = moment(dateRangeFormat(filters.dateRange)[0]);
+            return pubDate.isSameOrAfter(afterDate);
+          });
+        }
+        if (date && index === 1) {
+          fData = data.filter((item) => {
+            const pubDate = moment(item.attributes.createdAt);
+            const beforeDate = dateRangeFormat(filters.dateRange)[1];
+            return pubDate.isSameOrBefore(moment(beforeDate));
+          });
+        }
+      });
+      setFilterResult({ ...filterResult, data: fData });
+    };
+    applyFilters();
+  }, [filters.dateRange]);
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let { data } = news;
+      let fData = [];
+      if (filters.category != "all") {
+        fData = data.filter((item) => {
+          return Boolean(
+            item.attributes.categories.data.find(
+              (category) => category.attributes.Name === filters.category
+            )
+          );
+        });
+      }
+      setFilterResult({ ...filterResult, data: fData });
+    };
+    applyFilters();
+  }, [filters.category]);
+
   const SortButton = () => {
     return (
       <Box>
         <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="demo-multiple-checkbox-label">Sort</InputLabel>
           <Select
             labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            id="sort-select"
             value={sort}
-            label="Sort"
             onChange={handleSort}
+            className={classes.sortSelect}
           >
             <MenuItem value="Latest">Latest</MenuItem>
             <MenuItem value="Popular">Popular</MenuItem>
@@ -128,6 +200,7 @@ const News = () => {
     return (
       <Button
         size="small"
+        className={showFilterPanel ? "active" : ""}
         onClick={handleShowFilter}
         variant="outlined"
         startIcon={<FilterListIcon />}
@@ -137,7 +210,11 @@ const News = () => {
     );
   };
 
-  const FilterType = () => {
+  const handleFilterCategory = (value) => {
+    setFilters({ ...filters, category: value });
+  };
+
+  /*  const FilterType = () => {
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -158,7 +235,7 @@ const News = () => {
     };
 
     return (
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 116 }}>
         <InputLabel id="demo-multiple-checkbox-label">Type</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
@@ -180,15 +257,40 @@ const News = () => {
         </Select>
       </FormControl>
     );
+  };*/
+
+  const handleDateRange = (value) => {
+    setFilters({ ...filters, dateRange: value });
+  };
+
+  const handleDeleteFromDate = () => {
+    setFilters({ ...filters, dateRange: [null, filters.dateRange[1]] });
+  };
+
+  const handleDeleteToDate = () => {
+    setFilters({ ...filters, dateRange: [filters.dateRange[0], null] });
   };
 
   const FilterPanel = () => {
+    const isActive = (value) => {
+      return filters.category === value;
+    };
+
+    const formatDate = (date) => {
+      return moment(date).format("YYYY.MM.DD");
+    };
+
     return (
       <Box>
         <Box className={classes.filterContainer}>
           <SortButton />
-          <Stack spacing={2} direction="row">
-            <Button variant="text" style={{ textTransform: "none" }}>
+          <Stack spacing={1} direction="row" className={classes.filterCategory}>
+            <Button
+              variant="text"
+              className={isActive("all") ? "active" : ""}
+              style={{ textTransform: "none" }}
+              onClick={() => handleFilterCategory("all")}
+            >
               All categories
             </Button>
             {categories
@@ -196,6 +298,8 @@ const News = () => {
                   <Button
                     variant="text"
                     key={index}
+                    className={isActive(name) ? "active" : ""}
+                    onClick={() => handleFilterCategory(name)}
                     style={{ textTransform: "none" }}
                   >
                     {name}
@@ -205,15 +309,15 @@ const News = () => {
           </Stack>
           <FilterButton />
         </Box>
-        {showFilter && (
+        {showFilterPanel && (
           <Box className={classes.filterActionContainer}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DateRangePicker
                 startText="Start date"
                 endText="End date"
-                value={dateRange}
+                value={filters.dateRange}
                 onChange={(newValue) => {
-                  setDateRange(newValue);
+                  handleDateRange(newValue);
                 }}
                 renderInput={(startProps, endProps) => (
                   <>
@@ -242,57 +346,102 @@ const News = () => {
                 )}
               />
             </LocalizationProvider>
-            <Box>
-              <FilterType />
-            </Box>
           </Box>
         )}
+        <Box>
+          {(filters.dateRange[0] != null || filters.dateRange[1] != null) && (
+            <Box
+              display="flex"
+              alignItems="center"
+              style={{
+                marginTop: 24,
+                marginBottom: 24,
+                paddingTop: 24,
+                paddingBottom: 24,
+                borderTop: "1px solid #ccc",
+              }}
+            >
+              <Button
+                variant="text"
+                style={{ textTransform: "none" }}
+                startIcon={<FontAwesomeIcon icon={faTimes} />}
+              >
+                Clear All
+              </Button>
+              <Divider orientation="vertical" flexItem />
+              <Stack spacing={1} direction="row">
+                {filters.dateRange[0] && (
+                  <Chip
+                    label={
+                      "From date:" +
+                      formatDate(dateRangeFormat(filters.dateRange)[0])
+                    }
+                    onDelete={handleDeleteFromDate}
+                  />
+                )}
+                {filters.dateRange[1] && (
+                  <Chip
+                    label={
+                      "To date:" +
+                      formatDate(dateRangeFormat(filters.dateRange)[1])
+                    }
+                    onDelete={handleDeleteToDate}
+                  />
+                )}
+              </Stack>
+            </Box>
+          )}
+        </Box>
       </Box>
     );
   };
 
-  const FilterResult = () => {
-    return <NewsGrid news={filterResult} />;
+  const FilterResult = ({ filterResult }) => {
+    return <NewsGrid news={filterResult.data} />;
   };
+
+  console.log("filterResult", filterResult);
 
   const classes = useStyles();
 
   return (
     <>
       <Navbar />
-      <Box className={classes.mainContainer}>
-        <FilterPanel />
-        {!filterResult.length > 0 ? (
-          <>
-            <Box className={classes.topContainer}>
-              <Box className={classes.blockColumn}>
-                <Announce article={news.data[0]} />
+      <Box className={classes.root}>
+        <Box className={classes.pageWrapper}>
+          <FilterPanel />
+          {!filterResult.data.length > 0 ? (
+            <>
+              <Box className={classes.topContainer}>
+                <Box className={classes.blockColumn}>
+                  <Announce article={news.data[0]} />
+                </Box>
+                <Box className={classes.blockColumn}>
+                  {news.data.length && <NewsGrid news={getLatestNews()} />}
+                </Box>
               </Box>
-              <Box className={classes.blockColumn}>
-                {news.data.length && <NewsGrid news={getLatestNews()} />}
-              </Box>
-            </Box>
-            <Box className={classes.latestArticles}>
-              <div className={classes.blockTitle}>Latest News</div>
-              {news.data.length > 0 ? (
-                <div className={styles.editionsList}>
-                  <NewsGrid news={getLatestNews()} />
-                  <div className={styles.subscribeBlock}>
-                    <div className={styles.formTitle}>
-                      Subscribe to The NEARWEEK newsletter{" "}
-                    </div>
-                    <div className={styles.formWrapper}>
-                      <input className={styles.formInput} type="text" />
-                      <button className={styles.formBtn}>Subscribe</button>
+              <Box className={classes.latestArticles}>
+                <div className={classes.blockTitle}>Latest News</div>
+                {news.data.length > 0 ? (
+                  <div className={styles.editionsList}>
+                    <NewsGrid news={getLatestNews()} />
+                    <div className={styles.subscribeBlock}>
+                      <div className={styles.formTitle}>
+                        Subscribe to The NEARWEEK newsletter{" "}
+                      </div>
+                      <div className={styles.formWrapper}>
+                        <input className={styles.formInput} type="text" />
+                        <button className={styles.formBtn}>Subscribe</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : null}
-            </Box>
-          </>
-        ) : (
-          <FilterResult />
-        )}
+                ) : null}
+              </Box>
+            </>
+          ) : (
+            <FilterResult filterResult={filterResult} />
+          )}
+        </Box>
       </Box>
     </>
   );

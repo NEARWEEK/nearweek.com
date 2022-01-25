@@ -14,6 +14,7 @@ import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import Box from "@mui/material/Box";
 
 const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -38,7 +39,14 @@ const ListItem = ({ data }) => {
       flex: 1,
       borderRadius: "0 12px 12px 0",
       background: matchEdition ? "#fff" : "#f7f7f7",
-      padding: "16px 0 0 24px",
+    },
+    contentBody: {
+      padding: "16px 16px 0 16px",
+    },
+    contentFooter: {
+      marginTop: "auto",
+      padding: "12px",
+      borderTop: "1px solid #c8c6c6",
     },
     postDate: {
       color: "#2013fb",
@@ -57,12 +65,6 @@ const ListItem = ({ data }) => {
       fontSize: "16px",
       lineHeight: "24px",
       marginTop: 0,
-    },
-    postFooter: {
-      marginTop: "auto",
-      paddingTop: "12px",
-      paddingBottom: "12px",
-      borderTop: "1px solid #c8c6c6",
     },
     postWidgets: {
       display: "flex",
@@ -84,31 +86,33 @@ const ListItem = ({ data }) => {
               <Thumbnail data={data} url={`/editions/${data.id}`} />
             </div>
             <div className={classes.postContent}>
-              <div className={classes.postDate}>
-                <span>{getPubDate(data.attributes.Period)}</span>
-              </div>
-              <h3 className={classes.postTitle}>
-                <Link
-                  color="inherit"
-                  underline="none"
-                  href={`/editions/${data.id}`}
-                >
-                  {data.attributes.Title}{" "}
-                  <span className={classes.postNumber}>
-                    #{data.attributes.Number}
-                  </span>
-                </Link>
-              </h3>
-              <p className={classes.postBody}>
-                {data.attributes.Body.substring(0, 130)}
-              </p>
-              <div className={classes.postFooter}>
+              <Box className={classes.contentBody}>
+                <div className={classes.postDate}>
+                  <span>{getPubDate(data.attributes.Period)}</span>
+                </div>
+                <h3 className={classes.postTitle}>
+                  <Link
+                    color="inherit"
+                    underline="none"
+                    href={`/editions/${data.id}`}
+                  >
+                    {data.attributes.Title}{" "}
+                    <span className={classes.postNumber}>
+                      #{data.attributes.Number}
+                    </span>
+                  </Link>
+                </h3>
+                <p className={classes.postBody}>
+                  {data.attributes.Body.substring(0, 130)}
+                </p>
+              </Box>
+              <Box className={classes.contentFooter}>
                 <div className={classes.postWidgets}>
                   <Widget icon={"Visibility"} data={data.attributes.views} />
                   <Widget icon={"ThumbUp"} data={data.attributes.likes} />
                   <Widget icon={"ChatBubble"} data={"0"} />
                 </div>
-              </div>
+              </Box>
             </div>
           </div>
         </div>

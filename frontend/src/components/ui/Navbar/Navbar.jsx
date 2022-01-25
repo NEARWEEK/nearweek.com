@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Menu from "./Menu/Menu";
 import Logo from "./Logo/Logo";
 import makeStyles from "@mui/styles/makeStyles";
@@ -27,6 +27,18 @@ const Navbar = () => {
     header: {
       borderBottom: "1px solid #ccc",
     },
+    row: {
+      display: "flex",
+      flex: 1,
+    },
+    columnLeft: {
+      display: "flex",
+      flex: 0.7,
+    },
+    columnRight: {
+      display: "flex",
+      flex: 0.3,
+    },
   }));
 
   const toggleDrawer = (open) => (event) => {
@@ -49,10 +61,15 @@ const Navbar = () => {
     >
       <Toolbar className={classes.container}>
         {!isMobileMatch ? (
-          <>
-            <Logo />
-            <Menu />
-          </>
+          <div className={classes.row}>
+            <div className={classes.columnLeft}>
+              <Logo />
+              <Menu />
+            </div>
+            <div className={classes.columnRight}>
+              <Actions />
+            </div>
+          </div>
         ) : (
           <>
             <IconButton
@@ -102,7 +119,6 @@ const Navbar = () => {
             </Drawer>
           </>
         )}
-        <Actions />
       </Toolbar>
     </AppBar>
   );
