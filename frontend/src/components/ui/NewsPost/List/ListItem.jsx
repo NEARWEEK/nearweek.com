@@ -22,6 +22,7 @@ const ListItem = ({ data, meta }) => {
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
+      width: "100%",
       flexDirection: "column",
     },
     postItem: {
@@ -30,17 +31,24 @@ const ListItem = ({ data, meta }) => {
     },
     postImage: {
       borderRadius: "12px 0 0 12px",
+      float: "left",
     },
     itemContainer: {
       borderRadius: "12px",
       display: "flex",
+      flex: 1,
       flexDirection: !isMobileMatch ? "row" : "column",
     },
     postContent: {
+      borderRadius: !isMobileMatch ? "0 12px  12px 0" : "12px",
       background: matchEdition ? "#fff" : "#f7f7f7",
     },
     contentBody: {
+      display: "flex",
       padding: "16px 16px 0 16px",
+      "& .image-container .image": {
+        marginRight: "16px",
+      },
     },
     postCategory: {
       color: "#2013fb",
@@ -92,49 +100,63 @@ const ListItem = ({ data, meta }) => {
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
             <div className={classes.itemContainer}>
-              {data.attributes.Image.data && (
+              {!isMobileMatch && (
                 <div className={classes.postImage}>
                   <Thumbnail data={data} url={`/news/${data.id}`} />
                 </div>
               )}
               <div className={classes.postContent}>
                 <div className={classes.contentBody}>
-                  {data && (
-                    <Box display="inline-flex" className={classes.postCategory}>
-                      {data.attributes.categories.data ? (
-                        <>
-                          {data.attributes.categories.data.map(
-                            (item, index) => (
-                              <>
-                                {index > 0 &&
-                                  index <
-                                    data.attributes.categories.data.length &&
-                                  "•"}{" "}
-                                <Box
-                                  className={classes.categoryItem}
-                                  key={index}
-                                >
-                                  {item.attributes.Name}
-                                </Box>
-                              </>
-                            )
-                          )}
-                        </>
-                      ) : null}
-                    </Box>
+                  {isMobileMatch && (
+                    <div className="image-container">
+                      <div className={classes.postImage}>
+                        <Thumbnail data={data} url={`/news/${data.id}`} />
+                      </div>
+                    </div>
                   )}
-                  <h3 className={classes.postTitle}>
-                    <Link
-                      color="inherit"
-                      underline="none"
-                      href={`/news/${data.id}`}
-                    >
-                      {data.attributes.Title}{" "}
-                    </Link>
-                  </h3>
-                  <p className={classes.postBody}>
-                    {data.attributes.Body.substring(0, 130)}
-                  </p>
+                  <div className="body-container">
+                    {data && (
+                      <Box
+                        display="inline-flex"
+                        className={classes.postCategory}
+                      >
+                        {data.attributes.categories.data ? (
+                          <>
+                            {data.attributes.categories.data.map(
+                              (item, index) => (
+                                <>
+                                  {index > 0 &&
+                                    index <
+                                      data.attributes.categories.data.length &&
+                                    "•"}{" "}
+                                  <Box
+                                    className={classes.categoryItem}
+                                    key={index}
+                                  >
+                                    {item.attributes.Name}
+                                  </Box>
+                                </>
+                              )
+                            )}
+                          </>
+                        ) : null}
+                      </Box>
+                    )}
+                    <h3 className={classes.postTitle}>
+                      <Link
+                        color="inherit"
+                        underline="none"
+                        href={`/news/${data.id}`}
+                      >
+                        {data.attributes.Title}{" "}
+                      </Link>
+                    </h3>
+                    {!isMobileMatch && (
+                      <p className={classes.postBody}>
+                        {data.attributes.Body.substring(0, 130)}
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>

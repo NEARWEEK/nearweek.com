@@ -9,9 +9,9 @@ const Thumbnail = ({ data, url }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const useStyles = makeStyles(() => ({
     img: {
-      minWidth: isMobileMatch ? "100%" : "205px",
-      minHeight: isMobileMatch ? "205px" : "100%",
-      borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
+      minWidth: isMobileMatch ? "68px" : "205px",
+      minHeight: isMobileMatch ? "68px" : "100%",
+      borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px",
     },
   }));
   let thumbnail;
@@ -29,7 +29,7 @@ const Thumbnail = ({ data, url }) => {
               backgroundSize: "cover",
               backgroundPosition: "50% 50%",
             }}
-            className={classes.img}
+            className={"image " + classes.img}
           />{" "}
         </Link>
       ) : null}
