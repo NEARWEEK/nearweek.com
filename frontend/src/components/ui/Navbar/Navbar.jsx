@@ -21,8 +21,8 @@ const Navbar = () => {
 
   const useStyles = makeStyles((theme) => ({
     container: {
-      marginRight: theme.spacing(4),
-      marginLeft: theme.spacing(4),
+      marginRight: !isMobileMatch ? theme.spacing(4) : theme.spacing(2),
+      marginLeft: !isMobileMatch ? theme.spacing(4) : theme.spacing(2),
     },
     header: {
       borderBottom: "1px solid #ccc",
@@ -33,11 +33,16 @@ const Navbar = () => {
     },
     columnLeft: {
       display: "flex",
+      justifyContent: "flex-start",
       flex: 0.7,
     },
     columnRight: {
       display: "flex",
+      justifyContent: "flex-end",
       flex: 0.3,
+    },
+    menuIcon: {
+      color: "#000000de !important",
     },
   }));
 
@@ -71,53 +76,54 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer(true)}
-              sx={{
-                mr: 2,
-                backgroundColor: "#ddd",
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Drawer
-              anchor="left"
-              variant="temporary"
-              open={menuOpen}
-              PaperProps={{
-                sx: { width: "60%" },
-              }}
-              onClose={toggleDrawer(false)}
-              onOpen={toggleDrawer(true)}
-            >
-              <Box>
-                <IconButton sx={{ mb: 2 }}>
-                  <CloseIcon onClick={toggleDrawer(false)} />
-                </IconButton>
-                <Divider sx={{ mb: 2 }} />
-                <Search />
-                <ListItemButton component={Link} to="/">
-                  <ListItemText primary="Home" />
-                </ListItemButton>
-                <ListItemButton component={Link} to="/news">
-                  <ListItemText primary="News" />
-                </ListItemButton>
-                <ListItemButton component={Link} to="/editions">
-                  <ListItemText primary="Editions" />
-                </ListItemButton>
-                <ListItemButton component={Link} to="/resources">
-                  <ListItemText primary="Resources" />
-                </ListItemButton>
-                <ListItemButton component={Link} to="/reports">
-                  <ListItemText primary="Reports" />
-                </ListItemButton>
-              </Box>
-            </Drawer>
-          </>
+          <div className={classes.row}>
+            <div className={classes.columnLeft}>
+              <Logo />
+            </div>
+            <div className={classes.columnRight}>
+              <IconButton
+                className={classes.menuIcon}
+                component="span"
+                aria-label="open drawer"
+                onClick={toggleDrawer(true)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Drawer
+                anchor="left"
+                variant="temporary"
+                open={menuOpen}
+                PaperProps={{
+                  sx: { width: "60%" },
+                }}
+                onClose={toggleDrawer(false)}
+                onOpen={toggleDrawer(true)}
+              >
+                <Box>
+                  <IconButton sx={{ mb: 2 }}>
+                    <CloseIcon onClick={toggleDrawer(false)} />
+                  </IconButton>
+                  <Divider sx={{ mb: 2 }} />
+                  <Search />
+                  <ListItemButton component={Link} to="/">
+                    <ListItemText primary="Home" />
+                  </ListItemButton>
+                  <ListItemButton component={Link} to="/news">
+                    <ListItemText primary="News" />
+                  </ListItemButton>
+                  <ListItemButton component={Link} to="/editions">
+                    <ListItemText primary="Editions" />
+                  </ListItemButton>
+                  <ListItemButton component={Link} to="/resources">
+                    <ListItemText primary="Resources" />
+                  </ListItemButton>
+                  <ListItemButton component={Link} to="/reports">
+                    <ListItemText primary="Reports" />
+                  </ListItemButton>
+                </Box>
+              </Drawer>
+            </div>
+          </div>
         )}
       </Toolbar>
     </AppBar>

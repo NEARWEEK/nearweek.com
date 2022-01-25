@@ -27,8 +27,8 @@ function App() {
             minHeight: "72px",
             paddingLeft: 0,
             paddingRight: 0,
-            "@media (min-width: 600px)": {
-              minHeight: "72px",
+            "@media screen  and (max-width: 600px)": {
+              minHeight: "56px",
               paddingLeft: 0,
               paddingRight: 0,
             },
