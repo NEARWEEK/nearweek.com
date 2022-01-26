@@ -13,7 +13,6 @@ import Events from "./pages/Events";
 import EventPost from "./components/ui/EventPost/EventPost";
 
 function App() {
-  const defaultTheme = createTheme();
   let theme = createTheme({
     palette: {
       primary: {

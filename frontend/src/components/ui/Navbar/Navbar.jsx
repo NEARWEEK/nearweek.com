@@ -16,7 +16,7 @@ import Search from "./Actions/Search/Search";
 import Actions from "./Actions/Actions";
 
 const Navbar = () => {
-  const isMobileMatch = useMediaQuery("(max-width:860px)");
+  const isMobileMatch = useMediaQuery("(max-width:1364px)");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const useStyles = makeStyles((theme) => ({

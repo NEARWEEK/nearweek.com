@@ -1,7 +1,10 @@
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 
 const SectionHeader = ({ title, link }) => {
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const useStyles = makeStyles(() => ({
     blockHeader: {
       display: "flex",
@@ -11,7 +14,7 @@ const SectionHeader = ({ title, link }) => {
       justifyContent: "space-between",
     },
     blockTitle: {
-      fontSize: "48px",
+      fontSize: !isMobileMatch ? "48px" : "28px",
       fontWeight: "900",
     },
     blockLink: {
@@ -30,9 +33,11 @@ const SectionHeader = ({ title, link }) => {
   return (
     <div className={classes.blockHeader}>
       <h2 className={classes.blockTitle}>{title}</h2>
-      <div className={classes.blockLink}>
-        <a href={link}>SHOW MORE</a>
-      </div>
+      {!isMobileMatch && (
+        <div className={classes.blockLink}>
+          <a href={link}>SHOW MORE</a>
+        </div>
+      )}
     </div>
   );
 };

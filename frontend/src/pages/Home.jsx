@@ -8,11 +8,17 @@ import SectionHeader from "../components/ui/general/Section/SectionHeader/Sectio
 import Announce from "../components/ui/EditionPost/Announce/Announce";
 import NewsList from "../components/ui/NewsPost/List/NewsList";
 import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
-import VideoSlider from "../components/ui/VideoPost/Slider/VideoSlider";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import Section from "../components/ui/general/Section/Section";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../Utils/Utils";
+import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
+import VideoSlider from "../components/ui/VideoPost/Slider/VideoSlider";
+import GridCarousel from "../components/ui/VideoPost/GridCarousel/GridCarousel";
 
 const Home = () => {
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
+
   const useStyles = makeStyles(() => ({
     wrapper: {},
     container: {
@@ -119,7 +125,11 @@ const Home = () => {
             <SectionHeader title={"Latest Video"} link={"/video"} />
           </Box>
           <Box>
-            <VideoSlider video={video} />
+            {!isMobileMatch ? (
+              <GridCarousel video={video.data} />
+            ) : (
+              <GridVideo video={video.data} />
+            )}
           </Box>
           <Box className={classes.container}>
             <Section title={"Latest Editions"} link={"/editions"}>

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import makeStyles from "@mui/styles/makeStyles";
 
 const Menu = () => {
-  const useStyles = makeStyles((theme) => ({
+  const useStyles = makeStyles(() => ({
     container: {
       flex: 1,
       padding: "0 24px",
