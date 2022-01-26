@@ -7,10 +7,15 @@ import { useEffect, useState } from "react";
 import Announce from "../components/ui/EditionPost/Announce/Announce";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import * as Utils from "../Utils/Utils";
+import Section from "../components/ui/general/Section/Section";
 
 const Editions = () => {
   const useStyles = makeStyles(() => ({
     root: {
+      marginRight: "16px",
+      marginLeft: "16px",
+    },
+    pageWrapper: {
       margin: "0 auto",
       maxWidth: 892,
     },
@@ -42,24 +47,31 @@ const Editions = () => {
     <>
       <Navbar />
       <Box className={classes.root}>
-        <Box className={classes.topContainer}>
-          <Announce edition={editions.data[0]} />
-        </Box>
-        <div className={classes.latestEditions}>
-          <div className={classes.blockTitle}>Latest Editions</div>
-          <div className={styles.editionsList}>
-            <EditionsList editions={editions.data} />
-            <div className={styles.subscribeBlock}>
-              <div className={styles.formTitle}>
-                Subscribe to The NEARWEEK newsletter{" "}
-              </div>
-              <div className={styles.formWrapper}>
-                <input className={styles.formInput} type="text" />
-                <button className={styles.formBtn}>Subscribe</button>
+        <Box className={classes.pageWrapper}>
+          <Box className={classes.topContainer}>
+            <Announce edition={editions.data[0]} />
+          </Box>
+          <Box className={classes.latestEditions}>
+            <div className={styles.editionsList}>
+              <Box className={classes.container}>
+                <Section title={"Latest Editions"}>
+                  {editions.data.length > 0 && (
+                    <EditionsList editions={editions.data} />
+                  )}
+                </Section>
+              </Box>
+              <div className={styles.subscribeBlock}>
+                <div className={styles.formTitle}>
+                  Subscribe to The NEARWEEK newsletter{" "}
+                </div>
+                <div className={styles.formWrapper}>
+                  <input className={styles.formInput} type="text" />
+                  <button className={styles.formBtn}>Subscribe</button>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </Box>
     </>
   );
