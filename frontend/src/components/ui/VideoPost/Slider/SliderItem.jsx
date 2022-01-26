@@ -1,6 +1,9 @@
 import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import ReactPlayer from "react-player/youtube";
+import Link from "@mui/material/Link";
+import Widget from "../../general/Widget/Widget";
+import { getTimeAgo } from "../../../../Utils/Utils";
 
 const SliderItem = (props) => {
   const useStyles = makeStyles(() => ({
@@ -16,15 +19,17 @@ const SliderItem = (props) => {
   return (
     <>
       {props.video.attributes?.Link ? (
-        <ReactPlayer
-          key={props.key}
-          controls={true}
-          width="100%"
-          height="100%"
-          light={true}
-          url={`${props.video.attributes.Link}`}
-          className={classes.slideItem}
-        />
+        <>
+          <ReactPlayer
+            key={props.key}
+            controls={true}
+            width="100%"
+            height="100%"
+            light={true}
+            url={`${props.video.attributes.Link}`}
+            className={classes.slideItem}
+          />
+        </>
       ) : null}
     </>
   );

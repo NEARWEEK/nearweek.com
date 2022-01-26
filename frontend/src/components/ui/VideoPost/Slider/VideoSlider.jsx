@@ -20,13 +20,13 @@ const VideoSlider = ({ video }) => {
       },
       "& .swiper-wrapper": {
         justifyContent: !isMobileMatch ? "center" : "unset",
+        height: "auto",
       },
       "& .swiper-slide": {
         minWidth: !isMobileMatch ? "676px" : "auto",
         height: "380px",
         display: "flex",
         alignItems: "center",
-        /* justifyContent: "center",*/
         transition: "all 200ms linear",
         transform: "scale(0.8)",
       },
@@ -66,12 +66,12 @@ const VideoSlider = ({ video }) => {
               slidesPerView: 1,
               spaceBetween: 20,
             },
-            768: {
-              slidesPerView: 1,
+            860: {
+              slidesPerView: 2,
               spaceBetween: 24,
             },
             1024: {
-              slidesPerView: video.data.length >= 3 ? 3 : 3,
+              slidesPerView: 3,
               spaceBetween: 24,
             },
             1240: {
