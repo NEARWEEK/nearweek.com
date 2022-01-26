@@ -34,9 +34,13 @@ const SectionHeader = ({ title, link }) => {
     <div className={classes.blockHeader}>
       <h2 className={classes.blockTitle}>{title}</h2>
       {!isMobileMatch && (
-        <div className={classes.blockLink}>
-          <a href={link}>SHOW MORE</a>
-        </div>
+        <>
+          {link && (
+            <div className={classes.blockLink}>
+              <a href={link}>SHOW MORE</a>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
