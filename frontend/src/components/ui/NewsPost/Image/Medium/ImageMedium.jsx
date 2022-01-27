@@ -1,12 +1,16 @@
 import makeStyles from "@mui/styles/makeStyles";
 import * as React from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 
 const ImageMedium = ({ data }) => {
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+
   const useStyles = makeStyles(() => ({
     img: {
       width: "100%",
       borderRadius: "12px 12px 0 0",
-      minHeight: "362px",
+      minHeight: isMobileMatch ? "262px" : "362px",
     },
   }));
 

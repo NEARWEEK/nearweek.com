@@ -27,6 +27,8 @@ import Divider from "@mui/material/Divider";
 import { dateRangeFormat, MOBILE_WIDTH } from "../Utils/Utils";
 import moment from "moment";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Section from "../components/ui/general/Section/Section";
+import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
@@ -55,8 +57,6 @@ const News = () => {
       gap: 24,
       "@media screen and (max-width: 1080px)": {
         flexDirection: "column",
-        marginRight: 16,
-        marginLeft: 16,
       },
     },
     blockColumn: {
@@ -209,6 +209,15 @@ const News = () => {
     );
   };
 
+  const handleClearFilters = (e) => {
+    e.preventDefault();
+    setFilters({
+      dateRange: [null, null],
+      category: "all",
+      tags: [],
+    });
+  };
+
   const handleFilterCategory = (value) => {
     setFilters({ ...filters, category: value });
   };
@@ -358,6 +367,7 @@ const News = () => {
             >
               <Button
                 variant="text"
+                onClick={handleClearFilters}
                 style={{ textTransform: "none" }}
                 startIcon={<FontAwesomeIcon icon={faTimes} />}
               >
@@ -416,21 +426,18 @@ const News = () => {
                 </Box>
               </Box>
               <Box className={classes.latestArticles}>
-                <div className={classes.blockTitle}>Latest News</div>
-                {news.data.length > 0 ? (
-                  <div className={styles.editionsList}>
-                    <NewsGrid news={getLatestNews()} />
-                    <div className={styles.subscribeBlock}>
-                      <div className={styles.formTitle}>
-                        Subscribe to The NEARWEEK newsletter{" "}
-                      </div>
-                      <div className={styles.formWrapper}>
-                        <input className={styles.formInput} type="text" />
-                        <button className={styles.formBtn}>Subscribe</button>
-                      </div>
-                    </div>
+                <Section title={"Latest News"}>
+                  {news.data.length > 0 && <NewsGrid news={getLatestNews()} />}
+                </Section>
+                <div className={styles.subscribeBlock}>
+                  <div className={styles.formTitle}>
+                    Subscribe to The NEARWEEK newsletter{" "}
                   </div>
-                ) : null}
+                  <div className={styles.formWrapper}>
+                    <input className={styles.formInput} type="text" />
+                    <button className={styles.formBtn}>Subscribe</button>
+                  </div>
+                </div>
               </Box>
             </>
           ) : (
