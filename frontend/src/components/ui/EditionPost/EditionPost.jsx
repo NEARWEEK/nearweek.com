@@ -96,7 +96,7 @@ const EditionPost = () => {
       margin: "4px 0",
     },
     postDate: {
-      marginRight: "24px",
+      marginRight: 24,
     },
     postWidgets: {
       display: "flex",
@@ -119,8 +119,8 @@ const EditionPost = () => {
       fontSize: "14px !important",
     },
     postActions: {
-      marginTop: "36px",
-      marginBottom: "36px",
+      marginTop: 36,
+      marginBottom: 36,
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
@@ -138,9 +138,10 @@ const EditionPost = () => {
     button: {
       margin: theme.spacing(1),
       [theme.breakpoints.down("sm")]: {
-        minWidth: 32,
-        paddingLeft: 8,
-        paddingRight: 8,
+        minWidth: "36px !important",
+        minHeight: "36px !important",
+        paddingLeft: "8px !important",
+        paddingRight: "8px !important",
         "& .MuiButton-startIcon": {
           margin: 0,
         },
@@ -284,7 +285,6 @@ const EditionPost = () => {
           </Button>
         </Box>
         <Box>
-          {" "}
           <Button
             className={classes.likeBtn}
             variant="contained"
