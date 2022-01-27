@@ -25,20 +25,26 @@ import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import ReactMarkdown from "react-markdown";
 import * as Utils from "../../../Utils/Utils";
 import EditionsList from "./List/EditionsList";
-import { getPubDate } from "../../../Utils/Utils";
+import { getPubDate, MOBILE_WIDTH } from "../../../Utils/Utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 library.add(faDiscord);
 
 const EditionPost = () => {
-  const useStyles = makeStyles(() => ({
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const useStyles = makeStyles((theme) => ({
     pageWrapper: {
       backgroundColor: "#f7f7f7",
-      width: "100vw",
     },
     contentContainer: {
-      width: 900,
+      maxWidth: " 900px",
+      minWidth: "200px",
       margin: "0 auto",
       position: "relative",
+    },
+    contentWrapper: {
+      marginLeft: "16px",
+      marginRight: "16px",
     },
     headerBlock: {
       display: "flex",
@@ -68,7 +74,7 @@ const EditionPost = () => {
     },
     headerContainer: {
       position: "absolute",
-      top: "76px",
+      top: "73px",
       width: "100%",
       height: "302px",
       "&::before": {
@@ -128,6 +134,22 @@ const EditionPost = () => {
     likeBtn: {
       color: "#0d00ff  !important",
       backgroundColor: "#e1dff5 !important",
+    },
+    button: {
+      margin: theme.spacing(1),
+      [theme.breakpoints.down("sm")]: {
+        minWidth: 32,
+        paddingLeft: 8,
+        paddingRight: 8,
+        "& .MuiButton-startIcon": {
+          margin: 0,
+        },
+      },
+    },
+    buttonText: {
+      [theme.breakpoints.down("sm")]: {
+        display: "none",
+      },
     },
     shareBtn: {
       backgroundColor: "#0d00ff !important",
@@ -228,38 +250,37 @@ const EditionPost = () => {
     return (
       <Box className={classes.postActions}>
         <Box>
-          {" "}
           <Button
-            className={classes.shareBtn}
+            className={[classes.button, classes.shareBtn].join(" ")}
             variant="contained"
             disableElevation
             startIcon={<IosShareIcon />}
           >
-            SHARE
+            <span className={classes.buttonText}>SHARE</span>
           </Button>
           <Button
-            className={classes.twitterBtn}
+            className={[classes.button, classes.twitterBtn].join(" ")}
             variant="contained"
             disableElevation
             startIcon={<TwitterIcon />}
           >
-            TWITTER
+            <span className={classes.buttonText}>TWITTER</span>
           </Button>
           <Button
-            className={classes.telegramBtn}
+            className={[classes.button, classes.telegramBtn].join(" ")}
             variant="contained"
             disableElevation
             startIcon={<TelegramIcon />}
           >
-            TELEGRAM
+            <span className={classes.buttonText}>TELEGRAM</span>
           </Button>
           <Button
-            className={classes.discordBtn}
+            className={[classes.button, classes.discordBtn].join(" ")}
             variant="contained"
             disableElevation
             startIcon={<FontAwesomeIcon icon={faDiscord} />}
           >
-            DISCORD
+            <span className={classes.buttonText}>DISCORD</span>
           </Button>
         </Box>
         <Box>
@@ -327,126 +348,132 @@ const EditionPost = () => {
           </Box>
           <Box className={classes.pageWrapper}>
             <Box className={classes.contentContainer}>
-              <Box className={classes.headerBlock}>
-                <Box className={classes.breadcrumb}>
-                  <a className={classes.link} href="/editions">
-                    <FontAwesomeIcon
-                      className={classes.icon}
-                      icon={faChevronLeft}
-                    />
-                    <span>Editions / </span>
-                  </a>
-                  <span className={classes.current}>
-                    {`${edition.attributes.Title} # ${edition.attributes.Number}`}
-                  </span>
-                </Box>
-                <Box>
-                  <h2 className={classes.postTitle}>
-                    {" "}
-                    {`${edition.attributes.Title} # ${edition.attributes.Number}`}
-                  </h2>
-                  <Box className={classes.headerBlockFooter}>
-                    <Box display="inline-flex">
-                      <Box className={classes.postDate}>
-                        <span>{getPubDate(edition.attributes.Period)}</span>
+              <Box className={classes.contentWrapper}>
+                <Box className={classes.headerBlock}>
+                  <Box className={classes.breadcrumb}>
+                    <a className={classes.link} href="/editions">
+                      <FontAwesomeIcon
+                        className={classes.icon}
+                        icon={faChevronLeft}
+                      />
+                      <span>Editions / </span>
+                    </a>
+                    <span className={classes.current}>
+                      {`${edition.attributes.Title} # ${edition.attributes.Number}`}
+                    </span>
+                  </Box>
+                  <Box>
+                    <h2 className={classes.postTitle}>
+                      {" "}
+                      {`${edition.attributes.Title} # ${edition.attributes.Number}`}
+                    </h2>
+                    <Box className={classes.headerBlockFooter}>
+                      <Box display="inline-flex">
+                        <Box className={classes.postDate}>
+                          <span>{getPubDate(edition.attributes.Period)}</span>
+                        </Box>
+                        <div className={classes.postWidgets}>
+                          <span className={classes.postWidget}>
+                            <FontAwesomeIcon icon={faEye} />{" "}
+                            {edition.attributes.views}
+                          </span>
+                          <span className={classes.postWidget}>
+                            <FontAwesomeIcon icon={faThumbsUp} />{" "}
+                            {edition.attributes.likes}
+                          </span>
+                          <span className={classes.postWidget}>
+                            <FontAwesomeIcon icon={faCommentAlt} /> 0
+                          </span>
+                        </div>
                       </Box>
-                      <div className={classes.postWidgets}>
-                        <span className={classes.postWidget}>
-                          <FontAwesomeIcon icon={faEye} />{" "}
-                          {edition.attributes.views}
-                        </span>
-                        <span className={classes.postWidget}>
-                          <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                          {edition.attributes.likes}
-                        </span>
-                        <span className={classes.postWidget}>
-                          <FontAwesomeIcon icon={faCommentAlt} /> 0
-                        </span>
-                      </div>
-                    </Box>
-                    <Box>
-                      <IconButton
-                        color="primary"
-                        className={classes.actionButton}
-                        onClick={(e) => handleBackward(e)}
-                      >
-                        <ArrowBackIosIcon className={classes.actionIcon} />
-                      </IconButton>
-                      <Button
-                        className={classes.actionButton}
-                        variant="contained"
-                        disableElevation
-                      >
-                        CURRENT
-                      </Button>
-                      <IconButton
-                        color="primary"
-                        onClick={(e) => handleForward(e)}
-                        className={classes.actionButton}
-                      >
-                        <ArrowForwardIosIcon className={classes.actionIcon} />
-                      </IconButton>
+                      {!isMobileMatch && (
+                        <Box>
+                          <IconButton
+                            color="primary"
+                            className={classes.actionButton}
+                            onClick={(e) => handleBackward(e)}
+                          >
+                            <ArrowBackIosIcon className={classes.actionIcon} />
+                          </IconButton>
+                          <Button
+                            className={classes.actionButton}
+                            variant="contained"
+                            disableElevation
+                          >
+                            CURRENT
+                          </Button>
+                          <IconButton
+                            color="primary"
+                            onClick={(e) => handleForward(e)}
+                            className={classes.actionButton}
+                          >
+                            <ArrowForwardIosIcon
+                              className={classes.actionIcon}
+                            />
+                          </IconButton>
+                        </Box>
+                      )}
                     </Box>
                   </Box>
                 </Box>
-              </Box>
-              <PostActions />
-              <ReadMore>{edition.attributes.Body}</ReadMore>
-              <Box>
-                <Box className={classes.blockTitle}>{"Highlights"}</Box>
+                <PostActions />
+                <ReadMore>{edition.attributes.Body}</ReadMore>
                 <Box>
-                  {edition && edition.attributes.Highlights ? (
-                    <>
-                      {edition.attributes.Highlights.map((item, index) => (
-                        <Box className={classes.highlightItem} key={index}>
-                          <ReactMarkdown className={classes.highlightTitle}>
-                            {item.Link}
-                          </ReactMarkdown>
-                        </Box>
-                      ))}
-                    </>
-                  ) : null}
+                  <Box className={classes.blockTitle}>{"Highlights"}</Box>
+                  <Box>
+                    {edition && edition.attributes.Highlights ? (
+                      <>
+                        {edition.attributes.Highlights.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
                 </Box>
-              </Box>
-              <Box>
-                <Box className={classes.blockTitle}>{"DAO's"}</Box>
                 <Box>
-                  {edition && edition.attributes.DAOs ? (
-                    <>
-                      {edition.attributes.DAOs.map((item, index) => (
-                        <Box className={classes.highlightItem} key={index}>
-                          <ReactMarkdown className={classes.highlightTitle}>
-                            {item.Link}
-                          </ReactMarkdown>
-                        </Box>
-                      ))}
-                    </>
-                  ) : null}
+                  <Box className={classes.blockTitle}>{"DAO's"}</Box>
+                  <Box>
+                    {edition && edition.attributes.DAOs ? (
+                      <>
+                        {edition.attributes.DAOs.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
                 </Box>
-              </Box>
-              <Box>
-                <Box className={classes.blockTitle}>{"DeFI"}</Box>
                 <Box>
-                  {edition && edition.attributes.DeFI ? (
-                    <>
-                      {edition.attributes.DeFI.map((item, index) => (
-                        <Box className={classes.highlightItem} key={index}>
-                          <ReactMarkdown className={classes.highlightTitle}>
-                            {item.Link}
-                          </ReactMarkdown>
-                        </Box>
-                      ))}
-                    </>
-                  ) : null}
+                  <Box className={classes.blockTitle}>{"DeFI"}</Box>
+                  <Box>
+                    {edition && edition.attributes.DeFI ? (
+                      <>
+                        {edition.attributes.DeFI.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
                 </Box>
-              </Box>
-              <Box>
-                <Box className={classes.blockTitle}>{"Latest Editions"}</Box>
-              </Box>
-              <Box>
-                {editions.data.length > 0 && (
-                  <EditionsList editions={editions.data} />
-                )}
+                <Box>
+                  <Box className={classes.blockTitle}>{"Latest Editions"}</Box>
+                </Box>
+                <Box>
+                  {editions.data.length > 0 && (
+                    <EditionsList editions={editions.data} />
+                  )}
+                </Box>
               </Box>
             </Box>
           </Box>
