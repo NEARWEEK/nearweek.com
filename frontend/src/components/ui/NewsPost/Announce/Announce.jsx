@@ -10,9 +10,12 @@ import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Widget from "../../general/Widget/Widget";
-import { getTimeAgo } from "../../../../Utils/Utils";
+import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Announce = ({ article }) => {
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+
   const useStyles = makeStyles(() => ({
     latestPost: {
       marginBottom: "36px",
@@ -33,7 +36,7 @@ const Announce = ({ article }) => {
       fontSize: "14px",
     },
     postTitle: {
-      fontSize: "42px",
+      fontSize: isMobileMatch ? "26px" : "42px",
       fontWeight: "900",
       marginTop: "12px",
       marginBottom: "12px",

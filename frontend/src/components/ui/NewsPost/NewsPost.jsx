@@ -11,18 +11,16 @@ import {
   faEye,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
-import Button from "@mui/material/Button";
 import ReactMarkdown from "react-markdown";
 import NewsList from "./List/NewsList";
 import makeStyles from "@mui/styles/makeStyles";
 import { useNavigate } from "react-router-dom";
-import IosShareIcon from "@mui/icons-material/IosShare";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import { faDiscord } from "@fortawesome/free-brands-svg-icons";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import PostActions from "../general/PostActions/PostActions";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../../../Utils/Utils";
 
 const NewsPost = () => {
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const [article, setArticle] = useState(null);
   const [news, setNews] = useState([]);
 
@@ -30,8 +28,13 @@ const NewsPost = () => {
   const navigate = useNavigate();
 
   const useStyles = makeStyles(() => ({
+    pageWrapper: {
+      marginLeft: 16,
+      marginRight: 16,
+    },
     contentContainer: {
-      width: 860,
+      maxWidth: 900,
+      minWidth: 200,
       margin: "0 auto",
       position: "relative",
     },
@@ -72,7 +75,7 @@ const NewsPost = () => {
       padding: "8px 24px",
     },
     postTitle: {
-      fontSize: "48px",
+      fontSize: isMobileMatch ? "26px" : "48px",
       fontWeight: [900],
       margin: "4px 0",
     },
@@ -191,152 +194,106 @@ const NewsPost = () => {
     }
   }, []);
 
-  const PostActions = () => {
-    return (
-      <Box className={classes.postActions}>
-        <Box>
-          {" "}
-          <Button
-            className={classes.shareBtn}
-            variant="contained"
-            disableElevation
-            startIcon={<IosShareIcon />}
-          >
-            SHARE
-          </Button>
-          <Button
-            className={classes.twitterBtn}
-            variant="contained"
-            disableElevation
-            startIcon={<TwitterIcon />}
-          >
-            TWITTER
-          </Button>
-          <Button
-            className={classes.telegramBtn}
-            variant="contained"
-            disableElevation
-            startIcon={<TelegramIcon />}
-          >
-            TELEGRAM
-          </Button>
-          <Button
-            className={classes.discordBtn}
-            variant="contained"
-            disableElevation
-            startIcon={<FontAwesomeIcon icon={faDiscord} />}
-          >
-            DISCORD
-          </Button>
-        </Box>
-        <Box>
-          {" "}
-          <Button
-            className={classes.likeBtn}
-            variant="contained"
-            disableElevation
-            startIcon={<ThumbUpIcon />}
-          >
-            Like
-          </Button>
-        </Box>
-      </Box>
-    );
-  };
-
   const classes = useStyles();
 
   return (
     <>
       <Navbar />
       {article && (
-        <Box className={classes.contentContainer}>
-          <Box className={classes.breadcrumb}>
-            <a className={classes.link} href="/news">
-              <FontAwesomeIcon className={classes.icon} icon={faChevronLeft} />
-              <span>News / </span>
-            </a>
-            <span className={classes.current}>
-              {`${article.attributes.Title}`}
-            </span>
-          </Box>
-          <Box className={classes.headerBlock}>
-            {article.attributes.Image.data && (
-              <div
-                style={{
-                  backgroundImage: `url('${article.attributes.Image.data.attributes.url}')`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "50% 50%",
-                  minWidth: "860px",
-                  minHeight: "582px",
-                }}
-                className={classes.img}
-              />
-            )}
-            <Box className={classes.postContent}>
-              <Box className={classes.postHeader}>
-                <Box className={classes.postCategory}>
-                  {article && (
-                    <Box display="inline-flex">
-                      {article.attributes.categories.data ? (
-                        <>
-                          {article.attributes.categories.data.map(
-                            (item, index) => (
-                              <>
-                                {index > 0 &&
-                                  index <
-                                    article.attributes.categories.data.length &&
-                                  "•"}{" "}
-                                <Box
-                                  className={classes.categoryItem}
-                                  key={index}
-                                >
-                                  {item.attributes.Name}
-                                </Box>
-                              </>
-                            )
-                          )}
-                        </>
-                      ) : null}
-                    </Box>
-                  )}
+        <Box className={classes.pageWrapper}>
+          <Box className={classes.contentContainer}>
+            <Box className={classes.breadcrumb}>
+              <a className={classes.link} href="/news">
+                <FontAwesomeIcon
+                  className={classes.icon}
+                  icon={faChevronLeft}
+                />
+                <span>News / </span>
+              </a>
+              <span className={classes.current}>
+                {`${article.attributes.Title}`}
+              </span>
+            </Box>
+            <Box className={classes.headerBlock}>
+              {article.attributes.Image.data && (
+                <div
+                  style={{
+                    backgroundImage: `url('${article.attributes.Image.data.attributes.url}')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "50% 50%",
+                    maxWidth: "860px",
+                    minWidth: "200px",
+                    minHeight: isMobileMatch ? "186px" : "582px",
+                  }}
+                  className={classes.img}
+                />
+              )}
+              <Box className={classes.postContent}>
+                <Box className={classes.postHeader}>
+                  <Box className={classes.postCategory}>
+                    {article && (
+                      <Box display="inline-flex">
+                        {article.attributes.categories.data ? (
+                          <>
+                            {article.attributes.categories.data.map(
+                              (item, index) => (
+                                <>
+                                  {index > 0 &&
+                                    index <
+                                      article.attributes.categories.data
+                                        .length &&
+                                    "•"}{" "}
+                                  <Box
+                                    className={classes.categoryItem}
+                                    key={index}
+                                  >
+                                    {item.attributes.Name}
+                                  </Box>
+                                </>
+                              )
+                            )}
+                          </>
+                        ) : null}
+                      </Box>
+                    )}
+                  </Box>
+                  <h2 className={classes.postTitle}>
+                    {`${article.attributes.Title}`}
+                  </h2>
                 </Box>
-                <h2 className={classes.postTitle}>
-                  {`${article.attributes.Title}`}
-                </h2>
-              </Box>
 
-              <Box className={classes.headerBlockFooter}>
-                <Box display="inline-flex">
-                  <div className={classes.postWidgets}>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faEye} />{" "}
-                      {article.attributes.views}
-                    </span>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                      {article.attributes.likes}
-                    </span>
-                    <span className={classes.postWidget}>
-                      <FontAwesomeIcon icon={faCommentAlt} /> 0
-                    </span>
-                  </div>
+                <Box className={classes.headerBlockFooter}>
+                  <Box display="inline-flex">
+                    <div className={classes.postWidgets}>
+                      <span className={classes.postWidget}>
+                        <FontAwesomeIcon icon={faEye} />{" "}
+                        {article.attributes.views}
+                      </span>
+                      <span className={classes.postWidget}>
+                        <FontAwesomeIcon icon={faThumbsUp} />{" "}
+                        {article.attributes.likes}
+                      </span>
+                      <span className={classes.postWidget}>
+                        <FontAwesomeIcon icon={faCommentAlt} /> 0
+                      </span>
+                    </div>
+                  </Box>
                 </Box>
               </Box>
             </Box>
-          </Box>
-          <PostActions />
-          <Box className={classes.containerBody}>
-            <ReactMarkdown className={classes.postBody}>
-              {article.attributes.Body}
-            </ReactMarkdown>
-          </Box>
-          <PostActions />
-          <Box>
-            <Box className={classes.blockTitle}>{"Read also"}</Box>
-          </Box>
-          <Box>
-            {news.data && <NewsList news={news} exclude={[article.id]} />}
+            <PostActions />
+            <Box className={classes.containerBody}>
+              <ReactMarkdown className={classes.postBody}>
+                {article.attributes.Body}
+              </ReactMarkdown>
+            </Box>
+            <PostActions />
+            <Box>
+              <Box className={classes.blockTitle}>{"Read also"}</Box>
+            </Box>
+            <Box>
+              {news.data && <NewsList news={news} exclude={[article.id]} />}
+            </Box>
           </Box>
         </Box>
       )}
