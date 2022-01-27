@@ -70,11 +70,17 @@ const EditionPost = () => {
     },
     breadcrumb: {
       color: "#ffffff99",
-      marginTop: "32px",
+      marginTop: 32,
+      [theme.breakpoints.down("sm")]: {
+        marginTop: 16,
+      },
     },
     headerContainer: {
       position: "absolute",
-      top: "73px",
+      top: 73,
+      [theme.breakpoints.down("sm")]: {
+        top: 56,
+      },
       width: "100%",
       height: "302px",
       "&::before": {
