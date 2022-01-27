@@ -110,7 +110,7 @@ const Home = () => {
                   <Announce edition={editions.data[0]} />
                 </Box>
                 <Box className={classes.blockColumn}>
-                  <NewsList news={news} limit={3} />
+                  <NewsList news={news.data.slice(0, 3)} />
                 </Box>
               </Box>
             </Section>

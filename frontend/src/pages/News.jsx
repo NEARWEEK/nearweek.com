@@ -29,6 +29,7 @@ import moment from "moment";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Section from "../components/ui/general/Section/Section";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
+import NewsList from "../components/ui/NewsPost/List/NewsList";
 
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
@@ -421,9 +422,16 @@ const News = () => {
                 <Box className={classes.blockColumn}>
                   <Announce article={news.data[0]} />
                 </Box>
-                <Box className={classes.blockColumn}>
-                  {news.data.length && <NewsGrid news={getLatestNews()} />}
-                </Box>
+                {!isMobileMatch && (
+                  <Box className={classes.blockColumn}>
+                    {news.data.length && <NewsGrid news={getLatestNews()} />}
+                  </Box>
+                )}
+                {isMobileMatch && (
+                  <Box className={classes.blockColumn}>
+                    {news.data.length && <NewsList news={getLatestNews()} />}
+                  </Box>
+                )}
               </Box>
               <Box className={classes.latestArticles}>
                 <Section title={"Latest News"}>

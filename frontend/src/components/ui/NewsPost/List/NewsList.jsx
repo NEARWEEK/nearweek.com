@@ -1,21 +1,11 @@
-import * as React from "react";
-import makeStyles from "@mui/styles/makeStyles";
+import React from "react";
 import ListItem from "./ListItem";
 
-const NewsList = ({ news, limit = 0 }) => {
-  const useStyles = makeStyles(() => ({}));
-
-  let newsList = [];
-  if (news) {
-    newsList = [...news.data.slice(0, limit)];
-  }
-
-  const classes = useStyles();
-
+const NewsList = ({ news }) => {
   return (
     <>
-      {newsList.length > 0
-        ? newsList.map((article, i) => {
+      {news.length > 0
+        ? news.map((article, i) => {
             return <ListItem key={i} data={article} meta={news.meta} />;
           })
         : null}
