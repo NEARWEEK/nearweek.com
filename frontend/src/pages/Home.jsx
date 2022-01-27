@@ -13,7 +13,6 @@ import Section from "../components/ui/general/Section/Section";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../Utils/Utils";
 import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
-import VideoSlider from "../components/ui/VideoPost/Slider/VideoSlider";
 import GridCarousel from "../components/ui/VideoPost/GridCarousel/GridCarousel";
 
 const Home = () => {
