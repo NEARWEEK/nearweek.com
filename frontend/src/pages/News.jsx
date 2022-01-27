@@ -97,6 +97,8 @@ const News = () => {
       },
     },
     filterCategory: {
+      flexWrap: "wrap",
+      alignItems: "center",
       "& .active": {
         backgroundColor: "rgba(13, 0, 255, 0.04)",
       },
