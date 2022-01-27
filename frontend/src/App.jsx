@@ -23,11 +23,15 @@ function App() {
       MuiToolbar: {
         styleOverrides: {
           root: {
-            minHeight: "72px",
             paddingLeft: 0,
             paddingRight: 0,
             "@media screen  and (max-width: 600px)": {
               minHeight: "56px",
+              paddingLeft: 0,
+              paddingRight: 0,
+            },
+            "@media screen  and (min-width: 601px)": {
+              minHeight: "72px",
               paddingLeft: 0,
               paddingRight: 0,
             },

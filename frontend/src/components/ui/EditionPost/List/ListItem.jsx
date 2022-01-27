@@ -56,7 +56,7 @@ const ListItem = ({ data }) => {
       fontSize: "14px",
     },
     postTitle: {
-      fontSize: isMobileMatch ? "16px" : "20px",
+      fontSize: "20px",
       marginTop: "6px",
       marginBottom: "6px",
     },
