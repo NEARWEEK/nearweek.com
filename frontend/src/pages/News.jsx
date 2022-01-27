@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import * as Utils from "../Utils/Utils";
@@ -18,19 +18,15 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import InputAdornment from "@mui/material/InputAdornment";
 import EventIcon from "@mui/icons-material/Event";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Checkbox from "@mui/material/Checkbox";
-import ListItemText from "@mui/material/ListItemText";
-import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
 import Chip from "@mui/material/Chip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import Divider from "@mui/material/Divider";
-import { dateRangeFormat } from "../Utils/Utils";
+import { dateRangeFormat, MOBILE_WIDTH } from "../Utils/Utils";
 import moment from "moment";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
@@ -43,6 +39,7 @@ const News = () => {
     tags: [],
   });
   const [filterResult, setFilterResult] = useState({ data: [] });
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
 
   const useStyles = makeStyles(() => ({
     root: {
@@ -50,16 +47,16 @@ const News = () => {
       maxWidth: 1440,
     },
     pageWrapper: {
-      marginRight: "16px",
-      marginLeft: "16px",
+      marginRight: 16,
+      marginLeft: 16,
     },
     topContainer: {
       display: "flex",
-      gap: "24px",
+      gap: 24,
       "@media screen and (max-width: 1080px)": {
         flexDirection: "column",
-        marginRight: "16px",
-        marginLeft: "16px",
+        marginRight: 16,
+        marginLeft: 16,
       },
     },
     blockColumn: {
@@ -180,7 +177,7 @@ const News = () => {
   const SortButton = () => {
     return (
       <Box>
-        <FormControl sx={{ m: 1, width: 300 }}>
+        <FormControl sx={{ m: 1, width: 116 }}>
           <Select
             labelId="demo-simple-select-label"
             id="sort-select"
@@ -214,51 +211,6 @@ const News = () => {
     setFilters({ ...filters, category: value });
   };
 
-  /*  const FilterType = () => {
-    const ITEM_HEIGHT = 48;
-    const ITEM_PADDING_TOP = 8;
-    const MenuProps = {
-      PaperProps: {
-        style: {
-          maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-          width: 250,
-        },
-      },
-    };
-
-    const handleFilterType = (e) => {
-      e.preventDefault();
-      const {
-        target: { value },
-      } = e;
-      setFilterType(typeof value === "string" ? value.split(",") : value);
-    };
-
-    return (
-      <FormControl sx={{ m: 1, width: 116 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Type</InputLabel>
-        <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={filterType}
-          onChange={handleFilterType}
-          input={<OutlinedInput label="Type" />}
-          renderValue={(selected) => selected.join(", ")}
-          MenuProps={MenuProps}
-        >
-          {categories &&
-            categories.map((name) => (
-              <MenuItem key={name} value={name}>
-                <Checkbox checked={filterType.indexOf(name) > -1} />
-                <ListItemText primary={name} />
-              </MenuItem>
-            ))}
-        </Select>
-      </FormControl>
-    );
-  };*/
-
   const handleDateRange = (value) => {
     setFilters({ ...filters, dateRange: value });
   };
@@ -282,33 +234,74 @@ const News = () => {
 
     return (
       <Box>
-        <Box className={classes.filterContainer}>
-          <SortButton />
-          <Stack spacing={1} direction="row" className={classes.filterCategory}>
-            <Button
-              variant="text"
-              className={isActive("all") ? "active" : ""}
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilterCategory("all")}
+        {isMobileMatch && (
+          <>
+            <Box className={classes.filterContainer}>
+              <SortButton />
+              <FilterButton />
+              <Stack
+                spacing={1}
+                direction="row"
+                className={classes.filterCategory}
+              >
+                <Button
+                  variant="text"
+                  className={isActive("all") ? "active" : ""}
+                  style={{ textTransform: "none" }}
+                  onClick={() => handleFilterCategory("all")}
+                >
+                  All categories
+                </Button>
+                {categories
+                  ? categories.map((name, index) => (
+                      <Button
+                        variant="text"
+                        key={index}
+                        className={isActive(name) ? "active" : ""}
+                        onClick={() => handleFilterCategory(name)}
+                        style={{ textTransform: "none" }}
+                      >
+                        {name}
+                      </Button>
+                    ))
+                  : null}
+              </Stack>
+            </Box>
+          </>
+        )}
+        {!isMobileMatch && (
+          <Box className={classes.filterContainer}>
+            <SortButton />
+            <Stack
+              spacing={1}
+              direction="row"
+              className={classes.filterCategory}
             >
-              All categories
-            </Button>
-            {categories
-              ? categories.map((name, index) => (
-                  <Button
-                    variant="text"
-                    key={index}
-                    className={isActive(name) ? "active" : ""}
-                    onClick={() => handleFilterCategory(name)}
-                    style={{ textTransform: "none" }}
-                  >
-                    {name}
-                  </Button>
-                ))
-              : null}
-          </Stack>
-          <FilterButton />
-        </Box>
+              <Button
+                variant="text"
+                className={isActive("all") ? "active" : ""}
+                style={{ textTransform: "none" }}
+                onClick={() => handleFilterCategory("all")}
+              >
+                All categories
+              </Button>
+              {categories
+                ? categories.map((name, index) => (
+                    <Button
+                      variant="text"
+                      key={index}
+                      className={isActive(name) ? "active" : ""}
+                      onClick={() => handleFilterCategory(name)}
+                      style={{ textTransform: "none" }}
+                    >
+                      {name}
+                    </Button>
+                  ))
+                : null}
+            </Stack>
+            <FilterButton />
+          </Box>
+        )}
         {showFilterPanel && (
           <Box className={classes.filterActionContainer}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>

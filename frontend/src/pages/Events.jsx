@@ -1,6 +1,12 @@
 import * as React from "react";
+import Navbar from "../components/ui/Navbar/Navbar";
 const Events = () => {
-  return <>{"Empty content"}</>;
+  return (
+    <>
+      <Navbar />
+      <main>{"Empty content"}</main>
+    </>
+  );
 };
 
 export default Events;
