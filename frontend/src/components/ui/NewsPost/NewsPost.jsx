@@ -17,7 +17,8 @@ import makeStyles from "@mui/styles/makeStyles";
 import { useNavigate } from "react-router-dom";
 import PostActions from "../general/PostActions/PostActions";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { MOBILE_WIDTH } from "../../../Utils/Utils";
+import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
+import Widget from "../general/Widget/Widget";
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -44,14 +45,12 @@ const NewsPost = () => {
       height: "100%",
       borderRadius: "12px",
     },
-    headerBlockFooter: {
+    postFooter: {
       display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
       justifyContent: "space-between",
-      fontSize: "14px",
-      borderTop: "1px solid #b4b2b2",
-      padding: "16px",
+      padding: "12px 24px",
+      borderTop: "1px solid #c8c6c6",
+      borderRadius: "0 0 12px 12px",
     },
     link: {
       /* color: "#fff",*/
@@ -95,6 +94,10 @@ const NewsPost = () => {
     },
     postWidget: {
       paddingRight: "24px",
+    },
+    footerDate: {
+      fontSize: "12px",
+      color: "#656364",
     },
     actionButton: {
       padding: "12px !important",
@@ -221,7 +224,7 @@ const NewsPost = () => {
                     backgroundImage: `url('${article.attributes.Image.data.attributes.url}')`,
                     backgroundSize: "cover",
                     backgroundPosition: "50% 50%",
-                    maxWidth: "860px",
+                    maxWidth: "900px",
                     minWidth: "200px",
                     minHeight: isMobileMatch ? "186px" : "582px",
                   }}
@@ -262,22 +265,18 @@ const NewsPost = () => {
                   </h2>
                 </Box>
 
-                <Box className={classes.headerBlockFooter}>
-                  <Box display="inline-flex">
-                    <div className={classes.postWidgets}>
-                      <span className={classes.postWidget}>
-                        <FontAwesomeIcon icon={faEye} />{" "}
-                        {article.attributes.views}
-                      </span>
-                      <span className={classes.postWidget}>
-                        <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                        {article.attributes.likes}
-                      </span>
-                      <span className={classes.postWidget}>
-                        <FontAwesomeIcon icon={faCommentAlt} /> 0
-                      </span>
-                    </div>
-                  </Box>
+                <Box className={classes.postFooter}>
+                  <div className={classes.postWidgets}>
+                    <Widget
+                      icon={"Visibility"}
+                      data={article.attributes.Views}
+                    />
+                    <Widget icon={"ThumbUp"} data={article.attributes.Likes} />
+                    <Widget icon={"ChatBubble"} data={"0"} />
+                  </div>
+                  <div className={classes.footerDate}>
+                    {getTimeAgo(article.attributes.createdAt)}
+                  </div>
                 </Box>
               </Box>
             </Box>

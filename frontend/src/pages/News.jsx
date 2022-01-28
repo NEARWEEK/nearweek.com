@@ -30,6 +30,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Section from "../components/ui/general/Section/Section";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import NewsList from "../components/ui/NewsPost/List/NewsList";
+import Subscription from "../components/ui/general/Subscription/Subscription";
 
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
@@ -437,15 +438,7 @@ const News = () => {
                 <Section title={"Latest News"}>
                   {news.data.length > 0 && <NewsGrid news={getLatestNews()} />}
                 </Section>
-                <div className={styles.subscribeBlock}>
-                  <div className={styles.formTitle}>
-                    Subscribe to The NEARWEEK newsletter{" "}
-                  </div>
-                  <div className={styles.formWrapper}>
-                    <input className={styles.formInput} type="text" />
-                    <button className={styles.formBtn}>Subscribe</button>
-                  </div>
-                </div>
+                <Subscription />
               </Box>
             </>
           ) : (

@@ -118,8 +118,8 @@ const Announce = ({ article }) => {
           </div>
           <div className={classes.postFooter}>
             <div className={classes.postWidgets}>
-              <Widget icon={"Visibility"} data={article.attributes.views} />
-              <Widget icon={"ThumbUp"} data={article.attributes.likes} />
+              <Widget icon={"Visibility"} data={article.attributes.Views} />
+              <Widget icon={"ThumbUp"} data={article.attributes.Likes} />
               <Widget icon={"ChatBubble"} data={"0"} />
             </div>
             <div className={classes.footerDate}>
