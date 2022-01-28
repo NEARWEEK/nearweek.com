@@ -8,6 +8,7 @@ import Announce from "../components/ui/EditionPost/Announce/Announce";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import * as Utils from "../Utils/Utils";
 import Section from "../components/ui/general/Section/Section";
+import Subscription from "../components/ui/general/Subscription/Subscription";
 
 const Editions = () => {
   const useStyles = makeStyles(() => ({
@@ -60,15 +61,7 @@ const Editions = () => {
                   )}
                 </Section>
               </Box>
-              <div className={styles.subscribeBlock}>
-                <div className={styles.formTitle}>
-                  Subscribe to The NEARWEEK newsletter{" "}
-                </div>
-                <div className={styles.formWrapper}>
-                  <input className={styles.formInput} type="text" />
-                  <button className={styles.formBtn}>Subscribe</button>
-                </div>
-              </div>
+              <Subscription />
             </div>
           </Box>
         </Box>

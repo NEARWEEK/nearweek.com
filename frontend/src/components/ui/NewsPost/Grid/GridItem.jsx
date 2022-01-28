@@ -36,6 +36,7 @@ const GridItem = ({ data }) => {
     },
     postContent: {
       minHeight: "25%",
+      borderRadius: 12,
       background: matchEdition ? "#fff" : "#f7f7f7",
     },
     contentBody: {
@@ -92,12 +93,12 @@ const GridItem = ({ data }) => {
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
             <div className={classes.itemContainer}>
-              {data.attributes.Image.data && (
-                <div className={classes.postImage}>
-                  <Thumbnail data={data} url={`/news/${data.id}`} />
-                </div>
-              )}
               <div className={classes.postContent}>
+                {data.attributes.Image.data && (
+                  <div className={classes.postImage}>
+                    <Thumbnail data={data} url={`/news/${data.id}`} />
+                  </div>
+                )}
                 <div className={classes.contentBody}>
                   {data && (
                     <Box display="inline-flex" className={classes.postCategory}>
@@ -135,8 +136,8 @@ const GridItem = ({ data }) => {
                 </div>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>
-                    <Widget icon={"Visibility"} data={data.attributes.views} />
-                    <Widget icon={"ThumbUp"} data={data.attributes.likes} />
+                    <Widget icon={"Visibility"} data={data.attributes.Views} />
+                    <Widget icon={"ThumbUp"} data={data.attributes.Likes} />
                     <Widget icon={"ChatBubble"} data={"0"} />
                   </div>
                   <div className={classes.footerDate}>
