@@ -17,6 +17,11 @@ export function getTimeAgo(date) {
   return moment(date).fromNow();
 }
 
+export function getEventDay(date) {
+  const dateFormatted = moment(date).format("DD MMMM, YYYY").toUpperCase();
+  return `${dateFormatted}`;
+}
+
 export function dateRangeFormat(range) {
   const startDate = moment(range[0]);
   const endDate = moment(range[1]);

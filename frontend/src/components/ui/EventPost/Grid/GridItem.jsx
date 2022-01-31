@@ -10,10 +10,9 @@ import {
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import moment from "moment";
 import Typography from "@mui/material/Typography";
 import Widget from "../../general/Widget/Widget";
-import { getTimeAgo } from "../../../../Utils/Utils";
+import { getEventDay, getTimeAgo } from "../../../../Utils/Utils";
 
 const GridItem = ({ data }) => {
   const useStyles = makeStyles(() => ({
@@ -87,11 +86,6 @@ const GridItem = ({ data }) => {
 
   const classes = useStyles();
 
-  function getEventDay(date) {
-    const dateFormatted = moment(date).format("DD MMMM, YYYY").toUpperCase();
-    return `${dateFormatted}`;
-  }
-
   return (
     <>
       {data ? (
@@ -113,12 +107,8 @@ const GridItem = ({ data }) => {
                     <Typography color="primary" style={{ fontWeight: 600 }}>
                       {getEventDay(data.attributes.Date)}
                     </Typography>
-                    <Typography
-                      color="primary"
-                      display="flex"
-                      style={{ fontWeight: 600 }}
-                    >
-                      <LocationOnIcon />
+                    <Typography display="flex" style={{ fontWeight: 600 }}>
+                      <LocationOnIcon style={{ color: "#2013fb" }} />
                       {data.attributes.Location}
                     </Typography>
                   </Box>

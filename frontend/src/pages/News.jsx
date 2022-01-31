@@ -28,7 +28,6 @@ import { dateRangeFormat, MOBILE_WIDTH } from "../Utils/Utils";
 import moment from "moment";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Section from "../components/ui/general/Section/Section";
-import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import NewsList from "../components/ui/NewsPost/List/NewsList";
 import Subscription from "../components/ui/general/Subscription/Subscription";
 
@@ -406,8 +405,6 @@ const News = () => {
   const FilterResult = ({ filterResult }) => {
     return <NewsGrid news={filterResult.data} />;
   };
-
-  console.log("filterResult", filterResult);
 
   const classes = useStyles();
 
