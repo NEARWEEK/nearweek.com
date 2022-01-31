@@ -110,6 +110,7 @@ const GridCarousel = ({ video }) => {
     postWidgets: {
       display: "flex",
       alignItems: "center",
+      color: "rgba(0, 0, 0, 0.54)",
     },
     postWidget: {
       color: "#656364",
@@ -158,11 +159,11 @@ const GridCarousel = ({ video }) => {
                             <div className={classes.postWidgets}>
                               <Widget
                                 icon={"Visibility"}
-                                data={_video.attributes.views}
+                                data={_video.attributes.Views}
                               />
                               <Widget
                                 icon={"ThumbUp"}
-                                data={_video.attributes.likes}
+                                data={_video.attributes.Likes}
                               />
                               <Widget icon={"ChatBubble"} data={"0"} />
                             </div>
