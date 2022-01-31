@@ -6,12 +6,6 @@ import * as Utils from "../Utils/Utils";
 import Navbar from "../components/ui/Navbar/Navbar";
 import Box from "@mui/material/Box";
 import ReactPlayer from "react-player/youtube";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
 import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import Widget from "../components/ui/general/Widget/Widget";
 
@@ -32,25 +26,26 @@ const Video = () => {
     headerBlock: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "center",
+      justifyContent: isMobileMatch ? "flex-end" : "center",
       height: "100%",
-      background:
-        "linear-gradient(to left, black, transparent 50%, transparent 50%, black 100%)",
-      minHeight: "calc(526px - 1px)",
+      background: isMobileMatch
+        ? "linear-gradient(to top, black, transparent 50%, transparent 100%, black 100%)"
+        : "linear-gradient(to left, black, transparent 50%, transparent 50%, black 100%)",
+      minHeight: isMobileMatch ? "calc(360px - 1px)" : "calc(526px - 1px)",
       "&::before": {
-        content: "''",
-        width: "100%",
+        content: isMobileMatch ? "" : "''",
+        minWidth: "100%",
         top: 0,
-        height: "525px",
+        height: isMobileMatch ? "360px" : "525px",
         position: "absolute",
         background: "#000",
         left: "calc(-100% - -16px)",
       },
       "&::after": {
-        content: "''",
-        width: "100%",
+        content: isMobileMatch ? "" : "''",
         top: 0,
-        height: "525px",
+        minWidth: "100%",
+        height: isMobileMatch ? "360px" : "525px",
         position: "absolute",
         background: "#000",
         right: "calc(-100% - -16px)",
@@ -60,7 +55,7 @@ const Video = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      marginBottom: "36px",
+      marginBottom: isMobileMatch ? 16 : 36,
       color: "#fff",
       fontSize: "14px",
     },
@@ -143,7 +138,7 @@ const Video = () => {
               key={video.id}
               controls={true}
               width="100%"
-              height="526px"
+              height={isMobileMatch ? "360px" : "526px"}
               light={true}
               className="video-item"
               url={`${video.data[0].attributes.Link}`}
