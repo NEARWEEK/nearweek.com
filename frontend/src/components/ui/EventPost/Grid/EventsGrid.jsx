@@ -18,17 +18,14 @@ const EventsGrid = ({ events }) => {
       columnGap: "24px",
     },
   }));
-  let eventsList = [];
-  if (events.data) {
-    eventsList = [...events.data];
-  }
+
   const classes = useStyles();
 
   return (
     <Box className={classes.gridContainer}>
-      {eventsList.length > 0
-        ? eventsList.map((event, i) => {
-            return <GridItem key={i} data={event} meta={events.meta} />;
+      {events.length > 0
+        ? events.map((event, i) => {
+            return <GridItem key={i} data={event} />;
           })
         : null}
     </Box>

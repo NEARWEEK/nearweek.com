@@ -1,11 +1,5 @@
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
 import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";

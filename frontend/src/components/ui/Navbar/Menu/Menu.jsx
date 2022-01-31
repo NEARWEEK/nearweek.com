@@ -77,22 +77,22 @@ const Menu = () => {
             Video
           </NavLink>
         </li>
-        <li className={classes.menuItem}>
+        {/*        <li className={classes.menuItem}>
           <NavLink
             className={({ isActive }) => (isActive ? "active" : "inactive")}
             to="/resources"
           >
             Resources
           </NavLink>
-        </li>
-        <li className={classes.menuItem}>
+        </li>*/}
+        {/*       <li className={classes.menuItem}>
           <NavLink
             className={({ isActive }) => (isActive ? "active" : "inactive")}
             to="/reports"
           >
             Reports
           </NavLink>
-        </li>
+        </li>*/}
       </ul>
     </div>
   );
