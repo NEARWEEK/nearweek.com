@@ -1,15 +1,12 @@
 import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import ReactPlayer from "react-player/youtube";
-import Link from "@mui/material/Link";
-import Widget from "../../general/Widget/Widget";
-import { getTimeAgo } from "../../../../Utils/Utils";
 
 const SliderItem = (props) => {
   const useStyles = makeStyles(() => ({
     slideItem: {
       borderRadius: "12px",
-      "& .react-player__preview": {
+      "& div > .react-player__preview": {
         borderRadius: "12px",
       },
     },

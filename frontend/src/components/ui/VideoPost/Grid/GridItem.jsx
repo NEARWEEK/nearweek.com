@@ -29,10 +29,14 @@ const GridItem = ({ data, key }) => {
     postVideo: {
       borderRadius: "12px 0 0 12px",
       minHeight: "254px",
+      "& .react-player__preview": {
+        borderRadius: "12px 12px 0 0",
+      },
     },
     postContent: {
       minHeight: "25%",
       background: matchEdition ? "#fff" : "#f7f7f7",
+      borderRadius: "0 0 12px 12px",
     },
     contentBody: {
       padding: "16px 16px 0 16px",
@@ -66,6 +70,7 @@ const GridItem = ({ data, key }) => {
     postWidgets: {
       display: "flex",
       alignItems: "center",
+      color: "rgba(0, 0, 0, 0.54)",
     },
     postWidget: {
       color: "#656364",
