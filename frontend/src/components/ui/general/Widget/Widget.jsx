@@ -5,7 +5,7 @@ import * as MuiIcons from "@mui/icons-material";
 const Widget = ({ icon, data }) => {
   const useStyles = makeStyles(() => ({
     postWidget: {
-      color: "rgba(0, 0, 0, 0.54)",
+      color: "inherit",
       paddingRight: "14px",
       display: "flex",
       alignItems: "center",

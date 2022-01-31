@@ -71,6 +71,7 @@ const ListItem = ({ data }) => {
     postWidgets: {
       display: "flex",
       alignItems: "center",
+      color: "rgba(0, 0, 0, 0.54)",
     },
     postWidget: {
       color: "#656364",

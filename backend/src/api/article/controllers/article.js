@@ -58,11 +58,8 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
 
     const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
 
-    console.log("sanitizedEntity", sanitizedEntity);
-
     const increaseView = Number(sanitizedEntity.Views) + 1;
 
-    console.log("increaseView", increaseView);
     await strapi.entityService.update(
       "api::article.article",
       sanitizedEntity.id,

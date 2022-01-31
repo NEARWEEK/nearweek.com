@@ -122,8 +122,16 @@ async function loadEdition(editionId) {
   return await response.json();
 }
 
+async function loadVideo(videoId) {
+  const response = await fetch(`/api/videos/${videoId}?populate=*`, options);
+  return await response.json();
+}
+
 async function loadVideos() {
-  const response = await fetch(`/api/videos?populate=*`, options);
+  const response = await fetch(
+    `/api/videos?populate=*&sort=createdAt:desc`,
+    options
+  );
   return await response.json();
 }
 
@@ -160,6 +168,7 @@ export const api = {
   getAllEvents: loadEvents,
   getLatestEvents: loadLatestEvents,
   getCategories: loadCategories,
+  getOneVideo: loadVideo,
   getAllVideo: loadVideos,
   search: elasticSearch,
   getLatestVideo: loadLatestVideo,
