@@ -117,7 +117,7 @@ const Home = () => {
           </Box>
           <Box className={classes.container}>
             <Section title={"Events"} link={"/events"}>
-              <EventsGrid events={events} />
+              <EventsGrid events={events.data} />
             </Section>
           </Box>
           <Box className={classes.container}>

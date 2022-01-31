@@ -91,6 +91,7 @@ const NewsPost = () => {
     postWidgets: {
       display: "flex",
       alignItems: "center",
+      color: "rgba(0, 0, 0, 0.54)",
     },
     postWidget: {
       paddingRight: "24px",

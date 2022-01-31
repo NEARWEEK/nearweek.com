@@ -11,6 +11,8 @@ import News from "./pages/News";
 import NewsPost from "./components/ui/NewsPost/NewsPost";
 import Events from "./pages/Events";
 import EventPost from "./components/ui/EventPost/EventPost";
+import Video from "./pages/Video";
+import VideoPost from "./components/ui/VideoPost/VideoPost";
 
 function App() {
   let theme = createTheme({
@@ -56,6 +58,8 @@ function App() {
             <Route exact path="news/:articleId" element={<NewsPost />} />
             <Route exact path="events" element={<Events />} />
             <Route exact path="events/:eventId" element={<EventPost />} />
+            <Route exact path="video" element={<Video />} />
+            <Route exact path="video/:videoId" element={<VideoPost />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
