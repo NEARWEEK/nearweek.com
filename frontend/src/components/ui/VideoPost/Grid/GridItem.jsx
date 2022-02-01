@@ -56,7 +56,6 @@ const GridItem = ({ data, key }) => {
       fontSize: "20px",
       marginTop: "6px",
       marginBottom: "6px",
-      "& a": {},
     },
     postBody: {
       fontSize: "16px",

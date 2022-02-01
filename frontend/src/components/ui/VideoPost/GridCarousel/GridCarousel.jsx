@@ -78,6 +78,7 @@ const GridCarousel = ({ video }) => {
     postContent: {
       minHeight: "25%",
       background: "#f7f7f7",
+      borderRadius: "0 0 12px 12px",
     },
     contentBody: {
       padding: "16px 16px 0 16px",
@@ -221,11 +222,11 @@ const GridCarousel = ({ video }) => {
                         <div className={classes.postWidgets}>
                           <Widget
                             icon={"Visibility"}
-                            data={_video.attributes.views}
+                            data={_video.attributes.Views}
                           />
                           <Widget
                             icon={"ThumbUp"}
-                            data={_video.attributes.likes}
+                            data={_video.attributes.Likes}
                           />
                           <Widget icon={"ChatBubble"} data={"0"} />
                         </div>
