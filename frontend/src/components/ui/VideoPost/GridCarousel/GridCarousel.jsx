@@ -64,6 +64,7 @@ const GridCarousel = ({ video }) => {
         transform: "scale(1)",
       },
       "& .carousel li.prev-item": {
+        transform: "scale(0.8)",
         "@media screen and (max-width: 600px)": {
           display: "none",
         },
