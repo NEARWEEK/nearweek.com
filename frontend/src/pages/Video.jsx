@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import ReactPlayer from "react-player/youtube";
 import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import Widget from "../components/ui/general/Widget/Widget";
+import Section from "../components/ui/general/Section/Section";
 
 const Video = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -99,25 +100,6 @@ const Video = () => {
     postWidget: {
       paddingRight: "24px",
     },
-    containerBody: {
-      marginBottom: "26px",
-      borderBottom: "1px solid #e1dff5",
-    },
-    postBody: {
-      marginBottom: "8px",
-    },
-    readMoreLink: {
-      display: "flex",
-      flexDirection: "column",
-      color: "#0d00ff",
-      fontWeight: "bold",
-      marginBottom: "24px",
-    },
-    blockTitle: {
-      fontSize: "42px",
-      fontWeight: "900",
-      marginBottom: "24px",
-    },
   }));
 
   const [video, setVideo] = useState(null);
@@ -128,6 +110,10 @@ const Video = () => {
       setVideo(data);
     }
   }, []);
+
+  function getLatestVideo() {
+    return video.data.filter((_video) => _video.id !== video.data[0].id);
+  }
 
   const classes = useStyles();
   return (
@@ -215,12 +201,11 @@ const Video = () => {
                     </Box>
                   </Box>
                 )}
-                <Box>
-                  <Box className={classes.blockTitle}>{"Latest Video"}</Box>
-                </Box>
-                <Box>
-                  {video.data.length > 0 && <GridVideo video={video.data} />}
-                </Box>
+                <Section title={"Latest Video"}>
+                  {video.data.length > 0 && (
+                    <GridVideo video={getLatestVideo()} />
+                  )}
+                </Section>
               </Box>
             </Box>
           </Box>
