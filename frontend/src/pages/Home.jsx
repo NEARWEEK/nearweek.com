@@ -32,6 +32,10 @@ const Home = () => {
       gap: "24px",
       width: 1140,
     },
+    videoGrid: {
+      marginRight: "16px",
+      marginLeft: "16px",
+    },
     latestEditions: {
       marginTop: "24px",
       width: "100%",
@@ -127,7 +131,9 @@ const Home = () => {
             {!isMobileMatch ? (
               <GridCarousel video={video.data} />
             ) : (
-              <GridVideo video={video.data} />
+              <Box className={classes.videoGrid}>
+                <GridVideo video={video.data} />
+              </Box>
             )}
           </Box>
           <Box className={classes.container}>
