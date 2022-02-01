@@ -51,10 +51,16 @@ const Video = () => {
         right: "calc(-100% - -16px)",
       },
     },
+    mobileHeaderBlock: {
+      background: "#000",
+      marginLeft: "-16px",
+      marginRight: "-16px",
+      padding: "16px",
+    },
     headerBlockFooter: {
       display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
+      flexDirection: "column",
+      justifyContent: "flex-start",
       marginBottom: isMobileMatch ? 16 : 36,
       color: "#fff",
       fontSize: "14px",
@@ -72,7 +78,7 @@ const Video = () => {
         top: 56,
       },
       width: "100%",
-      height: "526px",
+      height: isMobileMatch ? 320 : 526,
     },
     img: {
       width: "100%",
@@ -148,7 +154,39 @@ const Video = () => {
             <Box className={classes.contentContainer}>
               <Box className={classes.contentWrapper}>
                 <Box className={classes.headerBlock}>
-                  <Box>
+                  {!isMobileMatch && (
+                    <Box>
+                      <a href={`/video/${video.data[0].id}`}>
+                        <h2 className={classes.postTitle}>
+                          {" "}
+                          {`${video.data[0].attributes.Title}`}
+                        </h2>
+                      </a>
+                      <Box className={classes.headerBlockFooter}>
+                        <Box display="inline-flex">
+                          <div className={classes.postWidgets}>
+                            <Widget
+                              icon={"Visibility"}
+                              data={video.data[0].attributes.Views}
+                            />
+                            <Widget
+                              icon={"ThumbUp"}
+                              data={video.data[0].attributes.Likes}
+                            />
+                            <Widget icon={"ChatBubble"} data={"0"} />
+                          </div>
+                        </Box>
+                        <Box className={classes.postDate}>
+                          <span>
+                            {getTimeAgo(video.data[0].attributes.createdAt)}
+                          </span>
+                        </Box>
+                      </Box>
+                    </Box>
+                  )}
+                </Box>
+                {isMobileMatch && (
+                  <Box className={classes.mobileHeaderBlock}>
                     <a href={`/video/${video.data[0].id}`}>
                       <h2 className={classes.postTitle}>
                         {" "}
@@ -157,11 +195,6 @@ const Video = () => {
                     </a>
                     <Box className={classes.headerBlockFooter}>
                       <Box display="inline-flex">
-                        <Box className={classes.postDate}>
-                          <span>
-                            {getTimeAgo(video.data[0].attributes.createdAt)}
-                          </span>
-                        </Box>
                         <div className={classes.postWidgets}>
                           <Widget
                             icon={"Visibility"}
@@ -174,9 +207,14 @@ const Video = () => {
                           <Widget icon={"ChatBubble"} data={"0"} />
                         </div>
                       </Box>
+                      <Box className={classes.postDate}>
+                        <span>
+                          {getTimeAgo(video.data[0].attributes.createdAt)}
+                        </span>
+                      </Box>
                     </Box>
                   </Box>
-                </Box>
+                )}
                 <Box>
                   <Box className={classes.blockTitle}>{"Latest Video"}</Box>
                 </Box>
