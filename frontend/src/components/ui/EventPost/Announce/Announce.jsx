@@ -80,8 +80,6 @@ const Announce = ({ event }) => {
     },
   }));
 
-  console.log("event", event);
-
   const classes = useStyles();
   return (
     <>

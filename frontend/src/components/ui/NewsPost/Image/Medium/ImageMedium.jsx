@@ -26,6 +26,7 @@ const ImageMedium = ({ data }) => {
           style={{
             backgroundImage: `url('${medium}')`,
             backgroundSize: "cover",
+            backgroundPosition: "center center",
             width: "100%",
             height: "100%",
           }}
