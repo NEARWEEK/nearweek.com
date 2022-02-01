@@ -215,9 +215,9 @@ const EditionPost = () => {
     };
     return (
       <Box className={classes.containerBody}>
-        <p className={classes.postBody}>
+        <ReactMarkdown className={classes.postBody}>
           {isReadMore ? text.slice(0, 230) + "..." : text}
-        </p>
+        </ReactMarkdown>
         <span
           onClick={toggleReadMore}
           className={classes.readMoreLink}
