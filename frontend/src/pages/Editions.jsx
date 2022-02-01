@@ -1,6 +1,5 @@
-import * as React from "react";
+import React from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
-import styles from "./editions.module.css";
 import Box from "@mui/material/Box";
 import makeStyles from "@mui/styles/makeStyles";
 import { useEffect, useState } from "react";
@@ -53,7 +52,7 @@ const Editions = () => {
             <Announce edition={editions.data[0]} />
           </Box>
           <Box className={classes.latestEditions}>
-            <div className={styles.editionsList}>
+            <div>
               <Box className={classes.container}>
                 <Section title={"Latest Editions"}>
                   {editions.data.length > 0 && (

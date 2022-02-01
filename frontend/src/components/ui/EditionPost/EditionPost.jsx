@@ -34,14 +34,14 @@ const EditionPost = () => {
       minWidth: "200px",
       margin: "0 auto",
       position: "relative",
+      "& p img": {
+        maxWidth: "100%",
+        maxHeight: "100%",
+      },
     },
     contentWrapper: {
       marginLeft: "16px",
       marginRight: "16px",
-      "& > img": {
-        maxWidth: "100%",
-        maxHeight: "100%",
-      },
     },
     headerBlock: {
       display: "flex",
