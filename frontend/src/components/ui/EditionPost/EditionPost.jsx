@@ -4,12 +4,7 @@ import { useMatch } from "react-router";
 import { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
-import {
-  faChevronLeft,
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import IconButton from "@mui/material/IconButton";
@@ -43,6 +38,10 @@ const EditionPost = () => {
     contentWrapper: {
       marginLeft: "16px",
       marginRight: "16px",
+      "& > img": {
+        maxWidth: "100%",
+        maxHeight: "100%",
+      },
     },
     headerBlock: {
       display: "flex",
