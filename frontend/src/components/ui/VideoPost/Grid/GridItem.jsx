@@ -4,11 +4,13 @@ import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Widget from "../../general/Widget/Widget";
-import { getTimeAgo } from "../../../../Utils/Utils";
+import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import ReactPlayer from "react-player/youtube";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const GridItem = ({ data, key }) => {
-  const matchEdition = useMatch(`/video/:viedoId`);
+  const matchVideo = useMatch(`/video/:viedoId`);
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {
@@ -28,14 +30,14 @@ const GridItem = ({ data, key }) => {
     },
     postVideo: {
       borderRadius: "12px 0 0 12px",
-      minHeight: "254px",
+      minHeight: isMobileMatch ? 184 : 254,
       "& .react-player__preview": {
         borderRadius: "12px 12px 0 0",
       },
     },
     postContent: {
       minHeight: "25%",
-      background: matchEdition ? "#fff" : "#f7f7f7",
+      background: matchVideo ? "#fff" : "#f7f7f7",
       borderRadius: "0 0 12px 12px",
     },
     contentBody: {
