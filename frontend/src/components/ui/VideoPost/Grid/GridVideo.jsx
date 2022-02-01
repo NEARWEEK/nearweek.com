@@ -2,15 +2,19 @@ import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
 import GridItem from "./GridItem";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 
 const GridVideo = ({ video }) => {
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+
   const useStyles = makeStyles(() => ({
     gridContainer: {
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fill,minmax(306px, 1fr))",
+      gridTemplateColumns: isMobileMatch
+        ? "repeat(auto-fill,minmax(328px, 1fr))"
+        : "repeat(auto-fill,minmax(646px, 1fr))",
       columnGap: "24px",
-      marginLeft: "16px",
-      marginRight: "16px",
     },
   }));
   let videoList = [];

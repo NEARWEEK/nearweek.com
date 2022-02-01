@@ -14,6 +14,7 @@ import { Divider, ListItemButton, Box, Toolbar, AppBar } from "@mui/material";
 
 import Search from "./Actions/Search/Search";
 import Actions from "./Actions/Actions";
+import MobileMenu from "./Menu/MobileMenu";
 
 const Navbar = () => {
   const isMobileMatch = useMediaQuery("(max-width:1364px)");
@@ -105,21 +106,7 @@ const Navbar = () => {
                   </IconButton>
                   <Divider sx={{ mb: 2 }} />
                   <Search />
-                  <ListItemButton component={Link} to="/">
-                    <ListItemText primary="Home" />
-                  </ListItemButton>
-                  <ListItemButton component={Link} to="/news">
-                    <ListItemText primary="News" />
-                  </ListItemButton>
-                  <ListItemButton component={Link} to="/editions">
-                    <ListItemText primary="Editions" />
-                  </ListItemButton>
-                  <ListItemButton component={Link} to="/resources">
-                    <ListItemText primary="Resources" />
-                  </ListItemButton>
-                  <ListItemButton component={Link} to="/reports">
-                    <ListItemText primary="Reports" />
-                  </ListItemButton>
+                  <MobileMenu />
                 </Box>
               </Drawer>
             </div>
