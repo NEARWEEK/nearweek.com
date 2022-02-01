@@ -131,7 +131,7 @@ const GridCarousel = ({ video }) => {
               return (
                 <>
                   {index === video.length - 1 && (
-                    <li className="prev-item" key={"dup-" + _video.id}>
+                    <li key={"dup-" + _video.id}>
                       <div className="content-container">
                         <div className="post-video">
                           <ReactPlayer
@@ -181,7 +181,7 @@ const GridCarousel = ({ video }) => {
             })
           : null}
         {video.length > 0
-          ? video.map((_video, index) => {
+          ? video.slice(0, 3).map((_video, index) => {
               return (
                 <li
                   className={
