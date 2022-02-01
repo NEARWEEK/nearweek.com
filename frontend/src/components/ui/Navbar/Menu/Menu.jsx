@@ -1,6 +1,7 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
 import makeStyles from "@mui/styles/makeStyles";
+import { menuItems } from "../../../../Utils/conf";
 
 const Menu = () => {
   const useStyles = makeStyles(() => ({
@@ -37,62 +38,16 @@ const Menu = () => {
   return (
     <div className={classes.container}>
       <ul className={classes.menu}>
-        <li className={classes.menuItem}>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-            to="/"
-          >
-            Home
-          </NavLink>
-        </li>
-        <li className={classes.menuItem}>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-            to="/news"
-          >
-            News
-          </NavLink>
-        </li>
-        <li className={classes.menuItem}>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-            to="/editions"
-          >
-            Editions
-          </NavLink>
-        </li>
-        <li className={classes.menuItem}>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-            to="/events"
-          >
-            Events
-          </NavLink>
-        </li>
-        <li className={classes.menuItem}>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-            to="/video"
-          >
-            Video
-          </NavLink>
-        </li>
-        {/*        <li className={classes.menuItem}>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-            to="/resources"
-          >
-            Resources
-          </NavLink>
-        </li>*/}
-        {/*       <li className={classes.menuItem}>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-            to="/reports"
-          >
-            Reports
-          </NavLink>
-        </li>*/}
+        {menuItems.map((item) => (
+          <li className={classes.menuItem} key={item.name}>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : "inactive")}
+              to={item.link}
+            >
+              {item.name}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </div>
   );
