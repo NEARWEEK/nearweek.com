@@ -5,12 +5,7 @@ import { useMatch } from "react-router";
 import Navbar from "../Navbar/Navbar";
 import Box from "@mui/material/Box";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import ReactMarkdown from "react-markdown";
 import NewsList from "./List/NewsList";
 import makeStyles from "@mui/styles/makeStyles";
@@ -26,7 +21,6 @@ const NewsPost = () => {
   const [news, setNews] = useState([]);
 
   const [ids, setIds] = useState([]);
-  const navigate = useNavigate();
 
   const useStyles = makeStyles(() => ({
     pageWrapper: {
@@ -38,6 +32,10 @@ const NewsPost = () => {
       minWidth: 200,
       margin: "0 auto",
       position: "relative",
+      "& p img": {
+        maxWidth: "100%",
+        maxHeight: "100%",
+      },
     },
     headerBlock: {
       display: "flex",

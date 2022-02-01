@@ -12,6 +12,7 @@ import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
 import Box from "@mui/material/Box";
+import ReactMarkdown from "react-markdown";
 
 const Announce = ({ edition }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -94,9 +95,9 @@ const Announce = ({ edition }) => {
                 </span>
               </Link>
             </h2>
-            <p className={classes.postBody}>
+            <ReactMarkdown className={classes.postBody}>
               {edition.attributes.Body.substring(0, 130)}
-            </p>
+            </ReactMarkdown>
           </div>
           <div className={classes.postFooter}>
             <div className={classes.postWidgets}>
