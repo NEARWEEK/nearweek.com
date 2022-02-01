@@ -24,6 +24,7 @@ import EditionsList from "./List/EditionsList";
 import { getPubDate, MOBILE_WIDTH } from "../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import PostActions from "../general/PostActions/PostActions";
+import Widget from "../general/Widget/Widget";
 
 library.add(faDiscord);
 
@@ -104,10 +105,20 @@ const EditionPost = () => {
     postWidgets: {
       display: "flex",
       alignItems: "center",
-      color: "rgba(0, 0, 0, 0.54)",
+      color: "#fff",
     },
-    postWidget: {
-      paddingRight: "24px",
+    actionButton: {
+      padding: "12px !important",
+      backgroundColor: " #cccccc85 !important",
+      borderRadius: "8px !important",
+      margin: "0 6px !important",
+      fontSize: "12px !important",
+      fontWeight: "600 !important",
+      letterSpacing: "1.25px !important",
+    },
+    actionIcon: {
+      color: "#fff",
+      fontSize: "14px !important",
     },
     containerBody: {
       marginBottom: "26px",
@@ -267,17 +278,15 @@ const EditionPost = () => {
                           <span>{getPubDate(edition.attributes.Period)}</span>
                         </Box>
                         <div className={classes.postWidgets}>
-                          <span className={classes.postWidget}>
-                            <FontAwesomeIcon icon={faEye} />{" "}
-                            {edition.attributes.views}
-                          </span>
-                          <span className={classes.postWidget}>
-                            <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                            {edition.attributes.likes}
-                          </span>
-                          <span className={classes.postWidget}>
-                            <FontAwesomeIcon icon={faCommentAlt} /> 0
-                          </span>
+                          <Widget
+                            icon={"Visibility"}
+                            data={edition.attributes.views}
+                          />
+                          <Widget
+                            icon={"ThumbUp"}
+                            data={edition.attributes.likes}
+                          />
+                          <Widget icon={"ChatBubble"} data={"0"} />
                         </div>
                       </Box>
                       {!isMobileMatch && (
