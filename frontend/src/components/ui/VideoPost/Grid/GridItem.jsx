@@ -1,7 +1,6 @@
 import React from "react";
 import { useMatch } from "react-router";
 import makeStyles from "@mui/styles/makeStyles";
-import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Widget from "../../general/Widget/Widget";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
@@ -30,7 +29,7 @@ const GridItem = ({ data, key }) => {
     },
     postVideo: {
       borderRadius: "12px 0 0 12px",
-      minHeight: isMobileMatch ? 184 : 254,
+      minHeight: isMobileMatch ? 184 : 380,
       "& .react-player__preview": {
         borderRadius: "12px 12px 0 0",
       },
