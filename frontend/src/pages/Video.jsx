@@ -9,6 +9,7 @@ import ReactPlayer from "react-player/youtube";
 import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import Widget from "../components/ui/general/Widget/Widget";
 import Section from "../components/ui/general/Section/Section";
+import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 
 const Video = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -87,11 +88,19 @@ const Video = () => {
   }));
 
   const [video, setVideo] = useState(null);
+  const [editions, setEditions] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
     const data = await Utils.api.getAllVideo();
     if (data) {
       setVideo(data);
+    }
+  }, []);
+
+  useEffect(async () => {
+    const data = await Utils.api.getAllEditions();
+    if (data) {
+      setEditions(data);
     }
   }, []);
 
@@ -188,6 +197,11 @@ const Video = () => {
                 <Section title={"Latest Video"}>
                   {video.data.length > 0 && (
                     <GridVideo video={getLatestVideo()} />
+                  )}
+                </Section>
+                <Section title={"Latest Editions"}>
+                  {editions.data.length > 0 && (
+                    <EditionsList editions={editions.data} />
                   )}
                 </Section>
               </Box>
