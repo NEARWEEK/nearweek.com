@@ -24,9 +24,14 @@ const EditionsList = ({ editions }) => {
       background: "#f7f7f7",
       marginBottom: "24px",
       fontWeight: "bold",
+      "& button": {
+        textTransform: "none",
+        fontWeight: "bold",
+        fontSize: "20px",
+      },
     },
     showMoreButton: {
-      margin: "24px 0",
+      margin: "18px 0",
     },
   }));
 
