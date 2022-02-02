@@ -35,7 +35,7 @@ const Video = () => {
       minHeight: isMobileMatch ? "calc(360px - 1px)" : "calc(526px - 1px)",
     },
     videoItem: {
-      maxWidth: "1376px",
+      maxWidth: isMobileMatch ? 600 : 1376,
       margin: "0 auto",
       width: "100%",
     },
