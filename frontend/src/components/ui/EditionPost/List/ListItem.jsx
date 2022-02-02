@@ -21,8 +21,12 @@ const ListItem = ({ data }) => {
       flexDirection: !isMobileMatch ? "row" : "column",
       marginBottom: "24px",
     },
-    postImage: {
+    bodyImage: {
       borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
+    },
+    blockImage: {
+      borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
+      minHeight: 205,
     },
     postContent: {
       width: "100%",
@@ -90,7 +94,7 @@ const ListItem = ({ data }) => {
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
             {!isMobileMatch && (
-              <div className={classes.postImage}>
+              <div className={classes.blockImage}>
                 <Thumbnail data={data} url={`/editions/${data.id}`} />
               </div>
             )}
@@ -98,7 +102,7 @@ const ListItem = ({ data }) => {
               <Box className={classes.contentBody}>
                 {isMobileMatch && (
                   <div className="image-container">
-                    <div className={classes.postImage}>
+                    <div className={classes.bodyImage}>
                       <Thumbnail data={data} url={`/editions/${data.id}`} />
                     </div>
                   </div>
