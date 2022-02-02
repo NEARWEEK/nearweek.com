@@ -7,17 +7,24 @@ import { useEffect, useState } from "react";
 import * as Utils from "../Utils/Utils";
 import Announce from "../components/ui/EventPost/Announce/Announce";
 import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
+import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
+import GridCarousel from "../components/ui/VideoPost/GridCarousel/GridCarousel";
+import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { MOBILE_WIDTH } from "../Utils/Utils";
+import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 const Events = () => {
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
   const [events, setEvents] = useState({ data: [], meta: {} });
 
   const useStyles = makeStyles(() => ({
-    root: {
-      margin: "0 auto",
-      maxWidth: 1440,
-    },
     pageWrapper: {
       marginRight: 16,
       marginLeft: 16,
+    },
+    contentWrapper: {
+      margin: "0 auto",
+      maxWidth: 1440,
     },
     topContainer: {
       display: "flex",
@@ -72,10 +79,27 @@ const Events = () => {
     },
   }));
 
+  const [video, setVideo] = useState({ data: [], meta: {} });
+  const [editions, setEditions] = useState({ data: [], meta: {} });
+
+  useEffect(async () => {
+    const data = await Utils.api.getLatestVideo(1, 4);
+    if (data) {
+      setVideo(data);
+    }
+  }, []);
+
   useEffect(async () => {
     const data = await Utils.api.getAllEvents();
     if (data) {
       setEvents(data);
+    }
+  }, []);
+
+  useEffect(async () => {
+    const data = await Utils.api.getAllEditions();
+    if (data) {
+      setEditions(data);
     }
   }, []);
 
@@ -87,17 +111,42 @@ const Events = () => {
   return (
     <>
       <Navbar />
-      <Box className={classes.root}>
+      <Box>
         <Box className={classes.pageWrapper}>
-          <Box className={classes.topContainer}>
-            <Announce event={events.data[0]} />
+          <Box className={classes.contentWrapper}>
+            <Box className={classes.topContainer}>
+              <Announce event={events.data[0]} />
+            </Box>
+            <Box className={classes.latestEvents}>
+              <Section title={"Latest Events"}>
+                {events.data.length > 0 && (
+                  <EventsGrid events={getLatestEvents()} />
+                )}
+              </Section>
+            </Box>
+            <Box className={classes.container}>
+              <SectionHeader title={"Latest Video"} link={"/video"} />
+            </Box>
           </Box>
-          <Box className={classes.latestEvents}>
-            <Section title={"Latest Events"}>
-              {events.data.length > 0 && (
-                <EventsGrid events={getLatestEvents()} />
-              )}
-            </Section>
+        </Box>
+        <Box>
+          {!isMobileMatch ? (
+            <GridCarousel video={video.data} />
+          ) : (
+            <Box className={classes.videoGrid}>
+              <GridVideo video={video.data} />
+            </Box>
+          )}
+        </Box>
+        <Box className={classes.pageWrapper}>
+          <Box className={classes.contentWrapper}>
+            <Box className={classes.container}>
+              <Section title={"Latest Editions"} link={"/editions"}>
+                {editions.data.length > 0 && (
+                  <EditionsList editions={editions.data} />
+                )}
+              </Section>
+            </Box>
           </Box>
         </Box>
       </Box>
