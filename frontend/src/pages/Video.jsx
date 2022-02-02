@@ -35,8 +35,9 @@ const Video = () => {
       minHeight: isMobileMatch ? "calc(360px - 1px)" : "calc(526px - 1px)",
     },
     videoItem: {
-      maxWidth: 1376,
+      maxWidth: "1376px",
       margin: "0 auto",
+      width: "100%",
     },
     mobileHeaderBlock: {
       background: "#000",
@@ -119,15 +120,16 @@ const Video = () => {
             flexDirection="row"
             className={classes.headerContainer}
           >
-            <ReactPlayer
-              key={video.id}
-              controls={true}
-              width="100%"
-              height={isMobileMatch ? "360px" : "526px"}
-              light={true}
-              className={classes.videoItem}
-              url={`${video.data[0].attributes.Link}`}
-            />
+            <Box className={classes.videoItem}>
+              <ReactPlayer
+                key={video.id}
+                controls={true}
+                width="100%"
+                height={isMobileMatch ? "360px" : "526px"}
+                light={true}
+                url={`${video.data[0].attributes.Link}`}
+              />
+            </Box>
           </Box>
           <Box className={classes.pageWrapper}>
             <Box className={classes.contentContainer}>
