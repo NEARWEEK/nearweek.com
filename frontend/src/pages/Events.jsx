@@ -129,7 +129,7 @@ const Events = () => {
             </Box>
           </Box>
         </Box>
-        <Box>
+        <Box style={{ backgroundColor: "#f7f7f7", paddingTop: "36px" }}>
           {!isMobileMatch ? (
             <GridCarousel video={video.data} />
           ) : (

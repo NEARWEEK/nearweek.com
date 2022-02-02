@@ -127,7 +127,7 @@ const Home = () => {
           <Box className={classes.container}>
             <SectionHeader title={"Latest Video"} link={"/video"} />
           </Box>
-          <Box>
+          <Box style={{ backgroundColor: "#f7f7f7", paddingTop: "36px" }}>
             {!isMobileMatch ? (
               <GridCarousel video={video.data} />
             ) : (
