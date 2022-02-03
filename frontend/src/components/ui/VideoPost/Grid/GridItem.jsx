@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useMatch } from "react-router";
 import makeStyles from "@mui/styles/makeStyles";
 import Link from "@mui/material/Link";
@@ -96,6 +96,11 @@ const GridItem = ({ data, key }) => {
                     <ReactPlayer
                       key={key}
                       controls={true}
+                      config={{
+                        youtube: {
+                          playerVars: { showinfo: 1 },
+                        },
+                      }}
                       width="100%"
                       height="100%"
                       light={true}

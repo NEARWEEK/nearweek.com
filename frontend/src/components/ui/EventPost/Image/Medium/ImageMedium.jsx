@@ -8,7 +8,7 @@ const ImageMedium = ({ data }) => {
   const useStyles = makeStyles(() => ({
     img: {
       width: "100%",
-      borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
+      borderRadius: !isMobileMatch ? "12px 0 0 12px" : 0,
       minHeight: !isMobileMatch ? 526 : 360,
     },
   }));
