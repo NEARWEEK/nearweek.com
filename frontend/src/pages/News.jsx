@@ -29,9 +29,15 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Section from "../components/ui/general/Section/Section";
 import NewsList from "../components/ui/NewsPost/List/NewsList";
 import Subscription from "../components/ui/general/Subscription/Subscription";
+import GridCarousel from "../components/ui/VideoPost/GridCarousel/GridCarousel";
+import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
+import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
+import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
 
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
+  const [video, setVideo] = useState({ data: [], meta: {} });
+  const [events, setEvents] = useState({ data: [], meta: {} });
   const [categories, setCategories] = useState([]);
   const [sort, setSort] = useState("Latest");
   const [showFilterPanel, setShowFilterPanel] = useState(false);
@@ -109,6 +115,20 @@ const News = () => {
     const data = await Utils.api.getAllNews();
     if (data) {
       setNews(data);
+    }
+  }, []);
+
+  useEffect(async () => {
+    const data = await Utils.api.getAllEvents();
+    if (data) {
+      setEvents(data);
+    }
+  }, []);
+
+  useEffect(async () => {
+    const data = await Utils.api.getAllVideo();
+    if (data) {
+      setVideo(data);
     }
   }, []);
 
@@ -439,6 +459,31 @@ const News = () => {
             </>
           ) : (
             <FilterResult filterResult={filterResult} />
+          )}
+
+          <Box>
+            <Section title={"Events"} link={"/events"}>
+              {events.data.length > 0 && (
+                <EventsGrid events={events.data.slice(0, 3)} />
+              )}
+            </Section>
+          </Box>
+        </Box>
+
+        <Box style={{ backgroundColor: "#f7f7f7", marginTop: "36px" }}>
+          <Box className={classes.pageWrapper}>
+            <Box className={classes.container}>
+              <SectionHeader title={"Latest Video"} link={"/video"} />
+            </Box>
+          </Box>
+          {!isMobileMatch ? (
+            <GridCarousel video={video.data} />
+          ) : (
+            <Box className={classes.pageWrapper}>
+              <Box className={classes.videoGrid}>
+                <GridVideo video={video.data} />
+              </Box>
+            </Box>
           )}
         </Box>
       </Box>
