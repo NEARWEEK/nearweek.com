@@ -54,7 +54,7 @@ const News = () => {
       margin: "0 auto",
       maxWidth: 1440,
     },
-    pageWrapper: {
+    wrapper: {
       marginRight: 16,
       marginLeft: 16,
     },
@@ -264,41 +264,39 @@ const News = () => {
     };
 
     return (
-      <Box>
+      <>
         {isMobileMatch && (
-          <>
-            <Box className={classes.filterContainer}>
-              <SortButton />
-              <FilterButton />
-              <Stack
-                spacing={1}
-                direction="row"
-                className={classes.filterCategory}
+          <Box className={classes.filterContainer}>
+            <SortButton />
+            <FilterButton />
+            <Stack
+              spacing={1}
+              direction="row"
+              className={classes.filterCategory}
+            >
+              <Button
+                variant="text"
+                className={isActive("all") ? "active" : ""}
+                style={{ textTransform: "none" }}
+                onClick={() => handleFilterCategory("all")}
               >
-                <Button
-                  variant="text"
-                  className={isActive("all") ? "active" : ""}
-                  style={{ textTransform: "none" }}
-                  onClick={() => handleFilterCategory("all")}
-                >
-                  All categories
-                </Button>
-                {categories
-                  ? categories.map((name, index) => (
-                      <Button
-                        variant="text"
-                        key={index}
-                        className={isActive(name) ? "active" : ""}
-                        onClick={() => handleFilterCategory(name)}
-                        style={{ textTransform: "none" }}
-                      >
-                        {name}
-                      </Button>
-                    ))
-                  : null}
-              </Stack>
-            </Box>
-          </>
+                All categories
+              </Button>
+              {categories
+                ? categories.map((name, index) => (
+                    <Button
+                      variant="text"
+                      key={index}
+                      className={isActive(name) ? "active" : ""}
+                      onClick={() => handleFilterCategory(name)}
+                      style={{ textTransform: "none" }}
+                    >
+                      {name}
+                    </Button>
+                  ))
+                : null}
+            </Stack>
+          </Box>
         )}
         {!isMobileMatch && (
           <Box className={classes.filterContainer}>
@@ -417,7 +415,7 @@ const News = () => {
             </Box>
           )}
         </Box>
-      </Box>
+      </>
     );
   };
 
@@ -430,8 +428,9 @@ const News = () => {
   return (
     <>
       <Navbar />
-      <Box className={classes.root}>
-        <Box className={classes.pageWrapper}>
+
+      <Box className={classes.wrapper}>
+        <Box className={classes.root}>
           <FilterPanel />
           {!filterResult.data.length > 0 ? (
             <>
@@ -469,23 +468,20 @@ const News = () => {
             </Section>
           </Box>
         </Box>
-
-        <Box style={{ backgroundColor: "#f7f7f7", marginTop: "36px" }}>
-          <Box className={classes.pageWrapper}>
-            <Box className={classes.container}>
-              <SectionHeader title={"Latest Video"} link={"/video"} />
+      </Box>
+      <Box style={{ backgroundColor: "#f7f7f7", marginTop: "36px" }}>
+        <Box className={classes.wrapper}>
+          <SectionHeader title={"Latest Video"} link={"/video"} />
+        </Box>
+        {!isMobileMatch ? (
+          <GridCarousel video={video.data} />
+        ) : (
+          <Box className={classes.wrapper}>
+            <Box className={classes.videoGrid}>
+              <GridVideo video={video.data} />
             </Box>
           </Box>
-          {!isMobileMatch ? (
-            <GridCarousel video={video.data} />
-          ) : (
-            <Box className={classes.pageWrapper}>
-              <Box className={classes.videoGrid}>
-                <GridVideo video={video.data} />
-              </Box>
-            </Box>
-          )}
-        </Box>
+        )}
       </Box>
     </>
   );
