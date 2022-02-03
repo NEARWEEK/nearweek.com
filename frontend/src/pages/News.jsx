@@ -50,7 +50,7 @@ const News = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
 
   const useStyles = makeStyles(() => ({
-    root: {
+    container: {
       margin: "0 auto",
       maxWidth: 1440,
     },
@@ -430,7 +430,7 @@ const News = () => {
       <Navbar />
 
       <Box className={classes.wrapper}>
-        <Box className={classes.root}>
+        <Box className={classes.container}>
           <FilterPanel />
           {!filterResult.data.length > 0 ? (
             <>
@@ -459,8 +459,7 @@ const News = () => {
           ) : (
             <FilterResult filterResult={filterResult} />
           )}
-
-          <Box>
+          <Box className={classes.wrapper}>
             <Section title={"Events"} link={"/events"}>
               {events.data.length > 0 && (
                 <EventsGrid events={events.data.slice(0, 3)} />
@@ -471,7 +470,9 @@ const News = () => {
       </Box>
       <Box style={{ backgroundColor: "#f7f7f7", marginTop: "36px" }}>
         <Box className={classes.wrapper}>
-          <SectionHeader title={"Latest Video"} link={"/video"} />
+          <Box className={classes.container}>
+            <SectionHeader title={"Latest Video"} link={"/video"} />
+          </Box>
         </Box>
         {!isMobileMatch ? (
           <GridCarousel video={video.data} />
