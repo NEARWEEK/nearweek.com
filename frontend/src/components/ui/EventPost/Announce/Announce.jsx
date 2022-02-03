@@ -15,12 +15,12 @@ const Announce = ({ event }) => {
   const useStyles = makeStyles(() => ({
     latestPost: {
       display: "flex",
-      marginTop: 16,
+      marginTop: !isMobileMatch ? 16 : 0,
       marginBottom: 36,
       width: "100%",
       flexDirection: isMobileMatch ? "column" : "unset",
       background: "#dbd9d7",
-      borderRadius: 12,
+      borderRadius: !isMobileMatch ? 12 : 0,
     },
     postContent: {
       flex: 0.3,
@@ -33,7 +33,7 @@ const Announce = ({ event }) => {
     },
     image: {
       flex: 0.7,
-      borderRadius: "12px 0 0 12px",
+      borderRadius: !isMobileMatch ? "12px 0 0 12px" : 0,
       width: "100%",
     },
     postHeader: {
@@ -59,7 +59,7 @@ const Announce = ({ event }) => {
       justifyContent: "space-between",
       padding: "12px 24px",
       borderTop: "1px solid #c8c6c6",
-      borderRadius: "0 0 12px 12px",
+      borderRadius: !isMobileMatch ? "0 0 12px 12px" : 0,
     },
     postWidgets: {
       display: "flex",

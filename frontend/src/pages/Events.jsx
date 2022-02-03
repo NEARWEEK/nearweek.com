@@ -28,6 +28,7 @@ const Events = () => {
     },
     topContainer: {
       display: "flex",
+      margin: !isMobileMatch ? 16 : 0,
       gap: 24,
       "@media screen and (max-width: 1080px)": {
         flexDirection: "column",
@@ -112,11 +113,11 @@ const Events = () => {
     <>
       <Navbar />
       <Box>
+        <Box className={classes.topContainer}>
+          <Announce event={events.data[0]} />
+        </Box>
         <Box className={classes.pageWrapper}>
           <Box className={classes.contentWrapper}>
-            <Box className={classes.topContainer}>
-              <Announce event={events.data[0]} />
-            </Box>
             <Box className={classes.latestEvents}>
               <Section title={"Latest Events"}>
                 {events.data.length > 0 && (
@@ -133,8 +134,10 @@ const Events = () => {
           {!isMobileMatch ? (
             <GridCarousel video={video.data} />
           ) : (
-            <Box className={classes.videoGrid}>
-              <GridVideo video={video.data} />
+            <Box className={classes.pageWrapper}>
+              <Box className={classes.videoGrid}>
+                <GridVideo video={video.data} />
+              </Box>
             </Box>
           )}
         </Box>
