@@ -96,9 +96,10 @@ const Video = () => {
     postDate: {
       marginRight: 24,
     },
-    watchButton: {
-      marginTop: "24px !important",
-      textTransform: "none !important",
+    watchVideo: {
+      backgroundColor: "transparent !important",
+      color: "transparent !important",
+      boxShadow: "none",
     },
     postWidgets: {
       display: "flex",
@@ -205,7 +206,12 @@ const Video = () => {
                 <Box className={classes.headerBlock}>
                   {!isMobileMatch && (
                     <Box className={classes.videoDescription}>
-                      <Paper component={Link} to={""} onClick={handleClickOpen}>
+                      <Paper
+                        className={classes.watchVideo}
+                        component={Link}
+                        to={""}
+                        onClick={handleClickOpen}
+                      >
                         <h2 className={classes.postTitle}>
                           {" "}
                           {`${video.data[0].attributes.Title}`}
