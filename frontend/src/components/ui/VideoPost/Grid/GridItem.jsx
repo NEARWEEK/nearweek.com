@@ -29,7 +29,7 @@ const GridItem = ({ data, key }) => {
     },
     postVideo: {
       borderRadius: "12px 0 0 12px",
-      minHeight: isMobileMatch ? 184 : 380,
+      minHeight: isMobileMatch ? 184 : 360,
       "& .react-player__preview": {
         borderRadius: "12px 12px 0 0",
       },
