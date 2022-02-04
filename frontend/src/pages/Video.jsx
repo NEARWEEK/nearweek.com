@@ -141,7 +141,14 @@ const Video = () => {
   }
 
   const WatchVideo = (props) => {
-    const { onClose, title, open, url } = props;
+    const { onClose, title, open, url, videoId } = props;
+
+    useEffect(() => {
+      if (open) {
+        console.log("watch video");
+        Utils.api.getOneVideo(videoId).then();
+      }
+    }, [open]);
 
     const handleClose = () => {
       onClose();
@@ -242,12 +249,10 @@ const Video = () => {
                 </Box>
                 {isMobileMatch && (
                   <Box className={classes.mobileHeaderBlock}>
-                    <a href={`/video/${video.data[0].id}`}>
-                      <h2 className={classes.postTitle}>
-                        {" "}
-                        {`${video.data[0].attributes.Title}`}
-                      </h2>
-                    </a>
+                    <h2 className={classes.postTitle}>
+                      {" "}
+                      {`${video.data[0].attributes.Title}`}
+                    </h2>
                     <Box className={classes.headerBlockFooter}>
                       <Box display="inline-flex">
                         <div className={classes.postWidgets}>
@@ -274,6 +279,7 @@ const Video = () => {
               <WatchVideo
                 open={open}
                 onClose={handleClose}
+                videoId={video.data[0].id}
                 title={video.data[0].attributes.Title}
                 url={video.data[0].attributes.Link}
               />
