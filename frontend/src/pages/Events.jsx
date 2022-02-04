@@ -18,13 +18,13 @@ const Events = () => {
   const [events, setEvents] = useState({ data: [], meta: {} });
 
   const useStyles = makeStyles(() => ({
-    pageWrapper: {
-      marginRight: 16,
-      marginLeft: 16,
-    },
-    contentWrapper: {
+    container: {
       margin: "0 auto",
       maxWidth: 1440,
+    },
+    wrapper: {
+      marginRight: 16,
+      marginLeft: 16,
     },
     topContainer: {
       display: "flex",
@@ -113,11 +113,19 @@ const Events = () => {
     <>
       <Navbar />
       <Box>
-        <Box className={classes.topContainer}>
-          <Announce event={events.data[0]} />
-        </Box>
-        <Box className={classes.pageWrapper}>
-          <Box className={classes.contentWrapper}>
+        {!isMobileMatch ? (
+          <Box className={classes.container}>
+            <Box className={classes.topContainer}>
+              <Announce event={events.data[0]} />
+            </Box>
+          </Box>
+        ) : (
+          <Box className={classes.topContainer}>
+            <Announce event={events.data[0]} />
+          </Box>
+        )}
+        <Box className={classes.container}>
+          <Box className={classes.wrapper}>
             <Box className={classes.latestEvents}>
               <Section title={"Latest Events"}>
                 {events.data.length > 0 && (
@@ -134,15 +142,15 @@ const Events = () => {
           {!isMobileMatch ? (
             <GridCarousel video={video.data} />
           ) : (
-            <Box className={classes.pageWrapper}>
+            <Box className={classes.container}>
               <Box className={classes.videoGrid}>
                 <GridVideo video={video.data} />
               </Box>
             </Box>
           )}
         </Box>
-        <Box className={classes.pageWrapper}>
-          <Box className={classes.contentWrapper}>
+        <Box className={classes.container}>
+          <Box className={classes.wrapper}>
             <Box className={classes.container}>
               <Section title={"Latest Editions"} link={"/editions"}>
                 {editions.data.length > 0 && (
