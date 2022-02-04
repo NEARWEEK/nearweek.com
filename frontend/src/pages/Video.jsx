@@ -10,6 +10,13 @@ import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import Widget from "../components/ui/general/Widget/Widget";
 import Section from "../components/ui/general/Section/Section";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
+import Button from "@mui/material/Button";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Video = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -79,6 +86,10 @@ const Video = () => {
     postDate: {
       marginRight: 24,
     },
+    watchButton: {
+      marginTop: "24px !important",
+      textTransform: "none !important",
+    },
     postWidgets: {
       display: "flex",
       alignItems: "center",
@@ -90,6 +101,15 @@ const Video = () => {
 
   const [video, setVideo] = useState(null);
   const [editions, setEditions] = useState({ data: [], meta: {} });
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(async () => {
     const data = await Utils.api.getAllVideo();
@@ -108,6 +128,39 @@ const Video = () => {
   function getLatestVideo() {
     return video.data.filter((_video) => _video.id !== video.data[0].id);
   }
+
+  const WatchVideo = (props) => {
+    const { onClose, title, open, url } = props;
+
+    const handleClose = () => {
+      onClose();
+    };
+
+    return (
+      <Dialog onClose={handleClose} open={open} fullScreen>
+        <DialogTitle>
+          <IconButton
+            edge="start"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+          {title}
+        </DialogTitle>
+        <DialogContent>
+          <ReactPlayer
+            controls={true}
+            playing={true}
+            width="100%"
+            height="100%"
+            url={`${url}`}
+          />
+        </DialogContent>
+      </Dialog>
+    );
+  };
 
   const classes = useStyles();
   return (
@@ -160,6 +213,23 @@ const Video = () => {
                         <span>
                           {getTimeAgo(video.data[0].attributes.createdAt)}
                         </span>
+                      </Box>
+                      <Box>
+                        <Button
+                          className={classes.watchButton}
+                          disableElevation
+                          variant="contained"
+                          onClick={handleClickOpen}
+                          startIcon={<PlayArrowIcon />}
+                        >
+                          Watch now
+                        </Button>
+                        <WatchVideo
+                          open={open}
+                          onClose={handleClose}
+                          title={video.data[0].attributes.Title}
+                          url={video.data[0].attributes.Link}
+                        />
                       </Box>
                     </Box>
                   </Box>
