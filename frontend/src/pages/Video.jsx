@@ -40,7 +40,7 @@ const Video = () => {
       height: "100%",
       background: isMobileMatch
         ? "linear-gradient(to top, black, transparent 50%, transparent 100%, black 100%)"
-        : "linear-gradient(to left, black, transparent 50%, transparent 50%, black 100%)",
+        : "linear-gradient(to left, black, transparent 50%, transparent 65%, black 100%)",
       minHeight: isMobileMatch ? "calc(360px - 1px)" : "calc(526px - 1px)",
     },
     videoDescription: {
@@ -145,7 +145,6 @@ const Video = () => {
 
     useEffect(() => {
       if (open) {
-        console.log("watch video");
         Utils.api.getOneVideo(videoId).then();
       }
     }, [open]);
