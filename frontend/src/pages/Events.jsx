@@ -133,17 +133,19 @@ const Events = () => {
                 )}
               </Section>
             </Box>
-            <Box className={classes.container}>
+          </Box>
+        </Box>
+        <Box style={{ backgroundColor: "#f7f7f7" }}>
+          <Box className={classes.container}>
+            <Box className={classes.wrapper}>
               <SectionHeader title={"Latest Video"} link={"/video"} />
             </Box>
           </Box>
-        </Box>
-        <Box style={{ backgroundColor: "#f7f7f7", paddingTop: "36px" }}>
           {!isMobileMatch ? (
             <GridCarousel video={video.data} />
           ) : (
             <Box className={classes.container}>
-              <Box className={classes.videoGrid}>
+              <Box className={classes.wrapper}>
                 <GridVideo video={video.data} />
               </Box>
             </Box>

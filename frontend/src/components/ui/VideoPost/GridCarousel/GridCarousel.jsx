@@ -72,7 +72,7 @@ const GridCarousel = ({ video }) => {
       "& .carousel li .content-container .carousel-item .react-player__preview":
         {
           borderRadius: "12px 12px 0 0 !important",
-          minHeight: "364px",
+          minHeight: "360px",
         },
     },
     postContent: {

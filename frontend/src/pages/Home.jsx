@@ -32,10 +32,6 @@ const Home = () => {
       gap: "24px",
       width: 1140,
     },
-    videoGrid: {
-      marginRight: "16px",
-      marginLeft: "16px",
-    },
     latestEditions: {
       marginTop: "24px",
       width: "100%",
@@ -124,15 +120,19 @@ const Home = () => {
               <EventsGrid events={events.data} />
             </Section>
           </Box>
-          <Box className={classes.container}>
-            <SectionHeader title={"Latest Video"} link={"/video"} />
-          </Box>
-          <Box style={{ backgroundColor: "#f7f7f7", paddingTop: "36px" }}>
+          <Box style={{ backgroundColor: "#f7f7f7" }}>
+            <Box className={classes.container}>
+              <Box className={classes.wrapper}>
+                <SectionHeader title={"Latest Video"} link={"/video"} />
+              </Box>
+            </Box>
             {!isMobileMatch ? (
               <GridCarousel video={video.data} />
             ) : (
-              <Box className={classes.videoGrid}>
-                <GridVideo video={video.data} />
+              <Box className={classes.container}>
+                <Box className={classes.wrapper}>
+                  <GridVideo video={video.data} />
+                </Box>
               </Box>
             )}
           </Box>
