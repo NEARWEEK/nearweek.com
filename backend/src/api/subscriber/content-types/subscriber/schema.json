@@ -4,7 +4,8 @@
   "info": {
     "singularName": "subscriber",
     "pluralName": "subscribers",
-    "displayName": "Subscribers"
+    "displayName": "Subscribers",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,9 @@
     },
     "email": {
       "type": "email"
+    },
+    "hash": {
+      "type": "string"
     }
   }
 }
