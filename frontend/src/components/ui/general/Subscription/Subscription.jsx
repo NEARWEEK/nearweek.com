@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
@@ -8,22 +8,34 @@ import InputBase from "@mui/material/InputBase";
 import { useForm } from "react-hook-form";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
+import * as Utils from "../../../../Utils/Utils";
+import Box from "@mui/material/Box";
 
 const Subscription = () => {
   const [showError, setShowError] = React.useState(false);
+  const [showSubscribed, setShowSubscribed] = useState(false);
+
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => subscribe(data);
 
   useEffect(() => {
     if (errors.email) {
       setShowError(true);
     }
   }, [errors.email]);
+
+  const subscribe = async (request) => {
+    const { data } = await Utils.api.subscribe({ data: request });
+    if (data) {
+      setShowSubscribed(true);
+      reset();
+    }
+  };
 
   const useStyles = makeStyles(() => ({
     subscribeBlock: {
@@ -39,12 +51,13 @@ const Subscription = () => {
       marginTop: 24,
       marginBottom: 24,
     },
+    message: {
+      marginTop: 24,
+    },
     button: {
       borderRadius: "12px !important",
     },
   }));
-
-  console.log(watch("email"));
 
   const classes = useStyles();
 
@@ -84,18 +97,31 @@ const Subscription = () => {
             type="submit"
             variant="contained"
             disableElevation={true}
+            onClick={subscribe}
             className={classes.button}
           >
             Subscribe
           </Button>
         </Paper>
-        {errors.email && (
-          <Collapse in={showError}>
-            <Alert severity="error" onClose={() => setShowError(false)}>
-              {errors.email.message}
-            </Alert>
-          </Collapse>
-        )}
+        <Box className={classes.message}>
+          {errors.email && (
+            <Collapse in={showError}>
+              <Alert severity="error" onClose={() => setShowError(false)}>
+                {errors.email.message}
+              </Alert>
+            </Collapse>
+          )}
+          {showSubscribed && (
+            <Collapse in={showSubscribed}>
+              <Alert
+                severity="success"
+                onClose={() => setShowSubscribed(false)}
+              >
+                Thank you for subscribing!
+              </Alert>
+            </Collapse>
+          )}
+        </Box>
       </div>
     </div>
   );
