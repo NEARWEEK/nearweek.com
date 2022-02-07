@@ -122,12 +122,12 @@ async function loadEdition(editionId) {
   return await response.json();
 }
 
-async function loadVideo(videoId) {
+async function loadOneVideo(videoId) {
   const response = await fetch(`/api/videos/${videoId}?populate=*`, options);
   return await response.json();
 }
 
-async function loadVideos() {
+async function loadAllVideo() {
   const response = await fetch(
     `/api/videos?populate=*&sort=createdAt:desc`,
     options
@@ -159,6 +159,21 @@ async function elasticSearch(query) {
   return await response.json();
 }
 
+async function subscribe(body) {
+  const requestOptions = {
+    headers,
+    method: "PUT",
+    body: JSON.stringify(body),
+  };
+  const response = await fetch(`/api/subscribe`, requestOptions);
+  return await response.json();
+}
+
+async function unsubscribe(query) {
+  const response = await fetch(`/api/search?q="${query}"`, options);
+  return await response.json();
+}
+
 export const api = {
   getAllEditions: loadEditions,
   getOneEdition: loadEdition,
@@ -168,8 +183,9 @@ export const api = {
   getAllEvents: loadEvents,
   getLatestEvents: loadLatestEvents,
   getCategories: loadCategories,
-  getOneVideo: loadVideo,
-  getAllVideo: loadVideos,
+  getOneVideo: loadOneVideo,
+  getAllVideo: loadAllVideo,
   search: elasticSearch,
   getLatestVideo: loadLatestVideo,
+  subscribe: subscribe,
 };

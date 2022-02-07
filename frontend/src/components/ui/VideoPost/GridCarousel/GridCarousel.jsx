@@ -73,6 +73,16 @@ const GridCarousel = ({ video }) => {
         {
           borderRadius: "12px 12px 0 0 !important",
           minHeight: "360px",
+          "& .react-player__shadow": {
+            background: "rgba(255, 255, 255, 0.82) !important",
+            borderRadius: "72px !important",
+            width: "72px !important",
+            height: "72px !important",
+            "& .react-player__play-icon": {
+              borderColor:
+                "transparent transparent transparent #0d00ff !important",
+            },
+          },
         },
     },
     postContent: {

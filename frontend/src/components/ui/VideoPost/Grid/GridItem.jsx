@@ -32,6 +32,16 @@ const GridItem = ({ data, key }) => {
       minHeight: isMobileMatch ? 184 : 360,
       "& .react-player__preview": {
         borderRadius: "12px 12px 0 0",
+        "& .react-player__shadow": {
+          background: "rgba(255, 255, 255, 0.82) !important",
+          borderRadius: "72px !important",
+          width: "72px !important",
+          height: "72px !important",
+          "& .react-player__play-icon": {
+            borderColor:
+              "transparent transparent transparent #0d00ff !important",
+          },
+        },
       },
     },
     postContent: {

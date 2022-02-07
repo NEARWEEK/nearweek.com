@@ -6,4 +6,6 @@ module.exports = {
     const hash = await bcrypt.hash(data.email, 5);
     event.params.data.hash = hash.replace(/\./g, "");
   },
+
+  async afterCreate(event) {},
 };
