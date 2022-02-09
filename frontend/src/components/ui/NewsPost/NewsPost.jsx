@@ -14,6 +14,7 @@ import PostActions from "../general/PostActions/PostActions";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
 import Widget from "../general/Widget/Widget";
+import Section from "../general/Section/Section";
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -198,6 +199,8 @@ const NewsPost = () => {
 
   const classes = useStyles();
 
+  console.log(news);
+
   return (
     <>
       <Navbar />
@@ -287,10 +290,14 @@ const NewsPost = () => {
             </Box>
             <PostActions />
             <Box>
-              <Box className={classes.blockTitle}>{"Read also"}</Box>
-            </Box>
-            <Box>
-              {news.data && <NewsList news={news} exclude={[article.id]} />}
+              <Section title={"Read also"}>
+                {news.data && (
+                  <NewsList
+                    news={news.data.slice(1, 4)}
+                    exclude={[article.id]}
+                  />
+                )}
+              </Section>
             </Box>
           </Box>
         </Box>
