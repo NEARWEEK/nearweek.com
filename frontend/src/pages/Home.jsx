@@ -51,9 +51,6 @@ const Home = () => {
     blockColumn: {
       flex: 0.5,
       display: "flex",
-      flexWrap: "wrap",
-      gap: "22px",
-      height: "100%",
     },
   }));
 

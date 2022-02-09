@@ -15,7 +15,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import Widget from "../../general/Widget/Widget";
 
-const ListItem = ({ data, meta }) => {
+const ListItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
