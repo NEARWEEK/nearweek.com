@@ -9,7 +9,6 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import ReactMarkdown from "react-markdown";
 import NewsList from "./List/NewsList";
 import makeStyles from "@mui/styles/makeStyles";
-import { useNavigate } from "react-router-dom";
 import PostActions from "../general/PostActions/PostActions";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";

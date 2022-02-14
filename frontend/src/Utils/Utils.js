@@ -85,6 +85,15 @@ async function loadEvents() {
   }
 }
 
+async function loadOneEvent(eventId) {
+  try {
+    const response = await fetch(`/api/events/${eventId}?populate=*`, options);
+    return await response.json();
+  } catch (e) {
+    console.log("Error load event:", e);
+  }
+}
+
 async function loadLatestEvents(page = 1, size = 3) {
   try {
     const response = await fetch(
@@ -181,6 +190,7 @@ export const api = {
   getAllNews: loadNews,
   getLatestNews: loadLatestNews,
   getAllEvents: loadEvents,
+  getOneEvent: loadOneEvent,
   getLatestEvents: loadLatestEvents,
   getCategories: loadCategories,
   getOneVideo: loadOneVideo,
