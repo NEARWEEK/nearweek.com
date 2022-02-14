@@ -13,11 +13,11 @@ import SectionHeader from "../general/Section/SectionHeader/SectionHeader";
 import ReactMarkdown from "react-markdown";
 import Subscription from "../general/Subscription/Subscription";
 import Section from "../general/Section/Section";
-import EventsList from "./List/EventsList";
 import EditionsList from "../EditionPost/List/EditionsList";
 import NewsList from "../NewsPost/List/NewsList";
 import AddToCalendar from "./Actions/AddToCalendar";
-import Typography from "@mui/material/Typography";
+import EventsList from "./List/EventsList";
+import EventsGrid from "./Grid/EventsGrid";
 
 const EventPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -227,11 +227,21 @@ const EventPost = () => {
               <Box>
                 <Section title={"More Events"} linj={"/events"}>
                   {events && (
-                    <EventsList
-                      events={events.data.filter(
-                        (item) => item.id !== event.id
+                    <>
+                      {!isMobileMatch ? (
+                        <EventsList
+                          events={events.data.filter(
+                            (item) => item.id !== event.id
+                          )}
+                        />
+                      ) : (
+                        <EventsGrid
+                          events={events.data.filter(
+                            (item) => item.id !== event.id
+                          )}
+                        />
                       )}
-                    />
+                    </>
                   )}
                 </Section>
               </Box>

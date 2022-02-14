@@ -60,8 +60,8 @@ const EventsList = ({ events }) => {
   return (
     <div className="section">
       {eventsList.length > 0
-        ? eventsList.slice(0, moreLength).map((event, i) => {
-            return <ListItem key={i} data={event} />;
+        ? eventsList.slice(0, moreLength).map((event) => {
+            return <ListItem key={event.attributes.Title} data={event} />;
           })
         : null}
       <div className={classes.showMoreBlock}>
