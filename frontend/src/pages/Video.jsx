@@ -10,8 +10,6 @@ import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import Widget from "../components/ui/general/Widget/Widget";
 import Section from "../components/ui/general/Section/Section";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
-import Button from "@mui/material/Button";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -23,13 +21,13 @@ import Paper from "@mui/material/Paper";
 const Video = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const useStyles = makeStyles((theme) => ({
-    contentContainer: {
+    container: {
       maxWidth: "1376px",
       minWidth: "200px",
       margin: "0 auto",
       position: "relative",
     },
-    contentWrapper: {
+    wrapper: {
       marginLeft: "16px",
       marginRight: "16px",
     },
@@ -211,8 +209,8 @@ const Video = () => {
               />
             </Box>
           </Box>
-          <Box className={classes.pageWrapper}>
-            <Box className={classes.contentContainer}>
+          <Box className={classes.wrapper}>
+            <Box className={classes.container}>
               <Paper
                 elevation={0}
                 component={Link}
@@ -292,7 +290,7 @@ const Video = () => {
                 title={video.data[0].attributes.Title}
                 url={video.data[0].attributes.Link}
               />
-              <Box className={classes.contentWrapper}>
+              <Box className={classes.wrapper}>
                 <Section title={"Latest Video"}>
                   {video.data.length > 0 && (
                     <GridVideo video={getLatestVideo()} />

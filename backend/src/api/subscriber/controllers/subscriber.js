@@ -42,5 +42,11 @@ module.exports = createCoreController(
       ctx.response.status = 404;
       return "not implemented";
     },
+    async find(ctx) {
+      return ctx.response.methodNotAllowed("Method not allowed", [], []);
+    },
+    async findOne(ctx) {
+      return ctx.response.methodNotAllowed("Method not allowed", [], []);
+    },
   })
 );
