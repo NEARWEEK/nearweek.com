@@ -155,39 +155,11 @@ const EventPost = () => {
               )}
             </Box>
           </Box>
-          <Box className={classes.wrapper}>
-            <Box className={classes.container}>
-              <Box className={classes.headerBlock}>
-                {!isMobileMatch && (
-                  <Box className={classes.description}>
-                    <h2 className={classes.postTitle}>
-                      {`${event.attributes.Title}`}
-                    </h2>
-                    <Box className={classes.headerBlockFooter}>
-                      <Box display="inline-flex">
-                        <div className={classes.postWidgets}>
-                          <Widget
-                            icon={"Visibility"}
-                            data={event.attributes.Views}
-                          />
-                          <Widget
-                            icon={"ThumbUp"}
-                            data={event.attributes.Likes}
-                          />
-                          <Widget icon={"ChatBubble"} data={"0"} />
-                        </div>
-                      </Box>
-                      <Box className={classes.postDate}>
-                        <span>{getTimeAgo(event.attributes.createdAt)}</span>
-                      </Box>
-                    </Box>
-                  </Box>
-                )}
-              </Box>
-              {isMobileMatch && (
-                <Box className={classes.mobileHeaderBlock}>
+          <Box className={classes.container}>
+            <Box className={classes.headerBlock}>
+              {!isMobileMatch && (
+                <Box className={classes.description}>
                   <h2 className={classes.postTitle}>
-                    {" "}
                     {`${event.attributes.Title}`}
                   </h2>
                   <Box className={classes.headerBlockFooter}>
@@ -211,6 +183,29 @@ const EventPost = () => {
                 </Box>
               )}
             </Box>
+            {isMobileMatch && (
+              <Box className={classes.mobileHeaderBlock}>
+                <h2 className={classes.postTitle}>
+                  {" "}
+                  {`${event.attributes.Title}`}
+                </h2>
+                <Box className={classes.headerBlockFooter}>
+                  <Box display="inline-flex">
+                    <div className={classes.postWidgets}>
+                      <Widget
+                        icon={"Visibility"}
+                        data={event.attributes.Views}
+                      />
+                      <Widget icon={"ThumbUp"} data={event.attributes.Likes} />
+                      <Widget icon={"ChatBubble"} data={"0"} />
+                    </div>
+                  </Box>
+                  <Box className={classes.postDate}>
+                    <span>{getTimeAgo(event.attributes.createdAt)}</span>
+                  </Box>
+                </Box>
+              </Box>
+            )}
           </Box>
           <Box
             className={classes.wrapper}
