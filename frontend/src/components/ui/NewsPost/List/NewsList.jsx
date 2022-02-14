@@ -17,8 +17,8 @@ const NewsList = ({ news }) => {
   return (
     <Box className={classes.container}>
       {news.length > 0
-        ? news.map((article, i) => {
-            return <ListItem key={i} data={article} />;
+        ? news.map((article) => {
+            return <ListItem key={article.attributes.Title} data={article} />;
           })
         : null}
     </Box>
