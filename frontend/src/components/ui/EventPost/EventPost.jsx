@@ -188,7 +188,7 @@ const EventPost = () => {
                 <Box className={classes.mobileHeaderBlock}>
                   <h2 className={classes.postTitle}>
                     {" "}
-                    {`${event.data[0].attributes.Title}`}
+                    {`${event.attributes.Title}`}
                   </h2>
                   <Box className={classes.headerBlockFooter}>
                     <Box display="inline-flex">
