@@ -70,6 +70,33 @@
       "min": 0,
       "default": 0,
       "type": "integer"
+    },
+    "weekByNumbers": {
+      "type": "richtext"
+    },
+    "Developers": {
+      "type": "richtext"
+    },
+    "ProjectGrowth": {
+      "type": "richtext"
+    },
+    "Gaming": {
+      "type": "richtext"
+    },
+    "Events": {
+      "type": "richtext"
+    },
+    "CommunityGuilds": {
+      "type": "richtext"
+    },
+    "NFTs": {
+      "type": "richtext"
+    },
+    "OpenJobs": {
+      "type": "richtext"
+    },
+    "OtherUpdates": {
+      "type": "richtext"
     }
   }
 }

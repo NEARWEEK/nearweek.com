@@ -19,6 +19,7 @@ const AddToCalendar = (props) => {
       marginBottom: 24,
       flexDirection: !isMobileMatch ? "row" : "column",
       justifyContent: "space-between",
+      backgroundColor: "#fff",
     },
     iconBlock: {
       flexDirection: !isMobileMatch ? "row" : "column",
@@ -45,7 +46,7 @@ const AddToCalendar = (props) => {
         <Box display="flex">
           <InsertInvitationIcon fontSize="large" className={classes.icon} />
           <Typography
-            variant="h5"
+            variant="h6"
             style={{ fontWeight: 900 }}
             className={classes.text}
           >
@@ -55,7 +56,7 @@ const AddToCalendar = (props) => {
         <Box display="flex">
           <LocationOnIcon fontSize="large" className={classes.icon} />
           <Typography
-            variant="h5"
+            variant="h6"
             style={{ fontWeight: 900 }}
             className={classes.text}
           >
