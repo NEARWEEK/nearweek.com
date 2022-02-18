@@ -71,32 +71,50 @@
       "default": 0,
       "type": "integer"
     },
-    "weekByNumbers": {
-      "type": "richtext"
-    },
-    "Developers": {
-      "type": "richtext"
-    },
-    "ProjectGrowth": {
-      "type": "richtext"
-    },
-    "Gaming": {
-      "type": "richtext"
-    },
-    "Events": {
-      "type": "richtext"
-    },
-    "CommunityGuilds": {
-      "type": "richtext"
-    },
-    "NFTs": {
-      "type": "richtext"
+    "OtherUpdates": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
     },
     "OpenJobs": {
-      "type": "richtext"
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
     },
-    "OtherUpdates": {
-      "type": "richtext"
+    "NFTs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
+    },
+    "CommunityGuilds": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
+    },
+    "Events": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
+    },
+    "Gaming": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
+    },
+    "ProjectGrowth": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
+    },
+    "Developers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
+    },
+    "weekByNumbers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
     }
   }
 }
