@@ -61,12 +61,14 @@ const News = () => {
     topContainer: {
       display: "flex",
       gap: 24,
+      width: "100%",
       "@media screen and (max-width: 1080px)": {
         flexDirection: "column",
       },
     },
     blockColumn: {
       flex: 0.5,
+      maxWidth: "50%",
     },
     latestArticles: {
       marginTop: "24px",
