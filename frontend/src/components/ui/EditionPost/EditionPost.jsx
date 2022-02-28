@@ -319,9 +319,7 @@ const EditionPost = () => {
                   </Box>
                 </Box>
                 <PostActions />
-                <ReadMore>
-                  <ReactMarkdown>{edition.attributes.Body}</ReactMarkdown>
-                </ReadMore>
+                <ReadMore>{edition.attributes.Body}</ReadMore>
                 <Box>
                   <Box className={classes.blockTitle}>{"Highlights"}</Box>
                   <Box>

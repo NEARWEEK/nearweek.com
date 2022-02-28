@@ -51,6 +51,7 @@ const Home = () => {
     blockColumn: {
       flex: 0.5,
       display: "flex",
+      maxWidth: "50%",
     },
   }));
 
