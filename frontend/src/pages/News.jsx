@@ -69,6 +69,9 @@ const News = () => {
     blockColumn: {
       flex: 0.5,
       maxWidth: "50%",
+      "@media screen and (max-width: 1280px)": {
+        maxWidth: "100%",
+      },
     },
     latestArticles: {
       marginTop: "24px",
