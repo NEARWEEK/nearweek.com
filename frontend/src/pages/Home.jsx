@@ -52,6 +52,9 @@ const Home = () => {
       flex: 0.5,
       display: "flex",
       maxWidth: "50%",
+      "@media screen and (max-width: 1280px)": {
+        maxWidth: "100%",
+      },
     },
   }));
 
