@@ -146,9 +146,7 @@ const EditionPost = () => {
       marginBottom: "12px",
     },
     highlightTitle: {
-      fontSize: "20px",
       margin: "0 24px",
-      fontWeight: "bold",
       "& a": {
         color: "#0d00ff",
       },
