@@ -159,6 +159,8 @@ const EditionPost = () => {
   const [ids, setIds] = useState([]);
   const navigate = useNavigate();
 
+  console.log("edition", edition);
+
   useEffect(async () => {
     const { data, meta } = await Utils.api.getOneEdition(
       match.params.editionId
@@ -356,6 +358,177 @@ const EditionPost = () => {
                     {edition && edition.attributes.DeFI ? (
                       <>
                         {edition.attributes.DeFI.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>{"NFTs"}</Box>
+                  <Box>
+                    {edition && edition.attributes.NFTs ? (
+                      <>
+                        {edition.attributes.NFTs.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>
+                    {"Community and Guilds"}
+                  </Box>
+                  <Box>
+                    {edition && edition.attributes.CommunityGuilds ? (
+                      <>
+                        {edition.attributes.CommunityGuilds.map(
+                          (item, index) => (
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                          )
+                        )}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>{"Developers"}</Box>
+                  <Box>
+                    {edition && edition.attributes.Developers ? (
+                      <>
+                        {edition.attributes.Developers.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>{"Events"}</Box>
+                  <Box>
+                    {edition && edition.attributes.Events ? (
+                      <>
+                        {edition.attributes.Events.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>{"Gaming"}</Box>
+                  <Box>
+                    {edition && edition.attributes.Gaming ? (
+                      <>
+                        {edition.attributes.Gaming.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>{"Week by numbers"}</Box>
+                  <Box>
+                    {edition && edition.attributes.WeekByNumbers ? (
+                      <>
+                        {edition.attributes.WeekByNumbers.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+
+                <Box>
+                  <Box className={classes.blockTitle}>
+                    {"Join The Ecosystem"}
+                  </Box>
+                  <Box>
+                    {edition && edition.attributes.JoinTheEcosystem ? (
+                      <>
+                        {edition.attributes.JoinTheEcosystem.map(
+                          (item, index) => (
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                          )
+                        )}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>{"Project Growth"}</Box>
+                  <Box>
+                    {edition && edition.attributes.ProjectGrowth ? (
+                      <>
+                        {edition.attributes.ProjectGrowth.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>
+                    {"Open jobs in the NEARverse"}
+                  </Box>
+                  <Box>
+                    {edition && edition.attributes.OpenJobs ? (
+                      <>
+                        {edition.attributes.OpenJobs.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box className={classes.blockTitle}>{"Other updates"}</Box>
+                  <Box>
+                    {edition && edition.attributes.OtherUpdates ? (
+                      <>
+                        {edition.attributes.OtherUpdates.map((item, index) => (
                           <Box className={classes.highlightItem} key={index}>
                             <ReactMarkdown className={classes.highlightTitle}>
                               {item.Link}
