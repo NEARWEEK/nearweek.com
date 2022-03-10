@@ -1,11 +1,13 @@
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import { useMatch } from "react-router";
+import * as Utils from "../../../../Utils/Utils";
 
-const EditionsList = ({ editions }) => {
+const EditionsList = ({ exclude }) => {
+  const [editions, setEditions] = useState([]);
   const [moreLength, setMoreLength] = useState(5);
   const matchEdition = useMatch(`/editions/:editionId`);
   const matchEditions = useMatch(`/editions`);
@@ -47,6 +49,17 @@ const EditionsList = ({ editions }) => {
       editionsList = editions.slice(1);
     }
   }
+
+  useEffect(async () => {
+    const { data } = await Utils.api.getAllEditions();
+    if (data) {
+      if (exclude) {
+        setEditions(data.filter((item) => item.id !== exclude));
+      } else {
+        setEditions(data);
+      }
+    }
+  }, []);
 
   const showMoreHandler = () => {
     if (moreLength < editionsList.length) {

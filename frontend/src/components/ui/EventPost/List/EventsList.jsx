@@ -1,14 +1,28 @@
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import { useMatch } from "react-router";
+import * as Utils from "../../../../Utils/Utils";
 
-const EventsList = ({ events }) => {
+const EventsList = ({ exclude }) => {
+  console.log("exclude", exclude);
+  const [events, setEvents] = useState(null);
   const [moreLength, setMoreLength] = useState(5);
   const matchEvent = useMatch(`/editions/:editionId`);
   const matchEvents = useMatch(`/editions`);
+
+  useEffect(async () => {
+    const { data } = await Utils.api.getAllEvents();
+    if (data) {
+      if (exclude) {
+        setEvents(data.filter((item) => item.id !== exclude));
+      } else {
+        setEvents(data);
+      }
+    }
+  }, []);
 
   const useStyles = makeStyles(() => ({
     img: {

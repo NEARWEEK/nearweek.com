@@ -23,9 +23,6 @@ import { placeholder } from "../../../Utils/placeholder";
 const EventPost = () => {
   const [event, setEvent] = useState(null);
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
-  const [events, setEvents] = useState(null);
-  const [editions, setEditions] = useState(null);
-  const [news, setNews] = useState(null);
   const match = useMatch(`/events/:eventId`);
 
   const useStyles = makeStyles((theme) => ({
@@ -109,27 +106,6 @@ const EventPost = () => {
     const { data } = await Utils.api.getOneEvent(match.params.eventId);
     if (data) {
       setEvent(data);
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getAllEvents();
-    if (data) {
-      setEvents(data);
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getAllEditions();
-    if (data) {
-      setEditions(data);
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getAllNews();
-    if (data) {
-      setNews(data);
     }
   }, []);
 
@@ -228,33 +204,23 @@ const EventPost = () => {
               <Subscription />
               <Box>
                 <Section title={"More Events"} link={"/events"}>
-                  {events && (
-                    <>
-                      {!isMobileMatch ? (
-                        <EventsList
-                          events={events.data.filter(
-                            (item) => item.id !== event.id
-                          )}
-                        />
-                      ) : (
-                        <EventsGrid
-                          events={events.data.filter(
-                            (item) => item.id !== event.id
-                          )}
-                        />
-                      )}
-                    </>
-                  )}
+                  <>
+                    {!isMobileMatch ? (
+                      <EventsList exclude={event.id} />
+                    ) : (
+                      <EventsGrid exclude={event.id} />
+                    )}
+                  </>
                 </Section>
               </Box>
               <Box>
                 <Section title={"Latest Editions"} link={"/editions"}>
-                  {editions && <EditionsList editions={editions.data} />}
+                  <EditionsList />
                 </Section>
               </Box>
               <Box>
                 <Section title={"Read also"} link={"/news"}>
-                  {news && <NewsList news={news.data} />}
+                  <NewsList />
                 </Section>
               </Box>
             </Box>

@@ -59,8 +59,6 @@ const Home = () => {
   }));
 
   const [editions, setEditions] = useState({ data: [], meta: {} });
-  const [news, setNews] = useState({ data: [], meta: {} });
-  const [events, setEvents] = useState({ data: [], meta: {} });
   const [video, setVideo] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
@@ -71,31 +69,11 @@ const Home = () => {
   }, []);
 
   useEffect(async () => {
-    const data = await Utils.api.getAllNews();
-    if (data) {
-      setNews(data);
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getLatestEvents();
-    if (data) {
-      setEvents(data);
-    }
-  }, []);
-
-  useEffect(async () => {
     const data = await Utils.api.getLatestVideo(1, 4);
     if (data) {
       setVideo(data);
     }
   }, []);
-
-  function getLatestEditions() {
-    return editions.data.filter(
-      (edition) => edition.id !== editions.data[0].id
-    );
-  }
 
   const classes = useStyles();
 
@@ -111,14 +89,14 @@ const Home = () => {
                   <Announce edition={editions.data[0]} />
                 </Box>
                 <Box className={classes.blockColumn}>
-                  <NewsList news={news.data.slice(0, 3)} />
+                  <NewsList show={3} />
                 </Box>
               </Box>
             </Section>
           </Box>
           <Box className={classes.container}>
             <Section title={"Events"} link={"/events"}>
-              <EventsGrid events={events.data} />
+              <EventsGrid />
             </Section>
           </Box>
           <Box style={{ backgroundColor: "#f7f7f7" }}>
@@ -140,7 +118,7 @@ const Home = () => {
           <Box className={classes.container}>
             <Section title={"Latest Editions"} link={"/editions"}>
               {editions.data.length > 0 && (
-                <EditionsList editions={getLatestEditions()} />
+                <EditionsList exclude={editions.data[0].id} />
               )}
             </Section>
           </Box>
