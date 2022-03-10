@@ -145,12 +145,12 @@ const EventPost = () => {
             className={classes.headerContainer}
           >
             <Box className={classes.eventItem}>
-              {event.attributes.Image && (
+              {event.attributes.Image?.data && (
                 <img
                   src={event.attributes.Image.data.attributes.formats.large.url}
                   width="100%"
                   height={isMobileMatch ? "360px" : "526px"}
-                  alt={""}
+                  alt={"Event"}
                 />
               )}
             </Box>
@@ -207,10 +207,7 @@ const EventPost = () => {
               </Box>
             )}
           </Box>
-          <Box
-            className={classes.wrapper}
-            style={{ backgroundColor: "#f7f7f7" }}
-          >
+          <Box className={classes.wrapper}>
             <Box className={classes.container}>
               <PostActions />
               <AddToCalendar
