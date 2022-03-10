@@ -458,7 +458,7 @@ const News = () => {
           )}
           <Box className={classes.wrapper}>
             <Section title={"Events"} link={"/events"}>
-              <EventsGrid show={4} />
+              <EventsGrid show={3} />
             </Section>
           </Box>
         </Box>
