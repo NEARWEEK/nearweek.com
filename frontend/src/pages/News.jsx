@@ -37,7 +37,6 @@ import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
   const [video, setVideo] = useState({ data: [], meta: {} });
-  const [events, setEvents] = useState({ data: [], meta: {} });
   const [categories, setCategories] = useState([]);
   const [sort, setSort] = useState("Latest");
   const [showFilterPanel, setShowFilterPanel] = useState(false);
@@ -120,13 +119,6 @@ const News = () => {
     const data = await Utils.api.getAllNews();
     if (data) {
       setNews(data);
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getAllEvents();
-    if (data) {
-      setEvents(data);
     }
   }, []);
 
@@ -466,9 +458,7 @@ const News = () => {
           )}
           <Box className={classes.wrapper}>
             <Section title={"Events"} link={"/events"}>
-              {events.data.length > 0 && (
-                <EventsGrid events={events.data.slice(0, 3)} />
-              )}
+              <EventsGrid show={4} />
             </Section>
           </Box>
         </Box>
