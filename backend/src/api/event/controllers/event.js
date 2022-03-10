@@ -41,9 +41,9 @@ module.exports = createCoreController("api::event.event", ({ strapi }) => ({
 
     const entity = await strapi.service("api::event.event").findOne(id, query);
 
-    const allEditions = await strapi.service("api::event.event").find({});
+    const allEvents = await strapi.service("api::event.event").find({});
 
-    const ids = allEditions.results.map((item) => item.id);
+    const ids = allEvents.results.map((item) => item.id);
 
     const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
 

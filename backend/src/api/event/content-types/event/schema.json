@@ -28,13 +28,24 @@
       "type": "richtext"
     },
     "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "Views": {
+      "min": 0,
+      "default": 0,
+      "type": "integer"
+    },
+    "Likes": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
     }
   }
 }
