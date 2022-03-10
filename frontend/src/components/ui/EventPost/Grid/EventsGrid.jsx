@@ -5,9 +5,22 @@ import GridItem from "./GridItem";
 import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../Utils/Utils";
+import { useEffect, useState } from "react";
 
-const EventsGrid = ({ events }) => {
+const EventsGrid = ({ exclude, show = 3 }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const [events, setEvents] = useState([]);
+
+  useEffect(async () => {
+    const { data } = await Utils.api.getAllEvents();
+    if (data) {
+      if (exclude) {
+        setEvents(data.filter((item) => item.id !== exclude));
+      } else {
+        setEvents(data);
+      }
+    }
+  }, []);
 
   const useStyles = makeStyles(() => ({
     gridContainer: {
@@ -24,7 +37,7 @@ const EventsGrid = ({ events }) => {
   return (
     <Box className={classes.gridContainer}>
       {events.length > 0
-        ? events.map((event, i) => {
+        ? events.slice(0, show).map((event, i) => {
             return <GridItem key={i} data={event} />;
           })
         : null}
