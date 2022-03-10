@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "@mui/material/Link";
 import makeStyles from "@mui/styles/makeStyles";
+import { placeholder } from "../../../../../Utils/placeholder";
 
 const Thumbnail = ({ data, url }) => {
   const Image = data?.attributes?.Image || null;
@@ -10,27 +11,25 @@ const Thumbnail = ({ data, url }) => {
       borderRadius: "12px 12px 0 0",
     },
   }));
-  let thumbnail;
+  let thumbnail = placeholder.getRandomPlaceholder("small");
   if (Image.data) {
     thumbnail = `${Image.data.attributes.formats.thumbnail.url}`;
   }
   const classes = useStyles();
   return (
     <>
-      {Image.data ? (
-        <Link href={url} underline="none">
-          <div
-            style={{
-              backgroundImage: `url('${thumbnail}')`,
-              backgroundSize: "cover",
-              minWidth: "205px",
-              minHeight: "205px",
-              backgroundPosition: "50% 50%",
-            }}
-            className={classes.img}
-          />{" "}
-        </Link>
-      ) : null}
+      <Link href={url} underline="none">
+        <div
+          style={{
+            backgroundImage: `url('${thumbnail}')`,
+            backgroundSize: "cover",
+            minWidth: "205px",
+            minHeight: "205px",
+            backgroundPosition: "50% 50%",
+          }}
+          className={classes.img}
+        />{" "}
+      </Link>
     </>
   );
 };

@@ -5,7 +5,7 @@ import * as Utils from "../../../Utils/Utils";
 import Navbar from "../Navbar/Navbar";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { getEventDay, getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
+import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
 import { useMatch } from "react-router";
 import Widget from "../general/Widget/Widget";
 import PostActions from "../general/PostActions/PostActions";
@@ -18,13 +18,16 @@ import NewsList from "../NewsPost/List/NewsList";
 import AddToCalendar from "./Actions/AddToCalendar";
 import EventsList from "./List/EventsList";
 import EventsGrid from "./Grid/EventsGrid";
+import { placeholder } from "../../../Utils/placeholder";
 
 const EventPost = () => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const [event, setEvent] = useState(null);
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const [events, setEvents] = useState(null);
   const [editions, setEditions] = useState(null);
   const [news, setNews] = useState(null);
+  const match = useMatch(`/events/:eventId`);
+
   const useStyles = makeStyles((theme) => ({
     headerContainer: {
       position: "absolute",
@@ -102,8 +105,6 @@ const EventPost = () => {
     },
   }));
 
-  const match = useMatch(`/events/:eventId`);
-
   useEffect(async () => {
     const { data } = await Utils.api.getOneEvent(match.params.eventId);
     if (data) {
@@ -134,6 +135,11 @@ const EventPost = () => {
 
   const classes = useStyles();
 
+  let imageUrl = placeholder.getRandomPlaceholder("large");
+  if (event && event.attributes.Image?.data) {
+    imageUrl = event.attributes.Image.data.attributes.formats.large.url;
+  }
+
   return (
     <>
       <Navbar />
@@ -145,14 +151,13 @@ const EventPost = () => {
             className={classes.headerContainer}
           >
             <Box className={classes.eventItem}>
-              {event.attributes.Image?.data && (
-                <img
-                  src={event.attributes.Image.data.attributes.formats.large.url}
-                  width="100%"
-                  height={isMobileMatch ? "360px" : "526px"}
-                  alt={"Event"}
-                />
-              )}
+              <img
+                src={imageUrl}
+                width="100%"
+                style={{ objectFit: "cover" }}
+                height={isMobileMatch ? "360px" : "526px"}
+                alt={"Event"}
+              />
             </Box>
           </Box>
           <Box className={classes.container}>
@@ -222,7 +227,7 @@ const EventPost = () => {
               </Box>
               <Subscription />
               <Box>
-                <Section title={"More Events"} linj={"/events"}>
+                <Section title={"More Events"} link={"/events"}>
                   {events && (
                     <>
                       {!isMobileMatch ? (

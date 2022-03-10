@@ -45,8 +45,6 @@ const ListItem = ({ data }) => {
       background: matchEdition ? "#fff" : "#f7f7f7",
     },
     contentBody: {
-      /* display: "flex",*/
-      /*alignItems: "flex-start",*/
       padding: "16px 16px 0 16px",
       "& .image-container": {
         marginBottom: "16px",
