@@ -93,11 +93,9 @@ const GridItem = ({ data }) => {
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
             <div className={classes.itemContainer}>
-              {data.attributes.Image.data && (
-                <div className={classes.postImage}>
-                  <Thumbnail data={data} url={`/events/${data.id}`} />
-                </div>
-              )}
+              <div className={classes.postImage}>
+                <Thumbnail data={data} url={`/events/${data.id}`} />
+              </div>
               <Box className={classes.postContent}>
                 <Box className={classes.contentBody}>
                   <Box
