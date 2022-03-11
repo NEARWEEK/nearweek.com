@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import ReactPlayer from "react-player/youtube";
 import Link from "@mui/material/Link";
 import Widget from "../../general/Widget/Widget";
 import { getTimeAgo } from "../../../../Utils/Utils";
+import * as Utils from "../../../../Utils/Utils";
 
-const GridCarousel = ({ video }) => {
+const GridCarousel = ({ show = 4 }) => {
+  const [video, setVideo] = useState([]);
+
+  useEffect(async () => {
+    const { data } = await Utils.api.getLatestVideo(1, show);
+    if (data) {
+      setVideo(data);
+    }
+  }, []);
+
   const useStyles = makeStyles(() => ({
     carouselWrapper: {
       overflow: "hidden",

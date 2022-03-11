@@ -36,7 +36,6 @@ import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
 
 const News = () => {
   const [news, setNews] = useState({ data: [], meta: {} });
-  const [video, setVideo] = useState({ data: [], meta: {} });
   const [categories, setCategories] = useState([]);
   const [sort, setSort] = useState("Latest");
   const [showFilterPanel, setShowFilterPanel] = useState(false);
@@ -119,13 +118,6 @@ const News = () => {
     const data = await Utils.api.getAllNews();
     if (data) {
       setNews(data);
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getAllVideo();
-    if (data) {
-      setVideo(data);
     }
   }, []);
 
@@ -470,11 +462,11 @@ const News = () => {
           </Box>
         </Box>
         {!isMobileMatch ? (
-          <GridCarousel video={video.data} />
+          <GridCarousel />
         ) : (
           <Box className={classes.wrapper}>
             <Box className={classes.videoGrid}>
-              <GridVideo video={video.data} />
+              <GridVideo />
             </Box>
           </Box>
         )}
