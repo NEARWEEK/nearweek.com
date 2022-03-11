@@ -80,15 +80,7 @@ const Events = () => {
     },
   }));
 
-  const [video, setVideo] = useState({ data: [], meta: {} });
   const [editions, setEditions] = useState({ data: [], meta: {} });
-
-  useEffect(async () => {
-    const data = await Utils.api.getLatestVideo(1, 4);
-    if (data) {
-      setVideo(data);
-    }
-  }, []);
 
   useEffect(async () => {
     const data = await Utils.api.getAllEvents();
@@ -142,11 +134,11 @@ const Events = () => {
             </Box>
           </Box>
           {!isMobileMatch ? (
-            <GridCarousel video={video.data} />
+            <GridCarousel />
           ) : (
             <Box className={classes.container}>
               <Box className={classes.wrapper}>
-                <GridVideo video={video.data} />
+                <GridVideo />
               </Box>
             </Box>
           )}

@@ -59,19 +59,11 @@ const Home = () => {
   }));
 
   const [editions, setEditions] = useState({ data: [], meta: {} });
-  const [video, setVideo] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
     const data = await Utils.api.getAllEditions();
     if (data) {
       setEditions(data);
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getLatestVideo(1, 4);
-    if (data) {
-      setVideo(data);
     }
   }, []);
 
@@ -106,11 +98,11 @@ const Home = () => {
               </Box>
             </Box>
             {!isMobileMatch ? (
-              <GridCarousel video={video.data} />
+              <GridCarousel />
             ) : (
               <Box className={classes.container}>
                 <Box className={classes.wrapper}>
-                  <GridVideo video={video.data} />
+                  <GridVideo />
                 </Box>
               </Box>
             )}

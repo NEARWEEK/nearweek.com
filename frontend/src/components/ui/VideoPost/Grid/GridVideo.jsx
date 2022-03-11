@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
 import GridItem from "./GridItem";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../Utils/Utils";
+import * as Utils from "../../../../Utils/Utils";
 
-const GridVideo = ({ video }) => {
+const GridVideo = ({ show }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const [video, setVideo] = useState([]);
+
+  useEffect(async () => {
+    const { data } = await Utils.api.getAllVideo();
+    if (data) {
+      setVideo(data);
+    }
+  }, []);
 
   const useStyles = makeStyles(() => ({
     gridContainer: {
@@ -17,6 +26,7 @@ const GridVideo = ({ video }) => {
       columnGap: "24px",
     },
   }));
+
   let videoList = [];
   if (video) {
     videoList = [...video];
