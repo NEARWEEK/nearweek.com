@@ -20,6 +20,7 @@ import { getPubDate, MOBILE_WIDTH } from "../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import PostActions from "../general/PostActions/PostActions";
 import Widget from "../general/Widget/Widget";
+import { placeholder } from "../../../Utils/placeholder";
 
 library.add(faDiscord);
 
@@ -202,9 +203,20 @@ const EditionPost = () => {
     }
   };
 
-  let imageUrl = "";
-  if (edition) {
-    imageUrl = edition.attributes.Image.data?.attributes.url;
+  let imageUrl = placeholder.getRandomPlaceholder("large");
+  if (edition && edition.attributes.Image?.data) {
+    const { large, medium, small } =
+      edition.attributes.Image.data.attributes.formats;
+    if (large) {
+      imageUrl = large.url;
+    }
+    if (medium) {
+      imageUrl = medium.url;
+    }
+    if (small) {
+      imageUrl = small.url;
+    }
+    //  imageUrl = edition.attributes.Image.data?.attributes.url;
   }
 
   const ReadMore = ({ children }) => {

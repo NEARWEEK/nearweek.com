@@ -198,8 +198,6 @@ const NewsPost = () => {
 
   const classes = useStyles();
 
-  console.log(news);
-
   return (
     <>
       <Navbar />

@@ -7,7 +7,6 @@ import { useMatch } from "react-router";
 import * as Utils from "../../../../Utils/Utils";
 
 const EventsList = ({ exclude }) => {
-  console.log("exclude", exclude);
   const [events, setEvents] = useState(null);
   const [moreLength, setMoreLength] = useState(5);
   const matchEvent = useMatch(`/editions/:editionId`);
