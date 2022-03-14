@@ -113,7 +113,20 @@ const EventPost = () => {
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
   if (event && event.attributes.Image?.data) {
-    imageUrl = event.attributes.Image.data.attributes.formats.large.url;
+    const { large, medium, small } =
+      event.attributes.Image.data.attributes.formats;
+    if (large) {
+      imageUrl = large.url;
+    }
+    if (medium) {
+      imageUrl = medium.url;
+    }
+    if (small) {
+      imageUrl = small.url;
+    }
+    /*    imageUrl = event.attributes.Image.data.attributes.formats?.large.url
+      ? event.attributes.Image.data.attributes.formats.large.url
+      : event.attributes.Image.data.attributes.formats?.medium.url;*/
   }
 
   return (
