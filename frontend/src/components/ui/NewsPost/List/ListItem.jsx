@@ -1,19 +1,14 @@
 import Thumbnail from "./Thumbnail/Thumbnail";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { useMatch } from "react-router";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-import * as Utils from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import Widget from "../../general/Widget/Widget";
+import Truncate from "react-truncate";
+import ReactMarkdown from "react-markdown";
 
 const ListItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
@@ -161,7 +156,9 @@ const ListItem = ({ data }) => {
                     </h3>
                     {!isMobileMatch && (
                       <p className={classes.postBody}>
-                        {data.attributes.Body.substring(0, 130)}
+                        <Truncate lines={2}>
+                          <ReactMarkdown>{data.attributes.Body}</ReactMarkdown>
+                        </Truncate>
                       </p>
                     )}
                   </div>

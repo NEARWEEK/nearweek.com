@@ -13,8 +13,9 @@ import Events from "./pages/Events";
 import EventPost from "./components/ui/EventPost/EventPost";
 import Video from "./pages/Video";
 import VideoPost from "./components/ui/VideoPost/VideoPost";
+import UserProfile from "./components/ui/UserProfile/UserProfile";
 
-function App() {
+function App({ history }) {
   let theme = createTheme({
     palette: {
       primary: {
@@ -60,6 +61,7 @@ function App() {
             <Route exact path="events/:eventId" element={<EventPost />} />
             <Route exact path="video" element={<Video />} />
             <Route exact path="video/:videoId" element={<VideoPost />} />
+            <Route exact path="user-profile" element={<UserProfile />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

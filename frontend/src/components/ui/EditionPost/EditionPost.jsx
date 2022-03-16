@@ -156,37 +156,21 @@ const EditionPost = () => {
   const match = useMatch(`/editions/:editionId`);
 
   const [edition, setEdition] = useState(null);
-  const [editions, setEditions] = useState({ data: [], meta: {} });
-  const [ids, setIds] = useState([]);
   const navigate = useNavigate();
 
-  console.log("edition", edition);
-
   useEffect(async () => {
-    const { data, meta } = await Utils.api.getOneEdition(
-      match.params.editionId
-    );
+    const data = await Utils.api.getOneEdition(match.params.editionId);
     if (data) {
       setEdition(data);
-      if (meta) {
-        setIds(meta.ids);
-      }
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getAllEditions();
-    if (data) {
-      setEditions(data);
     }
   }, []);
 
   const handleForward = (e) => {
     e.preventDefault();
-    if (ids) {
-      const curr = ids.indexOf(edition.id);
-      if (curr !== ids.length - 1) {
-        navigate(`/editions/${ids[curr + 1]}`);
+    if (edition.meta.ids) {
+      const curr = edition.meta.ids.indexOf(edition.data.id);
+      if (curr !== edition.meta.ids.length - 1) {
+        navigate(`/editions/${edition.meta.ids[curr + 1]}`);
         window.location.reload();
       }
     }
@@ -194,29 +178,20 @@ const EditionPost = () => {
 
   const handleBackward = (e) => {
     e.preventDefault();
-    if (ids) {
-      const curr = ids.indexOf(edition.id);
+    if (edition.meta.ids) {
+      const curr = edition.meta.ids.indexOf(edition.data.id);
       if (curr !== 0) {
-        navigate(`/editions/${ids[curr - 1]}`);
+        navigate(`/editions/${edition.meta.ids[curr - 1]}`);
         window.location.reload();
       }
     }
   };
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
-  if (edition && edition.attributes.Image?.data) {
+  if (edition && edition.data.attributes.Image?.data) {
     const { large, medium, small } =
-      edition.attributes.Image.data.attributes.formats;
-    if (large) {
-      imageUrl = large.url;
-    }
-    if (medium) {
-      imageUrl = medium.url;
-    }
-    if (small) {
-      imageUrl = small.url;
-    }
-    //  imageUrl = edition.attributes.Image.data?.attributes.url;
+      edition.data.attributes.Image.data.attributes.formats;
+    imageUrl = large.url || medium.url || small.url;
   }
 
   const ReadMore = ({ children }) => {
@@ -275,27 +250,29 @@ const EditionPost = () => {
                       <span>Editions / </span>
                     </a>
                     <span className={classes.current}>
-                      {`${edition.attributes.Title} # ${edition.attributes.Number}`}
+                      {`${edition.data.attributes.Title} # ${edition.data.attributes.Number}`}
                     </span>
                   </Box>
                   <Box>
                     <h2 className={classes.postTitle}>
                       {" "}
-                      {`${edition.attributes.Title} # ${edition.attributes.Number}`}
+                      {`${edition.data.attributes.Title} # ${edition.data.attributes.Number}`}
                     </h2>
                     <Box className={classes.headerBlockFooter}>
                       <Box display="inline-flex">
                         <Box className={classes.postDate}>
-                          <span>{getPubDate(edition.attributes.Period)}</span>
+                          <span>
+                            {getPubDate(edition.data.attributes.Period)}
+                          </span>
                         </Box>
                         <div className={classes.postWidgets}>
                           <Widget
                             icon={"Visibility"}
-                            data={edition.attributes.views}
+                            data={edition.data.attributes.views}
                           />
                           <Widget
                             icon={"ThumbUp"}
-                            data={edition.attributes.likes}
+                            data={edition.data.attributes.likes}
                           />
                           <Widget icon={"ChatBubble"} data={"0"} />
                         </div>
@@ -331,79 +308,13 @@ const EditionPost = () => {
                   </Box>
                 </Box>
                 <PostActions />
-                <ReadMore>{edition.attributes.Body}</ReadMore>
+                <ReadMore>{edition.data.attributes.Body}</ReadMore>
                 <Box>
-                  <Box className={classes.blockTitle}>{"Highlights"}</Box>
                   <Box>
-                    {edition && edition.attributes.Highlights ? (
+                    {edition && edition.data.attributes.Highlights.length ? (
                       <>
-                        {edition.attributes.Highlights.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
-                        ))}
-                      </>
-                    ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box className={classes.blockTitle}>{"DAO's"}</Box>
-                  <Box>
-                    {edition && edition.attributes.DAOs ? (
-                      <>
-                        {edition.attributes.DAOs.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
-                        ))}
-                      </>
-                    ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box className={classes.blockTitle}>{"DeFI"}</Box>
-                  <Box>
-                    {edition && edition.attributes.DeFI ? (
-                      <>
-                        {edition.attributes.DeFI.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
-                        ))}
-                      </>
-                    ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box className={classes.blockTitle}>{"NFTs"}</Box>
-                  <Box>
-                    {edition && edition.attributes.NFTs ? (
-                      <>
-                        {edition.attributes.NFTs.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
-                        ))}
-                      </>
-                    ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box className={classes.blockTitle}>
-                    {"Community and Guilds"}
-                  </Box>
-                  <Box>
-                    {edition && edition.attributes.CommunityGuilds ? (
-                      <>
-                        {edition.attributes.CommunityGuilds.map(
+                        <Box className={classes.blockTitle}>{"Highlights"}</Box>
+                        {edition.data.attributes.Highlights.map(
                           (item, index) => (
                             <Box className={classes.highlightItem} key={index}>
                               <ReactMarkdown className={classes.highlightTitle}>
@@ -417,11 +328,11 @@ const EditionPost = () => {
                   </Box>
                 </Box>
                 <Box>
-                  <Box className={classes.blockTitle}>{"Developers"}</Box>
                   <Box>
-                    {edition && edition.attributes.Developers ? (
+                    {edition && edition.data.attributes.DAOs.length ? (
                       <>
-                        {edition.attributes.Developers.map((item, index) => (
+                        <Box className={classes.blockTitle}>{"DAO's"}</Box>
+                        {edition.data.attributes.DAOs.map((item, index) => (
                           <Box className={classes.highlightItem} key={index}>
                             <ReactMarkdown className={classes.highlightTitle}>
                               {item.Link}
@@ -433,11 +344,11 @@ const EditionPost = () => {
                   </Box>
                 </Box>
                 <Box>
-                  <Box className={classes.blockTitle}>{"Events"}</Box>
                   <Box>
-                    {edition && edition.attributes.Events ? (
+                    {edition && edition.data.attributes.DeFI.length ? (
                       <>
-                        {edition.attributes.Events.map((item, index) => (
+                        <Box className={classes.blockTitle}>{"DeFI"}</Box>
+                        {edition.data.attributes.DeFI.map((item, index) => (
                           <Box className={classes.highlightItem} key={index}>
                             <ReactMarkdown className={classes.highlightTitle}>
                               {item.Link}
@@ -449,11 +360,11 @@ const EditionPost = () => {
                   </Box>
                 </Box>
                 <Box>
-                  <Box className={classes.blockTitle}>{"Gaming"}</Box>
                   <Box>
-                    {edition && edition.attributes.Gaming ? (
+                    {edition && edition.data.attributes.NFTs.length ? (
                       <>
-                        {edition.attributes.Gaming.map((item, index) => (
+                        <Box className={classes.blockTitle}>{"NFTs"}</Box>
+                        {edition.data.attributes.NFTs.map((item, index) => (
                           <Box className={classes.highlightItem} key={index}>
                             <ReactMarkdown className={classes.highlightTitle}>
                               {item.Link}
@@ -465,30 +376,106 @@ const EditionPost = () => {
                   </Box>
                 </Box>
                 <Box>
-                  <Box className={classes.blockTitle}>{"Week by numbers"}</Box>
                   <Box>
-                    {edition && edition.attributes.WeekByNumbers ? (
+                    {edition &&
+                    edition.data.attributes.CommunityGuilds.length ? (
                       <>
-                        {edition.attributes.WeekByNumbers.map((item, index) => (
+                        <Box className={classes.blockTitle}>
+                          {"Community and Guilds"}
+                        </Box>
+                        {edition.data.attributes.CommunityGuilds.map(
+                          (item, index) => (
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                          )
+                        )}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box>
+                    {edition && edition.data.attributes.Developers.length ? (
+                      <>
+                        <Box className={classes.blockTitle}>{"Developers"}</Box>
+                        {edition.data.attributes.Developers.map(
+                          (item, index) => (
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                          )
+                        )}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box>
+                    {edition && edition.data.attributes.Events.length ? (
+                      <>
+                        <Box className={classes.blockTitle}>{"Events"}</Box>
+                        {edition.data.attributes.Events.map((item, index) => (
                           <Box className={classes.highlightItem} key={index}>
                             <ReactMarkdown className={classes.highlightTitle}>
                               {item.Link}
                             </ReactMarkdown>
                           </Box>
                         ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box>
+                    {edition && edition.data.attributes.Gaming.length ? (
+                      <>
+                        <Box className={classes.blockTitle}>{"Gaming"}</Box>
+                        {edition.data.attributes.Gaming.map((item, index) => (
+                          <Box className={classes.highlightItem} key={index}>
+                            <ReactMarkdown className={classes.highlightTitle}>
+                              {item.Link}
+                            </ReactMarkdown>
+                          </Box>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box>
+                    {edition && edition.data.attributes.weekByNumbers.length ? (
+                      <>
+                        <Box className={classes.blockTitle}>
+                          {"Week by numbers"}
+                        </Box>
+                        {edition.data.attributes.weekByNumbers.map(
+                          (item, index) => (
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                          )
+                        )}
                       </>
                     ) : null}
                   </Box>
                 </Box>
 
                 <Box>
-                  <Box className={classes.blockTitle}>
-                    {"Join The Ecosystem"}
-                  </Box>
                   <Box>
-                    {edition && edition.attributes.JoinTheEcosystem ? (
+                    {edition &&
+                    edition.data.attributes.JoinTheEcosystem.length ? (
                       <>
-                        {edition.attributes.JoinTheEcosystem.map(
+                        <Box className={classes.blockTitle}>
+                          {"Join The Ecosystem"}
+                        </Box>
+                        {edition.data.attributes.JoinTheEcosystem.map(
                           (item, index) => (
                             <Box className={classes.highlightItem} key={index}>
                               <ReactMarkdown className={classes.highlightTitle}>
@@ -502,11 +489,33 @@ const EditionPost = () => {
                   </Box>
                 </Box>
                 <Box>
-                  <Box className={classes.blockTitle}>{"Project Growth"}</Box>
                   <Box>
-                    {edition && edition.attributes.ProjectGrowth ? (
+                    {edition && edition.data.attributes.ProjectGrowth.length ? (
                       <>
-                        {edition.attributes.ProjectGrowth.map((item, index) => (
+                        <Box className={classes.blockTitle}>
+                          {"Project Growth"}
+                        </Box>
+                        {edition.data.attributes.ProjectGrowth.map(
+                          (item, index) => (
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                          )
+                        )}
+                      </>
+                    ) : null}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box>
+                    {edition && edition.data.attributes.OpenJobs.length ? (
+                      <>
+                        <Box className={classes.blockTitle}>
+                          {"Open jobs in the NEARverse"}
+                        </Box>
+                        {edition.data.attributes.OpenJobs.map((item, index) => (
                           <Box className={classes.highlightItem} key={index}>
                             <ReactMarkdown className={classes.highlightTitle}>
                               {item.Link}
@@ -518,35 +527,21 @@ const EditionPost = () => {
                   </Box>
                 </Box>
                 <Box>
-                  <Box className={classes.blockTitle}>
-                    {"Open jobs in the NEARverse"}
-                  </Box>
                   <Box>
-                    {edition && edition.attributes.OpenJobs ? (
+                    {edition && edition.data.attributes.OtherUpdates.length ? (
                       <>
-                        {edition.attributes.OpenJobs.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
-                        ))}
-                      </>
-                    ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box className={classes.blockTitle}>{"Other updates"}</Box>
-                  <Box>
-                    {edition && edition.attributes.OtherUpdates ? (
-                      <>
-                        {edition.attributes.OtherUpdates.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
-                        ))}
+                        <Box className={classes.blockTitle}>
+                          {"Other updates"}
+                        </Box>
+                        {edition.data.attributes.OtherUpdates.map(
+                          (item, index) => (
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                          )
+                        )}
                       </>
                     ) : null}
                   </Box>
@@ -555,9 +550,7 @@ const EditionPost = () => {
                   <Box className={classes.blockTitle}>{"Latest Editions"}</Box>
                 </Box>
                 <Box>
-                  {editions.data.length > 0 && (
-                    <EditionsList editions={editions.data} />
-                  )}
+                  <EditionsList exclude={edition.data.id} />
                 </Box>
               </Box>
             </Box>

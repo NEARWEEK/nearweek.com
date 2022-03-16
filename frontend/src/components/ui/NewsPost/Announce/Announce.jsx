@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import Widget from "../../general/Widget/Widget";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Truncate from "react-truncate";
+import ReactMarkdown from "react-markdown";
 
 const Announce = ({ article }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -108,7 +110,9 @@ const Announce = ({ article }) => {
               </Link>
             </h2>
             <p className={classes.postBody}>
-              {article.attributes.Body.substring(0, 130)}
+              <Truncate lines={2}>
+                <ReactMarkdown>{article.attributes.Body}</ReactMarkdown>
+              </Truncate>
             </p>
           </div>
           <div className={classes.postFooter}>
