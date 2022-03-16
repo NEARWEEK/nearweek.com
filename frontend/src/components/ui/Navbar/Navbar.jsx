@@ -35,12 +35,12 @@ const Navbar = () => {
     columnLeft: {
       display: "flex",
       justifyContent: "flex-start",
-      flex: 0.7,
+      flex: 0.5,
     },
     columnRight: {
       display: "flex",
       justifyContent: "flex-end",
-      flex: 0.3,
+      flex: 0.5,
     },
     menuIcon: {
       color: "#000000de !important",

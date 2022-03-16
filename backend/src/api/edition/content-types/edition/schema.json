@@ -115,6 +115,11 @@
       "type": "component",
       "repeatable": true,
       "component": "c-link.component-with-link"
+    },
+    "JoinTheEcosystem": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c-link.component-with-link"
     }
   }
 }

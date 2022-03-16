@@ -13,6 +13,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Typography from "@mui/material/Typography";
 import Widget from "../../general/Widget/Widget";
 import { getEventDay, getTimeAgo } from "../../../../Utils/Utils";
+import Truncate from "react-truncate";
+import ReactMarkdown from "react-markdown";
 
 const GridItem = ({ data }) => {
   const useStyles = makeStyles(() => ({
@@ -120,7 +122,9 @@ const GridItem = ({ data }) => {
                       {data.attributes.Title}
                     </Link>
                   </h3>
-                  <Box>{data.attributes.Body.substring(0, 130)}</Box>
+                  <Truncate lines={2}>
+                    <ReactMarkdown>{data.attributes.Body}</ReactMarkdown>
+                  </Truncate>
                 </Box>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>

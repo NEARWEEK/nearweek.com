@@ -8,6 +8,8 @@ import { getEventDay, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Typography from "@mui/material/Typography";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Truncate from "react-truncate";
+import ReactMarkdown from "react-markdown";
 
 const Announce = ({ event }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -117,7 +119,9 @@ const Announce = ({ event }) => {
                 </Link>
               </h2>
               <p className={classes.postBody}>
-                {event.attributes.Body.substring(0, 130)}
+                <Truncate lines={2}>
+                  <ReactMarkdown>{event.attributes.Body}</ReactMarkdown>
+                </Truncate>
               </p>
             </Box>
             <Box className={classes.contentFooter}>

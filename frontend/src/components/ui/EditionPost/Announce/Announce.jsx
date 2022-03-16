@@ -13,6 +13,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
 import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
+import Truncate from "react-truncate";
 
 const Announce = ({ edition }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -95,9 +96,11 @@ const Announce = ({ edition }) => {
                 </span>
               </Link>
             </h2>
-            <ReactMarkdown className={classes.postBody}>
-              {edition.attributes.Body.substring(0, 130)}
-            </ReactMarkdown>
+            <Truncate lines={2}>
+              <ReactMarkdown className={classes.postBody}>
+                {edition.attributes.Body}
+              </ReactMarkdown>
+            </Truncate>
           </div>
           <div className={classes.postFooter}>
             <div className={classes.postWidgets}>
