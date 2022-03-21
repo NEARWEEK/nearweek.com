@@ -191,7 +191,7 @@ const EditionPost = () => {
   if (edition && edition.data.attributes.Image?.data) {
     const { large, medium, small } =
       edition.data.attributes.Image.data.attributes.formats;
-    imageUrl = large.url || medium.url || small.url;
+    imageUrl = large?.url || medium?.url || small?.url;
   }
 
   const ReadMore = ({ children }) => {
@@ -215,6 +215,23 @@ const EditionPost = () => {
       </Box>
     );
   };
+
+  const Pictures = ({ pictures }) => {
+    return (
+      <>
+        {pictures &&
+          pictures.data &&
+          pictures.data.map((picture) => (
+            <Box key={picture.attributes.caption}>
+              <p>
+                <img src={picture.attributes.url} alt={""} />
+              </p>
+            </Box>
+          ))}
+      </>
+    );
+  };
+
   const classes = useStyles();
   return (
     <>
@@ -316,11 +333,21 @@ const EditionPost = () => {
                         <Box className={classes.blockTitle}>{"Highlights"}</Box>
                         {edition.data.attributes.Highlights.map(
                           (item, index) => (
-                            <Box className={classes.highlightItem} key={index}>
-                              <ReactMarkdown className={classes.highlightTitle}>
-                                {item.Link}
-                              </ReactMarkdown>
-                            </Box>
+                            <>
+                              <Box
+                                className={classes.highlightItem}
+                                key={index}
+                              >
+                                <ReactMarkdown
+                                  className={classes.highlightTitle}
+                                >
+                                  {item.Link}
+                                </ReactMarkdown>
+                              </Box>
+                              {item.Pictures && (
+                                <Pictures pictures={item.Pictures} />
+                              )}
+                            </>
                           )
                         )}
                       </>
@@ -333,11 +360,16 @@ const EditionPost = () => {
                       <>
                         <Box className={classes.blockTitle}>{"DAO's"}</Box>
                         {edition.data.attributes.DAOs.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
+                          <>
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                            {item.Pictures && (
+                              <Pictures pictures={item.Pictures} />
+                            )}
+                          </>
                         ))}
                       </>
                     ) : null}
@@ -349,11 +381,16 @@ const EditionPost = () => {
                       <>
                         <Box className={classes.blockTitle}>{"DeFI"}</Box>
                         {edition.data.attributes.DeFI.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
+                          <>
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                            {item.Pictures && (
+                              <Pictures pictures={item.Pictures} />
+                            )}
+                          </>
                         ))}
                       </>
                     ) : null}
@@ -365,11 +402,16 @@ const EditionPost = () => {
                       <>
                         <Box className={classes.blockTitle}>{"NFTs"}</Box>
                         {edition.data.attributes.NFTs.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
+                          <>
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                            {item.Pictures && (
+                              <Pictures pictures={item.Pictures} />
+                            )}
+                          </>
                         ))}
                       </>
                     ) : null}
@@ -385,11 +427,21 @@ const EditionPost = () => {
                         </Box>
                         {edition.data.attributes.CommunityGuilds.map(
                           (item, index) => (
-                            <Box className={classes.highlightItem} key={index}>
-                              <ReactMarkdown className={classes.highlightTitle}>
-                                {item.Link}
-                              </ReactMarkdown>
-                            </Box>
+                            <>
+                              <Box
+                                className={classes.highlightItem}
+                                key={index}
+                              >
+                                <ReactMarkdown
+                                  className={classes.highlightTitle}
+                                >
+                                  {item.Link}
+                                </ReactMarkdown>
+                              </Box>
+                              {item.Pictures && (
+                                <Pictures pictures={item.Pictures} />
+                              )}
+                            </>
                           )
                         )}
                       </>
@@ -403,11 +455,21 @@ const EditionPost = () => {
                         <Box className={classes.blockTitle}>{"Developers"}</Box>
                         {edition.data.attributes.Developers.map(
                           (item, index) => (
-                            <Box className={classes.highlightItem} key={index}>
-                              <ReactMarkdown className={classes.highlightTitle}>
-                                {item.Link}
-                              </ReactMarkdown>
-                            </Box>
+                            <>
+                              <Box
+                                className={classes.highlightItem}
+                                key={index}
+                              >
+                                <ReactMarkdown
+                                  className={classes.highlightTitle}
+                                >
+                                  {item.Link}
+                                </ReactMarkdown>
+                              </Box>
+                              {item.Pictures && (
+                                <Pictures pictures={item.Pictures} />
+                              )}
+                            </>
                           )
                         )}
                       </>
@@ -420,11 +482,16 @@ const EditionPost = () => {
                       <>
                         <Box className={classes.blockTitle}>{"Events"}</Box>
                         {edition.data.attributes.Events.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
+                          <>
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                            {item.Pictures && (
+                              <Pictures pictures={item.Pictures} />
+                            )}
+                          </>
                         ))}
                       </>
                     ) : null}
@@ -436,11 +503,16 @@ const EditionPost = () => {
                       <>
                         <Box className={classes.blockTitle}>{"Gaming"}</Box>
                         {edition.data.attributes.Gaming.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
+                          <>
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                            {item.Pictures && (
+                              <Pictures pictures={item.Pictures} />
+                            )}
+                          </>
                         ))}
                       </>
                     ) : null}
@@ -455,11 +527,21 @@ const EditionPost = () => {
                         </Box>
                         {edition.data.attributes.weekByNumbers.map(
                           (item, index) => (
-                            <Box className={classes.highlightItem} key={index}>
-                              <ReactMarkdown className={classes.highlightTitle}>
-                                {item.Link}
-                              </ReactMarkdown>
-                            </Box>
+                            <>
+                              <Box
+                                className={classes.highlightItem}
+                                key={index}
+                              >
+                                <ReactMarkdown
+                                  className={classes.highlightTitle}
+                                >
+                                  {item.Link}
+                                </ReactMarkdown>
+                              </Box>
+                              {item.Pictures && (
+                                <Pictures pictures={item.Pictures} />
+                              )}
+                            </>
                           )
                         )}
                       </>
@@ -477,11 +559,21 @@ const EditionPost = () => {
                         </Box>
                         {edition.data.attributes.JoinTheEcosystem.map(
                           (item, index) => (
-                            <Box className={classes.highlightItem} key={index}>
-                              <ReactMarkdown className={classes.highlightTitle}>
-                                {item.Link}
-                              </ReactMarkdown>
-                            </Box>
+                            <>
+                              <Box
+                                className={classes.highlightItem}
+                                key={index}
+                              >
+                                <ReactMarkdown
+                                  className={classes.highlightTitle}
+                                >
+                                  {item.Link}
+                                </ReactMarkdown>
+                              </Box>
+                              {item.Pictures && (
+                                <Pictures pictures={item.Pictures} />
+                              )}
+                            </>
                           )
                         )}
                       </>
@@ -497,11 +589,21 @@ const EditionPost = () => {
                         </Box>
                         {edition.data.attributes.ProjectGrowth.map(
                           (item, index) => (
-                            <Box className={classes.highlightItem} key={index}>
-                              <ReactMarkdown className={classes.highlightTitle}>
-                                {item.Link}
-                              </ReactMarkdown>
-                            </Box>
+                            <>
+                              <Box
+                                className={classes.highlightItem}
+                                key={index}
+                              >
+                                <ReactMarkdown
+                                  className={classes.highlightTitle}
+                                >
+                                  {item.Link}
+                                </ReactMarkdown>
+                              </Box>
+                              {item.Pictures && (
+                                <Pictures pictures={item.Pictures} />
+                              )}
+                            </>
                           )
                         )}
                       </>
@@ -516,11 +618,16 @@ const EditionPost = () => {
                           {"Open jobs in the NEARverse"}
                         </Box>
                         {edition.data.attributes.OpenJobs.map((item, index) => (
-                          <Box className={classes.highlightItem} key={index}>
-                            <ReactMarkdown className={classes.highlightTitle}>
-                              {item.Link}
-                            </ReactMarkdown>
-                          </Box>
+                          <>
+                            <Box className={classes.highlightItem} key={index}>
+                              <ReactMarkdown className={classes.highlightTitle}>
+                                {item.Link}
+                              </ReactMarkdown>
+                            </Box>
+                            {item.Pictures && (
+                              <Pictures pictures={item.Pictures} />
+                            )}
+                          </>
                         ))}
                       </>
                     ) : null}
@@ -535,11 +642,21 @@ const EditionPost = () => {
                         </Box>
                         {edition.data.attributes.OtherUpdates.map(
                           (item, index) => (
-                            <Box className={classes.highlightItem} key={index}>
-                              <ReactMarkdown className={classes.highlightTitle}>
-                                {item.Link}
-                              </ReactMarkdown>
-                            </Box>
+                            <>
+                              <Box
+                                className={classes.highlightItem}
+                                key={index}
+                              >
+                                <ReactMarkdown
+                                  className={classes.highlightTitle}
+                                >
+                                  {item.Link}
+                                </ReactMarkdown>
+                              </Box>
+                              {item.Pictures && (
+                                <Pictures pictures={item.Pictures} />
+                              )}
+                            </>
                           )
                         )}
                       </>

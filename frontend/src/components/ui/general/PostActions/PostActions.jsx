@@ -8,8 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import makeStyles from "@mui/styles/makeStyles";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 const PostActions = () => {
+  const { wallet } = useStoreState((state) => state.main.entities);
+  const onConnectWallet = useStoreActions(
+    (actions) => actions.main.onConnectWallet
+  );
+  const isSignedIn = wallet.isSignedIn();
+
   const useStyles = makeStyles((theme) => ({
     link: {
       color: "#fff",
@@ -84,6 +91,11 @@ const PostActions = () => {
       marginBottom: "8px",
     },
   }));
+
+  const handleLikeClick = () => {
+    if (!isSignedIn) onConnectWallet();
+  };
+
   const classes = useStyles();
   return (
     <Box className={classes.postActions}>
@@ -126,6 +138,7 @@ const PostActions = () => {
           className={classes.likeBtn}
           variant="contained"
           disableElevation
+          onClick={handleLikeClick}
           startIcon={<ThumbUpIcon />}
         >
           Like

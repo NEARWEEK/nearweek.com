@@ -14,6 +14,8 @@ import EventPost from "./components/ui/EventPost/EventPost";
 import Video from "./pages/Video";
 import VideoPost from "./components/ui/VideoPost/VideoPost";
 import UserProfile from "./components/ui/UserProfile/UserProfile";
+import UploadNews from "./components/ui/UploadNews/UploadNews";
+import ProtectedRoute from "./guard/ProtectedRoute/ProtectedRoute";
 
 function App({ history }) {
   let theme = createTheme({
@@ -61,7 +63,10 @@ function App({ history }) {
             <Route exact path="events/:eventId" element={<EventPost />} />
             <Route exact path="video" element={<Video />} />
             <Route exact path="video/:videoId" element={<VideoPost />} />
-            <Route exact path="user-profile" element={<UserProfile />} />
+            <Route element={<ProtectedRoute />}>
+              <Route exact path="user-profile" element={<UserProfile />} />
+              <Route exact path="upload-news" element={<UploadNews />} />
+            </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>

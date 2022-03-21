@@ -3,14 +3,15 @@ import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import EditIcon from "@mui/icons-material/Edit";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Divider from "@mui/material/Divider";
-import ArchiveIcon from "@mui/icons-material/Archive";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStoreState } from "easy-peasy";
 import { makeStyles } from "@mui/styles";
+import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const UserMenu = styled((props) => (
   <Menu
@@ -58,6 +59,7 @@ const UserMenu = styled((props) => (
 const UserActions = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
   const wallet = useStoreState((state) => state.main.entities.wallet);
   const accountId = wallet.getAccountId();
   const handleClick = (event) => {
@@ -67,11 +69,23 @@ const UserActions = () => {
     setAnchorEl(null);
   };
 
+  const handleProfileClick = () => {
+    navigate("/user-profile");
+  };
+
   const useStyles = makeStyles(() => ({
+    box: {
+      minWidth: 256,
+    },
     button: {
       whiteSpace: "nowrap",
       textTransform: "none !important",
-      fontSize: "12px !important",
+      border: "0 !important",
+      background: "#f6f6f6 !important",
+      color: "#555 !important",
+      "& .account-id": {
+        fontSize: "14px !important",
+      },
     },
   }));
 
@@ -80,8 +94,8 @@ const UserActions = () => {
   return (
     <div>
       <Button
-        id="demo-customized-button"
-        aria-controls={open ? "demo-customized-menu" : undefined}
+        id="user-button"
+        aria-controls={open ? "user-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         variant="outlined"
@@ -90,34 +104,40 @@ const UserActions = () => {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        {accountId}
+        <Box display="flex" alignItems="center">
+          <AccountCircleIcon />
+          <span className="account-id">{accountId}</span>
+        </Box>
       </Button>
       <UserMenu
-        id="demo-customized-menu"
+        id="user-menu"
         MenuListProps={{
-          "aria-labelledby": "demo-customized-button",
+          "aria-labelledby": "user-button",
         }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        className={classes.box}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          <EditIcon />
-          Edit
+        <Box display="flex" alignItems="center">
+          <Typography variant="h6" style={{ fontWeight: "bold" }}>
+            {accountId}
+          </Typography>
+        </Box>
+        <MenuItem onClick={handleProfileClick} disableRipple>
+          <AccountCircleIcon />
+          My Profile
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <FileCopyIcon />
-          Duplicate
+          My News
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <ArchiveIcon />
-          Archive
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <MoreHorizIcon />
-          More
-        </MenuItem>
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <Button variant="contained" disableElevation>
+            Disconnect
+          </Button>
+        </Box>
       </UserMenu>
     </div>
   );
