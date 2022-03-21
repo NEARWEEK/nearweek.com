@@ -52,7 +52,7 @@ export function groupBy(list, keyGetter) {
 async function loadEditions() {
   try {
     const response = await fetch(
-      `/api/editions?populate=*&sort=createdAt:desc`,
+      `/api/editions?populate=*&sort=id:desc`,
       options
     );
     return await response.json();
@@ -125,7 +125,7 @@ async function loadLatestNews(page = 1, size = 3) {
 
 async function loadEdition(editionId) {
   const response = await fetch(
-    `/api/editions/${editionId}?populate=*`,
+    `/api/editions/${editionId}?populate=deep`,
     options
   );
   return await response.json();

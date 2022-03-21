@@ -19,7 +19,8 @@
     "@strapi/plugin-users-permissions": "4.0.3",
     "@strapi/strapi": "4.0.3",
     "bcryptjs": "^2.4.3",
-    "sqlite3": "5.0.2"
+    "sqlite3": "5.0.2",
+    "strapi-plugin-populate-deep": "^0.1.2"
   },
   "author": {
     "name": "A Strapi developer"

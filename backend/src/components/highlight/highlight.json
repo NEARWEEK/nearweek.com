@@ -9,6 +9,14 @@
   "attributes": {
     "Link": {
       "type": "richtext"
+    },
+    "Pictures": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

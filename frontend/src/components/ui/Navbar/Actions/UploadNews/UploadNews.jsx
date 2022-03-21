@@ -2,8 +2,10 @@ import { useStoreActions } from "easy-peasy";
 import makeStyles from "@mui/styles/makeStyles";
 import Button from "@mui/material/Button";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 const UploadNews = () => {
+  const navigate = useNavigate();
   const useStyles = makeStyles((theme) => ({
     root: {},
     button: {
@@ -12,7 +14,9 @@ const UploadNews = () => {
   }));
   const classes = useStyles();
 
-  const uploadNewsHandler = () => {};
+  const uploadNewsHandler = () => {
+    navigate("/upload-news");
+  };
 
   return (
     <div className={classes.root}>

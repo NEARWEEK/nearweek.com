@@ -2,12 +2,21 @@
   "collectionName": "components_c_link_component_with_links",
   "info": {
     "displayName": "Component with link",
-    "icon": "link"
+    "icon": "link",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "Link": {
       "type": "richtext"
+    },
+    "Pictures": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

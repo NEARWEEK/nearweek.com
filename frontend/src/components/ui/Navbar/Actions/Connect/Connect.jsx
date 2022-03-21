@@ -14,7 +14,7 @@ const Connect = () => {
   const classes = useStyles();
 
   const connectWalletHandler = () => {
-    //onConnectWallet();
+    onConnectWallet();
   };
 
   return (
