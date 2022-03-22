@@ -1,18 +1,11 @@
 import * as React from "react";
-import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
 import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import CancelIcon from "@mui/icons-material/Cancel";
-import DirectionsIcon from "@mui/icons-material/Directions";
 import Autosuggest from "react-autosuggest";
-import { debounce } from "throttle-debounce";
 import { useState } from "react";
 import * as Utils from "../../../../../Utils/Utils";
 import { getTimeAgo, groupBy } from "../../../../../Utils/Utils";
@@ -52,7 +45,7 @@ const Search = () => {
         position: "absolute",
         top: "52px",
         right: "-6px",
-        width: "400px",
+        maxWidth: "400px",
         boxShadow: "4px 4px 8px 0px rgba(34, 60, 80, 0.2)",
         padding: "0 16px",
         backgroundColor: " #fff",
@@ -175,7 +168,7 @@ const Search = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          width: 400,
+          width: "100%",
           background: "#f6f6f6",
         }}
       >

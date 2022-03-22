@@ -14,6 +14,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../Utils/Utils";
 import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import GridCarousel from "../components/ui/VideoPost/GridCarousel/GridCarousel";
+import VideoSlider from "../components/ui/VideoPost/Slider/VideoSlider";
 
 const Home = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
@@ -97,8 +98,10 @@ const Home = () => {
                 <SectionHeader title={"Latest Video"} link={"/video"} />
               </Box>
             </Box>
+
             {!isMobileMatch ? (
-              <GridCarousel />
+              /*<GridCarousel />*/
+              <VideoSlider />
             ) : (
               <Box className={classes.container}>
                 <Box className={classes.wrapper}>

@@ -279,7 +279,8 @@ const EditionPost = () => {
                       <Box display="inline-flex">
                         <Box className={classes.postDate}>
                           <span>
-                            {getPubDate(edition.data.attributes.Period)}
+                            {edition.data.attributes.Period &&
+                              getPubDate(edition.data.attributes.Period)}
                           </span>
                         </Box>
                         <div className={classes.postWidgets}>

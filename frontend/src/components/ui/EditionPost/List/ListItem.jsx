@@ -111,7 +111,10 @@ const ListItem = ({ data }) => {
                 )}
                 <div className="body-container">
                   <div className={classes.postDate}>
-                    <span>{getPubDate(data.attributes.Period)}</span>
+                    <span>
+                      {data.attributes.Period &&
+                        getPubDate(data.attributes.Period)}
+                    </span>
                   </div>
                   <h3 className={classes.postTitle}>
                     <Link
