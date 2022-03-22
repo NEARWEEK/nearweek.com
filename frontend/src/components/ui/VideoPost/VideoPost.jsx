@@ -1,6 +1,3 @@
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
-import makeStyles from "@mui/styles/makeStyles";
 import { useMatch } from "react-router";
 import { useEffect, useState } from "react";
 import * as Utils from "../../../Utils/Utils";

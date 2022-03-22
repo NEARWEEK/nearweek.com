@@ -82,7 +82,10 @@ const Announce = ({ edition }) => {
           </div>
           <div className={classes.content}>
             <div className={classes.postDate}>
-              <span>{getPubDate(edition.attributes.Period)}</span>
+              <span>
+                {edition.attributes.Period &&
+                  getPubDate(edition.attributes.Period)}
+              </span>
             </div>
             <h2 className={classes.postTitle}>
               <Link

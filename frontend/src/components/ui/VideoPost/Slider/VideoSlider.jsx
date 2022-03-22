@@ -1,46 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SliderItem from "./SliderItem";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import makeStyles from "@mui/styles/makeStyles";
 import SwiperCore, { FreeMode, Navigation } from "swiper";
+import * as Utils from "../../../../Utils/Utils";
 
 SwiperCore.use([FreeMode, Navigation]);
 
-const VideoSlider = ({ video }) => {
+const VideoSlider = () => {
+  const [video, setVideo] = useState([]);
+
+  useEffect(async () => {
+    const { data } = await Utils.api.getAllVideo();
+    if (data) {
+      setVideo(data);
+    }
+  }, []);
+
   const isMobileMatch = useMediaQuery(`(max-width:1024px`);
 
   const useStyles = makeStyles(() => ({
     root: {
       "& .swiper-container": {
         position: "relative",
-        height: "380px",
-      },
-      "& .swiper-wrapper": {
-        justifyContent: !isMobileMatch ? "center" : "unset",
-        height: "auto",
-      },
-      "& .swiper-slide": {
-        minWidth: !isMobileMatch ? "676px" : "auto",
-        height: "380px",
-        display: "flex",
-        alignItems: "center",
-        transition: "all 200ms linear",
-        transform: "scale(0.8)",
-      },
-      "& .swiper-slide-duplicate-prev": {
-        transform: video.data.length <= 2 ? "scale(1)" : "scale(0.8)",
-      },
-      "& .swiper-slide-duplicate-next": {
-        transform: video.data.length >= 4 ? "scale(1)" : "scale(0.8)",
-      },
-      "& .swiper-slide-duplicate-active": {
-        transform: "scale(1)",
-      },
-      "& .swiper-slide__content": {
-        height: "380px",
+        width: "100%",
+        height: 480,
+        "& .swiper-slide": {},
       },
     },
   }));
@@ -51,39 +40,33 @@ const VideoSlider = ({ video }) => {
     <div className={classes.root}>
       <div className="swiper-container">
         <Swiper
-          slidesPerView={2}
+          breakpoints={{
+            360: {
+              width: 360,
+              slidesPerView: 1,
+            },
+            480: {
+              width: 480,
+              slidesPerView: 1,
+            },
+            640: {
+              width: 640,
+              slidesPerView: 1,
+            },
+          }}
+          slidesPerView={3}
+          loopedSlides={1}
+          watchSlidesProgress={true}
+          slidesOffsetBefore={24}
           spaceBetween={24}
+          navigation={true}
           loop={true}
           centeredSlides={true}
           centeredSlidesBounds={true}
           loopFillGroupWithBlank={true}
-          breakpoints={{
-            480: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 20,
-            },
-            860: {
-              slidesPerView: 2,
-              spaceBetween: 24,
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 24,
-            },
-            1240: {
-              slidesPerView: video.data.length >= 4 ? 4 : 3,
-              spaceBetween: 24,
-            },
-          }}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
         >
-          {video.data
-            ? video.data.map((item, i) => {
+          {video
+            ? video.map((item, i) => {
                 return (
                   <SwiperSlide key={item.id}>
                     <SliderItem key={item.id} video={item} index={i} />
