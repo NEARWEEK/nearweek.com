@@ -28,8 +28,17 @@ const VideoSlider = () => {
       "& .swiper-container": {
         position: "relative",
         width: "100%",
-        height: 480,
-        "& .swiper-slide": {},
+        "& .swiper-slide": {
+          height: "360px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "all 200ms linear",
+          transform: "scale(0.8)",
+        },
+        "& .swiper-slide-active": {
+          transform: "scale(1)",
+        },
       },
     },
   }));
@@ -40,30 +49,15 @@ const VideoSlider = () => {
     <div className={classes.root}>
       <div className="swiper-container">
         <Swiper
-          breakpoints={{
-            360: {
-              width: 360,
-              slidesPerView: 1,
-            },
-            480: {
-              width: 480,
-              slidesPerView: 1,
-            },
-            640: {
-              width: 640,
-              slidesPerView: 1,
-            },
-          }}
           slidesPerView={3}
           loopedSlides={1}
           watchSlidesProgress={true}
-          slidesOffsetBefore={24}
-          spaceBetween={24}
           navigation={true}
           loop={true}
           centeredSlides={true}
           centeredSlidesBounds={true}
           loopFillGroupWithBlank={true}
+          loopAdditionalSlides={30}
         >
           {video
             ? video.map((item, i) => {

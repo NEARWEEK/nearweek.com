@@ -88,7 +88,7 @@ const SliderItem = (props) => {
               <ReactPlayer
                 key={props.video.id}
                 width="100%"
-                height="360px"
+                height="250px"
                 controls={true}
                 light={true}
                 className="carousel-item"
