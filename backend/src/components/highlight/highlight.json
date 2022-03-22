@@ -10,13 +10,10 @@
     "Link": {
       "type": "richtext"
     },
-    "Pictures": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+    "Images": {
+      "type": "component",
+      "repeatable": true,
+      "component": "images.images"
     }
   }
 }

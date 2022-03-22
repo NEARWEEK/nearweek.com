@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_images_images",
+  "info": {
+    "displayName": "Images",
+    "icon": "images",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Description": {
+      "type": "richtext"
+    }
+  }
+}
