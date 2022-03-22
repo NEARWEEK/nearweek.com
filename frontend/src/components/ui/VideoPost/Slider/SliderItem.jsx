@@ -11,9 +11,22 @@ const SliderItem = (props) => {
       height: "100%",
       width: "100%",
       display: "grid",
-      //gridTemplateRows: "75% 25%",
+      gridTemplateRows: "70% 30%",
+      "& .player-wrapper": {
+        width: "auto",
+        height: "auto",
+      },
     },
-    postVideo: {
+    "& .player-wrapper": {
+      width: "auto",
+      height: "auto",
+      "& .react-player__preview": {
+        paddingTop: "56.25%",
+        position: "relative",
+      },
+      "& .react-player__preview > div ": {
+        position: "absolute",
+      },
       "& .carousel-item": {
         maxWidth: "100%",
         "& .react-player__shadow": {
@@ -84,11 +97,11 @@ const SliderItem = (props) => {
       {props.video.attributes?.Link ? (
         <>
           <div className={classes.contentContainer}>
-            <div className={classes.postVideo}>
+            <div className="player-wrapper">
               <ReactPlayer
                 key={props.video.id}
                 width="100%"
-                height="250px"
+                height="100%"
                 controls={true}
                 light={true}
                 className="carousel-item"
