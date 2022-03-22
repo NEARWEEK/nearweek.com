@@ -15,28 +15,20 @@ const SliderItem = (props) => {
       "& .player-wrapper": {
         width: "auto",
         height: "auto",
-      },
-    },
-    "& .player-wrapper": {
-      width: "auto",
-      height: "auto",
-      "& .react-player__preview": {
-        paddingTop: "56.25%",
-        position: "relative",
-      },
-      "& .react-player__preview > div ": {
-        position: "absolute",
-      },
-      "& .carousel-item": {
-        maxWidth: "100%",
-        "& .react-player__shadow": {
-          background: "rgba(255, 255, 255, 0.82) !important",
-          borderRadius: "72px !important",
-          width: "72px !important",
-          height: "72px !important",
-          "& .react-player__play-icon": {
-            borderColor:
-              "transparent transparent transparent #0d00ff !important",
+        "& .carousel-item": {
+          maxWidth: "100%",
+          "& .react-player__preview": {
+            borderRadius: "12px 12px 0 0",
+          },
+          "& .react-player__shadow": {
+            background: "rgba(255, 255, 255, 0.82) !important",
+            borderRadius: "72px !important",
+            width: "72px !important",
+            height: "72px !important",
+            "& .react-player__play-icon": {
+              borderColor:
+                "transparent transparent transparent #0d00ff !important",
+            },
           },
         },
       },
