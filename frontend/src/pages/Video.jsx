@@ -120,7 +120,7 @@ const Video = () => {
 
   const [video, setVideo] = useState(null);
   const [editions, setEditions] = useState({ data: [], meta: {} });
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = (e) => {
     setOpen(true);
@@ -209,57 +209,27 @@ const Video = () => {
               />
             </Box>
           </Box>
-          <Box className={classes.wrapper}>
-            <Box className={classes.container}>
-              <Paper
-                elevation={0}
-                component={Link}
-                to={""}
-                onClick={handleClickOpen}
-              >
-                <Box className={classes.headerBlock}>
-                  {!isMobileMatch && (
-                    <Box className={classes.videoDescription}>
-                      <Paper
-                        className={classes.watchVideo}
-                        component={Link}
-                        to={""}
-                        onClick={handleClickOpen}
-                      >
-                        <h2 className={classes.postTitle}>
-                          {" "}
-                          {`${video.data[0].attributes.Title}`}
-                        </h2>
-                      </Paper>
-                      <Box className={classes.headerBlockFooter}>
-                        <Box display="inline-flex">
-                          <div className={classes.postWidgets}>
-                            <Widget
-                              icon={"Visibility"}
-                              data={video.data[0].attributes.Views}
-                            />
-                            <Widget
-                              icon={"ThumbUp"}
-                              data={video.data[0].attributes.Likes}
-                            />
-                            <Widget icon={"ChatBubble"} data={"0"} />
-                          </div>
-                        </Box>
-                        <Box className={classes.postDate}>
-                          <span>
-                            {getTimeAgo(video.data[0].attributes.createdAt)}
-                          </span>
-                        </Box>
-                      </Box>
-                    </Box>
-                  )}
-                </Box>
-                {isMobileMatch && (
-                  <Box className={classes.mobileHeaderBlock}>
-                    <h2 className={classes.postTitle}>
-                      {" "}
-                      {`${video.data[0].attributes.Title}`}
-                    </h2>
+          <Box className={classes.container}>
+            <Paper
+              elevation={0}
+              component={Link}
+              to={""}
+              onClick={handleClickOpen}
+            >
+              <Box className={classes.headerBlock}>
+                {!isMobileMatch && (
+                  <Box className={classes.videoDescription}>
+                    <Paper
+                      className={classes.watchVideo}
+                      component={Link}
+                      to={""}
+                      onClick={handleClickOpen}
+                    >
+                      <h2 className={classes.postTitle}>
+                        {" "}
+                        {`${video.data[0].attributes.Title}`}
+                      </h2>
+                    </Paper>
                     <Box className={classes.headerBlockFooter}>
                       <Box display="inline-flex">
                         <div className={classes.postWidgets}>
@@ -282,26 +252,53 @@ const Video = () => {
                     </Box>
                   </Box>
                 )}
-              </Paper>
-              <WatchVideo
-                open={open}
-                onClose={handleClose}
-                videoId={video.data[0].id}
-                title={video.data[0].attributes.Title}
-                url={video.data[0].attributes.Link}
-              />
-              <Box className={classes.wrapper}>
-                <Section title={"Latest Video"}>
-                  {video.data.length > 0 && (
-                    <GridVideo video={getLatestVideo()} />
-                  )}
-                </Section>
-                <Section title={"Latest Editions"}>
-                  {editions.data.length > 0 && (
-                    <EditionsList editions={editions.data} />
-                  )}
-                </Section>
               </Box>
+              {isMobileMatch && (
+                <Box className={classes.mobileHeaderBlock}>
+                  <h2 className={classes.postTitle}>
+                    {`${video.data[0].attributes.Title}`}
+                  </h2>
+                  <Box className={classes.headerBlockFooter}>
+                    <Box display="inline-flex">
+                      <div className={classes.postWidgets}>
+                        <Widget
+                          icon={"Visibility"}
+                          data={video.data[0].attributes.Views}
+                        />
+                        <Widget
+                          icon={"ThumbUp"}
+                          data={video.data[0].attributes.Likes}
+                        />
+                        <Widget icon={"ChatBubble"} data={"0"} />
+                      </div>
+                    </Box>
+                    <Box className={classes.postDate}>
+                      <span>
+                        {getTimeAgo(video.data[0].attributes.createdAt)}
+                      </span>
+                    </Box>
+                  </Box>
+                </Box>
+              )}
+            </Paper>
+            <WatchVideo
+              open={open}
+              onClose={handleClose}
+              videoId={video.data[0].id}
+              title={video.data[0].attributes.Title}
+              url={video.data[0].attributes.Link}
+            />
+            <Box className={classes.wrapper}>
+              <Section title={"Latest Video"}>
+                {video.data.length > 0 && (
+                  <GridVideo video={getLatestVideo()} />
+                )}
+              </Section>
+              <Section title={"Latest Editions"}>
+                {editions.data.length > 0 && (
+                  <EditionsList editions={editions.data} />
+                )}
+              </Section>
             </Box>
           </Box>
         </>
