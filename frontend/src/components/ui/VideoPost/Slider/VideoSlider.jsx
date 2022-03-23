@@ -8,6 +8,7 @@ import "swiper/css/free-mode";
 import makeStyles from "@mui/styles/makeStyles";
 import SwiperCore, { FreeMode, Navigation } from "swiper";
 import * as Utils from "../../../../Utils/Utils";
+import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 
 SwiperCore.use([FreeMode, Navigation]);
 
@@ -21,7 +22,7 @@ const VideoSlider = () => {
     }
   }, []);
 
-  const isMobileMatch = useMediaQuery(`(max-width:1024px`);
+  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
   const useStyles = makeStyles(() => ({
     root: {
@@ -30,9 +31,9 @@ const VideoSlider = () => {
         width: "100%",
         "& .swiper-slide": {
           height: "360px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          // display: "flex",
+          //   alignItems: "center",
+          //   justifyContent: "center",
           transition: "all 200ms linear",
           transform: "scale(0.8)",
         },
@@ -54,25 +55,17 @@ const VideoSlider = () => {
     <div className={classes.root}>
       <div className="swiper-container">
         <Swiper
+          slidesPerView={!isMobileMatch ? 3 : 1}
           breakpoints={{
-            480: {
-              slidesPerView: 1,
-              spaceBetween: 30,
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 40,
-            },
             780: {
-              slidesPerView: 2,
-              spaceBetween: 40,
-            },
-            1024: {
               slidesPerView: 3,
-              spaceBetween: 40,
+              spaceBetween: 10,
+            },
+            600: {
+              slidesPerView: 2,
+              spaceBetween: 10,
             },
           }}
-          slidesPerView={3}
           loopedSlides={1}
           watchSlidesProgress={true}
           navigation={true}
