@@ -220,11 +220,13 @@ const EditionPost = () => {
     return (
       <>
         {pictures &&
-          pictures.data &&
-          pictures.data.map((picture) => (
-            <Box key={picture.attributes.caption}>
+          pictures.map((picture) => (
+            <Box key={picture.Image.data.attributes.caption}>
               <p>
-                <img src={picture.attributes.url} alt={""} />
+                <img src={picture.Image.data.attributes.url} alt={""} />
+                {picture.Description && (
+                  <ReactMarkdown>{picture.Description}</ReactMarkdown>
+                )}
               </p>
             </Box>
           ))}
@@ -345,8 +347,8 @@ const EditionPost = () => {
                                   {item.Link}
                                 </ReactMarkdown>
                               </Box>
-                              {item.Pictures && (
-                                <Pictures pictures={item.Pictures} />
+                              {item.Images && (
+                                <Pictures pictures={item.Images} />
                               )}
                             </>
                           )
@@ -367,9 +369,7 @@ const EditionPost = () => {
                                 {item.Link}
                               </ReactMarkdown>
                             </Box>
-                            {item.Pictures && (
-                              <Pictures pictures={item.Pictures} />
-                            )}
+                            {item.Images && <Pictures pictures={item.Images} />}
                           </>
                         ))}
                       </>
@@ -388,9 +388,7 @@ const EditionPost = () => {
                                 {item.Link}
                               </ReactMarkdown>
                             </Box>
-                            {item.Pictures && (
-                              <Pictures pictures={item.Pictures} />
-                            )}
+                            {item.Images && <Pictures pictures={item.Images} />}
                           </>
                         ))}
                       </>
@@ -409,9 +407,7 @@ const EditionPost = () => {
                                 {item.Link}
                               </ReactMarkdown>
                             </Box>
-                            {item.Pictures && (
-                              <Pictures pictures={item.Pictures} />
-                            )}
+                            {item.Images && <Pictures pictures={item.Images} />}
                           </>
                         ))}
                       </>
@@ -439,8 +435,8 @@ const EditionPost = () => {
                                   {item.Link}
                                 </ReactMarkdown>
                               </Box>
-                              {item.Pictures && (
-                                <Pictures pictures={item.Pictures} />
+                              {item.Images && (
+                                <Pictures pictures={item.Images} />
                               )}
                             </>
                           )
@@ -467,8 +463,8 @@ const EditionPost = () => {
                                   {item.Link}
                                 </ReactMarkdown>
                               </Box>
-                              {item.Pictures && (
-                                <Pictures pictures={item.Pictures} />
+                              {item.Images && (
+                                <Pictures pictures={item.Images} />
                               )}
                             </>
                           )
@@ -489,9 +485,7 @@ const EditionPost = () => {
                                 {item.Link}
                               </ReactMarkdown>
                             </Box>
-                            {item.Pictures && (
-                              <Pictures pictures={item.Pictures} />
-                            )}
+                            {item.Images && <Pictures pictures={item.Images} />}
                           </>
                         ))}
                       </>
@@ -510,9 +504,7 @@ const EditionPost = () => {
                                 {item.Link}
                               </ReactMarkdown>
                             </Box>
-                            {item.Pictures && (
-                              <Pictures pictures={item.Pictures} />
-                            )}
+                            {item.Images && <Pictures pictures={item.Images} />}
                           </>
                         ))}
                       </>
@@ -539,8 +531,8 @@ const EditionPost = () => {
                                   {item.Link}
                                 </ReactMarkdown>
                               </Box>
-                              {item.Pictures && (
-                                <Pictures pictures={item.Pictures} />
+                              {item.Images && (
+                                <Pictures pictures={item.Images} />
                               )}
                             </>
                           )
@@ -571,8 +563,8 @@ const EditionPost = () => {
                                   {item.Link}
                                 </ReactMarkdown>
                               </Box>
-                              {item.Pictures && (
-                                <Pictures pictures={item.Pictures} />
+                              {item.Images && (
+                                <Pictures pictures={item.Images} />
                               )}
                             </>
                           )
@@ -601,8 +593,8 @@ const EditionPost = () => {
                                   {item.Link}
                                 </ReactMarkdown>
                               </Box>
-                              {item.Pictures && (
-                                <Pictures pictures={item.Pictures} />
+                              {item.Images && (
+                                <Pictures pictures={item.Images} />
                               )}
                             </>
                           )
@@ -625,9 +617,7 @@ const EditionPost = () => {
                                 {item.Link}
                               </ReactMarkdown>
                             </Box>
-                            {item.Pictures && (
-                              <Pictures pictures={item.Pictures} />
-                            )}
+                            {item.Images && <Pictures pictures={item.Images} />}
                           </>
                         ))}
                       </>
@@ -654,8 +644,8 @@ const EditionPost = () => {
                                   {item.Link}
                                 </ReactMarkdown>
                               </Box>
-                              {item.Pictures && (
-                                <Pictures pictures={item.Pictures} />
+                              {item.Images && (
+                                <Pictures pictures={item.Images} />
                               )}
                             </>
                           )
