@@ -39,6 +39,11 @@ const VideoSlider = () => {
         "& .swiper-slide-active": {
           transform: "scale(1)",
         },
+        "@media (max-width: 1024px)": {
+          "& .swiper-slide": {
+            transform: "scale(1)",
+          },
+        },
       },
     },
   }));
@@ -49,6 +54,24 @@ const VideoSlider = () => {
     <div className={classes.root}>
       <div className="swiper-container">
         <Swiper
+          breakpoints={{
+            480: {
+              slidesPerView: 1,
+              spaceBetween: 30,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+            780: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+          }}
           slidesPerView={3}
           loopedSlides={1}
           watchSlidesProgress={true}

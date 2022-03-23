@@ -98,17 +98,7 @@ const Home = () => {
                 <SectionHeader title={"Latest Video"} link={"/video"} />
               </Box>
             </Box>
-
-            {!isMobileMatch ? (
-              /*<GridCarousel />*/
-              <VideoSlider />
-            ) : (
-              <Box className={classes.container}>
-                <Box className={classes.wrapper}>
-                  <GridVideo />
-                </Box>
-              </Box>
-            )}
+            <VideoSlider />
           </Box>
           <Box className={classes.container}>
             <Section title={"Latest Editions"} link={"/editions"}>

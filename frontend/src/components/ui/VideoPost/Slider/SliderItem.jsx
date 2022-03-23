@@ -11,15 +11,12 @@ const SliderItem = (props) => {
       height: "100%",
       width: "100%",
       display: "grid",
-      gridTemplateRows: "70% 30%",
+      gridTemplateRows: "65% 35%",
       "& .player-wrapper": {
         width: "auto",
         height: "auto",
         "& .carousel-item": {
           maxWidth: "100%",
-          "& .react-player__preview": {
-            borderRadius: "12px 12px 0 0",
-          },
           "& .react-player__shadow": {
             background: "rgba(255, 255, 255, 0.82) !important",
             borderRadius: "72px !important",
