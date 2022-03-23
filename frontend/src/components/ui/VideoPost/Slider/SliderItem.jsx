@@ -100,13 +100,7 @@ const SliderItem = (props) => {
             <div className={classes.postContent}>
               <div className={classes.contentBody}>
                 <h3 className={classes.postTitle}>
-                  <Link
-                    color="inherit"
-                    href={`/video/${props.video.id}`}
-                    underline="none"
-                  >
-                    {props.video.attributes.Title}
-                  </Link>
+                  {props.video.attributes.Title}
                 </h3>
               </div>
               <div className={classes.contentFooter}>
