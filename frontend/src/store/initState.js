@@ -6,6 +6,7 @@ const _initState = {
     isError: false,
     description: "",
   },
+  messages: "Test message",
   entities: {
     near: null,
     keyStore: null,

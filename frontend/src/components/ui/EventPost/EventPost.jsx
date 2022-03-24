@@ -118,6 +118,8 @@ const EventPost = () => {
     imageUrl = large.url || medium.url || small.url;
   }
 
+  console.log("event", event);
+
   return (
     <>
       <Navbar />
@@ -194,6 +196,8 @@ const EventPost = () => {
             <Box className={classes.container}>
               <PostActions />
               <AddToCalendar
+                summary={event.attributes.Title}
+                description={event.attributes.Body}
                 location={event.attributes.Location}
                 time={event.attributes.Date}
               />
