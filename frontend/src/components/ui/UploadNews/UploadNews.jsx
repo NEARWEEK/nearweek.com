@@ -6,11 +6,13 @@ import SectionHeader from "../general/Section/SectionHeader/SectionHeader";
 import Typography from "@mui/material/Typography";
 import ImageUploader from "react-images-upload";
 import { ErrorMessage } from "@hookform/error-message";
-import TextField from "@mui/material/TextField";
+import { TextField, Button } from "@mui/material";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { api } from "../../../Utils/Utils";
+import FormControl from "@mui/material/FormControl";
 
 const UploadNews = () => {
   const [pictures, setPictures] = useState([]);
@@ -18,9 +20,7 @@ const UploadNews = () => {
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
-    last_name: Yup.string().required("Last name is required"),
-    dob: Yup.string().required("Birthday is required"),
-    email: Yup.string().required("Email is required").email("Email is invalid"),
+    url: Yup.string().required("Url name is required"),
   });
 
   useEffect(async () => {
@@ -48,8 +48,9 @@ const UploadNews = () => {
     console.log(data);
   };
 
-  const onDrop = (picture) => {
+  const onDrop = async (picture) => {
     setPictures([...pictures, picture]);
+    //const upload = await api.upload(picture);
   };
 
   const useStyles = makeStyles((theme) => ({
@@ -106,15 +107,17 @@ const UploadNews = () => {
                 Upload Cover
               </Typography>
               <Box className={classes.inputGroup}>
-                <ImageUploader
-                  singleImage={true}
-                  withPreview={true}
-                  withIcon={true}
-                  buttonText="Choose image"
-                  onChange={onDrop}
-                  imgExtension={[".jpg", ".gif", ".png"]}
-                  maxFileSize={5242880}
-                />
+                <FormControl {...register("image")}>
+                  <ImageUploader
+                    singleImage={true}
+                    withPreview={true}
+                    withIcon={true}
+                    buttonText="Choose image"
+                    onChange={onDrop}
+                    imgExtension={[".jpg", ".gif", ".png"]}
+                    maxFileSize={5242880}
+                  />
+                </FormControl>
               </Box>
               <Box className={classes.inputGroup}>
                 <TextField
@@ -179,7 +182,11 @@ const UploadNews = () => {
                   aria-label="empty textarea"
                   placeholder="Empty"
                   style={{ width: "100%" }}
+                  {...register("body")}
                 />
+              </Box>
+              <Box>
+                <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
               </Box>
             </Box>
             <Box className={classes.column}>
