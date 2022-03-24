@@ -7,11 +7,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { getEventDay, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import ApiCalendar from "react-google-calendar-api";
+import { useStoreActions } from "easy-peasy";
 
 const AddToCalendar = (props) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const showMessage = useStoreActions((actions) => actions.main.showMessage);
 
-  const { time, location } = props;
+  const { summary, description, time, location } = props;
   const useStyles = makeStyles(() => ({
     container: {
       padding: 24,
@@ -37,6 +40,39 @@ const AddToCalendar = (props) => {
       marginTop: !isMobileMatch ? 0 : "24px !important",
     },
   }));
+
+  const event = {
+    summary,
+    time: 60,
+    description,
+    calendarId: "primary",
+    location,
+    start: {
+      dateTime: "2022-03-27T09:00:00+02:00",
+      timeZone: "Europe/Berlin",
+    },
+    end: {
+      dateTime: "2022-03-27T10:00:00+02:00",
+      timeZone: "Europe/Berlin",
+    },
+    attendees: [{ email: "dzhumanrm@gmail.com" }],
+    conferenceData: {
+      createRequest: {
+        requestId: "new14",
+        conferenceSolutionKey: {
+          type: "hangoutsMeet",
+        },
+      },
+    },
+  };
+
+  const addToCalendarHandler = async (e) => {
+    if (!ApiCalendar.sign) await ApiCalendar.handleAuthClick();
+    const createEvent = await ApiCalendar.createEvent(event, "primary");
+    if (createEvent) {
+      showMessage("Event added successfully!");
+    }
+  };
 
   const classes = useStyles();
 
@@ -68,6 +104,7 @@ const AddToCalendar = (props) => {
         variant="contained"
         disableElevation={true}
         className={classes.button}
+        onClick={addToCalendarHandler}
       >
         Add to calendar
       </Button>

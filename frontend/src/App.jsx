@@ -16,8 +16,12 @@ import VideoPost from "./components/ui/VideoPost/VideoPost";
 import UserProfile from "./components/ui/UserProfile/UserProfile";
 import UploadNews from "./components/ui/UploadNews/UploadNews";
 import ProtectedRoute from "./guard/ProtectedRoute/ProtectedRoute";
+import { MessageText } from "./components/ui/general/MessageText/MessageText";
+import { useStoreState } from "easy-peasy";
 
-function App({ history }) {
+function App() {
+  const message = useStoreState((state) => state.main.messages);
+
   let theme = createTheme({
     palette: {
       primary: {
@@ -70,6 +74,7 @@ function App({ history }) {
           </Routes>
         </Suspense>
       </BrowserRouter>
+      <MessageText message={message} />
     </ThemeProvider>
   );
 }

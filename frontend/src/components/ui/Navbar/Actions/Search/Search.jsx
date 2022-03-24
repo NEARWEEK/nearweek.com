@@ -46,6 +46,7 @@ const Search = () => {
         top: "52px",
         right: "-6px",
         maxWidth: "400px",
+        width: "100%",
         boxShadow: "4px 4px 8px 0px rgba(34, 60, 80, 0.2)",
         padding: "0 16px",
         backgroundColor: " #fff",
