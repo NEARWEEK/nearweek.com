@@ -1,5 +1,5 @@
 import moment from "moment";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
 
 const TOKEN = process.env.REACT_APP_API_KEY;
 export const MOBILE_WIDTH = "600px";
@@ -178,6 +178,17 @@ async function subscribe(body) {
   return await response.json();
 }
 
+async function upload(file) {
+  console.log(file);
+  const formData = new FormData();
+  formData.append("files", file[0]);
+  const upload_res = await axios({
+    method: "POST",
+    url: "/api/upload",
+    data: formData,
+  });
+}
+
 async function unsubscribe(query) {
   const response = await fetch(`/api/search?q="${query}"`, options);
   return await response.json();
@@ -198,4 +209,5 @@ export const api = {
   search: elasticSearch,
   getLatestVideo: loadLatestVideo,
   subscribe: subscribe,
+  upload: upload,
 };
