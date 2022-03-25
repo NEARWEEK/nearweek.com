@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "Date": {
-      "type": "datetime",
-      "required": true
-    },
     "Location": {
       "type": "string",
       "required": true
