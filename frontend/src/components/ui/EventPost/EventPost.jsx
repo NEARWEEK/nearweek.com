@@ -199,7 +199,8 @@ const EventPost = () => {
                 summary={event.attributes.Title}
                 description={event.attributes.Body}
                 location={event.attributes.Location}
-                time={event.attributes.Date}
+                start={event.attributes.StartDate}
+                end={event.attributes.EndDate}
               />
               <SectionHeader title={"About Event"} />
               <Box className={classes.containerBody}>
