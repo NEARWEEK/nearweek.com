@@ -14,7 +14,7 @@ const AddToCalendar = (props) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const showMessage = useStoreActions((actions) => actions.main.showMessage);
 
-  const { summary, description, time, location } = props;
+  const { summary, description, start, end, location } = props;
   const useStyles = makeStyles(() => ({
     container: {
       padding: 24,
@@ -43,34 +43,24 @@ const AddToCalendar = (props) => {
 
   const event = {
     summary,
-    time: 60,
     description,
     calendarId: "primary",
     location,
     start: {
-      dateTime: "2022-03-27T09:00:00+02:00",
-      timeZone: "Europe/Berlin",
+      dateTime: start,
     },
     end: {
-      dateTime: "2022-03-27T10:00:00+02:00",
-      timeZone: "Europe/Berlin",
+      dateTime: end,
     },
-    attendees: [{ email: "dzhumanrm@gmail.com" }],
-    conferenceData: {
-      createRequest: {
-        requestId: "new14",
-        conferenceSolutionKey: {
-          type: "hangoutsMeet",
-        },
-      },
-    },
+    attendees: [],
+    conferenceData: {},
   };
 
   const addToCalendarHandler = async (e) => {
     if (!ApiCalendar.sign) await ApiCalendar.handleAuthClick();
     const createEvent = await ApiCalendar.createEvent(event, "primary");
     if (createEvent) {
-      showMessage("Event added successfully!");
+      showMessage("Event created successfully!");
     }
   };
 
@@ -86,7 +76,7 @@ const AddToCalendar = (props) => {
             style={{ fontWeight: 900 }}
             className={classes.text}
           >
-            {getEventDay(time)}
+            {getEventDay(start)}
           </Typography>
         </Box>
         <Box display="flex">
