@@ -10,10 +10,11 @@ import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
 import * as Utils from "../../../../Utils/Utils";
 import Box from "@mui/material/Box";
+import { useStoreActions } from "easy-peasy";
 
 const Subscription = () => {
   const [showError, setShowError] = React.useState(false);
-  const [showSubscribed, setShowSubscribed] = useState(false);
+  const showMessage = useStoreActions((actions) => actions.main.showMessage);
 
   const {
     register,
@@ -21,7 +22,7 @@ const Subscription = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => subscribe(data);
+  const onSubmit = (data) => handleSubscribe(data);
 
   useEffect(() => {
     if (errors.email) {
@@ -29,10 +30,12 @@ const Subscription = () => {
     }
   }, [errors.email]);
 
-  const subscribe = async (request) => {
-    const { data } = await Utils.api.subscribe({ data: request });
+  const handleSubscribe = async (request) => {
+    const { data } = await Utils.api.subscribeNewsletter({ data: request });
     if (data) {
-      setShowSubscribed(true);
+      showMessage(
+        "You have successfully subscribed to the NEARWEEK newsletter."
+      );
       reset();
     }
   };
@@ -97,7 +100,7 @@ const Subscription = () => {
             type="submit"
             variant="contained"
             disableElevation={true}
-            onClick={subscribe}
+            onClick={handleSubscribe}
             className={classes.button}
           >
             Subscribe
@@ -108,16 +111,6 @@ const Subscription = () => {
             <Collapse in={showError}>
               <Alert severity="error" onClose={() => setShowError(false)}>
                 {errors.email.message}
-              </Alert>
-            </Collapse>
-          )}
-          {showSubscribed && (
-            <Collapse in={showSubscribed}>
-              <Alert
-                severity="success"
-                onClose={() => setShowSubscribed(false)}
-              >
-                Thank you for subscribing!
               </Alert>
             </Collapse>
           )}

@@ -168,7 +168,7 @@ async function elasticSearch(query) {
   return await response.json();
 }
 
-async function subscribe(body) {
+async function subscribeNewsletter(body) {
   const requestOptions = {
     headers,
     method: "PUT",
@@ -208,6 +208,6 @@ export const api = {
   getAllVideo: loadAllVideo,
   search: elasticSearch,
   getLatestVideo: loadLatestVideo,
-  subscribe: subscribe,
+  subscribeNewsletter: subscribeNewsletter,
   upload: upload,
 };

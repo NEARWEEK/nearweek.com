@@ -6,6 +6,14 @@
 
 const { createCoreController } = require("@strapi/strapi").factories;
 
+const emailTemplate = {
+  subject: "NEARWEEK.com subscription",
+  text: `Welcome on nearweek.com!
+    Thanks for subscribing to the NEARWEEK newsletter.`,
+  html: `<h1>Welcome on nearweek.com!</h1>
+    <p>Thanks for subscribing to the NEARWEEK newsletter.<p>`,
+};
+
 module.exports = createCoreController(
   "api::subscriber.subscriber",
   ({ strapi }) => ({
@@ -18,6 +26,15 @@ module.exports = createCoreController(
 
       if (!entity) {
         response = await super.create(ctx);
+        await strapi.plugins["email"].services.email.sendTemplatedEmail(
+          {
+            to: email,
+          },
+          emailTemplate,
+          {
+            user: { email },
+          }
+        );
         return response;
       }
 

@@ -120,6 +120,9 @@
       "type": "component",
       "repeatable": true,
       "component": "c-link.component-with-link"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }
