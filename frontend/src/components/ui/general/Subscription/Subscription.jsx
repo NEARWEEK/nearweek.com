@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
+import {
+  Paper,
+  Box,
+  Button,
+  IconButton,
+  Alert,
+  InputBase,
+} from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import EmailIcon from "@mui/icons-material/Email";
-import Button from "@mui/material/Button";
-import InputBase from "@mui/material/InputBase";
 import { useForm } from "react-hook-form";
-import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
 import * as Utils from "../../../../Utils/Utils";
-import Box from "@mui/material/Box";
+
 import { useStoreActions } from "easy-peasy";
 
 const Subscription = () => {
-  const [showError, setShowError] = React.useState(false);
+  const [showError, setShowError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const showMessage = useStoreActions((actions) => actions.main.showMessage);
 
   const {
@@ -31,13 +36,19 @@ const Subscription = () => {
   }, [errors.email]);
 
   const handleSubscribe = async (request) => {
-    const { data } = await Utils.api.subscribeNewsletter({ data: request });
-    if (data) {
+    setLoading(true);
+    const { response, err } = await Utils.api.subscribeNewsletter({
+      data: request,
+    });
+    setLoading(false);
+    if (response) {
       showMessage(
         "You have successfully subscribed to the NEARWEEK newsletter."
       );
-      reset();
+    } else {
+      showMessage(err.title);
     }
+    reset();
   };
 
   const useStyles = makeStyles(() => ({
@@ -99,8 +110,9 @@ const Subscription = () => {
           <Button
             type="submit"
             variant="contained"
+            disabled={loading}
             disableElevation={true}
-            onClick={handleSubscribe}
+            onClick={handleSubmit(onSubmit)}
             className={classes.button}
           >
             Subscribe

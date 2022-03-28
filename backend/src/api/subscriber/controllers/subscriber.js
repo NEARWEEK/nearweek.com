@@ -5,14 +5,10 @@
  */
 
 const { createCoreController } = require("@strapi/strapi").factories;
+const Mailchimp = require("mailchimp-api-v3");
 
-const emailTemplate = {
-  subject: "NEARWEEK.com subscription",
-  text: `Welcome on nearweek.com!
-    Thanks for subscribing to the NEARWEEK newsletter.`,
-  html: `<h1>Welcome on nearweek.com!</h1>
-    <p>Thanks for subscribing to the NEARWEEK newsletter.<p>`,
-};
+const { token, listId } = strapi.config.get("hook.settings.mailchimp");
+const mailchimpService = new Mailchimp(token);
 
 module.exports = createCoreController(
   "api::subscriber.subscriber",
@@ -20,27 +16,20 @@ module.exports = createCoreController(
     async subscribe(ctx) {
       let response;
       const { email } = ctx.request.body.data;
-      const entity = await strapi.query("api::subscriber.subscriber").findOne({
-        where: { email },
-      });
-
-      if (!entity) {
-        response = await super.create(ctx);
-        await strapi.plugins["email"].services.email.sendTemplatedEmail(
-          {
-            to: email,
+      try {
+        response = await mailchimpService.request({
+          method: "post",
+          path: `/lists/${listId}/members`,
+          body: {
+            email_address: email,
+            status: "subscribed",
           },
-          emailTemplate,
-          {
-            user: { email },
-          }
-        );
-        return response;
+        });
+
+        return { response };
+      } catch (err) {
+        return { err };
       }
-
-      const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
-
-      return this.transformResponse(sanitizedEntity);
     },
     async unsubscribe(ctx) {
       const { id } = ctx.params;
