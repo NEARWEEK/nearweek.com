@@ -31,7 +31,7 @@ export const MessageText = ({ message }) => {
     <Snackbar
       sx={{ width: "100%" }}
       open={open}
-      autoHideDuration={60000}
+      autoHideDuration={30000}
       onClose={handleClose}
       message={message}
       action={action}

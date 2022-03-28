@@ -48,6 +48,9 @@
     "StartDate": {
       "type": "datetime",
       "required": false
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

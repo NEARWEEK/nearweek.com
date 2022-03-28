@@ -1,13 +1,17 @@
-module.exports = {
-  /**
-   * Triggered before user creation.
-   */
-  beforeCreate(event) {
-    const { data, where, select, populate } = event.params;
-  },
+const slugify = require("slugify");
 
-  afterCreate(event) {
-    const { result, params } = event;
-    // do something to the result;
+module.exports = {
+  beforeCreate(event) {
+    const { data } = event.params;
+    if (data.Title && data.Number) {
+      data.slug = slugify(`${data.Title} ${data.Number}`, { lower: true });
+    }
+  },
+  beforeUpdate(event) {
+    const { data } = event.params;
+    console.log(data);
+    if (data.Title && data.Number) {
+      data.slug = slugify(`${data.Title} ${data.Number}`, { lower: true });
+    }
   },
 };
