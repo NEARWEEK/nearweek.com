@@ -9,6 +9,7 @@ import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import makeStyles from "@mui/styles/makeStyles";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import ShareButton from "./ShareButton/ShareButton";
 
 const PostActions = () => {
   const { wallet } = useStoreState((state) => state.main.entities);
@@ -100,14 +101,7 @@ const PostActions = () => {
   return (
     <Box className={classes.postActions}>
       <Box>
-        <Button
-          className={[classes.button, classes.shareBtn].join(" ")}
-          variant="contained"
-          disableElevation
-          startIcon={<IosShareIcon />}
-        >
-          <span className={classes.buttonText}>SHARE</span>
-        </Button>
+        <ShareButton />
         <Button
           className={[classes.button, classes.twitterBtn].join(" ")}
           variant="contained"

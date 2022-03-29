@@ -23,6 +23,31 @@ module.exports = createCoreController("api::event.event", ({ strapi }) => ({
     return this.transformResponse(sanitizedEntity);
   },
 
+  async findBySlug(ctx, populate) {
+    ctx.query = { ...ctx.query, local: "en" };
+
+    const { data, meta } = await super.find(ctx, { populate });
+
+    const entity = await strapi
+      .service("api::event.event")
+      .findOne(data[0].id, ctx.query);
+
+    const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+
+    const increaseView = Number(sanitizedEntity.Views) + 1;
+
+    await strapi.entityService.update(
+      "api::article.article",
+      sanitizedEntity.id,
+      {
+        data: {
+          Views: increaseView,
+        },
+      }
+    );
+    return this.transformResponse(sanitizedEntity);
+  },
+
   async find(ctx, populate) {
     // some custom logic here
     ctx.query = { ...ctx.query, local: "en" };

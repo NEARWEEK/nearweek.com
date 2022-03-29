@@ -100,7 +100,7 @@ const Announce = ({ event }) => {
                     alignItems="center"
                   >
                     <Typography color="primary" style={{ fontWeight: 600 }}>
-                      {getEventDay(event.attributes.Date)}
+                      {getEventDay(event.attributes.StartDate)}
                     </Typography>
                     <Typography display="flex" style={{ fontWeight: 600 }}>
                       <LocationOnIcon style={{ color: "#2013fb" }} />
@@ -112,7 +112,7 @@ const Announce = ({ event }) => {
               <h2 className={classes.postTitle}>
                 <Link
                   color="inherit"
-                  href={`/events/${event.id}`}
+                  href={`/events/${event.attributes.slug}`}
                   underline="none"
                 >
                   {event.attributes.Title}

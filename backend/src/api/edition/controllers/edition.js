@@ -14,6 +14,7 @@ module.exports = createCoreController("api::edition.edition", ({ strapi }) => ({
     const entity = await strapi
       .service("api::edition.edition")
       .findOne(id, query);
+
     const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
     const increaseLikes = Number(sanitizedEntity.likes) + 1;
     await strapi.entityService.update(
@@ -26,6 +27,31 @@ module.exports = createCoreController("api::edition.edition", ({ strapi }) => ({
       }
     );
 
+    return this.transformResponse(sanitizedEntity);
+  },
+
+  async findBySlug(ctx, populate) {
+    ctx.query = { ...ctx.query, local: "en" };
+
+    const { data, meta } = await super.find(ctx, { populate });
+
+    const entity = await strapi
+      .service("api::edition.edition")
+      .findOne(data[0].id, ctx.query);
+
+    const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+
+    const increaseView = Number(sanitizedEntity.views) + 1;
+
+    await strapi.entityService.update(
+      "api::edition.edition",
+      sanitizedEntity.id,
+      {
+        data: {
+          views: increaseView,
+        },
+      }
+    );
     return this.transformResponse(sanitizedEntity);
   },
 

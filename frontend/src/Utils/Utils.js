@@ -87,7 +87,10 @@ async function loadEvents() {
 
 async function loadOneEvent(eventId) {
   try {
-    const response = await fetch(`/api/events/${eventId}?populate=*`, options);
+    const response = await fetch(
+      `/api/events/slug?populate=*&filters[slug]=${eventId}`,
+      options
+    );
     return await response.json();
   } catch (e) {
     console.log("Error load event:", e);
@@ -108,7 +111,10 @@ async function loadLatestEvents(page = 1, size = 3) {
 
 async function loadArticle(articleId) {
   try {
-    const response = await fetch(`/api/news/${articleId}?populate=*`, options);
+    const response = await fetch(
+      `/api/news/slug?populate=*&filters[slug]=${articleId}`,
+      options
+    );
     return await response.json();
   } catch (e) {
     console.log("Error load article:", e);
@@ -124,8 +130,9 @@ async function loadLatestNews(page = 1, size = 3) {
 }
 
 async function loadEdition(editionId) {
+  //`/api/editions?populate=deep&filters[slug]=${editionId}`
   const response = await fetch(
-    `/api/editions/${editionId}?populate=deep`,
+    `/api/editions/slug?populate=deep&filters[slug]=${editionId}`,
     options
   );
   return await response.json();
@@ -179,7 +186,6 @@ async function subscribeNewsletter(body) {
 }
 
 async function upload(file) {
-  console.log(file);
   const formData = new FormData();
   formData.append("files", file[0]);
   const upload_res = await axios({

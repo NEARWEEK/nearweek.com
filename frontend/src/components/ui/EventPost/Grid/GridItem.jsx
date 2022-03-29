@@ -1,12 +1,6 @@
 import Thumbnail from "../../EventPost/Grid/Thumbnail/Thumbnail";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -96,7 +90,10 @@ const GridItem = ({ data }) => {
           <div className={classes.postItem}>
             <div className={classes.itemContainer}>
               <div className={classes.postImage}>
-                <Thumbnail data={data} url={`/events/${data.id}`} />
+                <Thumbnail
+                  data={data}
+                  url={`/events/${data.attributes.slug}`}
+                />
               </div>
               <Box className={classes.postContent}>
                 <Box className={classes.contentBody}>
@@ -106,7 +103,7 @@ const GridItem = ({ data }) => {
                     alignItems="center"
                   >
                     <Typography color="primary" style={{ fontWeight: 600 }}>
-                      {getEventDay(data.attributes.Date)}
+                      {getEventDay(data.attributes.StartDate)}
                     </Typography>
                     <Typography display="flex" style={{ fontWeight: 600 }}>
                       <LocationOnIcon style={{ color: "#2013fb" }} />
@@ -116,7 +113,7 @@ const GridItem = ({ data }) => {
                   <h3 className={classes.postTitle}>
                     <Link
                       color="inherit"
-                      href={`/events/${data.id}`}
+                      href={`/events/${data.attributes.slug}`}
                       underline="none"
                     >
                       {data.attributes.Title}
