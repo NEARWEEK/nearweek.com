@@ -121,7 +121,7 @@ const ListItem = ({ data }) => {
                     alignItems="center"
                   >
                     <Typography color="primary" style={{ fontWeight: 600 }}>
-                      {getEventDay(data.attributes.Date)}
+                      {getEventDay(data.attributes.StartDate)}
                     </Typography>
                     <Typography display="flex" style={{ fontWeight: 600 }}>
                       <LocationOnIcon style={{ color: "#2013fb" }} />

@@ -45,6 +45,9 @@
     },
     "slug": {
       "type": "string"
+    },
+    "LinkTo": {
+      "type": "string"
     }
   }
 }

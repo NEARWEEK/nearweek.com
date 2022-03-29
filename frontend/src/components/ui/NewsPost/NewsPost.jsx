@@ -14,6 +14,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
 import Widget from "../general/Widget/Widget";
 import Section from "../general/Section/Section";
+import { placeholder } from "../../../Utils/placeholder";
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -196,6 +197,15 @@ const NewsPost = () => {
     }
   }, []);
 
+  console.log(article);
+
+  let imageUrl = placeholder.getRandomPlaceholder("large");
+  if (article && article.attributes.Image?.data) {
+    const { large, medium, small } =
+      article.attributes.Image.data.attributes.formats;
+    imageUrl = large?.url || medium?.url || small?.url;
+  }
+
   const classes = useStyles();
 
   return (
@@ -217,19 +227,17 @@ const NewsPost = () => {
               </span>
             </Box>
             <Box className={classes.headerBlock}>
-              {article.attributes.Image.data && (
-                <div
-                  style={{
-                    backgroundImage: `url('${article.attributes.Image.data.attributes.url}')`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "50% 50%",
-                    maxWidth: "900px",
-                    minWidth: "200px",
-                    minHeight: isMobileMatch ? "186px" : "582px",
-                  }}
-                  className={classes.img}
-                />
-              )}
+              <div
+                style={{
+                  backgroundImage: imageUrl ? `url('${imageUrl}')` : "none",
+                  backgroundSize: "cover",
+                  backgroundPosition: "50% 50%",
+                  maxWidth: "900px",
+                  minWidth: "200px",
+                  minHeight: isMobileMatch ? "186px" : "582px",
+                }}
+                className={classes.img}
+              />
               <Box className={classes.postContent}>
                 <Box className={classes.postHeader}>
                   <Box className={classes.postCategory}>
@@ -288,12 +296,7 @@ const NewsPost = () => {
             <PostActions />
             <Box>
               <Section title={"Read also"}>
-                {news.data && (
-                  <NewsList
-                    news={news.data.slice(1, 4)}
-                    exclude={[article.id]}
-                  />
-                )}
+                <NewsList exclude={[article.id]} />
               </Section>
             </Box>
           </Box>

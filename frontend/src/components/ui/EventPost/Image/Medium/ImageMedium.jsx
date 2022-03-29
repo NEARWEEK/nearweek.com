@@ -20,7 +20,7 @@ const ImageMedium = ({ data }) => {
   }
   const classes = useStyles();
   return (
-    <a href={`/events/${data.id}`}>
+    <a href={`/events/${data.attributes.slug}`}>
       <div
         style={{
           backgroundImage: `url('${medium}')`,

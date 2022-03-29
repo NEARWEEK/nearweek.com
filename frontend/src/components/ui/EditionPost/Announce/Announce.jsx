@@ -90,7 +90,7 @@ const Announce = ({ edition }) => {
             <h2 className={classes.postTitle}>
               <Link
                 color="inherit"
-                href={`/editions/${edition.id}`}
+                href={`/editions/${edition.attributes.slug}`}
                 underline="none"
               >
                 {edition.attributes.Title}{" "}

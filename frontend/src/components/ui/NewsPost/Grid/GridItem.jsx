@@ -1,10 +1,5 @@
 import * as React from "react";
 import Link from "@mui/material/Link";
-import {
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
 import makeStyles from "@mui/styles/makeStyles";
 import { useMatch } from "react-router";
 import Box from "@mui/material/Box";
@@ -96,7 +91,10 @@ const GridItem = ({ data }) => {
             <div className={classes.itemContainer}>
               <div className={classes.postContent}>
                 <div className={classes.postImage}>
-                  <Thumbnail data={data} url={`/news/${data.id}`} />
+                  <Thumbnail
+                    data={data}
+                    url={`/news/${data.attributes.slug}`}
+                  />
                 </div>
                 <div className={classes.contentBody}>
                   {data && (
@@ -126,7 +124,7 @@ const GridItem = ({ data }) => {
                   <h3 className={classes.postTitle}>
                     <Link
                       color="inherit"
-                      href={`/news/${data.id}`}
+                      href={`/news/${data.attributes.slug}`}
                       underline="none"
                     >
                       {data.attributes.Title}

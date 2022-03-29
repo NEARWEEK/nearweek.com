@@ -13,6 +13,9 @@ import ReactMarkdown from "react-markdown";
 const ListItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const categories = data.attributes.categories.data;
+
+  console.log("categories", categories);
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {
@@ -105,7 +108,10 @@ const ListItem = ({ data }) => {
             <div className={classes.itemContainer}>
               {!isMobileMatch && (
                 <div className={classes.postImage}>
-                  <Thumbnail data={data} url={`/news/${data.id}`} />
+                  <Thumbnail
+                    data={data}
+                    url={`/news/${data.attributes.slug}`}
+                  />
                 </div>
               )}
               <div className={classes.postContent}>
@@ -113,7 +119,10 @@ const ListItem = ({ data }) => {
                   {isMobileMatch && (
                     <div className="image-container">
                       <div className={classes.postImage}>
-                        <Thumbnail data={data} url={`/news/${data.id}`} />
+                        <Thumbnail
+                          data={data}
+                          url={`/news/${data.attributes.slug}`}
+                        />
                       </div>
                     </div>
                   )}
@@ -149,9 +158,9 @@ const ListItem = ({ data }) => {
                       <Link
                         color="inherit"
                         underline="none"
-                        href={`/news/${data.id}`}
+                        href={`/news/${data.attributes.slug}`}
                       >
-                        {data.attributes.Title}{" "}
+                        {data.attributes.Title}
                       </Link>
                     </h3>
                     {!isMobileMatch && (

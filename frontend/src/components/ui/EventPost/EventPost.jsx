@@ -118,8 +118,6 @@ const EventPost = () => {
     imageUrl = large.url || medium.url || small.url;
   }
 
-  console.log("event", event);
-
   return (
     <>
       <Navbar />
@@ -171,7 +169,6 @@ const EventPost = () => {
             {isMobileMatch && (
               <Box className={classes.mobileHeaderBlock}>
                 <h2 className={classes.postTitle}>
-                  {" "}
                   {`${event.attributes.Title}`}
                 </h2>
                 <Box className={classes.headerBlockFooter}>
