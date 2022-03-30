@@ -9,6 +9,15 @@ import { getTimeAgo } from "../../../../Utils/Utils";
 
 const GridItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
+  const categories = data.attributes.categories.data;
+
+  const isHyperlink = () => {
+    let includeHyperlink = false;
+    categories.forEach((item) => {
+      if (item.attributes.Name === "Hyperlink") includeHyperlink = true;
+    });
+    return includeHyperlink;
+  };
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {
@@ -91,10 +100,15 @@ const GridItem = ({ data }) => {
             <div className={classes.itemContainer}>
               <div className={classes.postContent}>
                 <div className={classes.postImage}>
-                  <Thumbnail
-                    data={data}
-                    url={`/news/${data.attributes.slug}`}
-                  />
+                  {!isHyperlink() && (
+                    <Thumbnail
+                      data={data}
+                      url={`/news/${data.attributes.slug}`}
+                    />
+                  )}
+                  {isHyperlink() && (
+                    <Thumbnail data={data} url={`${data.attributes.LinkTo}`} />
+                  )}
                 </div>
                 <div className={classes.contentBody}>
                   {data && (
@@ -122,13 +136,24 @@ const GridItem = ({ data }) => {
                     </Box>
                   )}
                   <h3 className={classes.postTitle}>
-                    <Link
-                      color="inherit"
-                      href={`/news/${data.attributes.slug}`}
-                      underline="none"
-                    >
-                      {data.attributes.Title}
-                    </Link>
+                    {!isHyperlink() && (
+                      <Link
+                        color="inherit"
+                        href={`/news/${data.attributes.slug}`}
+                        underline="none"
+                      >
+                        {data.attributes.Title}
+                      </Link>
+                    )}
+                    {isHyperlink() && (
+                      <Link
+                        color="inherit"
+                        href={`${data.attributes.LinkTo}`}
+                        underline="none"
+                      >
+                        {data.attributes.Title}
+                      </Link>
+                    )}
                   </h3>
                 </div>
                 <div className={classes.contentFooter}>
