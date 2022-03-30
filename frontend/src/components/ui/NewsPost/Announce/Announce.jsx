@@ -11,6 +11,15 @@ import ReactMarkdown from "react-markdown";
 
 const Announce = ({ article }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const categories = article && article.attributes.categories.data;
+
+  const isHyperlink = () => {
+    let includeHyperlink = false;
+    categories.forEach((item) => {
+      if (item.attributes.Name === "Hyperlink") includeHyperlink = true;
+    });
+    return includeHyperlink;
+  };
 
   const useStyles = makeStyles(() => ({
     latestPost: {
@@ -101,13 +110,24 @@ const Announce = ({ article }) => {
               )}
             </div>
             <h2 className={classes.postTitle}>
-              <Link
-                color="inherit"
-                href={`/news/${article.id}`}
-                underline="none"
-              >
-                {article.attributes.Title}
-              </Link>
+              {!isHyperlink() && (
+                <Link
+                  color="inherit"
+                  href={`/news/${article.attributes.slug}`}
+                  underline="none"
+                >
+                  {article.attributes.Title}
+                </Link>
+              )}
+              {isHyperlink() && (
+                <Link
+                  color="inherit"
+                  href={`${article.attributes.LinkTo}`}
+                  underline="none"
+                >
+                  {article.attributes.Title}
+                </Link>
+              )}
             </h2>
             <p className={classes.postBody}>
               <Truncate lines={2}>
