@@ -15,7 +15,13 @@ const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const categories = data.attributes.categories.data;
 
-  console.log("categories", categories);
+  const isHyperlink = () => {
+    let includeHyperlink = false;
+    categories.forEach((item) => {
+      if (item.attributes.Name === "Hyperlink") includeHyperlink = true;
+    });
+    return includeHyperlink;
+  };
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {
@@ -108,10 +114,15 @@ const ListItem = ({ data }) => {
             <div className={classes.itemContainer}>
               {!isMobileMatch && (
                 <div className={classes.postImage}>
-                  <Thumbnail
-                    data={data}
-                    url={`/news/${data.attributes.slug}`}
-                  />
+                  {!isHyperlink() && (
+                    <Thumbnail
+                      data={data}
+                      url={`/news/${data.attributes.slug}`}
+                    />
+                  )}
+                  {isHyperlink() && (
+                    <Thumbnail data={data} url={`${data.attributes.LinkTo}`} />
+                  )}
                 </div>
               )}
               <div className={classes.postContent}>
@@ -119,10 +130,18 @@ const ListItem = ({ data }) => {
                   {isMobileMatch && (
                     <div className="image-container">
                       <div className={classes.postImage}>
-                        <Thumbnail
-                          data={data}
-                          url={`/news/${data.attributes.slug}`}
-                        />
+                        {!isHyperlink() && (
+                          <Thumbnail
+                            data={data}
+                            url={`/news/${data.attributes.slug}`}
+                          />
+                        )}
+                        {isHyperlink() && (
+                          <Thumbnail
+                            data={data}
+                            url={`${data.attributes.LinkTo}`}
+                          />
+                        )}
                       </div>
                     </div>
                   )}
@@ -155,13 +174,24 @@ const ListItem = ({ data }) => {
                       </Box>
                     )}
                     <h3 className={classes.postTitle}>
-                      <Link
-                        color="inherit"
-                        underline="none"
-                        href={`/news/${data.attributes.slug}`}
-                      >
-                        {data.attributes.Title}
-                      </Link>
+                      {!isHyperlink() && (
+                        <Link
+                          color="inherit"
+                          underline="none"
+                          href={`/news/${data.attributes.slug}`}
+                        >
+                          {data.attributes.Title}
+                        </Link>
+                      )}
+                      {isHyperlink() && (
+                        <Link
+                          color="inherit"
+                          underline="none"
+                          href={`${data.attributes.LinkTo}`}
+                        >
+                          {data.attributes.Title}
+                        </Link>
+                      )}
                     </h3>
                     {!isMobileMatch && (
                       <p className={classes.postBody}>
