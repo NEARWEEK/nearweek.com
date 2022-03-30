@@ -5,6 +5,15 @@ import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 
 const ImageMedium = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const categories = data.attributes.categories.data;
+
+  const isHyperlink = () => {
+    let includeHyperlink = false;
+    categories.forEach((item) => {
+      if (item.attributes.Name === "Hyperlink") includeHyperlink = true;
+    });
+    return includeHyperlink;
+  };
 
   const useStyles = makeStyles(() => ({
     img: {
@@ -20,20 +29,40 @@ const ImageMedium = ({ data }) => {
   }
   const classes = useStyles();
   return (
-    <a href={`/editions/${data.id}`}>
-      {medium ? (
-        <div
-          style={{
-            backgroundImage: `url('${medium}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-            width: "100%",
-            height: "100%",
-          }}
-          className={classes.img}
-        />
-      ) : null}
-    </a>
+    <>
+      {!isHyperlink() && (
+        <a href={`/news/${data.attributes.slug}`}>
+          {medium ? (
+            <div
+              style={{
+                backgroundImage: `url('${medium}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+                width: "100%",
+                height: "100%",
+              }}
+              className={classes.img}
+            />
+          ) : null}
+        </a>
+      )}
+      {isHyperlink() && (
+        <a href={`${data.attributes.LinkTo}`}>
+          {medium ? (
+            <div
+              style={{
+                backgroundImage: `url('${medium}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+                width: "100%",
+                height: "100%",
+              }}
+              className={classes.img}
+            />
+          ) : null}
+        </a>
+      )}
+    </>
   );
 };
 export default ImageMedium;
