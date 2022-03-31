@@ -88,6 +88,44 @@ const ShareButton = () => {
 
   const classes = useStyles();
 
+  const socialWindow = (url) => {
+    const left = (screen.width - 570) / 2;
+    const top = (screen.height - 570) / 2;
+    const params =
+      "menubar=no,toolbar=no,status=no,width=570,height=570,top=" +
+      top +
+      ",left=" +
+      left;
+    window.open(url, "NewWindow", params);
+    handleClose();
+  };
+
+  const pageUrl = encodeURIComponent(document.URL);
+
+  const handleShareFacebook = () => {
+    const url = `https://www.facebook.com/sharer.php?u=${pageUrl}`;
+    socialWindow(url);
+  };
+
+  const handleCopyLink = async () => {
+    await navigator.clipboard.writeText(document.URL);
+  };
+
+  const handleShareTwitter = () => {
+    const tweet = encodeURIComponent(
+      document
+        .querySelector('meta[property="og:description"]')
+        .content.toString()
+    );
+    const url = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${tweet}`;
+    socialWindow(url);
+  };
+
+  const handleShareLinkedin = () => {
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+    socialWindow(url);
+  };
+
   return (
     <>
       <Button
@@ -112,20 +150,20 @@ const ShareButton = () => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleCopyLink} disableRipple>
           <LinkIcon />
           Copy link
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleShareTwitter} disableRipple>
           <TwitterIcon />
           Share on Twitter
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleShareFacebook} disableRipple>
           <FacebookIcon />
           Share on Facebook
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleShareLinkedin} disableRipple>
           <LinkedInIcon />
           Share on Linkedin
         </MenuItem>

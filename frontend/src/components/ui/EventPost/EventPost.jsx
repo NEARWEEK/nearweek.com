@@ -19,6 +19,7 @@ import AddToCalendar from "./Actions/AddToCalendar";
 import EventsList from "./List/EventsList";
 import EventsGrid from "./Grid/EventsGrid";
 import { placeholder } from "../../../Utils/placeholder";
+import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 
 const EventPost = () => {
   const [event, setEvent] = useState(null);
@@ -120,6 +121,14 @@ const EventPost = () => {
 
   return (
     <>
+      {event && (
+        <PageMetaTags
+          title={event.attributes.Title}
+          description={event.attributes.Body}
+          image={imageUrl}
+          type={"event"}
+        />
+      )}
       <Navbar />
       {event && (
         <>
