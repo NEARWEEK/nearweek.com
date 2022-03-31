@@ -39,6 +39,17 @@ module.exports = createCoreController("api::edition.edition", ({ strapi }) => ({
       .service("api::edition.edition")
       .findOne(data[0].id, ctx.query);
 
+    //meta.date = new Date();
+
+    const allEditions = await strapi.service("api::edition.edition").find({});
+
+    const curr = allEditions.results[allEditions.results.length - 1].slug;
+    const currIndex = allEditions.results.findIndex((item) => {
+      return item.slug === data[0].attributes.slug;
+    });
+    const prev = allEditions.results[currIndex - 1]?.slug;
+    const next = allEditions.results[currIndex + 1]?.slug;
+
     const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
 
     const increaseView = Number(sanitizedEntity.views) + 1;
@@ -50,9 +61,10 @@ module.exports = createCoreController("api::edition.edition", ({ strapi }) => ({
         data: {
           views: increaseView,
         },
+        meta,
       }
     );
-    return this.transformResponse(sanitizedEntity);
+    return this.transformResponse(sanitizedEntity, { curr, prev, next });
   },
 
   async find(ctx, populate) {
