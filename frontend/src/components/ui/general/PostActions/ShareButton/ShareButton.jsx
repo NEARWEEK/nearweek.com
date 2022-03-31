@@ -88,9 +88,9 @@ const ShareButton = () => {
 
   const classes = useStyles();
 
-  const socialWindow = (url) => {
-    const left = (screen.width - 570) / 2;
-    const top = (screen.height - 570) / 2;
+  const handleSocialWindow = (url) => {
+    const left = (window.screen.width - 570) / 2;
+    const top = (window.screen.height - 570) / 2;
     const params =
       "menubar=no,toolbar=no,status=no,width=570,height=570,top=" +
       top +
@@ -104,7 +104,7 @@ const ShareButton = () => {
 
   const handleShareFacebook = () => {
     const url = `https://www.facebook.com/sharer.php?u=${pageUrl}`;
-    socialWindow(url);
+    handleSocialWindow(url);
   };
 
   const handleCopyLink = async () => {
@@ -118,12 +118,12 @@ const ShareButton = () => {
         .content.toString()
     );
     const url = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${tweet}`;
-    socialWindow(url);
+    handleSocialWindow(url);
   };
 
   const handleShareLinkedin = () => {
     const url = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
-    socialWindow(url);
+    handleSocialWindow(url);
   };
 
   return (
