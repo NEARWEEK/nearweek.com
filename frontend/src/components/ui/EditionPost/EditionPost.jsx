@@ -157,34 +157,43 @@ const EditionPost = () => {
   const match = useMatch(`/editions/:editionId`);
 
   const [edition, setEdition] = useState(null);
+  const [meta, setMeta] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(async () => {
-    const { data } = await Utils.api.getOneEdition(match.params.editionId);
+    const { data, meta } = await Utils.api.getOneEdition(
+      match.params.editionId
+    );
     if (data) {
       setEdition(data);
+    }
+    if (meta) {
+      setMeta(meta);
     }
   }, []);
 
   const handleForward = (e) => {
     e.preventDefault();
-    if (edition.meta.ids) {
-      const curr = edition.meta.ids.indexOf(edition.id);
-      if (curr !== edition.meta.ids.length - 1) {
-        navigate(`/editions/${edition.meta.ids[curr + 1]}`);
-        window.location.reload();
-      }
+    if (meta && meta.next) {
+      navigate(`/editions/${meta.next}`);
+      window.location.reload();
     }
   };
 
   const handleBackward = (e) => {
     e.preventDefault();
-    if (edition.meta.ids) {
-      const curr = edition.meta.ids.indexOf(edition.id);
-      if (curr !== 0) {
-        navigate(`/editions/${edition.meta.ids[curr - 1]}`);
-        window.location.reload();
-      }
+    if (meta && meta.prev) {
+      navigate(`/editions/${meta.prev}`);
+      window.location.reload();
+    }
+  };
+
+  const handleCurrent = (e) => {
+    e.preventDefault();
+    if (meta && meta.curr) {
+      navigate(`/editions/${meta.curr}`);
+      window.location.reload();
     }
   };
 
@@ -319,6 +328,7 @@ const EditionPost = () => {
                             className={classes.actionButton}
                             variant="contained"
                             disableElevation
+                            onClick={(e) => handleCurrent(e)}
                           >
                             CURRENT
                           </Button>
