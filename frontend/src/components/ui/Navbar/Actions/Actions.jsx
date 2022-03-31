@@ -26,9 +26,9 @@ const Actions = () => {
 
   return (
     <div className={classes.root}>
-      {!isMobileMatch && <Search />}
+      {/*{!isMobileMatch && <Search />}*/}
       {isSignIn && <UserActions />}
-      {!isSignIn && <Connect />}
+      {/* {!isSignIn && <Connect />}*/}
       {isSignIn && <UploadNews />}
     </div>
   );

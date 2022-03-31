@@ -15,6 +15,7 @@ import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
 import Widget from "../general/Widget/Widget";
 import Section from "../general/Section/Section";
 import { placeholder } from "../../../Utils/placeholder";
+import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -210,6 +211,14 @@ const NewsPost = () => {
 
   return (
     <>
+      {article && (
+        <PageMetaTags
+          title={article.attributes.Title}
+          description={article.attributes.Body}
+          image={imageUrl}
+          type={"article"}
+        />
+      )}
       <Navbar />
       {article && (
         <Box className={classes.pageWrapper}>

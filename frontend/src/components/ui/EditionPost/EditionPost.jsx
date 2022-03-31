@@ -21,6 +21,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import PostActions from "../general/PostActions/PostActions";
 import Widget from "../general/Widget/Widget";
 import { placeholder } from "../../../Utils/placeholder";
+import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 
 library.add(faDiscord);
 
@@ -237,6 +238,14 @@ const EditionPost = () => {
   const classes = useStyles();
   return (
     <>
+      {edition && (
+        <PageMetaTags
+          title={`${edition.attributes.Title} #${edition.attributes.Number}`}
+          description={edition.attributes.Body}
+          image={imageUrl}
+          type={"edition"}
+        />
+      )}
       <Navbar />
       {edition && (
         <>

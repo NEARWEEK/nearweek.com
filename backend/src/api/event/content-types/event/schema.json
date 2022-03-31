@@ -51,6 +51,11 @@
     },
     "slug": {
       "type": "string"
+    },
+    "time_zone": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::time-zone.time-zone"
     }
   }
 }

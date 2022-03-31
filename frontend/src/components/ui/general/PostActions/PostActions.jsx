@@ -97,6 +97,18 @@ const PostActions = () => {
     if (!isSignedIn) onConnectWallet();
   };
 
+  const handleTwitterButton = () => {
+    window.open("https://twitter.com/NEARWEEK");
+  };
+
+  const handleTelegramButton = () => {
+    window.open("https://t.me/nearweek");
+  };
+
+  const handleDiscordButton = () => {
+    window.open("https://discord.gg/ZysapgamA9");
+  };
+
   const classes = useStyles();
   return (
     <Box className={classes.postActions}>
@@ -106,6 +118,7 @@ const PostActions = () => {
           className={[classes.button, classes.twitterBtn].join(" ")}
           variant="contained"
           disableElevation
+          onClick={handleTwitterButton}
           startIcon={<TwitterIcon />}
         >
           <span className={classes.buttonText}>TWITTER</span>
@@ -114,6 +127,7 @@ const PostActions = () => {
           className={[classes.button, classes.telegramBtn].join(" ")}
           variant="contained"
           disableElevation
+          onClick={handleTelegramButton}
           startIcon={<TelegramIcon />}
         >
           <span className={classes.buttonText}>TELEGRAM</span>
@@ -122,12 +136,13 @@ const PostActions = () => {
           className={[classes.button, classes.discordBtn].join(" ")}
           variant="contained"
           disableElevation
+          onClick={handleDiscordButton}
           startIcon={<FontAwesomeIcon icon={faDiscord} />}
         >
           <span className={classes.buttonText}>DISCORD</span>
         </Button>
       </Box>
-      <Box>
+      {/*      <Box>
         <Button
           className={classes.likeBtn}
           variant="contained"
@@ -137,7 +152,7 @@ const PostActions = () => {
         >
           Like
         </Button>
-      </Box>
+      </Box>*/}
     </Box>
   );
 };
