@@ -110,7 +110,7 @@ const ShareButton = () => {
   };
 
   const handleCopyLink = async () => {
-    await document.navigator.clipboard.writeText(document.location.href);
+    await window.navigator.clipboard.writeText(document.location.href);
     handleClose();
   };
 
