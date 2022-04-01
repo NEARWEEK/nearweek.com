@@ -8,6 +8,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import makeStyles from "@mui/styles/makeStyles";
 import { styled, alpha } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
+import { copyToClipboard } from "../../../../../Utils/Utils";
 
 const ShareButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -113,9 +114,11 @@ const ShareButton = () => {
     handleSocialWindow(url);
   };
 
-  const handleCopyLink = async () => {
-    console.log(document.URL);
-    await navigator.clipboard.writeText(document.URL);
+  const handleCopyLink = (e) => {
+    e.preventDefault();
+    const cl = copyToClipboard(document.URL);
+    console.log(cl);
+    handleClose();
   };
 
   const handleShareTwitter = () => {

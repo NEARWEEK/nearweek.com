@@ -5,7 +5,6 @@ export const onAddToCalendar = thunk(async (actions, payload, helpers) => {
   const showMessage = actions.showMessage;
   const { event } = payload;
   try {
-    console.log(payload);
     if (!ApiCalendar.sign) await ApiCalendar.handleAuthClick();
     const createEvent = await ApiCalendar.createEvent(event, "primary");
     if (createEvent) showMessage("Event created successfully!");
