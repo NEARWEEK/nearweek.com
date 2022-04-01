@@ -114,9 +114,9 @@ const EventPost = () => {
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
   if (event && event.attributes.Image?.data) {
-    const { large, medium, small } =
+    const { large, medium, small, thumbnail } =
       event.attributes.Image.data.attributes.formats;
-    imageUrl = large.url || medium.url || small.url;
+    imageUrl = large?.url || medium?.url || small?.url || thumbnail.url;
   }
 
   return (

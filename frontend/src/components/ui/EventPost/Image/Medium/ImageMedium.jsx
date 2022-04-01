@@ -14,16 +14,19 @@ const ImageMedium = ({ data }) => {
     },
   }));
 
-  let medium = placeholder.getRandomPlaceholder("medium");
+  let imageUrl = placeholder.getRandomPlaceholder("medium");
   if (data.attributes.Image.data) {
-    medium = `${data.attributes.Image.data.attributes.formats.medium.url}`;
+    const { large, medium, small, thumbnail } =
+      data.attributes.Image.data.attributes.formats;
+    imageUrl = large?.url || medium?.url || small?.url || thumbnail.url;
   }
+  console.log(imageUrl);
   const classes = useStyles();
   return (
     <a href={`/events/${data.attributes.slug}`}>
       <div
         style={{
-          backgroundImage: `url('${medium}')`,
+          backgroundImage: `url(${imageUrl})`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
           width: "100%",
