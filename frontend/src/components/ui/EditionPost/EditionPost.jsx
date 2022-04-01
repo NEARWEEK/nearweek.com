@@ -251,7 +251,7 @@ const EditionPost = () => {
         <PageMetaTags
           title={`${edition.attributes.Title} #${edition.attributes.Number}`}
           description={edition.attributes.Body}
-          image={imageUrl}
+          url={document.URL}
           type={"edition"}
         />
       )}
