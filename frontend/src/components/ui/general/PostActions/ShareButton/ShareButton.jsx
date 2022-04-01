@@ -101,7 +101,7 @@ const ShareButton = () => {
     handleClose();
   };
 
-  const pageUrl = encodeURIComponent(document.URL);
+  const pageUrl = encodeURIComponent(location.href);
 
   const handleShareFacebook = (e) => {
     e.preventDefault();
@@ -109,10 +109,8 @@ const ShareButton = () => {
     handleSocialWindow(url);
   };
 
-  const handleCopyLink = async (e) => {
-    e.preventDefault();
-    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-      await navigator.clipboard.writeText(document.URL);
+  const handleCopyLink = async () => {
+    await navigator.clipboard.writeText(location.href);
     handleClose();
   };
 
