@@ -9,6 +9,7 @@ const PageMetaTags = ({ title, description, type, url }) => {
         property="og:description"
         content={description.substring(0, 155)}
       />
+      <meta name="description" content={description.substring(0, 155)} />
       <meta property="og:type" content={type} />
       <meta id="og-title" property="og:title" content={title} />
       <meta id="og-url" property="og:url" content={url} />
