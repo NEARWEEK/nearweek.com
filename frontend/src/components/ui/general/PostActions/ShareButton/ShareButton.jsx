@@ -103,25 +103,21 @@ const ShareButton = () => {
 
   const pageUrl = encodeURIComponent(document.URL);
 
-  const fixedEncodeURIComponent = (str) => {
-    return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
-      return "%" + c.charCodeAt(0).toString(16);
-    });
-  };
-
-  const handleShareFacebook = () => {
+  const handleShareFacebook = (e) => {
+    e.preventDefault();
     const url = `https://www.facebook.com/sharer.php?u=${pageUrl}`;
     handleSocialWindow(url);
   };
 
-  const handleCopyLink = (e) => {
+  const handleCopyLink = async (e) => {
     e.preventDefault();
-    const cl = copyToClipboard(document.URL);
-    console.log(cl);
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
+      await navigator.clipboard.writeText(document.URL);
     handleClose();
   };
 
-  const handleShareTwitter = () => {
+  const handleShareTwitter = (e) => {
+    e.preventDefault();
     const tweet = encodeURIComponent(
       document
         .querySelector('meta[property="og:description"]')
@@ -131,10 +127,9 @@ const ShareButton = () => {
     handleSocialWindow(url);
   };
 
-  const handleShareLinkedin = () => {
-    const url = `https://www.linkedin.com/sharing/share-offsite?mini=true&url=${fixedEncodeURIComponent(
-      document.URL
-    )}`;
+  const handleShareLinkedin = (e) => {
+    e.preventDefault();
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
     handleSocialWindow(url);
   };
 
