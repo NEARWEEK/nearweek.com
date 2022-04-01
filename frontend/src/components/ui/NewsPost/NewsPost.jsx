@@ -215,7 +215,7 @@ const NewsPost = () => {
         <PageMetaTags
           title={article.attributes.Title}
           description={article.attributes.Body}
-          image={imageUrl}
+          url={document.URL}
           type={"article"}
         />
       )}
