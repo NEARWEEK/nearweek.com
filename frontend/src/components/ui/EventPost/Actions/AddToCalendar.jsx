@@ -7,14 +7,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { getEventDay, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ApiCalendar from "react-google-calendar-api";
 import { useStoreActions } from "easy-peasy";
 
 const AddToCalendar = (props) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
-  const showMessage = useStoreActions((actions) => actions.main.showMessage);
+  const onAddToCalendar = useStoreActions(
+    (actions) => actions.main.onAddToCalendar
+  );
 
-  const { summary, description, start, end, location } = props;
+  const { summary, description, start, end, timeZone, location } = props;
   const useStyles = makeStyles(() => ({
     container: {
       padding: 24,
@@ -48,20 +49,19 @@ const AddToCalendar = (props) => {
     location,
     start: {
       dateTime: start,
+      timeZone,
     },
     end: {
       dateTime: end,
+      timeZone,
     },
     attendees: [],
     conferenceData: {},
   };
 
   const addToCalendarHandler = async (e) => {
-    if (!ApiCalendar.sign) await ApiCalendar.handleAuthClick();
-    const createEvent = await ApiCalendar.createEvent(event, "primary");
-    if (createEvent) {
-      showMessage("Event created successfully!");
-    }
+    e.preventDefault();
+    onAddToCalendar({ event });
   };
 
   const classes = useStyles();
