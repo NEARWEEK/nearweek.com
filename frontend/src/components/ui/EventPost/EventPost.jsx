@@ -127,6 +127,7 @@ const EventPost = () => {
           description={event.attributes.Body}
           image={imageUrl}
           type={"event"}
+          url={document.URL}
         />
       )}
       <Navbar />

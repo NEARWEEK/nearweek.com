@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-const PageMetaTags = ({ title, description, type, image }) => {
+const PageMetaTags = ({ title, description, type, url }) => {
   return (
     <Helmet>
       <meta
@@ -11,7 +11,7 @@ const PageMetaTags = ({ title, description, type, image }) => {
       />
       <meta property="og:type" content={type} />
       <meta id="og-title" property="og:title" content={title} />
-      <meta id="og-image" property="og:image" content={image} />
+      <meta id="og-url" property="og:url" content={url} />
     </Helmet>
   );
 };
