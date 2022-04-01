@@ -102,12 +102,19 @@ const ShareButton = () => {
 
   const pageUrl = encodeURIComponent(document.URL);
 
+  const fixedEncodeURIComponent = (str) => {
+    return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+      return "%" + c.charCodeAt(0).toString(16);
+    });
+  };
+
   const handleShareFacebook = () => {
     const url = `https://www.facebook.com/sharer.php?u=${pageUrl}`;
     handleSocialWindow(url);
   };
 
   const handleCopyLink = async () => {
+    console.log(document.URL);
     await navigator.clipboard.writeText(document.URL);
   };
 
@@ -122,7 +129,9 @@ const ShareButton = () => {
   };
 
   const handleShareLinkedin = () => {
-    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+    const url = `https://www.linkedin.com/sharing/share-offsite?mini=true&url=${fixedEncodeURIComponent(
+      document.URL
+    )}`;
     handleSocialWindow(url);
   };
 
