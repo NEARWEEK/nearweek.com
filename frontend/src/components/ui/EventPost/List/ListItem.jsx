@@ -102,7 +102,10 @@ const ListItem = ({ data }) => {
           <div className={classes.postItem}>
             {!isMobileMatch && (
               <div className={classes.blockImage}>
-                <Thumbnail data={data} url={`/events/${data.id}`} />
+                <Thumbnail
+                  data={data}
+                  url={`/events/${data.attributes.slug}`}
+                />
               </div>
             )}
             <div className={classes.postContent}>
@@ -110,7 +113,10 @@ const ListItem = ({ data }) => {
                 {isMobileMatch && (
                   <div className="image-container">
                     <div className={classes.bodyImage}>
-                      <Thumbnail data={data} url={`/events/${data.id}`} />
+                      <Thumbnail
+                        data={data}
+                        url={`/events/${data.attributes.slug}`}
+                      />
                     </div>
                   </div>
                 )}
@@ -132,7 +138,7 @@ const ListItem = ({ data }) => {
                     <Link
                       color="inherit"
                       underline="none"
-                      href={`/events/${data.id}`}
+                      href={`/events/${data.attributes.slug}`}
                     >
                       {data.attributes.Title}{" "}
                     </Link>

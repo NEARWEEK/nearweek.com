@@ -15,13 +15,14 @@ module.exports = createCoreController(
   ({ strapi }) => ({
     async subscribe(ctx) {
       let response;
-      const { email } = ctx.request.body.data;
+      const { email, merge_fields } = ctx.request.body.data;
       try {
         response = await mailchimpService.request({
           method: "post",
           path: `/lists/${listId}/members`,
           body: {
             email_address: email,
+            merge_fields,
             status: "subscribed",
           },
         });

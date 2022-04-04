@@ -198,8 +198,6 @@ const NewsPost = () => {
     }
   }, []);
 
-  console.log(article);
-
   let imageUrl = placeholder.getRandomPlaceholder("large");
   if (article && article.attributes.Image?.data) {
     const { large, medium, small } =

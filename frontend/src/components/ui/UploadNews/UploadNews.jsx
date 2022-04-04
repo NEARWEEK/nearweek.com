@@ -45,7 +45,6 @@ const UploadNews = () => {
 
   const submitButtonHandler = (data) => {
     setLoading(true);
-    console.log(data);
   };
 
   const onDrop = async (picture) => {
