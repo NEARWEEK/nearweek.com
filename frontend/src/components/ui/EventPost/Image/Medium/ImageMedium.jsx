@@ -20,7 +20,6 @@ const ImageMedium = ({ data }) => {
       data.attributes.Image.data.attributes.formats;
     imageUrl = large?.url || medium?.url || small?.url || thumbnail.url;
   }
-  console.log(imageUrl);
   const classes = useStyles();
   return (
     <a href={`/events/${data.attributes.slug}`}>

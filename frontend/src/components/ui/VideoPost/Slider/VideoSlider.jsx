@@ -31,9 +31,6 @@ const VideoSlider = () => {
         width: "100%",
         "& .swiper-slide": {
           height: "360px",
-          // display: "flex",
-          //   alignItems: "center",
-          //   justifyContent: "center",
           transition: "all 200ms linear",
           transform: "scale(0.8)",
         },
@@ -73,7 +70,6 @@ const VideoSlider = () => {
           centeredSlides={true}
           centeredSlidesBounds={true}
           loopFillGroupWithBlank={true}
-          loopAdditionalSlides={30}
         >
           {video
             ? video.map((item, i) => {

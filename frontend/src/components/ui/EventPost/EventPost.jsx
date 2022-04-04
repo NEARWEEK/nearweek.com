@@ -208,7 +208,7 @@ const EventPost = () => {
                 location={event.attributes.Location}
                 start={event.attributes.StartDate}
                 end={event.attributes.EndDate}
-                timeZone={event.attributes.time_zone.data.attributes.Name}
+                timeZone={event.attributes.time_zone.data?.attributes.Name}
               />
               <SectionHeader title={"About Event"} />
               <Box className={classes.containerBody}>
