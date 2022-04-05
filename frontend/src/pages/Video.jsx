@@ -241,7 +241,6 @@ const Video = () => {
                             icon={"ThumbUp"}
                             data={video.data[0].attributes.Likes}
                           />
-                          <Widget icon={"ChatBubble"} data={"0"} />
                         </div>
                       </Box>
                       <Box className={classes.postDate}>
@@ -269,7 +268,6 @@ const Video = () => {
                           icon={"ThumbUp"}
                           data={video.data[0].attributes.Likes}
                         />
-                        <Widget icon={"ChatBubble"} data={"0"} />
                       </div>
                     </Box>
                     <Box className={classes.postDate}>

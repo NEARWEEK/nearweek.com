@@ -187,7 +187,6 @@ const GridCarousel = ({ show = 4 }) => {
                                 icon={"ThumbUp"}
                                 data={_video.attributes.Likes}
                               />
-                              <Widget icon={"ChatBubble"} data={"0"} />
                             </div>
                             <div className={classes.footerDate}>
                               {getTimeAgo(_video.attributes.createdAt)}
@@ -248,7 +247,6 @@ const GridCarousel = ({ show = 4 }) => {
                             icon={"ThumbUp"}
                             data={_video.attributes.Likes}
                           />
-                          <Widget icon={"ChatBubble"} data={"0"} />
                         </div>
                         <div className={classes.footerDate}>
                           {getTimeAgo(_video.attributes.createdAt)}

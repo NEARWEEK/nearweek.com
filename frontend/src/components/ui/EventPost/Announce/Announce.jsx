@@ -128,7 +128,6 @@ const Announce = ({ event }) => {
               <div className={classes.postWidgets}>
                 <Widget icon={"Visibility"} data={event.attributes.Views} />
                 <Widget icon={"ThumbUp"} data={event.attributes.Likes} />
-                <Widget icon={"ChatBubble"} data={"0"} />
               </div>
               <div className={classes.footerDate}>
                 {getTimeAgo(event.attributes.createdAt)}

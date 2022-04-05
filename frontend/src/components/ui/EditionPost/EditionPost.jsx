@@ -312,7 +312,6 @@ const EditionPost = () => {
                             icon={"ThumbUp"}
                             data={edition.attributes.likes}
                           />
-                          <Widget icon={"ChatBubble"} data={"0"} />
                         </div>
                       </Box>
                       {!isMobileMatch && (

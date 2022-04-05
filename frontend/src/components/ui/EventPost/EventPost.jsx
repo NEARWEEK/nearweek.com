@@ -166,7 +166,6 @@ const EventPost = () => {
                           icon={"ThumbUp"}
                           data={event.attributes.Likes}
                         />
-                        <Widget icon={"ChatBubble"} data={"0"} />
                       </div>
                     </Box>
                     <Box className={classes.postDate}>
@@ -189,7 +188,6 @@ const EventPost = () => {
                         data={event.attributes.Views}
                       />
                       <Widget icon={"ThumbUp"} data={event.attributes.Likes} />
-                      <Widget icon={"ChatBubble"} data={"0"} />
                     </div>
                   </Box>
                   <Box className={classes.postDate}>
