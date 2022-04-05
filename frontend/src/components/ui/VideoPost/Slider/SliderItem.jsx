@@ -113,7 +113,6 @@ const SliderItem = (props) => {
                     icon={"ThumbUp"}
                     data={props.video.attributes.Likes}
                   />
-                  <Widget icon={"ChatBubble"} data={"0"} />
                 </div>
                 <div className={classes.footerDate}>
                   {getTimeAgo(props.video.attributes.createdAt)}

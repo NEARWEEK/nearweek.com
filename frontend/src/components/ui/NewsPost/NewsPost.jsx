@@ -286,7 +286,6 @@ const NewsPost = () => {
                       data={article.attributes.Views}
                     />
                     <Widget icon={"ThumbUp"} data={article.attributes.Likes} />
-                    <Widget icon={"ChatBubble"} data={"0"} />
                   </div>
                   <div className={classes.footerDate}>
                     {getTimeAgo(article.attributes.createdAt)}

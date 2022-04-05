@@ -109,7 +109,6 @@ const Announce = ({ edition }) => {
             <div className={classes.postWidgets}>
               <Widget icon={"Visibility"} data={edition.attributes.views} />
               <Widget icon={"ThumbUp"} data={edition.attributes.likes} />
-              <Widget icon={"ChatBubble"} data={"0"} />
             </div>
             <div className={classes.footerDate}>
               {getTimeAgo(edition.attributes.createdAt)}
