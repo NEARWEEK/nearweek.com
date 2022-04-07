@@ -188,6 +188,11 @@ async function loadCategories() {
   return await response.json();
 }
 
+async function loadVideoTags() {
+  const response = await fetch(`/api/video-tags?populate=*`, options);
+  return await response.json();
+}
+
 export function getPubDate(period) {
   const dateFrom = moment(period.From).format("DD MMM").toUpperCase();
   const dateTo = moment(period.To).format("DD MMM YYYY").toUpperCase();
@@ -234,6 +239,7 @@ export const api = {
   getOneEvent: loadOneEvent,
   getLatestEvents: loadLatestEvents,
   getCategories: loadCategories,
+  getVideoTags: loadVideoTags,
   getOneVideo: loadOneVideo,
   getAllVideo: loadAllVideo,
   search: elasticSearch,

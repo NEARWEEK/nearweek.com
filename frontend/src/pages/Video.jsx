@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { getTimeAgo, MOBILE_WIDTH } from "../Utils/Utils";
+import { dateRangeFormat, getTimeAgo, MOBILE_WIDTH } from "../Utils/Utils";
 import makeStyles from "@mui/styles/makeStyles";
 import * as Utils from "../Utils/Utils";
 import Navbar from "../components/ui/Navbar/Navbar";
@@ -17,6 +17,20 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
+import moment from "moment";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DateRangePicker from "@mui/lab/DateRangePicker";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import EventIcon from "@mui/icons-material/Event";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import Divider from "@mui/material/Divider";
+import Chip from "@mui/material/Chip";
+import NewsGrid from "../components/ui/NewsPost/Grid/NewsGrid";
 
 const Video = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -96,6 +110,31 @@ const Video = () => {
       width: "100%",
       height: "320px",
     },
+    filterContainer: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      marginTop: "16px",
+      marginBottom: "16px",
+      justifyContent: "space-between",
+    },
+    filterActionContainer: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      marginTop: "16px",
+      marginBottom: "16px",
+      gap: "24px",
+    },
+    filterCategory: {
+      flexWrap: "wrap",
+      alignItems: "center",
+      "& .active": {
+        backgroundColor: "rgba(13, 0, 255, 0.04)",
+      },
+    },
     postTitle: {
       fontSize: isMobileMatch ? "26px" : "48px",
       color: "#fff",
@@ -118,9 +157,49 @@ const Video = () => {
     },
   }));
 
-  const [video, setVideo] = useState(null);
-  const [editions, setEditions] = useState({ data: [], meta: {} });
+  const [video, setVideo] = useState({ data: [], meta: {} });
+  const [tags, setTags] = useState(null);
   const [open, setOpen] = useState(false);
+  const [filterResult, setFilterResult] = useState({ data: [] });
+  const [filters, setFilters] = useState({
+    tags: "all",
+  });
+
+  useEffect(async () => {
+    const data = await Utils.api.getAllVideo();
+    if (data) {
+      setVideo(data);
+      setFilterResult(data);
+    }
+  }, []);
+
+  useEffect(async () => {
+    const { data } = await Utils.api.getVideoTags();
+    if (data) {
+      const arr = data.map((item) => item.attributes.TagName);
+      setTags(arr);
+    }
+  }, []);
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let { data } = video;
+      let fData = [];
+      if (filters.tags !== "all") {
+        fData = data.filter((item) => {
+          return Boolean(
+            item.attributes.Tags.data.find(
+              (tag) => tag.attributes.TagName === filters.tags
+            )
+          );
+        });
+      } else {
+        fData = data;
+      }
+      setFilterResult({ ...filterResult, data: fData });
+    };
+    applyFilters();
+  }, [filters.tags]);
 
   const handleClickOpen = (e) => {
     setOpen(true);
@@ -130,23 +209,9 @@ const Video = () => {
     setOpen(false);
   };
 
-  useEffect(async () => {
-    const data = await Utils.api.getAllVideo();
-    if (data) {
-      setVideo(data);
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getAllEditions();
-    if (data) {
-      setEditions(data);
-    }
-  }, []);
-
-  function getLatestVideo() {
-    return video.data.filter((_video) => _video.id !== video.data[0].id);
-  }
+  const handleFilterTags = (value) => {
+    setFilters({ ...filters, tags: value });
+  };
 
   const WatchVideo = (props) => {
     const { onClose, title, open, url, videoId } = props;
@@ -187,11 +252,95 @@ const Video = () => {
     );
   };
 
+  const FilterPanel = () => {
+    const isActive = (value) => {
+      return filters.tags === value;
+    };
+
+    return (
+      <>
+        {isMobileMatch && (
+          <Box className={classes.filterContainer}>
+            <Stack
+              spacing={1}
+              direction="row"
+              className={classes.filterCategory}
+            >
+              <Button
+                variant="text"
+                className={isActive("all") ? "active" : ""}
+                style={{ textTransform: "none" }}
+                onClick={() => handleFilterTags("all")}
+              >
+                All categories
+              </Button>
+              {tags
+                ? tags.map((name, index) => (
+                    <Button
+                      variant="text"
+                      key={index}
+                      className={isActive(name) ? "active" : ""}
+                      onClick={() => handleFilterTags(name)}
+                      style={{ textTransform: "none" }}
+                    >
+                      {name}
+                    </Button>
+                  ))
+                : null}
+            </Stack>
+          </Box>
+        )}
+        {!isMobileMatch && (
+          <Box className={classes.filterContainer}>
+            <Stack
+              spacing={1}
+              direction="row"
+              className={classes.filterCategory}
+            >
+              <Button
+                variant="text"
+                className={isActive("all") ? "active" : ""}
+                style={{ textTransform: "none" }}
+                onClick={() => handleFilterTags("all")}
+              >
+                All tags
+              </Button>
+              {tags
+                ? tags.map((name, index) => (
+                    <Button
+                      variant="text"
+                      key={index}
+                      className={isActive(name) ? "active" : ""}
+                      onClick={() => handleFilterTags(name)}
+                      style={{ textTransform: "none" }}
+                    >
+                      {name}
+                    </Button>
+                  ))
+                : null}
+            </Stack>
+          </Box>
+        )}
+      </>
+    );
+  };
+
+  const FilterResult = ({ filterResult }) => {
+    return (
+      <Section title={"Latest Video"}>
+        <FilterPanel />
+        {filterResult.data.length > 0 && (
+          <GridVideo filteredVideo={filterResult.data} />
+        )}
+      </Section>
+    );
+  };
+
   const classes = useStyles();
   return (
     <>
       <Navbar />
-      {video && (
+      {video.data.length > 0 && (
         <>
           <Box
             display="flex"
@@ -287,15 +436,11 @@ const Video = () => {
               url={video.data[0].attributes.Link}
             />
             <Box className={classes.wrapper}>
-              <Section title={"Latest Video"}>
-                {video.data.length > 0 && (
-                  <GridVideo video={getLatestVideo()} />
-                )}
-              </Section>
+              {filterResult.data.length > 0 && (
+                <FilterResult filterResult={filterResult} />
+              )}
               <Section title={"Latest Editions"}>
-                {editions.data.length > 0 && (
-                  <EditionsList editions={editions.data} />
-                )}
+                <EditionsList />
               </Section>
             </Box>
           </Box>

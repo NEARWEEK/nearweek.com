@@ -12,14 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Video": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "videos"
-      ]
-    },
     "Title": {
       "type": "string",
       "required": true
@@ -34,6 +26,11 @@
     },
     "Link": {
       "type": "string"
+    },
+    "Tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::video-tag.video-tag"
     }
   }
 }
