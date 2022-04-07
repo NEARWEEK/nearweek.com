@@ -187,7 +187,7 @@ const EventPost = () => {
                         icon={"Visibility"}
                         data={event.attributes.Views}
                       />
-                      <Widget icon={"ThumbUp"} data={event.attributes.Likes} />
+                      {/*<Widget icon={"ThumbUp"} data={event.attributes.Likes} />*/}
                     </div>
                   </Box>
                   <Box className={classes.postDate}>

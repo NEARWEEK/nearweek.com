@@ -127,7 +127,7 @@ const Announce = ({ event }) => {
             <Box className={classes.contentFooter}>
               <div className={classes.postWidgets}>
                 <Widget icon={"Visibility"} data={event.attributes.Views} />
-                <Widget icon={"ThumbUp"} data={event.attributes.Likes} />
+                {/*<Widget icon={"ThumbUp"} data={event.attributes.Likes} />*/}
               </div>
               <div className={classes.footerDate}>
                 {getTimeAgo(event.attributes.createdAt)}
