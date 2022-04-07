@@ -155,7 +155,7 @@ const ListItem = ({ data }) => {
               <Box className={classes.contentFooter}>
                 <div className={classes.postWidgets}>
                   <Widget icon={"Visibility"} data={data.attributes.views} />
-                  <Widget icon={"ThumbUp"} data={data.attributes.likes} />
+                  {/* <Widget icon={"ThumbUp"} data={data.attributes.likes} />*/}
                 </div>
                 <div className={classes.footerDate}>
                   {getTimeAgo(data.attributes.createdAt)}

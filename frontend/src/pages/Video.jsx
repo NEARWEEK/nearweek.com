@@ -413,10 +413,10 @@ const Video = () => {
                           icon={"Visibility"}
                           data={video.data[0].attributes.Views}
                         />
-                        <Widget
+                        {/*                        <Widget
                           icon={"ThumbUp"}
                           data={video.data[0].attributes.Likes}
-                        />
+                        />*/}
                       </div>
                     </Box>
                     <Box className={classes.postDate}>
