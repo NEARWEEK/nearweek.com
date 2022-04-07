@@ -6,6 +6,7 @@ import Widget from "../../general/Widget/Widget";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import ReactPlayer from "react-player/youtube";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Box from "@mui/material/Box";
 
 const GridItem = ({ data, key }) => {
   const matchVideo = useMatch(`/video/:viedoId`);
@@ -123,6 +124,22 @@ const GridItem = ({ data, key }) => {
               )}
               <div className={classes.postContent}>
                 <div className={classes.contentBody}>
+                  <Box display="inline-flex" className={classes.postCategory}>
+                    {data.attributes.Tags.data ? (
+                      <>
+                        {data.attributes.Tags.data.map((item, index) => (
+                          <>
+                            {index > 0 &&
+                              index < data.attributes.Tags.data.length &&
+                              "•"}{" "}
+                            <Box className={classes.categoryItem} key={index}>
+                              {item.attributes.TagName}
+                            </Box>
+                          </>
+                        ))}
+                      </>
+                    ) : null}
+                  </Box>
                   <h3 className={classes.postTitle}>{data.attributes.Title}</h3>
                 </div>
                 <div className={classes.contentFooter}>

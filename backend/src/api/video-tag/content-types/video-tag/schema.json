@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "video_tags",
+  "info": {
+    "singularName": "video-tag",
+    "pluralName": "video-tags",
+    "displayName": "Video Tags",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "TagName": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

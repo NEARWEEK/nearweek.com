@@ -6,14 +6,18 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 import * as Utils from "../../../../Utils/Utils";
 
-const GridVideo = ({ show }) => {
+const GridVideo = ({ filteredVideo }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const [video, setVideo] = useState([]);
 
   useEffect(async () => {
-    const { data } = await Utils.api.getAllVideo();
-    if (data) {
-      setVideo(data);
+    if (!filteredVideo) {
+      const { data } = await Utils.api.getAllVideo();
+      if (data) {
+        setVideo(data);
+      }
+    } else {
+      setVideo(filteredVideo);
     }
   }, []);
 
@@ -27,18 +31,13 @@ const GridVideo = ({ show }) => {
     },
   }));
 
-  let videoList = [];
-  if (video) {
-    videoList = [...video];
-  }
-
   const classes = useStyles();
 
   return (
     <Box className={classes.gridContainer}>
-      {videoList.length > 0
-        ? videoList.map((_video, i) => {
-            return <GridItem key={_video.id} data={_video} />;
+      {video.length > 0
+        ? video.map((_video, i) => {
+            return <GridItem key={_video.attributes.Title} data={_video} />;
           })
         : null}
     </Box>
