@@ -5,10 +5,8 @@ import Link from "@mui/material/Link";
 import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
-import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import Truncate from "react-truncate";
-import TruncateMarkup from "react-truncate-markup";
 
 const Announce = ({ edition }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
