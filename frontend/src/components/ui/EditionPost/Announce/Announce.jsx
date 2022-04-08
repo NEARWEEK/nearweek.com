@@ -42,6 +42,13 @@ const Announce = ({ edition }) => {
       fontSize: "16px",
       lineHeight: "24px",
       marginTop: 0,
+      //      width: "100%",
+      //      textOverflow: "ellipsis",
+      //      whiteSpace: "nowrap",
+      overflow: "hidden",
+      display: "-webkit-box",
+      webkitLineClamp: 3,
+      webkitBoxOrient: "vertical",
     },
     postFooter: {
       display: "flex",
@@ -93,9 +100,7 @@ const Announce = ({ edition }) => {
               </Link>
             </h2>
             <div className={classes.postBody}>
-              <Truncate lines={2} trimWhitespace>
-                <ReactMarkdown>{edition.attributes.Body}</ReactMarkdown>
-              </Truncate>
+              <ReactMarkdown>{edition.attributes.Body}</ReactMarkdown>
             </div>
           </div>
           <div className={classes.postFooter}>
