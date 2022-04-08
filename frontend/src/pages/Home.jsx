@@ -12,8 +12,6 @@ import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import Section from "../components/ui/general/Section/Section";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../Utils/Utils";
-import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
-import GridCarousel from "../components/ui/VideoPost/GridCarousel/GridCarousel";
 import VideoSlider from "../components/ui/VideoPost/Slider/VideoSlider";
 
 const Home = () => {
