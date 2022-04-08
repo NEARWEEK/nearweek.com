@@ -84,7 +84,7 @@ const ListItem = ({ data }) => {
       marginTop: 0,
       overflow: "hidden",
       display: "-webkit-box",
-      WebkitLineClamp: 3,
+      WebkitLineClamp: 2,
       WebkitBoxOrient: "vertical",
     },
     contentFooter: {
