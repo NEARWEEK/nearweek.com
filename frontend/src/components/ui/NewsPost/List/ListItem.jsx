@@ -47,6 +47,7 @@ const ListItem = ({ data }) => {
       background: matchEdition ? "#fff" : "#f7f7f7",
       flex: 1,
       width: "100%",
+      maxWidth: "456px",
       display: "flex",
       flexDirection: "column",
     },
