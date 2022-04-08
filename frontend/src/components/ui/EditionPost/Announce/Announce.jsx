@@ -47,8 +47,8 @@ const Announce = ({ edition }) => {
       //      whiteSpace: "nowrap",
       overflow: "hidden",
       display: "-webkit-box",
-      webkitLineClamp: 3,
-      webkitBoxOrient: "vertical",
+      WebkitLineClamp: 3,
+      WebkitBoxOrient: "vertical",
     },
     postFooter: {
       display: "flex",
