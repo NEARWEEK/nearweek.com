@@ -1,9 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentAlt,
-  faEye,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import ImageMedium from "../Image/Medium/ImageMedium";
@@ -14,6 +8,7 @@ import Widget from "../../general/Widget/Widget";
 import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import Truncate from "react-truncate";
+import TruncateMarkup from "react-truncate-markup";
 
 const Announce = ({ edition }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -93,17 +88,17 @@ const Announce = ({ edition }) => {
                 href={`/editions/${edition.attributes.slug}`}
                 underline="none"
               >
-                {edition.attributes.Title}{" "}
+                {edition.attributes.Title}
                 <span className={classes.postNumber}>
                   #{edition.attributes.Number}
                 </span>
               </Link>
             </h2>
-            <Truncate lines={2}>
-              <ReactMarkdown className={classes.postBody}>
-                {edition.attributes.Body}
-              </ReactMarkdown>
-            </Truncate>
+            <div className={classes.postBody}>
+              <Truncate lines={2} trimWhitespace>
+                <ReactMarkdown>{edition.attributes.Body}</ReactMarkdown>
+              </Truncate>
+            </div>
           </div>
           <div className={classes.postFooter}>
             <div className={classes.postWidgets}>
