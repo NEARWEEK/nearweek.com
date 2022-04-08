@@ -100,7 +100,9 @@ const Announce = ({ edition }) => {
               </Link>
             </h2>
             <div className={classes.postBody}>
-              <ReactMarkdown>{edition.attributes.Body}</ReactMarkdown>
+              <Truncate lines={3}>
+                <ReactMarkdown>{edition.attributes.Body}</ReactMarkdown>
+              </Truncate>
             </div>
           </div>
           <div className={classes.postFooter}>
