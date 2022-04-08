@@ -13,6 +13,7 @@ const NewsList = ({ exclude, show = 3 }) => {
       height: "100%",
       display: "flex",
       flexWrap: "wrap",
+      maxWidth: "100%",
     },
   }));
 
