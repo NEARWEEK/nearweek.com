@@ -47,7 +47,6 @@ const ListItem = ({ data }) => {
       background: matchEdition ? "#fff" : "#f7f7f7",
       flex: 1,
       width: "100%",
-      maxWidth: "456px",
       display: "flex",
       flexDirection: "column",
     },
@@ -110,6 +109,10 @@ const ListItem = ({ data }) => {
   }));
 
   const classes = useStyles();
+
+  const Description = ({ body }) => {
+    return <ReactMarkdown>{body}</ReactMarkdown>;
+  };
 
   return (
     <>
@@ -200,7 +203,9 @@ const ListItem = ({ data }) => {
                     </h3>
                     {!isMobileMatch && (
                       <div className={classes.postBody}>
-                        <ReactMarkdown>{data.attributes.Body}</ReactMarkdown>
+                        <Truncate lines={3}>
+                          <Description body={data.attributes.Body} />
+                        </Truncate>
                       </div>
                     )}
                   </div>
