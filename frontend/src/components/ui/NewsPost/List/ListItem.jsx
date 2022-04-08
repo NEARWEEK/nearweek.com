@@ -82,6 +82,10 @@ const ListItem = ({ data }) => {
       fontSize: "16px",
       lineHeight: "24px",
       marginTop: 0,
+      overflow: "hidden",
+      display: "-webkit-box",
+      WebkitLineClamp: 3,
+      WebkitBoxOrient: "vertical",
     },
     contentFooter: {
       display: "flex",
@@ -194,11 +198,9 @@ const ListItem = ({ data }) => {
                       )}
                     </h3>
                     {!isMobileMatch && (
-                      <p className={classes.postBody}>
-                        <Truncate lines={2}>
-                          <ReactMarkdown>{data.attributes.Body}</ReactMarkdown>
-                        </Truncate>
-                      </p>
+                      <div className={classes.postBody}>
+                        <ReactMarkdown>{data.attributes.Body}</ReactMarkdown>
+                      </div>
                     )}
                   </div>
                 </div>
