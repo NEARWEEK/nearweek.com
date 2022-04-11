@@ -9,6 +9,7 @@ import Widget from "../../general/Widget/Widget";
 import { getEventDay, getTimeAgo } from "../../../../Utils/Utils";
 import Truncate from "react-truncate";
 import ReactMarkdown from "react-markdown";
+import PostDescription from "../../general/PostDescription/PostDescription";
 
 const GridItem = ({ data }) => {
   const useStyles = makeStyles(() => ({
@@ -119,9 +120,7 @@ const GridItem = ({ data }) => {
                       {data.attributes.Title}
                     </Link>
                   </h3>
-                  <Truncate lines={2}>
-                    <ReactMarkdown>{data.attributes.Body}</ReactMarkdown>
-                  </Truncate>
+                  <PostDescription body={data.attributes.Body} />
                 </Box>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>
