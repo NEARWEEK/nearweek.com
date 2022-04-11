@@ -237,7 +237,7 @@ const NewsPost = () => {
             <Box className={classes.headerBlock}>
               <div
                 style={{
-                  backgroundImage: imageUrl ? `url('${imageUrl}')` : "none",
+                  backgroundImage: `url('${imageUrl}')`,
                   backgroundSize: "cover",
                   backgroundPosition: "50% 50%",
                   maxWidth: "900px",
