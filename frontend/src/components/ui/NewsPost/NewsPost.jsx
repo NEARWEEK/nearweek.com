@@ -201,9 +201,9 @@ const NewsPost = () => {
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
   if (article && article.attributes.Image?.data) {
-    const { large, medium, small } =
-      article.attributes.Image.data.attributes.formats;
-    imageUrl = large?.url || medium?.url || small?.url;
+    const { large, medium } = article.attributes.Image.data.attributes.formats;
+    imageUrl =
+      large?.url || medium?.url || placeholder.getRandomPlaceholder("large");
   }
 
   const classes = useStyles();
