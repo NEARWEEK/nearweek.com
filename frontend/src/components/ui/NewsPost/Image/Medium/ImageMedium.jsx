@@ -2,6 +2,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
+import { placeholder } from "../../../../../Utils/placeholder";
 
 const ImageMedium = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -23,43 +24,41 @@ const ImageMedium = ({ data }) => {
     },
   }));
 
-  let medium;
-  if (data.attributes.Image.data) {
-    medium = `${data.attributes.Image.data.attributes.formats.medium.url}`;
+  let imageUrl = placeholder.getRandomPlaceholder("medium");
+  if (data.attributes.Image?.data?.attributes) {
+    const { large, medium } = data.attributes.Image.data.attributes.formats;
+    imageUrl = large?.url || medium?.url;
   }
+
   const classes = useStyles();
   return (
     <>
       {!isHyperlink() && (
         <a href={`/news/${data.attributes.slug}`}>
-          {medium ? (
-            <div
-              style={{
-                backgroundImage: `url('${medium}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center center",
-                width: "100%",
-                height: "100%",
-              }}
-              className={classes.img}
-            />
-          ) : null}
+          <div
+            style={{
+              backgroundImage: `url('${imageUrl}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+              width: "100%",
+              height: "100%",
+            }}
+            className={classes.img}
+          />
         </a>
       )}
       {isHyperlink() && (
         <a href={`${data.attributes.LinkTo}`}>
-          {medium ? (
-            <div
-              style={{
-                backgroundImage: `url('${medium}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center center",
-                width: "100%",
-                height: "100%",
-              }}
-              className={classes.img}
-            />
-          ) : null}
+          <div
+            style={{
+              backgroundImage: `url('${imageUrl}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+              width: "100%",
+              height: "100%",
+            }}
+            className={classes.img}
+          />
         </a>
       )}
     </>
