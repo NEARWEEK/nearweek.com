@@ -13,6 +13,7 @@ import Section from "../components/ui/general/Section/Section";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../Utils/Utils";
 import VideoSlider from "../components/ui/VideoPost/Slider/VideoSlider";
+import Subscription from "../components/ui/general/Subscription/Subscription";
 
 const Home = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
@@ -83,6 +84,11 @@ const Home = () => {
                   <NewsList show={3} />
                 </Box>
               </Box>
+            </Section>
+          </Box>
+          <Box className={classes.container}>
+            <Section>
+              <Subscription />
             </Section>
           </Box>
           <Box className={classes.container}>

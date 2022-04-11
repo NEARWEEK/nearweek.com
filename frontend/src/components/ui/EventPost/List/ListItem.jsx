@@ -16,6 +16,7 @@ import ReactMarkdown from "react-markdown";
 import Typography from "@mui/material/Typography";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Truncate from "react-truncate";
+import PostDescription from "../../general/PostDescription/PostDescription";
 
 const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -144,11 +145,7 @@ const ListItem = ({ data }) => {
                     </Link>
                   </h3>
                   {!isMobileMatch && (
-                    <Truncate lines={2}>
-                      <ReactMarkdown className={classes.postBody}>
-                        {data.attributes.Body}
-                      </ReactMarkdown>
-                    </Truncate>
+                    <PostDescription body={data.attributes.Body} />
                   )}
                 </div>
               </Box>

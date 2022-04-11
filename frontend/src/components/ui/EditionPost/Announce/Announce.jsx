@@ -7,6 +7,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
 import ReactMarkdown from "react-markdown";
 import Truncate from "react-truncate";
+import PostDescription from "../../general/PostDescription/PostDescription";
+import HTMLEllipsis from "react-lines-ellipsis/lib/html";
 
 const Announce = ({ edition }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -100,9 +102,7 @@ const Announce = ({ edition }) => {
               </Link>
             </h2>
             <div className={classes.postBody}>
-              <Truncate lines={3}>
-                <ReactMarkdown>{edition.attributes.Body}</ReactMarkdown>
-              </Truncate>
+              <PostDescription body={edition.attributes.Body} />
             </div>
           </div>
           <div className={classes.postFooter}>
