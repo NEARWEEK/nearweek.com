@@ -9,6 +9,7 @@ import Widget from "../../general/Widget/Widget";
 import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import Truncate from "react-truncate";
+import PostDescription from "../../general/PostDescription/PostDescription";
 
 const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -135,13 +136,7 @@ const ListItem = ({ data }) => {
                     </Link>
                   </h3>
                   {!isMobileMatch && (
-                    <Truncate lines={2}>
-                      <span>
-                        <ReactMarkdown className={classes.postBody}>
-                          {data.attributes.Body}
-                        </ReactMarkdown>
-                      </span>
-                    </Truncate>
+                    <PostDescription body={data.attributes.Body} />
                   )}
                 </div>
               </Box>

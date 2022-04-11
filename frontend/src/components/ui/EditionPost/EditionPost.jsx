@@ -41,6 +41,11 @@ const EditionPost = () => {
         maxHeight: "100%",
       },
     },
+    hoverPicture: {
+      "&:hover": {
+        transform: "scale(1.2)",
+      },
+    },
     contentWrapper: {
       marginLeft: "16px",
       marginRight: "16px",
@@ -233,7 +238,11 @@ const EditionPost = () => {
           pictures.map((picture) => (
             <Box key={picture.Image.data.attributes.caption}>
               <p>
-                <img src={picture.Image.data.attributes.url} alt={""} />
+                <img
+                  className={classes.hoverPicture}
+                  src={picture.Image.data.attributes.url}
+                  alt={""}
+                />
                 {picture.Description && (
                   <ReactMarkdown>{picture.Description}</ReactMarkdown>
                 )}

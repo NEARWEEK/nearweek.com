@@ -9,6 +9,7 @@ import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import Widget from "../../general/Widget/Widget";
 import Truncate from "react-truncate";
 import ReactMarkdown from "react-markdown";
+import PostDescription from "../../general/PostDescription/PostDescription";
 
 const ListItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
@@ -82,10 +83,10 @@ const ListItem = ({ data }) => {
       fontSize: "16px",
       lineHeight: "24px",
       marginTop: 0,
-      overflow: "hidden",
-      display: "-webkit-box",
-      WebkitLineClamp: 2,
-      WebkitBoxOrient: "vertical",
+      //      overflow: "hidden",
+      //      display: "-webkit-box",
+      //      WebkitLineClamp: 2,
+      //      WebkitBoxOrient: "vertical",
     },
     contentFooter: {
       display: "flex",
@@ -109,10 +110,6 @@ const ListItem = ({ data }) => {
   }));
 
   const classes = useStyles();
-
-  const Description = ({ body }) => {
-    return <ReactMarkdown>{body}</ReactMarkdown>;
-  };
 
   return (
     <>
@@ -203,9 +200,7 @@ const ListItem = ({ data }) => {
                     </h3>
                     {!isMobileMatch && (
                       <div className={classes.postBody}>
-                        <Truncate lines={3}>
-                          <Description body={data.attributes.Body} />
-                        </Truncate>
+                        <PostDescription body={data.attributes.Body} />
                       </div>
                     )}
                   </div>

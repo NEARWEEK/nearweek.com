@@ -16,6 +16,7 @@ import Widget from "../general/Widget/Widget";
 import Section from "../general/Section/Section";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
+import PostDescription from "../general/PostDescription/PostDescription";
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
