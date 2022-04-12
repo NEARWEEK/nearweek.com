@@ -22,6 +22,7 @@ import PostActions from "../general/PostActions/PostActions";
 import Widget from "../general/Widget/Widget";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
+import ShareButton from "../general/PostActions/ShareButton/ShareButton";
 
 library.add(faDiscord);
 
@@ -354,7 +355,9 @@ const EditionPost = () => {
                     </Box>
                   </Box>
                 </Box>
-                <PostActions />
+                <Box display="flex" mt={4} mb={4}>
+                  <ShareButton />
+                </Box>
                 <ReadMore>{edition.attributes.Body}</ReadMore>
                 <Box>
                   <Box>

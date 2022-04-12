@@ -6,6 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useStoreState } from "easy-peasy";
 import UploadNews from "./UploadNews/UploadNews";
 import UserActions from "./UserActions/UserActions";
+import PostActions from "../../general/PostActions/PostActions";
 
 const Actions = () => {
   const state = useStoreState((state) => state);
@@ -27,6 +28,7 @@ const Actions = () => {
   return (
     <div className={classes.root}>
       {/*{!isMobileMatch && <Search />}*/}
+      <PostActions />
       {isSignIn && <UserActions />}
       {/* {!isSignIn && <Connect />}*/}
       {isSignIn && <UploadNews />}

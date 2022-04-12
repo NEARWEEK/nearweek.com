@@ -17,6 +17,7 @@ import Section from "../general/Section/Section";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 import PostDescription from "../general/PostDescription/PostDescription";
+import ShareButton from "../general/PostActions/ShareButton/ShareButton";
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -294,13 +295,17 @@ const NewsPost = () => {
                 </Box>
               </Box>
             </Box>
-            <PostActions />
+            <Box display="flex" alignItems="center" mt={2} mb={2}>
+              <ShareButton />
+            </Box>
             <Box className={classes.containerBody}>
               <ReactMarkdown className={classes.postBody}>
                 {article.attributes.Body}
               </ReactMarkdown>
             </Box>
-            <PostActions />
+            <Box display="flex" alignItems="center">
+              <ShareButton />
+            </Box>
             <Box>
               <Section title={"Read also"}>
                 <NewsList exclude={[article.id]} />

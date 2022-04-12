@@ -39,8 +39,6 @@ const PostActions = () => {
       fontSize: "14px !important",
     },
     postActions: {
-      marginTop: 36,
-      marginBottom: 36,
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
@@ -113,7 +111,6 @@ const PostActions = () => {
   return (
     <Box className={classes.postActions}>
       <Box>
-        <ShareButton />
         <Button
           className={[classes.button, classes.twitterBtn].join(" ")}
           variant="contained"

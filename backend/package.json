@@ -21,7 +21,9 @@
     "@strapi/provider-email-sendgrid": "^4.1.5",
     "@strapi/strapi": "4.1.5",
     "bcryptjs": "^2.4.3",
+    "coingecko-api": "^1.0.10",
     "mailchimp-api-v3": "^1.15.0",
+    "moment": "^2.29.2",
     "sqlite3": "5.0.2",
     "strapi-plugin-populate-deep": "^0.1.2",
     "styled-components": "^5.3.5"
