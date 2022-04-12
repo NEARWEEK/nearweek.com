@@ -49,7 +49,7 @@ const GridItem = ({ data, key }) => {
     postContent: {
       minHeight: "25%",
       background: matchVideo ? "#fff" : "#f7f7f7",
-      borderRadius: "0 0 12px 12px",
+      //borderRadius: "0 0 12px 12px",
     },
     contentBody: {
       padding: "16px 16px 0 16px",
@@ -64,9 +64,9 @@ const GridItem = ({ data, key }) => {
       marginLeft: "6px",
     },
     postTitle: {
-      fontSize: "20px",
-      marginTop: "6px",
-      marginBottom: "6px",
+      fontSize: 14,
+      marginTop: 6,
+      marginBottom: 6,
       maxHeight: "4rem",
       overflow: "hidden",
       WebkitLineClamp: 2,
