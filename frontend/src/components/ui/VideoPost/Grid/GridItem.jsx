@@ -15,7 +15,7 @@ const GridItem = ({ data, key }) => {
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
-      flex: "1 1 326px",
+      flex: "1 1 100%",
     },
     postItem: {
       display: "flex",
@@ -29,10 +29,10 @@ const GridItem = ({ data, key }) => {
       flexDirection: "column",
     },
     postVideo: {
-      borderRadius: "12px 0 0 12px",
-      minHeight: isMobileMatch ? 184 : 360,
+      //borderRadius: "12px 0 0 12px",
+      minHeight: 174,
       "& .react-player__preview": {
-        borderRadius: "12px 12px 0 0",
+        //borderRadius: "12px 12px 0 0",
         "& .react-player__shadow": {
           background: "rgba(255, 255, 255, 0.82) !important",
           backdropFilter: "blur(48px)",

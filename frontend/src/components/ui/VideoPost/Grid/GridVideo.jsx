@@ -25,8 +25,8 @@ const GridVideo = ({ filteredVideo }) => {
     gridContainer: {
       display: "grid",
       gridTemplateColumns: isMobileMatch
-        ? "repeat(auto-fill,minmax(328px, 1fr))"
-        : "repeat(auto-fill,minmax(600px, 1fr))",
+        ? "repeat(auto-fill,minmax(264px, 1fr))"
+        : "repeat(auto-fill,minmax(264px, 1fr))",
       columnGap: "24px",
     },
   }));

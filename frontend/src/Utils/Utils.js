@@ -224,6 +224,11 @@ async function upload(file) {
   });
 }
 
+async function loadStatPrice(query) {
+  const response = await fetch(`/api/stats/price`, options);
+  return await response.json();
+}
+
 async function unsubscribe(query) {
   const response = await fetch(`/api/search?q="${query}"`, options);
   return await response.json();
@@ -245,5 +250,6 @@ export const api = {
   search: elasticSearch,
   getLatestVideo: loadLatestVideo,
   subscribeNewsletter: subscribeNewsletter,
+  getStatsPrice: loadStatPrice,
   upload: upload,
 };
