@@ -26,6 +26,7 @@ const GridItem = ({ data, key }) => {
     itemContainer: {
       borderRadius: "12px",
       display: "flex",
+      flexGrow: 1,
       flexDirection: "column",
     },
     postVideo: {
@@ -47,9 +48,11 @@ const GridItem = ({ data, key }) => {
       },
     },
     postContent: {
-      minHeight: "25%",
+      flexGrow: 1,
       background: matchVideo ? "#fff" : "#f7f7f7",
-      //borderRadius: "0 0 12px 12px",
+      flexDirection: "column",
+      display: "flex",
+      justifyContent: "space-between",
     },
     contentBody: {
       padding: "16px 16px 0 16px",
