@@ -67,6 +67,13 @@ const GridItem = ({ data, key }) => {
       fontSize: "20px",
       marginTop: "6px",
       marginBottom: "6px",
+      maxHeight: "4rem",
+      overflow: "hidden",
+      WebkitLineClamp: 2,
+      display: "box",
+      WebkitBoxOrient: "vertical",
+      textOverflow: "ellipsis",
+      whiteSpace: "normal",
     },
     postBody: {
       fontSize: "16px",
