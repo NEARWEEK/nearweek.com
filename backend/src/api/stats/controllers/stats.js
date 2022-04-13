@@ -4,32 +4,39 @@ const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
 
 module.exports = {
-  async fetch(ctx) {
+  async price() {
     try {
-      const getPrice = async () => {
-        return CoinGeckoClient.coins.fetch("near", {
+      const getPrice = async (coinId) => {
+        return CoinGeckoClient.coins.fetch(coinId, {
           localization: false,
           tickers: false,
         });
       };
 
-      const stats = await getPrice();
+      const stats = await Promise.all([
+        getPrice("near"),
+        getPrice("ref-finance"),
+        getPrice("aurora"),
+        getPrice("trisolaris"),
+        getPrice("octopus-protocol"),
+        getPrice("zelcash"), // Flux
+      ]);
 
-      return stats.data;
+      return stats;
     } catch (e) {
       console.log("Error:", e);
     }
   },
-  async global() {
+  async list() {
     try {
-      const stats = await CoinGeckoClient.global();
+      const stats = await CoinGeckoClient.coins.list();
 
       return stats.data;
     } catch (e) {
       console.log("Error:", e);
     }
   },
-  async price() {
+  async marketChart() {
     try {
       const stats = await CoinGeckoClient.coins.fetchMarketChart("near", {
         days: "max",

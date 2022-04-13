@@ -15,6 +15,8 @@ import { MOBILE_WIDTH } from "../Utils/Utils";
 import VideoSlider from "../components/ui/VideoPost/Slider/VideoSlider";
 import Subscription from "../components/ui/general/Subscription/Subscription";
 import ReactECharts from "echarts-for-react";
+import PriceChart from "../components/ui/general/PriceChart/PriceChart";
+import CoinsPrice from "../components/ui/general/CoinsPrice/CoinsPrice";
 
 const Home = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
@@ -59,32 +61,6 @@ const Home = () => {
     },
   }));
 
-  const options = {
-    grid: { top: 8, right: 8, bottom: 24, left: 36 },
-    xAxis: {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    },
-    yAxis: {
-      type: "value",
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: "line",
-        smooth: true,
-      },
-    ],
-    tooltip: {
-      trigger: "axis",
-    },
-  };
-
-  const getOption = async () => {
-    //return await Utils.api.getStatsPrice();
-    return options;
-  };
-
   const [editions, setEditions] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
@@ -99,6 +75,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
+      <CoinsPrice />
       <main>
         <Box className={classes.wrapper}>
           <Box className={classes.container}>
@@ -120,7 +97,7 @@ const Home = () => {
           </Box>
           {/*          <Box className={classes.container}>
             <Section title={"Nearweek by numbers"}>
-              <ReactECharts option={options} />
+              <PriceChart />
             </Section>
           </Box>*/}
           <Box className={classes.container}>
