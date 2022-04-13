@@ -224,7 +224,12 @@ async function upload(file) {
   });
 }
 
-async function loadStatPrice(query) {
+async function loadStatsMarketChart() {
+  const response = await fetch(`/api/stats/market-chart`, options);
+  return await response.json();
+}
+
+async function loadCoinsPrice() {
   const response = await fetch(`/api/stats/price`, options);
   return await response.json();
 }
@@ -250,6 +255,7 @@ export const api = {
   search: elasticSearch,
   getLatestVideo: loadLatestVideo,
   subscribeNewsletter: subscribeNewsletter,
-  getStatsPrice: loadStatPrice,
+  getCoinsPrice: loadCoinsPrice,
+  getStatsMarketChart: loadStatsMarketChart,
   upload: upload,
 };
