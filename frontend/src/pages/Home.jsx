@@ -17,50 +17,10 @@ import Subscription from "../components/ui/general/Subscription/Subscription";
 import ReactECharts from "echarts-for-react";
 import PriceChart from "../components/ui/general/PriceChart/PriceChart";
 import CoinsPrice from "../components/ui/general/CoinsPrice/CoinsPrice";
+import { useStyles } from "./Home.styles";
 
 const Home = () => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
-
-  const useStyles = makeStyles(() => ({
-    wrapper: {},
-    container: {
-      margin: "0 auto",
-      maxWidth: 1376,
-      paddingRight: "16px",
-      paddingLeft: "16px",
-    },
-    videoContainer: {
-      display: "flex",
-      flexDirection: "row",
-      gap: "24px",
-      width: 1140,
-    },
-    latestEditions: {
-      marginTop: "24px",
-      width: "100%",
-    },
-    blockTitle: {
-      fontSize: "42px",
-      fontWeight: "900",
-      marginBottom: "24px",
-    },
-    blockNews: {
-      display: "flex",
-      gap: "24px",
-      "@media screen and (max-width: 1280px)": {
-        flexDirection: "column",
-      },
-    },
-    blockColumn: {
-      flex: 0.5,
-      display: "flex",
-      maxWidth: "50%",
-      "@media screen and (max-width: 1280px)": {
-        maxWidth: "100%",
-      },
-    },
-  }));
-
+  const classes = useStyles();
   const [editions, setEditions] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
@@ -69,8 +29,6 @@ const Home = () => {
       setEditions(data);
     }
   }, []);
-
-  const classes = useStyles();
 
   return (
     <>

@@ -13,72 +13,11 @@ import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../Utils/Utils";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
+import { useStyles } from "./Events.styles";
+
 const Events = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
   const [events, setEvents] = useState({ data: [], meta: {} });
-
-  const useStyles = makeStyles(() => ({
-    container: {
-      margin: "0 auto",
-      maxWidth: 1440,
-    },
-    wrapper: {
-      marginRight: 16,
-      marginLeft: 16,
-    },
-    topContainer: {
-      display: "flex",
-      margin: !isMobileMatch ? 16 : 0,
-      gap: 24,
-      "@media screen and (max-width: 1080px)": {
-        flexDirection: "column",
-      },
-    },
-    blockColumn: {
-      flex: 0.5,
-    },
-    latestEvents: {
-      marginTop: "24px",
-      width: "100%",
-    },
-    blockTitle: {
-      fontSize: "42px",
-      fontWeight: "900",
-      marginBottom: "24px",
-    },
-    filterContainer: {
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      alignItems: "center",
-      marginTop: "16px",
-      marginBottom: "16px",
-      justifyContent: "space-between",
-    },
-    filterActionContainer: {
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      alignItems: "center",
-      marginTop: "16px",
-      marginBottom: "16px",
-      gap: "24px",
-    },
-    sortSelect: {
-      "& .MuiSelect-select": {
-        padding: "8px",
-        fontSize: "16px",
-        fontWeight: "bold",
-      },
-    },
-    filterCategory: {
-      flexWrap: "wrap",
-      alignItems: "center",
-      "& .active": {
-        backgroundColor: "rgba(13, 0, 255, 0.04)",
-      },
-    },
-  }));
 
   const [editions, setEditions] = useState({ data: [], meta: {} });
 
