@@ -22,7 +22,9 @@ const GridVideo = ({ filteredVideo }) => {
   }, []);
 
   useEffect(() => {
-    setVideo(filteredVideo);
+    if (filteredVideo) {
+      setVideo(filteredVideo);
+    }
   }, [filteredVideo]);
 
   const useStyles = makeStyles(() => ({
