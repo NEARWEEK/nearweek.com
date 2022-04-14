@@ -13,20 +13,6 @@ const styles = (theme) => ({
     marginLeft: "16px",
     marginRight: "16px",
   },
-  headerBlock: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: useMediaQuery(`(max-width:${MOBILE_WIDTH})`)
-      ? "flex-end"
-      : "center",
-    height: "100%",
-    background: useMediaQuery(`(max-width:${MOBILE_WIDTH})`)
-      ? "linear-gradient(to top, black, transparent 50%, transparent 100%, black 100%)"
-      : "linear-gradient(to left, black, transparent 50%, transparent 65%, black 100%)",
-    minHeight: useMediaQuery(`(max-width:${MOBILE_WIDTH})`)
-      ? "calc(360px - 1px)"
-      : "calc(526px - 1px)",
-  },
   videoDescription: {
     marginRight: 16,
     marginLeft: 16,
@@ -36,7 +22,12 @@ const styles = (theme) => ({
     alignSelf: "flex-start",
   },
   videoItem: {
-    maxWidth: useMediaQuery(`(max-width:${MOBILE_WIDTH})`) ? 600 : 1376,
+    maxWidth: {
+      sm: 600,
+      md: 900, // small laptop
+      lg: 1200, // desktop
+      xl: 1376, // large screens
+    },
     margin: "0 auto",
     width: "100%",
     "& .react-player__shadow": {
@@ -58,9 +49,15 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    marginBottom: useMediaQuery(`(max-width:${MOBILE_WIDTH})`) ? 16 : 36,
+    // marginBottom: useMediaQuery(`(max-width:${MOBILE_WIDTH})`) ? 16 : 36,
+    marginBottom: {
+      sm: 16,
+      md: 36, // small laptop
+      lg: 36, // desktop
+      xl: 36, // large screens
+    },
     color: "#fff",
-    fontSize: "14px",
+    fontSize: 14,
   },
   link: {
     color: "#fff",
@@ -76,7 +73,12 @@ const styles = (theme) => ({
       top: 56,
     },
     width: "100%",
-    height: useMediaQuery(`(max-width:${MOBILE_WIDTH})`) ? 320 : 526,
+    height: {
+      sm: 320,
+      md: 526,
+      lg: 526,
+      xl: 526,
+    },
   },
   img: {
     width: "100%",
@@ -108,7 +110,13 @@ const styles = (theme) => ({
     },
   },
   postTitle: {
-    fontSize: useMediaQuery(`(max-width:${MOBILE_WIDTH})`) ? "26px" : "48px",
+    //    fontSize: useMediaQuery(`(max-width:${MOBILE_WIDTH})`) ? "26px" : "48px",
+    fontSize: {
+      sm: 26,
+      md: 48, // small laptop
+      lg: 48, // desktop
+      xl: 48, // large screens
+    },
     color: "#fff",
     margin: "4px 0",
   },
@@ -129,4 +137,4 @@ const styles = (theme) => ({
   },
 });
 
-export const useStyles = makeStyles(styles, { name: "VideoPost" });
+export const useStyles = makeStyles(styles, { name: "Video" });
