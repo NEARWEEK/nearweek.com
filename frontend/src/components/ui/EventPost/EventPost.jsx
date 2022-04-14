@@ -20,88 +20,13 @@ import EventsList from "./List/EventsList";
 import EventsGrid from "./Grid/EventsGrid";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
+import { useStyles } from "./EventPost.styles";
 
 const EventPost = () => {
   const [event, setEvent] = useState(null);
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const match = useMatch(`/events/:eventId`);
-
-  const useStyles = makeStyles((theme) => ({
-    headerContainer: {
-      position: "absolute",
-      backgroundColor: "#000",
-      top: 73,
-      [theme.breakpoints.down("sm")]: {
-        top: 56,
-      },
-      width: "100%",
-      height: isMobileMatch ? 320 : 526,
-    },
-    eventItem: {
-      maxWidth: isMobileMatch ? 600 : 1376,
-      margin: "0 auto",
-      width: "100%",
-    },
-    wrapper: {
-      marginLeft: 16,
-      marginRight: 16,
-    },
-    container: {
-      maxWidth: "1376px",
-      minWidth: "200px",
-      margin: "0 auto",
-      position: "relative",
-    },
-    headerBlock: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: isMobileMatch ? "flex-end" : "center",
-      height: "100%",
-      background: isMobileMatch
-        ? "linear-gradient(to top, black, transparent 50%, transparent 100%, black 100%)"
-        : "linear-gradient(to left, black, transparent 50%, transparent 65%, black 100%)",
-      minHeight: isMobileMatch ? "calc(360px - 1px)" : "calc(526px - 1px)",
-    },
-    mobileHeaderBlock: {
-      background: "#000",
-      padding: "16px",
-    },
-    headerBlockFooter: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "flex-start",
-      marginBottom: isMobileMatch ? 16 : 36,
-      color: "#fff",
-      fontSize: "14px",
-    },
-    description: {
-      marginRight: 16,
-      marginLeft: 16,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "left",
-      alignSelf: "flex-start",
-    },
-    postTitle: {
-      fontSize: isMobileMatch ? "26px" : "48px",
-      color: "#fff",
-      margin: "4px 0",
-    },
-    postDate: {
-      marginRight: 24,
-    },
-    postWidgets: {
-      display: "flex",
-      alignItems: "center",
-    },
-    postWidget: {
-      paddingRight: "24px",
-    },
-    containerBody: {
-      borderBottom: "1px solid #ccc",
-      marginBottom: 24,
-    },
-  }));
+  const classes = useStyles();
 
   useEffect(async () => {
     const { data } = await Utils.api.getOneEvent(match.params.eventId);
@@ -109,8 +34,6 @@ const EventPost = () => {
       setEvent(data);
     }
   }, []);
-
-  const classes = useStyles();
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
   if (event && event.attributes.Image?.data) {
@@ -199,7 +122,6 @@ const EventPost = () => {
           </Box>
           <Box className={classes.wrapper}>
             <Box className={classes.container}>
-              <PostActions />
               <AddToCalendar
                 summary={event.attributes.Title}
                 description={event.attributes.Body}

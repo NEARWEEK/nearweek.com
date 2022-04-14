@@ -18,7 +18,6 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import InputAdornment from "@mui/material/InputAdornment";
 import EventIcon from "@mui/icons-material/Event";
 import FormControl from "@mui/material/FormControl";
-
 import Chip from "@mui/material/Chip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
@@ -33,8 +32,10 @@ import GridCarousel from "../components/ui/VideoPost/GridCarousel/GridCarousel";
 import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
+import { useStyles } from "./News.styles";
 
 const News = () => {
+  const classes = useStyles();
   const [news, setNews] = useState({ data: [], meta: {} });
   const [categories, setCategories] = useState([]);
   const [sort, setSort] = useState("Latest");
@@ -46,73 +47,6 @@ const News = () => {
   });
   const [filterResult, setFilterResult] = useState({ data: [] });
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH}`);
-
-  const useStyles = makeStyles(() => ({
-    container: {
-      margin: "0 auto",
-      maxWidth: 1440,
-    },
-    wrapper: {
-      marginRight: 16,
-      marginLeft: 16,
-    },
-    topContainer: {
-      display: "flex",
-      gap: 24,
-      width: "100%",
-      "@media screen and (max-width: 1080px)": {
-        flexDirection: "column",
-      },
-    },
-    blockColumn: {
-      flex: 0.5,
-      maxWidth: "50%",
-      "@media screen and (max-width: 1280px)": {
-        maxWidth: "100%",
-      },
-    },
-    latestArticles: {
-      marginTop: "24px",
-      width: "100%",
-    },
-    blockTitle: {
-      fontSize: "42px",
-      fontWeight: "900",
-      marginBottom: "24px",
-    },
-    filterContainer: {
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      alignItems: "center",
-      marginTop: "16px",
-      marginBottom: "16px",
-      justifyContent: "space-between",
-    },
-    filterActionContainer: {
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      alignItems: "center",
-      marginTop: "16px",
-      marginBottom: "16px",
-      gap: "24px",
-    },
-    sortSelect: {
-      "& .MuiSelect-select": {
-        padding: "8px",
-        fontSize: "16px",
-        fontWeight: "bold",
-      },
-    },
-    filterCategory: {
-      flexWrap: "wrap",
-      alignItems: "center",
-      "& .active": {
-        backgroundColor: "rgba(13, 0, 255, 0.04)",
-      },
-    },
-  }));
 
   useEffect(async () => {
     const data = await Utils.api.getAllNews();
@@ -411,8 +345,6 @@ const News = () => {
   const FilterResult = ({ filterResult }) => {
     return <NewsGrid news={filterResult.data} />;
   };
-
-  const classes = useStyles();
 
   return (
     <>

@@ -73,24 +73,40 @@ const CoinsPrice = () => {
 
   const classes = useStyles();
 
+  const coins = {
+    near: "$NEAR",
+    ref: "REF",
+    aoa: "AURORA",
+    tri: "TRI",
+    ops: "OPS",
+    flux: "FLUX",
+  };
+
   const CoinBlock = ({ coin }) => {
     return (
       <Card elevation={0}>
         <CardContent>
           <Box className={classes.box}>
-            <Box display="flex" alignItems="center">
-              <span style={{ fontWeight: 900, fontSize: "1rem" }}>
-                {coin.data.symbol}
+            <Box
+              display="flex"
+              alignItems="center"
+              style={{ fontWeight: 900, fontSize: "1rem" }}
+            >
+              <span style={{ marginRight: 8 }}>{coins[coin.data.symbol]}</span>{" "}
+              <span
+                style={{
+                  color: "#0d00ff",
+                }}
+              >
+                ${coin.data.market_data.current_price.usd}
               </span>
+            </Box>
+            <Box display="flex" style={{ textTransform: "none" }}>
+              24h:{" "}
               <ChangePrice24h
                 value={coin.data.market_data.price_change_percentage_24h}
               />
             </Box>
-            <span
-              style={{ fontWeight: 900, fontSize: "1.25rem", color: "#0d00ff" }}
-            >
-              ${coin.data.market_data.current_price.usd}
-            </span>
           </Box>
         </CardContent>
       </Card>
