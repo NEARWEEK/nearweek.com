@@ -21,6 +21,10 @@ const GridVideo = ({ filteredVideo }) => {
     }
   }, []);
 
+  useEffect(() => {
+    setVideo(filteredVideo);
+  }, [filteredVideo]);
+
   const useStyles = makeStyles(() => ({
     gridContainer: {
       display: "grid",
@@ -35,11 +39,10 @@ const GridVideo = ({ filteredVideo }) => {
 
   return (
     <Box className={classes.gridContainer}>
-      {video.length > 0
-        ? video.map((_video, i) => {
-            return <GridItem key={_video.attributes.Title} data={_video} />;
-          })
-        : null}
+      {video.length > 0 &&
+        video.map((_video, i) => (
+          <GridItem key={`${_video.attributes.Title}-${i}`} data={_video} />
+        ))}
     </Box>
   );
 };

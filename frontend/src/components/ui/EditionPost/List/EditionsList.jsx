@@ -76,7 +76,12 @@ const EditionsList = ({ exclude }) => {
     <div className="section">
       {editionsList.length > 0
         ? editionsList.slice(0, moreLength).map((edition, i) => {
-            return <ListItem key={edition.id} data={edition} />;
+            return (
+              <ListItem
+                key={`${edition.attributes.Title}-${i}`}
+                data={edition}
+              />
+            );
           })
         : null}
       <div className={classes.showMoreBlock}>

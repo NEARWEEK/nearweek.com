@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useMatch } from "react-router";
 import makeStyles from "@mui/styles/makeStyles";
-import Link from "@mui/material/Link";
 import Widget from "../../general/Widget/Widget";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import ReactPlayer from "react-player/youtube";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 
-const GridItem = ({ data, key }) => {
+const GridItem = ({ data }) => {
   const matchVideo = useMatch(`/video/:viedoId`);
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
   const useStyles = makeStyles(() => ({
     teaserBlock: {
@@ -116,7 +114,6 @@ const GridItem = ({ data, key }) => {
                 <div className={classes.postVideo}>
                   {data.attributes?.Link ? (
                     <ReactPlayer
-                      key={key}
                       controls={true}
                       config={{
                         youtube: {
@@ -135,20 +132,22 @@ const GridItem = ({ data, key }) => {
               <div className={classes.postContent}>
                 <div className={classes.contentBody}>
                   <Box display="inline-flex" className={classes.postCategory}>
-                    {data.attributes.Tags.data ? (
+                    {data.attributes.Tags.data && (
                       <>
                         {data.attributes.Tags.data.map((item, index) => (
-                          <>
+                          <Box
+                            className={classes.categoryItem}
+                            key={`${item.attributes.TagName}-${index}`}
+                          >
                             {index > 0 &&
-                              index < data.attributes.Tags.data.length &&
-                              "•"}{" "}
-                            <Box className={classes.categoryItem} key={index}>
-                              {item.attributes.TagName}
-                            </Box>
-                          </>
+                              index < data.attributes.Tags.data.length && (
+                                <span>{"•"}</span>
+                              )}
+                            <span>{item.attributes.TagName}</span>
+                          </Box>
                         ))}
                       </>
-                    ) : null}
+                    )}
                   </Box>
                   <h3 className={classes.postTitle}>{data.attributes.Title}</h3>
                 </div>

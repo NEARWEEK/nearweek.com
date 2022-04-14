@@ -318,10 +318,10 @@ const EditionPost = () => {
                             icon={"Visibility"}
                             data={edition.attributes.views}
                           />
-                          <Widget
+                          {/*                          <Widget
                             icon={"ThumbUp"}
                             data={edition.attributes.likes}
-                          />
+                          />*/}
                         </div>
                       </Box>
                       {!isMobileMatch && (
