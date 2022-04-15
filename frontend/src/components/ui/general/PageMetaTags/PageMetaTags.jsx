@@ -8,6 +8,8 @@ const PageMetaTags = ({ title, description, type, url }) => {
       <meta property="og:type" content="article" />
       <meta property="og:title" content={title} />
       <meta property="og:url" content={url} />
+      <meta property="twitter:title" content={title} />
+      <meta property="twitter:text:title" content={title} />
     </Helmet>
   );
 };
