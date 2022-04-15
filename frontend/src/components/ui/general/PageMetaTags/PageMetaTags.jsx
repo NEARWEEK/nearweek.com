@@ -12,6 +12,11 @@ const PageMetaTags = ({ title, description, type, url }) => {
       <meta property="og:type" content={type} />
       <meta name="title" property="og:title" content={title} />
       <meta name="url" property="og:url" content={url} />
+      <meta
+        name="image"
+        property="og:image"
+        content={location.origin + "/nearweek-logo.png"}
+      />
     </Helmet>
   );
 };
