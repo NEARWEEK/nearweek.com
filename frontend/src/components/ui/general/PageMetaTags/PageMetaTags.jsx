@@ -19,7 +19,7 @@ const PageMetaTags = ({ title, description, type, url }) => {
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:title" content={title} />
-      <meta property="og:image:type" content="imge/png" />
+      <meta property="og:image:type" content="image/png" />
     </Helmet>
   );
 };
