@@ -13,7 +13,7 @@ const PageMetaTags = ({ title, description, type, url }) => {
   };
 
   const setTweeterTitle = (title) => {
-    const el = document.querySelector("meta[property='tweeter:title']");
+    const el = document.querySelector("meta[property='twitter:title']");
     el.setAttribute("content", title);
   };
 
