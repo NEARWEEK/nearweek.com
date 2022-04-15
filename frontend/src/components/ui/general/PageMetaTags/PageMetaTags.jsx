@@ -2,7 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 const PageMetaTags = ({ title, description, type, url }) => {
-  console.log(location);
   return (
     <Helmet>
       <meta property="og:description" content={description.substring(0, 155)} />
