@@ -35,7 +35,7 @@ const PageMetaTags = ({ title, description, type, url }) => {
   }, [description]);
 
   useEffect(() => {
-    setTitle(title);
+    //setTitle(title);
     //    setTweeterTitle(title);
     //    setTweeterTextTitle(title);
   }, [title]);
@@ -44,7 +44,12 @@ const PageMetaTags = ({ title, description, type, url }) => {
     <Helmet>
       <meta property="og:type" content="article" />
       <meta property="og:url" content={url} />
-      {/*  <meta property="og:title" content={title} />*/}
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:text:title" content={description.substring(0, 155)} />
+      <meta
+        name="twitter:image"
+        content={`${window.location.origin}/nearweek-logo.jpg`}
+      />
     </Helmet>
   );
 };
