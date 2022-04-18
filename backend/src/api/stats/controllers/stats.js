@@ -16,10 +16,10 @@ module.exports = {
       const stats = await Promise.all([
         getPrice("near"),
         getPrice("ref-finance"),
-        getPrice("aurora"),
+        getPrice("aurora-near"),
         getPrice("trisolaris"),
-        getPrice("octopus-protocol"),
-        getPrice("zelcash"), // Flux
+        getPrice("octopus-network"),
+        getPrice("flux-token"),
       ]);
 
       return stats;

@@ -53,6 +53,10 @@ const CoinsPrice = () => {
     return parseFloat(value).toFixed(2);
   };
 
+  const getPrice = (value) => {
+    return parseFloat(value).toFixed(2);
+  };
+
   const ChangePrice24h = ({ value }) => {
     const boxColor = value < 0 ? "red" : "#27e3a8";
     return (
@@ -75,11 +79,11 @@ const CoinsPrice = () => {
 
   const coins = {
     near: "$NEAR",
-    ref: "REF",
-    aoa: "AURORA",
-    tri: "TRI",
-    ops: "OPS",
-    flux: "FLUX",
+    ref: "$REF",
+    aurora: "$AURORA",
+    tri: "$TRI",
+    oct: "$OCT",
+    flx: "$FLX",
   };
 
   const CoinBlock = ({ coin }) => {
@@ -98,7 +102,7 @@ const CoinsPrice = () => {
                   color: "#0d00ff",
                 }}
               >
-                ${coin.data.market_data.current_price.usd}
+                {getPrice(coin.data.market_data.current_price.usd)}
               </span>
             </Box>
             <Box display="flex" style={{ textTransform: "none" }}>
