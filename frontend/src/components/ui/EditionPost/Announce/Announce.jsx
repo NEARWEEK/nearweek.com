@@ -1,79 +1,12 @@
 import * as React from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
-import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { getPubDate, getTimeAgo } from "../../../../Utils/Utils";
 import Widget from "../../general/Widget/Widget";
-import ReactMarkdown from "react-markdown";
-import Truncate from "react-truncate";
 import PostDescription from "../../general/PostDescription/PostDescription";
-import HTMLEllipsis from "react-lines-ellipsis/lib/html";
+import { useStyles } from "./Announce.styles";
 
 const Announce = ({ edition }) => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
-
-  const useStyles = makeStyles(() => ({
-    latestPost: {
-      width: "100%",
-      background: "#f7f7f7",
-      borderRadius: "12px",
-    },
-    content: {
-      padding: "24px 24px 0",
-    },
-    image: {
-      borderRadius: "12px 12px 0 0",
-      width: "100%",
-    },
-    postDate: {
-      color: "#2013fb",
-      fontWeight: "bold",
-      fontSize: "14px",
-    },
-    postTitle: {
-      fontSize: "48px",
-      fontWeight: "900",
-      marginTop: "12px",
-      marginBottom: "12px",
-    },
-    postNumber: {
-      color: "#2013fb",
-    },
-    postBody: {
-      fontSize: "16px",
-      lineHeight: "24px",
-      marginTop: 0,
-      //      width: "100%",
-      //      textOverflow: "ellipsis",
-      //      whiteSpace: "nowrap",
-      overflow: "hidden",
-      display: "-webkit-box",
-      WebkitLineClamp: 3,
-      WebkitBoxOrient: "vertical",
-    },
-    postFooter: {
-      display: "flex",
-      justifyContent: "space-between",
-      padding: "12px 24px",
-      borderTop: "1px solid #c8c6c6",
-      borderRadius: "0 0 12px 12px",
-    },
-    postWidgets: {
-      display: "flex",
-      alignItems: "center",
-      color: "rgba(0, 0, 0, 0.54)",
-    },
-    postWidget: {
-      color: "#656364",
-      paddingRight: "24px",
-    },
-    footerDate: {
-      fontSize: "12px",
-      color: "#656364",
-    },
-  }));
-
   const classes = useStyles();
   return (
     <>
