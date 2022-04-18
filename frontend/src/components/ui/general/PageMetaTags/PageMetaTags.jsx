@@ -1,7 +1,14 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import Markdown from "js-markdown";
 
 const PageMetaTags = ({ title, description, type, url }) => {
+  const html = Markdown.parse(description);
+
+  const desc = html.replace(/<[^>]+>/g, "");
+
+  console.log(desc);
+
   const setDescription = (desc) => {
     const el = document.querySelector("meta[property='og:description']");
     el.setAttribute("content", desc);
@@ -45,7 +52,7 @@ const PageMetaTags = ({ title, description, type, url }) => {
       <meta property="og:type" content="article" />
       <meta property="og:url" content={url} />
       <meta name="twitter:title" content={title} />
-      <meta name="twitter:text:title" content={description.substring(0, 155)} />
+      <meta name="twitter:text:title" content={desc.substring(0, 155)} />
       <meta
         name="twitter:image"
         content={`${window.location.origin}/nearweek-logo.jpg`}

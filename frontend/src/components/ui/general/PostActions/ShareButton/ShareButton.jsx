@@ -118,7 +118,7 @@ const ShareButton = () => {
     e.preventDefault();
     const tweet = encodeURIComponent(
       document
-        .querySelector('meta[property="og:description"]')
+        .querySelector('meta[name="twitter:text:title"]')
         .content.toString()
     );
     const url = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${tweet}`;
