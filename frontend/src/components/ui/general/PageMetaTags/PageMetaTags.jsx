@@ -8,6 +8,14 @@ const PageMetaTags = ({ title, description, type, url }) => {
   };
 
   const setTitle = (title) => {
+    const meta = document.createElement("meta");
+    meta.setAttribute("property", "twitter:title");
+    meta.setAttribute("content", title);
+    document.head.insertBefore(meta, document.head.firstElementChild);
+    //document.getElementsByTagName("head")[0].appendChild(meta);
+  };
+
+  const _setTitle = (title) => {
     const el = document.querySelector("meta[property='og:title']");
     el.setAttribute("content", title);
   };
@@ -23,21 +31,20 @@ const PageMetaTags = ({ title, description, type, url }) => {
   };
 
   useEffect(() => {
-    setDescription(description.substring(0, 155));
+    //setDescription(description.substring(0, 155));
   }, [description]);
 
   useEffect(() => {
     setTitle(title);
-    setTweeterTitle(title);
-    setTweeterTextTitle(title);
+    //    setTweeterTitle(title);
+    //    setTweeterTextTitle(title);
   }, [title]);
 
   return (
-    <Helmet prepend>
-      {/*<meta property="og:description" content={description.substring(0, 155)} />*/}
+    <Helmet>
       <meta property="og:type" content="article" />
-      {/* <meta property="og:title" content={title} />*/}
       <meta property="og:url" content={url} />
+      {/*  <meta property="og:title" content={title} />*/}
     </Helmet>
   );
 };

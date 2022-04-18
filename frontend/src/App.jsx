@@ -18,6 +18,8 @@ import UploadNews from "./components/ui/UploadNews/UploadNews";
 import ProtectedRoute from "./guard/ProtectedRoute/ProtectedRoute";
 import { MessageText } from "./components/ui/general/MessageText/MessageText";
 import { useStoreState } from "easy-peasy";
+import { Helmet } from "react-helmet";
+import { Initializer } from "./providers/Initializer/Initializer";
 
 function App() {
   const message = useStoreState((state) => state.main.messages);
@@ -64,7 +66,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
