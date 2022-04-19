@@ -182,10 +182,10 @@ const EditionPost = () => {
                           </span>
                         </Box>
                         <div className={classes.postWidgets}>
-                          <Widget
+                          {/*                          <Widget
                             icon={"Visibility"}
                             data={edition.attributes.views}
-                          />
+                          />*/}
                           {/*                          <Widget
                             icon={"ThumbUp"}
                             data={edition.attributes.likes}

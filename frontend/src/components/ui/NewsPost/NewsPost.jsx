@@ -131,10 +131,10 @@ const NewsPost = () => {
 
                 <Box className={classes.postFooter}>
                   <div className={classes.postWidgets}>
-                    <Widget
+                    {/*                    <Widget
                       icon={"Visibility"}
                       data={article.attributes.Views}
-                    />
+                    />*/}
                     {/*<Widget icon={"ThumbUp"} data={article.attributes.Likes} />*/}
                   </div>
                   <div className={classes.footerDate}>

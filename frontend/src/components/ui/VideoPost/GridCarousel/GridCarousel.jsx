@@ -179,14 +179,14 @@ const GridCarousel = ({ show = 4 }) => {
                           </div>
                           <div className={classes.contentFooter}>
                             <div className={classes.postWidgets}>
-                              <Widget
+                              {/*                              <Widget
                                 icon={"Visibility"}
                                 data={_video.attributes.Views}
                               />
                               <Widget
                                 icon={"ThumbUp"}
                                 data={_video.attributes.Likes}
-                              />
+                              />*/}
                             </div>
                             <div className={classes.footerDate}>
                               {getTimeAgo(_video.attributes.createdAt)}
@@ -239,14 +239,14 @@ const GridCarousel = ({ show = 4 }) => {
                       </div>
                       <div className={classes.contentFooter}>
                         <div className={classes.postWidgets}>
-                          <Widget
+                          {/*                          <Widget
                             icon={"Visibility"}
                             data={_video.attributes.Views}
                           />
                           <Widget
                             icon={"ThumbUp"}
                             data={_video.attributes.Likes}
-                          />
+                          />*/}
                         </div>
                         <div className={classes.footerDate}>
                           {getTimeAgo(_video.attributes.createdAt)}

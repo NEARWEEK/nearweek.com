@@ -81,14 +81,14 @@ const EventPost = () => {
                   <Box className={classes.headerBlockFooter}>
                     <Box display="inline-flex">
                       <div className={classes.postWidgets}>
-                        <Widget
+                        {/*                        <Widget
                           icon={"Visibility"}
                           data={event.attributes.Views}
                         />
                         <Widget
                           icon={"ThumbUp"}
                           data={event.attributes.Likes}
-                        />
+                        />*/}
                       </div>
                     </Box>
                     <Box className={classes.postDate}>
@@ -106,10 +106,10 @@ const EventPost = () => {
                 <Box className={classes.headerBlockFooter}>
                   <Box display="inline-flex">
                     <div className={classes.postWidgets}>
-                      <Widget
+                      {/*                      <Widget
                         icon={"Visibility"}
                         data={event.attributes.Views}
-                      />
+                      />*/}
                       {/*<Widget icon={"ThumbUp"} data={event.attributes.Likes} />*/}
                     </div>
                   </Box>

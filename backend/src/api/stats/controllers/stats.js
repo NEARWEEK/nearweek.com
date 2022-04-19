@@ -15,9 +15,9 @@ module.exports = {
 
       const stats = await Promise.all([
         getPrice("near"),
-        getPrice("ref-finance"),
         getPrice("aurora-near"),
         getPrice("trisolaris"),
+        getPrice("ref-finance"),
         getPrice("octopus-network"),
         getPrice("flux-token"),
       ]);

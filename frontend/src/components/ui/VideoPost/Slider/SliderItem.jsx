@@ -105,14 +105,14 @@ const SliderItem = (props) => {
               </div>
               <div className={classes.contentFooter}>
                 <div className={classes.postWidgets}>
-                  <Widget
+                  {/*                  <Widget
                     icon={"Visibility"}
                     data={props.video.attributes.Views}
                   />
                   <Widget
                     icon={"ThumbUp"}
                     data={props.video.attributes.Likes}
-                  />
+                  />*/}
                 </div>
                 <div className={classes.footerDate}>
                   {getTimeAgo(props.video.attributes.createdAt)}

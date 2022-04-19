@@ -153,7 +153,7 @@ const GridItem = ({ data }) => {
                 </div>
                 <div className={classes.contentFooter}>
                   <div className={classes.postWidgets}>
-                    <Widget icon={"Visibility"} data={data.attributes.Views} />
+                    {/*<Widget icon={"Visibility"} data={data.attributes.Views} />*/}
                     {/*<Widget icon={"ThumbUp"} data={data.attributes.Likes} />*/}
                   </div>
                   <div className={classes.footerDate}>

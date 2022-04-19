@@ -12,7 +12,6 @@ const PageMetaTags = ({ title, description, type, url }) => {
 
   return (
     <Helmet>
-      <meta property="og:type" content="article" />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       {desc && <meta property="og:description" content={desc} />}
