@@ -79,8 +79,8 @@ const CoinsPrice = () => {
 
   const coins = {
     near: "$NEAR",
-    ref: "$REF",
     aurora: "$AURORA",
+    ref: "$REF",
     tri: "$TRI",
     oct: "$OCT",
     flx: "$FLX",

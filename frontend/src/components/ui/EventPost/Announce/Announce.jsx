@@ -126,7 +126,7 @@ const Announce = ({ event }) => {
             </Box>
             <Box className={classes.contentFooter}>
               <div className={classes.postWidgets}>
-                <Widget icon={"Visibility"} data={event.attributes.Views} />
+                {/* <Widget icon={"Visibility"} data={event.attributes.Views} />*/}
                 {/*<Widget icon={"ThumbUp"} data={event.attributes.Likes} />*/}
               </div>
               <div className={classes.footerDate}>
