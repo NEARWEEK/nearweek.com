@@ -26,6 +26,7 @@
     "echarts": "^5.3.2",
     "echarts-for-react": "^3.0.2",
     "flickity": "^2.3.0",
+    "gsap": "^3.10.3",
     "jquery": "^3.6.0",
     "js-markdown": "^1.1.5",
     "moment": "^2.29.1",

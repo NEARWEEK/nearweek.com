@@ -65,6 +65,17 @@ const styles = (theme) => ({
       backgroundColor: "rgba(13, 0, 255, 0.04)",
     },
   },
+  input: {
+    border: "1px solid #ccc",
+    padding: "0 8px",
+  },
+  mobileInput: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
+    border: "1px solid #ccc",
+    padding: "0 8px",
+  },
 });
 
 export const useStyles = makeStyles(styles, { name: "News" });
