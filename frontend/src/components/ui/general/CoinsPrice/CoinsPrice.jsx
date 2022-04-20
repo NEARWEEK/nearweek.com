@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { api } from "../../../../Utils/Utils";
 import Box from "@mui/material/Box";
 import makeStyles from "@mui/styles/makeStyles";
@@ -6,6 +6,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import gsap from "gsap";
+import IconButton from "@mui/material/IconButton";
 
 const CoinsPrice = () => {
   const [prices, setPrices] = useState([]);
@@ -15,12 +19,35 @@ const CoinsPrice = () => {
     setPrices(data);
   }, []);
 
-  const useStyles = makeStyles(() => ({
+  const useStyles = makeStyles((theme) => ({
     wrapper: {
       display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      justifyContent: "space-around",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    list: {
+      display: "flex",
+      alignItems: "center",
+      listStyle: "none",
+      maxWidth: "100vw",
+      overflowX: "scroll",
+      scrollBehavior: "smooth",
+      "&::-webkit-scrollbar": {
+        background: "transparent",
+        WebkitAppearance: "none",
+        width: 0,
+        height: 0,
+      },
+    },
+    listItem: {
+      color: "#fff",
+      padding: "8px",
+      borderRadius: "4px",
+      margin: "0 4px",
+      whiteSpace: "nowrap",
+    },
+    card: {
+      flex: "0 0 auto",
     },
     box: {
       display: "flex",
@@ -28,19 +55,16 @@ const CoinsPrice = () => {
       textTransform: "uppercase",
     },
     container: {
-      margin: "0 auto",
-      paddingRight: "16px",
-      paddingLeft: "16px",
-    },
-    videoContainer: {
       display: "flex",
-      flexDirection: "row",
-      gap: "24px",
-      width: 1140,
-    },
-    latestEditions: {
-      marginTop: "24px",
-      width: "100%",
+      alignItems: "center",
+      justifyContent: "center",
+      "& button": {
+        border: 0,
+        color: "#777",
+        [theme.breakpoints.up("md")]: {
+          display: "none",
+        },
+      },
     },
     blockTitle: {
       fontSize: "42px",
@@ -88,42 +112,113 @@ const CoinsPrice = () => {
 
   const CoinBlock = ({ coin }) => {
     return (
-      <Card elevation={0}>
-        <CardContent>
-          <Box className={classes.box}>
-            <Box
-              display="flex"
-              alignItems="center"
-              style={{ fontWeight: 900, fontSize: "1rem" }}
-            >
-              <span style={{ marginRight: 8 }}>{coins[coin.data.symbol]}</span>{" "}
-              <span
-                style={{
-                  color: "#0d00ff",
-                }}
+      <li className={classes.listItem}>
+        <Card elevation={0} className={classes.card}>
+          <CardContent>
+            <Box className={classes.box}>
+              <Box
+                display="flex"
+                alignItems="center"
+                style={{ fontWeight: 900, fontSize: "1rem" }}
               >
-                {getPrice(coin.data.market_data.current_price.usd)}
-              </span>
+                <span style={{ marginRight: 8 }}>
+                  {coins[coin.data.symbol]}
+                </span>{" "}
+                <span
+                  style={{
+                    color: "#0d00ff",
+                  }}
+                >
+                  {getPrice(coin.data.market_data.current_price.usd)}
+                </span>
+              </Box>
+              <Box display="flex" style={{ textTransform: "none" }}>
+                24h:{" "}
+                <ChangePrice24h
+                  value={coin.data.market_data.price_change_percentage_24h}
+                />
+              </Box>
             </Box>
-            <Box display="flex" style={{ textTransform: "none" }}>
-              24h:{" "}
-              <ChangePrice24h
-                value={coin.data.market_data.price_change_percentage_24h}
-              />
-            </Box>
-          </Box>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </li>
     );
   };
 
+  let scrl = useRef(null);
+  const [scrollX, setscrollX] = useState(0);
+  const [scrolEnd, setscrolEnd] = useState(false);
+
+  console.log(scrolEnd);
+
+  //Slide click
+  const slide = (shift) => {
+    scrl.current.scrollLeft += shift;
+    setscrollX(scrollX + shift);
+
+    if (
+      Math.floor(scrl.current.scrollWidth - scrl.current.scrollLeft) <=
+      scrl.current.offsetWidth
+    ) {
+      setscrolEnd(true);
+    } else {
+      setscrolEnd(false);
+    }
+  };
+
+  //Anim
+  const anim = (e) => {
+    gsap.from(e.target, { scale: 1 });
+    gsap.to(e.target, { scale: 1.3 });
+  };
+  const anim2 = (e) => {
+    gsap.from(e.target, { scale: 1.3 });
+    gsap.to(e.target, { scale: 1 });
+  };
+
+  const scrollCheck = () => {
+    setscrollX(scrl.current.scrollLeft);
+    if (
+      Math.floor(scrl.current.scrollWidth - scrl.current.scrollLeft) <=
+      scrl.current.offsetWidth
+    ) {
+      setscrolEnd(true);
+    } else {
+      setscrolEnd(false);
+    }
+  };
+
   return (
-    <Box className={classes.container}>
-      <Box className={classes.wrapper}>
-        {prices.length > 0 &&
-          prices.map((item) => <CoinBlock key={item.data.name} coin={item} />)}
-      </Box>
-    </Box>
+    <>
+      {prices.length > 0 && (
+        <Box className={classes.container}>
+          {scrollX !== 0 && (
+            <IconButton
+              onClick={() => slide(-150)}
+              onMouseEnter={(e) => anim(e)}
+              onMouseLeave={(e) => anim2(e)}
+            >
+              <ChevronLeftIcon />
+            </IconButton>
+          )}
+          <ul ref={scrl} onScroll={scrollCheck} className={classes.list}>
+            {prices.length > 0 &&
+              prices.map((item) => (
+                <CoinBlock key={item.data.name} coin={item} />
+              ))}
+          </ul>
+          {!scrolEnd && (
+            <IconButton
+              onClick={() => slide(+150)}
+              onMouseEnter={(e) => anim(e)}
+              onMouseLeave={(e) => anim2(e)}
+            >
+              <ChevronRightIcon />
+            </IconButton>
+          )}
+        </Box>
+      )}
+    </>
   );
 };
 

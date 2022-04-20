@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import * as Utils from "../Utils/Utils";
-import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
 import Announce from "../components/ui/NewsPost/Announce/Announce";
 import NewsGrid from "../components/ui/NewsPost/Grid/NewsGrid";
@@ -33,12 +32,18 @@ import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
 import { useStyles } from "./News.styles";
+import InputBase from "@mui/material/InputBase";
+import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import SearchInput from "../components/ui/NewsPost/SearchInput/SearchInput";
 
 const News = () => {
   const classes = useStyles();
   const [news, setNews] = useState({ data: [], meta: {} });
   const [categories, setCategories] = useState([]);
   const [sort, setSort] = useState("Latest");
+  const [searchTerm, setSearchTerm] = useState("");
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [filters, setFilters] = useState({
     dateRange: [null, null],
@@ -67,6 +72,30 @@ const News = () => {
     setSort(e.target.value);
   };
 
+  useEffect(() => {
+    const applySearchFilters = () => {
+      let { data } = news;
+      let fData = [];
+      if (searchTerm) {
+        fData = data.filter((item) => {
+          if (!searchTerm) return true;
+          if (
+            item.attributes.Title.toLowerCase().includes(
+              searchTerm.toLowerCase()
+            ) ||
+            item.attributes.Body.toLowerCase().includes(
+              searchTerm.toLowerCase()
+            )
+          ) {
+            return true;
+          }
+        });
+      }
+      setFilterResult({ ...filterResult, data: fData });
+    };
+    applySearchFilters();
+  }, [searchTerm]);
+
   const handleShowFilter = (e) => {
     e.preventDefault();
     setShowFilterPanel(!showFilterPanel);
@@ -77,7 +106,7 @@ const News = () => {
   }
 
   useEffect(() => {
-    const applyFilters = () => {
+    const applyDateRangeFilters = () => {
       let { data } = filterResult.data.length ? filterResult : news;
       let fData = [];
       filters.dateRange.forEach((date, index) => {
@@ -98,11 +127,11 @@ const News = () => {
       });
       setFilterResult({ ...filterResult, data: fData });
     };
-    applyFilters();
+    applyDateRangeFilters();
   }, [filters.dateRange]);
 
   useEffect(() => {
-    const applyFilters = () => {
+    const applyCategoryFilters = () => {
       let { data } = news;
       let fData = [];
       if (filters.category != "all") {
@@ -116,7 +145,7 @@ const News = () => {
       }
       setFilterResult({ ...filterResult, data: fData });
     };
-    applyFilters();
+    applyCategoryFilters();
   }, [filters.category]);
 
   const SortButton = () => {
@@ -189,41 +218,57 @@ const News = () => {
     return (
       <>
         {isMobileMatch && (
-          <Box className={classes.filterContainer}>
-            <SortButton />
-            <FilterButton />
-            <Stack
-              spacing={1}
-              direction="row"
-              className={classes.filterCategory}
-            >
-              <Button
-                variant="text"
-                className={isActive("all") ? "active" : ""}
-                style={{ textTransform: "none" }}
-                onClick={() => handleFilterCategory("all")}
+          <>
+            <Box display="flex" mt={2}>
+              <Paper elevation={0} className={classes.mobileInput}>
+                <SearchInput
+                  style={{ width: "100%" }}
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                />
+              </Paper>
+            </Box>
+            <Box className={classes.filterContainer}>
+              <SortButton />
+              <FilterButton />
+              <Stack
+                spacing={1}
+                direction="row"
+                className={classes.filterCategory}
               >
-                All categories
-              </Button>
-              {categories
-                ? categories.map((name, index) => (
-                    <Button
-                      variant="text"
-                      key={index}
-                      className={isActive(name) ? "active" : ""}
-                      onClick={() => handleFilterCategory(name)}
-                      style={{ textTransform: "none" }}
-                    >
-                      {name}
-                    </Button>
-                  ))
-                : null}
-            </Stack>
-          </Box>
+                <Button
+                  variant="text"
+                  className={isActive("all") ? "active" : ""}
+                  style={{ textTransform: "none" }}
+                  onClick={() => handleFilterCategory("all")}
+                >
+                  All categories
+                </Button>
+                {categories
+                  ? categories.map((name, index) => (
+                      <Button
+                        variant="text"
+                        key={index}
+                        className={isActive(name) ? "active" : ""}
+                        onClick={() => handleFilterCategory(name)}
+                        style={{ textTransform: "none" }}
+                      >
+                        {name}
+                      </Button>
+                    ))
+                  : null}
+              </Stack>
+            </Box>
+          </>
         )}
         {!isMobileMatch && (
           <Box className={classes.filterContainer}>
-            <SortButton />
+            <Paper elevation={0} className={classes.input}>
+              <SearchInput
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
+            </Paper>
             <Stack
               spacing={1}
               direction="row"
@@ -251,7 +296,10 @@ const News = () => {
                   ))
                 : null}
             </Stack>
-            <FilterButton />
+            <Box display="flex" alignItems="center">
+              <SortButton />
+              <FilterButton />
+            </Box>
           </Box>
         )}
         {showFilterPanel && (
@@ -352,7 +400,7 @@ const News = () => {
 
       <Box className={classes.wrapper}>
         <Box className={classes.container}>
-          <FilterPanel />
+          <FilterPanel searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           {!filterResult.data.length > 0 ? (
             <>
               <Box className={classes.topContainer}>
