@@ -59,7 +59,10 @@ const GridItem = ({ data }) => {
       fontSize: "20px",
       marginTop: "6px",
       marginBottom: "6px",
-      "& a": {},
+      overflow: "hidden",
+      display: "-webkit-box",
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: "vertical",
     },
     postNumber: {
       color: "#2013fb",
