@@ -19,6 +19,8 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "assert": "^2.0.0",
+    "autobahn": "^20.9.2",
     "axios": "^0.26.1",
     "buffer": "^6.0.3",
     "date-fns": "^2.28.0",
@@ -48,6 +50,7 @@
     "react-truncate": "^2.4.0",
     "swiper": "^7.4.1",
     "throttle-debounce": "^3.0.1",
+    "util": "^0.12.4",
     "web-vitals": "^2.1.2",
     "yup": "^0.32.11"
   },

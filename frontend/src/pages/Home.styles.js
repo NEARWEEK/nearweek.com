@@ -8,6 +8,9 @@ const styles = (theme) => ({
     paddingRight: "16px",
     paddingLeft: "16px",
   },
+  tabs: {
+    display: "flex",
+  },
   videoContainer: {
     display: "flex",
     flexDirection: "row",
