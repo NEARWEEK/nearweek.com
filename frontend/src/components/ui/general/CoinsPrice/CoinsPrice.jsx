@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { api } from "../../../../Utils/Utils";
 import Box from "@mui/material/Box";
-import makeStyles from "@mui/styles/makeStyles";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
@@ -10,6 +9,16 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import gsap from "gsap";
 import IconButton from "@mui/material/IconButton";
+import { useStyles } from "./CoinsPrice.styles";
+
+const COINS_ALIAS = {
+  near: "$NEAR",
+  aurora: "$AURORA",
+  ref: "$REF",
+  tri: "$TRI",
+  oct: "$OCT",
+  flx: "$FLX",
+};
 
 const CoinsPrice = () => {
   const [prices, setPrices] = useState([]);
@@ -18,60 +27,6 @@ const CoinsPrice = () => {
     const data = await api.getCoinsPrice();
     setPrices(data);
   }, []);
-
-  const useStyles = makeStyles((theme) => ({
-    wrapper: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    list: {
-      display: "flex",
-      alignItems: "center",
-      listStyle: "none",
-      maxWidth: "100vw",
-      overflowX: "scroll",
-      scrollBehavior: "smooth",
-      "&::-webkit-scrollbar": {
-        background: "transparent",
-        WebkitAppearance: "none",
-        width: 0,
-        height: 0,
-      },
-    },
-    listItem: {
-      color: "#fff",
-      padding: "8px",
-      borderRadius: "4px",
-      margin: "0 4px",
-      whiteSpace: "nowrap",
-    },
-    card: {
-      flex: "0 0 auto",
-    },
-    box: {
-      display: "flex",
-      flexDirection: "column",
-      textTransform: "uppercase",
-    },
-    container: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      "& button": {
-        border: 0,
-        color: "#777",
-        [theme.breakpoints.up("md")]: {
-          display: "none",
-        },
-      },
-    },
-    blockTitle: {
-      fontSize: "42px",
-      fontWeight: "900",
-      marginBottom: "24px",
-    },
-  }));
 
   const getChange24h = (value) => {
     return parseFloat(value).toFixed(2);
@@ -101,15 +56,6 @@ const CoinsPrice = () => {
 
   const classes = useStyles();
 
-  const coins = {
-    near: "$NEAR",
-    aurora: "$AURORA",
-    ref: "$REF",
-    tri: "$TRI",
-    oct: "$OCT",
-    flx: "$FLX",
-  };
-
   const CoinBlock = ({ coin }) => {
     return (
       <li className={classes.listItem}>
@@ -122,7 +68,7 @@ const CoinsPrice = () => {
                 style={{ fontWeight: 900, fontSize: "1rem" }}
               >
                 <span style={{ marginRight: 8 }}>
-                  {coins[coin.data.symbol]}
+                  {COINS_ALIAS[coin.data.symbol]}
                 </span>{" "}
                 <span
                   style={{
@@ -148,8 +94,6 @@ const CoinsPrice = () => {
   let scrl = useRef(null);
   const [scrollX, setscrollX] = useState(0);
   const [scrolEnd, setscrolEnd] = useState(false);
-
-  console.log(scrolEnd);
 
   //Slide click
   const slide = (shift) => {

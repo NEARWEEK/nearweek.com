@@ -333,12 +333,13 @@ const EditionPost = () => {
                     ) : null}
                   </Box>
                 </Box>
+
                 <Box>
                   <Box>
-                    {edition && edition.attributes.Developers.length ? (
+                    {edition && edition.attributes.Events.length ? (
                       <>
-                        <Box className={classes.blockTitle}>{"Developers"}</Box>
-                        {edition.attributes.Developers.map((item, index) => (
+                        <Box className={classes.blockTitle}>{"Events"}</Box>
+                        {edition.attributes.Events.map((item, index) => (
                           <>
                             <Box className={classes.highlightItem} key={index}>
                               <ReactMarkdown className={classes.highlightTitle}>
@@ -354,10 +355,10 @@ const EditionPost = () => {
                 </Box>
                 <Box>
                   <Box>
-                    {edition && edition.attributes.Events.length ? (
+                    {edition && edition.attributes.Developers.length ? (
                       <>
-                        <Box className={classes.blockTitle}>{"Events"}</Box>
-                        {edition.attributes.Events.map((item, index) => (
+                        <Box className={classes.blockTitle}>{"Developers"}</Box>
+                        {edition.attributes.Developers.map((item, index) => (
                           <>
                             <Box className={classes.highlightItem} key={index}>
                               <ReactMarkdown className={classes.highlightTitle}>

@@ -8,43 +8,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import ReactMarkdown from "react-markdown";
 import NewsList from "./List/NewsList";
-import makeStyles from "@mui/styles/makeStyles";
-import PostActions from "../general/PostActions/PostActions";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
 import Widget from "../general/Widget/Widget";
 import Section from "../general/Section/Section";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
-import PostDescription from "../general/PostDescription/PostDescription";
 import ShareButton from "../general/PostActions/ShareButton/ShareButton";
 import { useStyles } from "./NewsPost.styles";
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const [article, setArticle] = useState(null);
-  const [news, setNews] = useState([]);
-
-  const [ids, setIds] = useState([]);
 
   const match = useMatch(`/news/:articleId`);
 
   useEffect(async () => {
-    const { data, meta } = await Utils.api.getOneArticle(
-      match.params.articleId
-    );
+    const { data } = await Utils.api.getOneArticle(match.params.articleId);
     if (data) {
       setArticle(data);
-      if (meta) {
-        setIds(meta.ids);
-      }
-    }
-  }, []);
-
-  useEffect(async () => {
-    const data = await Utils.api.getAllNews();
-    if (data) {
-      setNews(data);
     }
   }, []);
 
