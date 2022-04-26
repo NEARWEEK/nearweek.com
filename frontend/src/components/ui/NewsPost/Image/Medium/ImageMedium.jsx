@@ -21,6 +21,7 @@ const ImageMedium = ({ data }) => {
       width: "100%",
       borderRadius: "12px 12px 0 0",
       minHeight: isMobileMatch ? "262px" : "362px",
+      height: "100%",
     },
   }));
 
@@ -35,7 +36,7 @@ const ImageMedium = ({ data }) => {
     <>
       {!isHyperlink() && (
         <a href={`/news/${data.attributes.slug}`}>
-          <div
+          {/*<div
             style={{
               backgroundImage: `url('${imageUrl}')`,
               backgroundSize: "cover",
@@ -44,7 +45,8 @@ const ImageMedium = ({ data }) => {
               height: "100%",
             }}
             className={classes.img}
-          />
+          />*/}
+          <img src={imageUrl} className={classes.img} />
         </a>
       )}
       {isHyperlink() && (

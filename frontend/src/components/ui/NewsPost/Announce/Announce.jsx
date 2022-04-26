@@ -27,6 +27,8 @@ const Announce = ({ article }) => {
       width: "100%",
       background: "#dbd9d7",
       borderRadius: "12px",
+      display: "grid",
+      gridTemplateRows: "419px repeat(auto-fill, 253px) 41px",
     },
     content: {
       padding: "24px 24px 0",
