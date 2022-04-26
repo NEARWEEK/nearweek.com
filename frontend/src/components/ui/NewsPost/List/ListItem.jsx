@@ -8,7 +8,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import Widget from "../../general/Widget/Widget";
 import PostDescription from "../../general/PostDescription/PostDescription";
-import LinesEllipsis from "react-lines-ellipsis";
 
 const ListItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
@@ -38,7 +37,10 @@ const ListItem = ({ data }) => {
     },
     itemContainer: {
       borderRadius: "12px",
-      display: "flex",
+      display: "grid",
+      gridTemplateColumns: !isMobileMatch
+        ? "repeat(auto-fit, minmax(100px, max-content))"
+        : "100%",
       flex: 1,
       flexDirection: !isMobileMatch ? "row" : "column",
     },
@@ -51,7 +53,10 @@ const ListItem = ({ data }) => {
       flexDirection: "column",
     },
     contentBody: {
-      display: "flex",
+      display: "grid",
+      gridTemplateColumns: isMobileMatch
+        ? "86px repeat(auto-fit, minmax(100px, 100%))"
+        : "repeat(auto-fit, minmax(100px, 100%))",
       alignItems: "flex-start",
       padding: "16px 16px 0 16px",
       "& .image-container": {
@@ -60,6 +65,9 @@ const ListItem = ({ data }) => {
       "& .image-container .image": {
         marginRight: "16px",
       },
+    },
+    bodyContainer: {
+      maxWidth: "100%",
     },
     postCategory: {
       color: "#2013fb",
@@ -74,6 +82,9 @@ const ListItem = ({ data }) => {
       marginTop: "6px",
       marginBottom: "6px",
       fontSize: isMobileMatch ? "16px" : "20px",
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
     },
     postNumber: {
       color: "#2013fb",
@@ -149,7 +160,7 @@ const ListItem = ({ data }) => {
                       </div>
                     </div>
                   )}
-                  <div className="body-container">
+                  <div className={classes.bodyContainer}>
                     {data && (
                       <Box
                         display="inline-flex"
