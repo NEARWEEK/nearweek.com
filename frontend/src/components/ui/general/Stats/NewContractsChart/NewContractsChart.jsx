@@ -140,7 +140,7 @@ const NewContractsChart = (props) => {
           option={getOption(
             "",
             "New Contracts",
-            newContractsCountCumulative,
+            newContractsCount,
             newContractsDates
           )}
           style={chartsStyle}
