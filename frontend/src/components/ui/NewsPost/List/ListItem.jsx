@@ -188,7 +188,7 @@ const ListItem = ({ data }) => {
                             text={data.attributes.Title}
                             maxLine="1"
                             ellipsis="..."
-                            basedOn="words"
+                            basedOn="letters"
                           />
                         </Link>
                       )}
@@ -202,7 +202,7 @@ const ListItem = ({ data }) => {
                             text={data.attributes.Title}
                             maxLine="1"
                             ellipsis="..."
-                            basedOn="words"
+                            basedOn="letters"
                           />
                         </Link>
                       )}
