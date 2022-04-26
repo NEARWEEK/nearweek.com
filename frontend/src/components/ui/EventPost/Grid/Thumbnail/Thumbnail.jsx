@@ -8,6 +8,7 @@ const Thumbnail = ({ data, url }) => {
   const useStyles = makeStyles(() => ({
     img: {
       width: "100%",
+      height: "100%",
       borderRadius: "12px 12px 0 0",
     },
   }));
@@ -19,7 +20,7 @@ const Thumbnail = ({ data, url }) => {
   return (
     <>
       <Link href={url} underline="none">
-        <div
+        {/*        <div
           style={{
             backgroundImage: `url('${thumbnail}')`,
             backgroundSize: "cover",
@@ -28,7 +29,8 @@ const Thumbnail = ({ data, url }) => {
             backgroundPosition: "50% 50%",
           }}
           className={classes.img}
-        />
+        />*/}
+        <img src={thumbnail} className={classes.img} />
       </Link>
     </>
   );

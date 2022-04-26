@@ -25,8 +25,8 @@ const GridItem = ({ data }) => {
     },
     itemContainer: {
       borderRadius: "12px",
-      display: "flex",
-      flexDirection: "column",
+      display: "grid",
+      gridTemplateRows: "248px repeat(auto-fill, 189px)",
     },
     postImage: {
       borderRadius: "12px 0 0 12px",
