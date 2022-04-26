@@ -1,15 +1,13 @@
 import * as React from "react";
 import ReactEcharts from "echarts-for-react";
 import * as echarts from "echarts";
-import moment from "moment";
 import { useChainTransactionStats } from "../../../../../libs/wamp/subscriptions";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { withStyles } from "@mui/styles";
 import Typography from "@mui/material/Typography";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Change24HCount from "../Change24HCount/Change24HCount";
+import { useWampSimpleQuery } from "../../../../../libs/wamp/wamp";
 
 const styles = {
   grid: {
@@ -30,91 +28,93 @@ const styles = {
 
 const chartsStyle = {
   height: 480,
-  marginTop: 26,
   marginBottom: 26,
 };
 
-const TransactionHistoryChart = (props) => {
-  const { classes } = props;
+const DailyTransactionsChart = (props) => {
+  const { classes, show } = props;
   const transactionsCountHistoryForTwoWeeks =
     useChainTransactionStats()?.transactionsCountHistoryForTwoWeeks || [];
   const recentTransactionsCount =
     useChainTransactionStats()?.recentTransactionsCount;
 
-  const getDate = () => {
-    const format = "MMM D";
-    const date = transactionsCountHistoryForTwoWeeks.map((t) =>
-      moment(t.date).format(format)
-    );
-    return date;
+  const transactionCountByDate =
+    useWampSimpleQuery("transactions-count-aggregated-by-date", []) ?? [];
+
+  const filter = {
+    all: 0,
+    "1w": -7,
+    "1m": -30,
   };
+
+  const transactionsByDate = React.useMemo(
+    () =>
+      transactionCountByDate
+        .map(({ transactionsCount }) => Number(transactionsCount))
+        .slice(filter[show]),
+    [transactionCountByDate]
+  );
+
+  const transactionDates = React.useMemo(
+    () =>
+      transactionCountByDate
+        .map(({ date }) => date.slice(0, 10))
+        .slice(filter[show]),
+    [transactionCountByDate]
+  );
 
   const count = transactionsCountHistoryForTwoWeeks.map((t) => t.total);
 
-  const getOption = () => {
+  const getOption = (title, seriesName, data) => {
     return {
       title: {
-        text: "14 Day History",
+        text: title,
       },
       tooltip: {
         trigger: "axis",
-        position: "top",
-        backgroundColor: "#25272A",
-        formatter: `{b0}<br />${"Txns"}: {c0}`,
       },
       grid: {
-        left: "5%",
+        left: "3%",
+        right: "4%",
         bottom: "3%",
         containLabel: true,
         backgroundColor: "#F9F9F9",
         show: true,
         color: "white",
-        borderWidth: 0,
       },
       xAxis: [
         {
           type: "category",
           boundaryGap: false,
-          data: getDate(),
-          axisLine: {
-            show: false,
-          },
-          axisLabel: {
-            color: "#9B9B9B",
-          },
-          offset: 3,
-          axisTick: {
-            show: false,
-          },
+          data: transactionDates,
         },
       ],
       yAxis: [
         {
-          position: "right",
           type: "value",
           splitLine: {
             lineStyle: {
               color: "white",
             },
           },
-          splitNumber: 3,
-          axisLine: {
-            show: false,
-          },
-          axisLabel: {
-            color: "#9B9B9B",
-          },
-          offset: 3,
-          axisTick: {
-            show: false,
-          },
+        },
+      ],
+      dataZoom: [
+        {
+          type: "inside",
+          start: 0,
+          end: 100,
+          filterMode: "filter",
+        },
+        {
+          start: 0,
+          end: 100,
         },
       ],
       series: [
         {
-          name: "Txns",
+          name: seriesName,
           type: "line",
-          smooth: true,
           lineStyle: {
             color: "#00C1DE",
             width: 2,
@@ -127,20 +127,19 @@ const TransactionHistoryChart = (props) => {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: "rgba(0, 193, 222, 0.19)",
+                color: "rgb(0, 193, 222)",
               },
               {
                 offset: 1,
-                color: "rgba(197, 247, 255, 0)",
+                color: "rgb(197, 247, 255)",
               },
             ]),
           },
-          data: count,
+          data: data,
         },
       ],
     };
   };
-
   return (
     <Box className={classes.grid} mt={4}>
       <Paper elevation={0} className={classes.card}>
@@ -163,10 +162,13 @@ const TransactionHistoryChart = (props) => {
         </Box>
       </Paper>
       <Paper elevation={0}>
-        <ReactEcharts option={getOption()} style={chartsStyle} />
+        <ReactEcharts
+          option={getOption("", "Txns", transactionsByDate)}
+          style={chartsStyle}
+        />
       </Paper>
     </Box>
   );
 };
 
-export default withStyles(styles)(TransactionHistoryChart);
+export default withStyles(styles)(DailyTransactionsChart);
