@@ -184,12 +184,7 @@ const ListItem = ({ data }) => {
                           underline="none"
                           href={`/news/${data.attributes.slug}`}
                         >
-                          <LinesEllipsis
-                            text={data.attributes.Title}
-                            maxLine="1"
-                            ellipsis="..."
-                            basedOn="letters"
-                          />
+                          {data.attributes.Title}
                         </Link>
                       )}
                       {isHyperlink() && (
@@ -198,12 +193,7 @@ const ListItem = ({ data }) => {
                           underline="none"
                           href={`${data.attributes.LinkTo}`}
                         >
-                          <LinesEllipsis
-                            text={data.attributes.Title}
-                            maxLine="1"
-                            ellipsis="..."
-                            basedOn="letters"
-                          />
+                          {data.attributes.Title}
                         </Link>
                       )}
                     </h3>
