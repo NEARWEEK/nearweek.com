@@ -102,6 +102,10 @@ const News = () => {
   };
 
   function getLatestNews() {
+    return news.data.filter((article) => article.id !== news.data[0].id);
+  }
+
+  function getNews() {
     return news.data
       .filter((article) => article.id !== news.data[0].id)
       .slice(0, 4);
@@ -411,12 +415,12 @@ const News = () => {
                 </Box>
                 {!isMobileMatch && (
                   <Box className={classes.blockColumn}>
-                    {news.data.length && <NewsGrid news={getLatestNews()} />}
+                    {news.data.length && <NewsGrid news={getNews()} />}
                   </Box>
                 )}
                 {isMobileMatch && (
                   <Box className={classes.blockColumn}>
-                    {news.data.length && <NewsList news={getLatestNews()} />}
+                    {news.data.length && <NewsList news={getNews()} />}
                   </Box>
                 )}
               </Box>
