@@ -10,8 +10,9 @@ const Thumbnail = ({ data, url }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const useStyles = makeStyles(() => ({
     img: {
-      width: isMobileMatch ? "68px" : "245px",
-      minHeight: isMobileMatch ? "68px" : "100%",
+      width: isMobileMatch ? "68px" : "205px",
+      height: isMobileMatch ? "68px" : "100%",
+      maxHeight: 205,
       borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px",
     },
   }));

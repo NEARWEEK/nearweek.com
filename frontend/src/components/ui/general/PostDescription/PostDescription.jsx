@@ -8,9 +8,9 @@ const PostDescription = ({ body }) => {
   return (
     <HTMLEllipsis
       unsafeHTML={html}
-      maxLine="3"
+      maxLine="2"
       ellipsis="..."
-      basedOn="letters"
+      basedOn="words"
     />
   );
 };
