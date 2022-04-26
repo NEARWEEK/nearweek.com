@@ -10,7 +10,7 @@ const Thumbnail = ({ data, url }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const useStyles = makeStyles(() => ({
     img: {
-      minWidth: isMobileMatch ? "68px" : "205px",
+      width: isMobileMatch ? "68px" : "245px",
       minHeight: isMobileMatch ? "68px" : "100%",
       borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px",
     },
@@ -23,14 +23,15 @@ const Thumbnail = ({ data, url }) => {
   return (
     <>
       <Link href={url} underline="none">
-        <div
+        {/*<div
           style={{
             backgroundImage: `url('${thumbnail}')`,
             backgroundSize: "cover",
             backgroundPosition: "50% 50%",
           }}
           className={"image " + classes.img}
-        />{" "}
+        />*/}{" "}
+        <img src={thumbnail} className={classes.img} />
       </Link>
     </>
   );
