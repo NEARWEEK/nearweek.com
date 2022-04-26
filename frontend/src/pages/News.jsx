@@ -102,7 +102,9 @@ const News = () => {
   };
 
   function getLatestNews() {
-    return news.data.filter((article) => article.id !== news.data[0].id);
+    return news.data
+      .filter((article) => article.id !== news.data[0].id)
+      .slice(0, 4);
   }
 
   useEffect(() => {
