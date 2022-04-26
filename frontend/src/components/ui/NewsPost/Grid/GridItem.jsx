@@ -42,6 +42,8 @@ const GridItem = ({ data }) => {
       minHeight: "25%",
       borderRadius: 12,
       background: matchEdition ? "#fff" : "#f7f7f7",
+      display: "grid",
+      gridTemplateRows: " 205px repeat(auto-fill, 103px) 41px",
     },
     contentBody: {
       padding: "16px 16px 0 16px",

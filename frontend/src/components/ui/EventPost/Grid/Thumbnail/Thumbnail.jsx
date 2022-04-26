@@ -28,7 +28,7 @@ const Thumbnail = ({ data, url }) => {
             backgroundPosition: "50% 50%",
           }}
           className={classes.img}
-        />{" "}
+        />
       </Link>
     </>
   );
