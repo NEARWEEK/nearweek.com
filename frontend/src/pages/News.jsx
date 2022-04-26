@@ -113,7 +113,7 @@ const News = () => {
 
   useEffect(() => {
     const applyDateRangeFilters = () => {
-      let { data } = filterResult.data.length ? filterResult : news;
+      let { data } = filterResult.data.length > 0 ? filterResult : news;
       let fData = [];
       filters.dateRange.forEach((date, index) => {
         if (date && index === 0) {
@@ -415,12 +415,12 @@ const News = () => {
                 </Box>
                 {!isMobileMatch && (
                   <Box className={classes.blockColumn}>
-                    {news.data.length && <NewsGrid news={getNews()} />}
+                    {news.data.length > 0 && <NewsGrid news={getNews()} />}
                   </Box>
                 )}
                 {isMobileMatch && (
                   <Box className={classes.blockColumn}>
-                    {news.data.length && <NewsList news={getNews()} />}
+                    {news.data.length > 0 && <NewsList news={getNews()} />}
                   </Box>
                 )}
               </Box>
