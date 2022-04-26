@@ -7,9 +7,8 @@ import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import Widget from "../../general/Widget/Widget";
-import Truncate from "react-truncate";
-import ReactMarkdown from "react-markdown";
 import PostDescription from "../../general/PostDescription/PostDescription";
+import LinesEllipsis from "react-lines-ellipsis";
 
 const ListItem = ({ data }) => {
   const matchEdition = useMatch(`/news/:articleId`);
@@ -185,7 +184,12 @@ const ListItem = ({ data }) => {
                           underline="none"
                           href={`/news/${data.attributes.slug}`}
                         >
-                          {data.attributes.Title}
+                          <LinesEllipsis
+                            text={data.attributes.Title}
+                            maxLine="1"
+                            ellipsis="..."
+                            basedOn="words"
+                          />
                         </Link>
                       )}
                       {isHyperlink() && (
@@ -194,7 +198,12 @@ const ListItem = ({ data }) => {
                           underline="none"
                           href={`${data.attributes.LinkTo}`}
                         >
-                          {data.attributes.Title}
+                          <LinesEllipsis
+                            text={data.attributes.Title}
+                            maxLine="1"
+                            ellipsis="..."
+                            basedOn="words"
+                          />
                         </Link>
                       )}
                     </h3>
