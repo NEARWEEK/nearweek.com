@@ -58,10 +58,6 @@ const NewAccountsChart = (props) => {
     () => newAccounts.map(({ date }) => date.slice(0, 10)).slice(filter[show]),
     [newAccounts]
   );
-  const cumulativeNewAccountsByDate = React.useMemo(
-    () => cumulativeSumArray(newAccountsCount),
-    [newAccountsCount]
-  );
 
   const getOption = (title, seriesName, data, date) => {
     return {
@@ -146,7 +142,7 @@ const NewAccountsChart = (props) => {
           option={getOption(
             "",
             "New Accounts",
-            cumulativeNewAccountsByDate,
+            newAccountsCount,
             newAccountsDate
           )}
           style={chartsStyle}
