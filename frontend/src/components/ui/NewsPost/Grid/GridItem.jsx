@@ -8,7 +8,7 @@ import Widget from "../../general/Widget/Widget";
 import { getTimeAgo } from "../../../../Utils/Utils";
 
 const GridItem = ({ data }) => {
-  const matchEdition = useMatch(`/news/:articleId`);
+  const matchEdition = useMatch(`/content/:articleId`);
   const categories = data.attributes.categories.data;
 
   const isHyperlink = () => {
@@ -108,7 +108,7 @@ const GridItem = ({ data }) => {
                   {!isHyperlink() && (
                     <Thumbnail
                       data={data}
-                      url={`/news/${data.attributes.slug}`}
+                      url={`/content/${data.attributes.slug}`}
                     />
                   )}
                   {isHyperlink() && (
@@ -144,7 +144,7 @@ const GridItem = ({ data }) => {
                     {!isHyperlink() && (
                       <Link
                         color="inherit"
-                        href={`/news/${data.attributes.slug}`}
+                        href={`/content/${data.attributes.slug}`}
                         underline="none"
                       >
                         {data.attributes.Title}

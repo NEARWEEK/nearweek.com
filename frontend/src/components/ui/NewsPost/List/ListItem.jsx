@@ -10,7 +10,7 @@ import Widget from "../../general/Widget/Widget";
 import PostDescription from "../../general/PostDescription/PostDescription";
 
 const ListItem = ({ data }) => {
-  const matchEdition = useMatch(`/news/:articleId`);
+  const matchEdition = useMatch(`/content/:articleId`);
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const categories = data.attributes.categories.data;
 
@@ -132,7 +132,7 @@ const ListItem = ({ data }) => {
                   {!isHyperlink() && (
                     <Thumbnail
                       data={data}
-                      url={`/news/${data.attributes.slug}`}
+                      url={`/content/${data.attributes.slug}`}
                     />
                   )}
                   {isHyperlink() && (
@@ -148,7 +148,7 @@ const ListItem = ({ data }) => {
                         {!isHyperlink() && (
                           <Thumbnail
                             data={data}
-                            url={`/news/${data.attributes.slug}`}
+                            url={`/content/${data.attributes.slug}`}
                           />
                         )}
                         {isHyperlink() && (
@@ -193,7 +193,7 @@ const ListItem = ({ data }) => {
                         <Link
                           color="inherit"
                           underline="none"
-                          href={`/news/${data.attributes.slug}`}
+                          href={`/content/${data.attributes.slug}`}
                         >
                           {data.attributes.Title}
                         </Link>

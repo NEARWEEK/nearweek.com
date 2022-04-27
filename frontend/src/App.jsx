@@ -72,8 +72,8 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="editions" element={<Editions />} />
             <Route exact path="editions/:editionId" element={<EditionPost />} />
-            <Route exact path="news" element={<News />} />
-            <Route exact path="news/:articleId" element={<NewsPost />} />
+            <Route exact path="content" element={<News />} />
+            <Route exact path="content/:articleId" element={<NewsPost />} />
             <Route exact path="events" element={<Events />} />
             <Route exact path="events/:eventId" element={<EventPost />} />
             <Route exact path="video" element={<Video />} />

@@ -21,7 +21,7 @@ const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const [article, setArticle] = useState(null);
 
-  const match = useMatch(`/news/:articleId`);
+  const match = useMatch(`/content/:articleId`);
 
   useEffect(async () => {
     const { data } = await Utils.api.getOneArticle(match.params.articleId);
@@ -54,12 +54,12 @@ const NewsPost = () => {
         <Box className={classes.pageWrapper}>
           <Box className={classes.contentContainer}>
             <Box className={classes.breadcrumb}>
-              <a className={classes.link} href="/news">
+              <a className={classes.link} href="/content">
                 <FontAwesomeIcon
                   className={classes.icon}
                   icon={faChevronLeft}
                 />
-                <span>News / </span>
+                <span>Content / </span>
               </a>
               <span className={classes.current}>
                 {`${article.attributes.Title}`}
