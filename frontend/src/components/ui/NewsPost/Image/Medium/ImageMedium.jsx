@@ -35,7 +35,7 @@ const ImageMedium = ({ data }) => {
   return (
     <>
       {!isHyperlink() && (
-        <a href={`/news/${data.attributes.slug}`}>
+        <a href={`/content/${data.attributes.slug}`}>
           {/*<div
             style={{
               backgroundImage: `url('${imageUrl}')`,
@@ -51,7 +51,7 @@ const ImageMedium = ({ data }) => {
       )}
       {isHyperlink() && (
         <a href={`${data.attributes.LinkTo}`}>
-          <div
+          {/*          <div
             style={{
               backgroundImage: `url('${imageUrl}')`,
               backgroundSize: "cover",
@@ -60,7 +60,8 @@ const ImageMedium = ({ data }) => {
               height: "100%",
             }}
             className={classes.img}
-          />
+          />*/}
+          <img src={imageUrl} className={classes.img} />
         </a>
       )}
     </>
