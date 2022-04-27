@@ -2,7 +2,6 @@ import * as React from "react";
 import Navbar from "../Navbar/Navbar";
 import { useMatch } from "react-router";
 import { useEffect, useState } from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import Box from "@mui/material/Box";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
