@@ -47,6 +47,11 @@ const Announce = ({ article }) => {
       fontWeight: "900",
       marginTop: "12px",
       marginBottom: "12px",
+      overflow: "hidden",
+      display: "-webkit-box",
+      textOverflow: "ellipsis",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: 2,
     },
     postNumber: {
       color: "#2013fb",
