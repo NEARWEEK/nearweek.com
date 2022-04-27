@@ -12,9 +12,10 @@ const Thumbnail = ({ data, url }) => {
       borderRadius: "12px 12px 0 0",
     },
   }));
-  let thumbnail = placeholder.getRandomPlaceholder("small");
+  let imageUrl = placeholder.getRandomPlaceholder("small");
   if (Image.data) {
-    thumbnail = `${Image.data.attributes.formats.thumbnail.url}`;
+    const { small, thumbnail } = Image.data.attributes.formats;
+    imageUrl = small?.url || thumbnail.url;
   }
   const classes = useStyles();
   return (
@@ -30,7 +31,7 @@ const Thumbnail = ({ data, url }) => {
           }}
           className={classes.img}
         />*/}
-        <img src={thumbnail} className={classes.img} />
+        <img src={imageUrl} className={classes.img} />
       </Link>
     </>
   );
