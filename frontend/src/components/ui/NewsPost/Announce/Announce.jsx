@@ -115,7 +115,7 @@ const Announce = ({ article }) => {
               {!isHyperlink() && (
                 <Link
                   color="inherit"
-                  href={`/news/${article.attributes.slug}`}
+                  href={`/content/${article.attributes.slug}`}
                   underline="none"
                 >
                   {article.attributes.Title}

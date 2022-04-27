@@ -23,6 +23,10 @@ const styles = (theme) => ({
     fontWeight: "900",
     marginTop: "12px",
     marginBottom: "12px",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
   },
   postNumber: {
     color: "#2013fb",
