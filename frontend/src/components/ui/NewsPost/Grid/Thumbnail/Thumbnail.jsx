@@ -12,27 +12,18 @@ const Thumbnail = ({ data, url }) => {
       borderRadius: "12px 12px 0 0",
     },
   }));
-  let thumbnail = placeholder.getRandomPlaceholder("small");
+
+  let imageUrl = placeholder.getRandomPlaceholder("small");
   if (Image.data) {
-    thumbnail = `${Image.data.attributes.formats.thumbnail.url}`;
+    const { small, thumbnail } = Image.data.attributes.formats;
+    imageUrl = small?.url || thumbnail?.url;
   }
+
   const classes = useStyles();
   return (
     <>
       <Link href={url} underline="none">
-        {/*        <div
-          style={{
-            backgroundImage: `url('${thumbnail}')`,
-            //            backgroundSize: "cover",
-            minWidth: "205px",
-            width: "100%",
-            height: "100%",
-            minHeight: "205px",
-            backgroundPosition: "50% 50%",
-          }}
-          className={classes.img}
-        />*/}
-        <img src={thumbnail} className={classes.img} />
+        <img src={imageUrl} className={classes.img} />
       </Link>
     </>
   );
