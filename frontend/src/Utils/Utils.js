@@ -1,5 +1,6 @@
 import moment from "moment";
 import axios from "axios";
+import Numeral from "numeral";
 
 const TOKEN = process.env.REACT_APP_API_KEY;
 export const MOBILE_WIDTH = "600px";
@@ -12,6 +13,12 @@ const options = {
   headers,
   credentials: "include",
 };
+
+const priceFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+});
 
 export function getTimeAgo(date) {
   return moment(date).fromNow();
@@ -72,6 +79,63 @@ export function groupBy(list, keyGetter) {
   });
   return array;
 }
+
+export const toK = (num) => {
+  return Numeral(num).format("0.[00]a");
+};
+
+export const formattedNum = (
+  number,
+  symbol = false,
+  acceptNegatives = false
+) => {
+  let currencySymbol;
+  if (symbol === true) {
+    currencySymbol = "$";
+  } else if (symbol === false) {
+    currencySymbol = "";
+  } else {
+    currencySymbol = symbol;
+  }
+  if (isNaN(number) || number === "" || number === undefined) {
+    return symbol ? `${currencySymbol}0` : 0;
+  }
+  let num = parseFloat(number);
+  const isNegative = num < 0;
+  num = Math.abs(num);
+
+  const currencyMark = isNegative ? `${currencySymbol}-` : currencySymbol;
+  const normalMark = isNegative ? "-" : "";
+
+  if (num > 10000000) {
+    return (symbol ? currencyMark : normalMark) + toK(num.toFixed(0), true);
+  }
+
+  if (num === 0) {
+    return symbol ? `${currencySymbol}0` : 0;
+  }
+
+  if (num < 0.0001 && num > 0) {
+    return symbol ? `< ${currencySymbol}0.0001` : "< 0.0001";
+  }
+
+  if (num > 1000) {
+    return symbol
+      ? currencyMark + Number(parseFloat(num).toFixed(0)).toLocaleString()
+      : normalMark + Number(parseFloat(num).toFixed(0)).toLocaleString();
+  }
+
+  if (symbol) {
+    if (num < 0.1) {
+      return currencyMark + Number(parseFloat(num).toFixed(4));
+    } else {
+      let usdString = priceFormatter.format(num);
+      return currencyMark + usdString.slice(1, usdString.length);
+    }
+  }
+
+  return Number(parseFloat(num).toFixed(5));
+};
 
 async function loadEditions() {
   try {
@@ -234,6 +298,11 @@ async function loadCoinsPrice() {
   return await response.json();
 }
 
+async function loadTvl(protocol) {
+  const response = await fetch(`/api/stats/tvl?q=${protocol}`, options);
+  return await response.json();
+}
+
 async function unsubscribe(query) {
   const response = await fetch(`/api/search?q="${query}"`, options);
   return await response.json();
@@ -257,5 +326,6 @@ export const api = {
   subscribeNewsletter: subscribeNewsletter,
   getCoinsPrice: loadCoinsPrice,
   getStatsMarketChart: loadStatsMarketChart,
+  getTvl: loadTvl,
   upload: upload,
 };

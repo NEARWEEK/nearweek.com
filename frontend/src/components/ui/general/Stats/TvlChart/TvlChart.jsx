@@ -1,15 +1,14 @@
-import * as React from "react";
-import ReactEcharts from "echarts-for-react";
-import * as echarts from "echarts";
+import React, { useEffect, useState } from "react";
+import ReactECharts from "echarts-for-react";
+import { api, formattedNum } from "../../../../../Utils/Utils";
 import moment from "moment";
-import { useChainTransactionStats } from "../../../../../libs/wamp/subscriptions";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
+import * as echarts from "echarts";
 import { withStyles } from "@mui/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Change24HCount from "../Change24HCount/Change24HCount";
+import ReactEcharts from "echarts-for-react";
 
 const styles = {
   grid: {
@@ -30,37 +29,62 @@ const styles = {
 
 const chartsStyle = {
   height: 480,
-  marginTop: 26,
   marginBottom: 26,
 };
 
-const TransactionHistoryChart = (props) => {
-  const { classes } = props;
-  const transactionsCountHistoryForTwoWeeks =
-    useChainTransactionStats()?.transactionsCountHistoryForTwoWeeks || [];
-  const recentTransactionsCount =
-    useChainTransactionStats()?.recentTransactionsCount;
+const filter = {
+  all: 0,
+  "1w": -7,
+  "1m": -30,
+};
 
-  const getDate = () => {
-    const format = "MMM D";
-    const date = transactionsCountHistoryForTwoWeeks.map((t) =>
-      moment(t.date).format(format)
-    );
-    return date;
+const TvlChart = (props) => {
+  const { classes, protocol, show } = props;
+  const [optionsData, setData] = useState([]);
+
+  const getOptionData = async () => {
+    const data = await api.getTvl(protocol);
+    setData(data);
   };
 
-  const count = transactionsCountHistoryForTwoWeeks.map((t) => t.total);
+  useEffect(() => {
+    getOptionData();
+  }, []);
 
-  const getOption = () => {
+  const optionsDates = React.useMemo(
+    () =>
+      optionsData
+        .map(({ date }) => {
+          const format = "MMM D";
+          return moment(date * 1000).format(format);
+        })
+        .slice(filter[show]),
+    [optionsData]
+  );
+
+  console.log(optionsDates);
+
+  const count = optionsData
+    .map((t) => {
+      return Math.trunc(t.totalLiquidityUSD);
+    })
+    .slice(filter[show]);
+
+  const getOption = (title, seriesName, data, date) => {
     return {
       title: {
-        text: "14 Day History",
+        text: title,
       },
       tooltip: {
         trigger: "axis",
         position: "top",
         backgroundColor: "#25272A",
-        formatter: `{b0}<br />${"Txns"}: {c0}`,
+        formatter: function (params) {
+          const formattedVal = formattedNum(params[0].value, true);
+          return `${params[0].seriesName}<br />
+              ${params[0].name}<br />
+              ${params[0].seriesName}: ${formattedVal}`;
+        },
       },
       grid: {
         left: "5%",
@@ -75,7 +99,7 @@ const TransactionHistoryChart = (props) => {
         {
           type: "category",
           boundaryGap: false,
-          data: getDate(),
+          data: date,
           axisLine: {
             show: false,
           },
@@ -103,6 +127,9 @@ const TransactionHistoryChart = (props) => {
           },
           axisLabel: {
             color: "#9B9B9B",
+            formatter: function (value) {
+              return formattedNum(value, true);
+            },
           },
           offset: 3,
           axisTick: {
@@ -112,7 +139,7 @@ const TransactionHistoryChart = (props) => {
       ],
       series: [
         {
-          name: "Txns",
+          name: seriesName,
           type: "line",
           smooth: true,
           lineStyle: {
@@ -135,7 +162,7 @@ const TransactionHistoryChart = (props) => {
               },
             ]),
           },
-          data: count,
+          data: data,
         },
       ],
     };
@@ -146,7 +173,7 @@ const TransactionHistoryChart = (props) => {
       <Paper elevation={0} className={classes.card}>
         <Box p={4}>
           <Typography variant="h5" style={{ fontWeight: 900 }}>
-            Total Transactions
+            Total Value Locked
           </Typography>
           <Typography>24hr Total</Typography>
           <Typography
@@ -154,19 +181,22 @@ const TransactionHistoryChart = (props) => {
             variant="h3"
             style={{ fontWeight: 900 }}
           >
-            {recentTransactionsCount}
+            {formattedNum(count.slice(-1)[0], true)}
           </Typography>
           <Change24HCount
-            last24htotal={count.slice(-1)[0]}
-            currentValue={recentTransactionsCount}
+            last24htotal={count.slice(-2)[0]}
+            currentValue={count.slice(-1)[0]}
           />
         </Box>
       </Paper>
       <Paper elevation={0}>
-        <ReactEcharts option={getOption()} style={chartsStyle} />
+        <ReactEcharts
+          option={getOption("", "TVL", count, optionsDates)}
+          style={chartsStyle}
+        />
       </Paper>
     </Box>
   );
 };
 
-export default withStyles(styles)(TransactionHistoryChart);
+export default withStyles(styles)(TvlChart);

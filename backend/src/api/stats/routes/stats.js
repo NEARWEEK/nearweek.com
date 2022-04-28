@@ -9,6 +9,12 @@ module.exports = {
     {
       // Path defined with a URL parameter
       method: "GET",
+      path: "/stats/tvl",
+      handler: "stats.tvl",
+    },
+    {
+      // Path defined with a URL parameter
+      method: "GET",
       path: "/stats/price",
       handler: "stats.price",
     },

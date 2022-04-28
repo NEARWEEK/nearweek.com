@@ -16,6 +16,7 @@ import TabsListUnstyled from "@mui/base/TabsListUnstyled";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 import { useStyles } from "./ChartTabs.styles";
+import TvlChart from "../TvlChart/TvlChart";
 
 const blue = {
   50: "#0d00ff26",
@@ -89,6 +90,7 @@ const ChartTabs = () => {
           <TabsUnstyled defaultValue={0}>
             <div className={classes.tabHeader}>
               <TabsList>
+                <Tab>Total Value Locked</Tab>
                 <Tab>Transactions</Tab>
                 <Tab>New Accounts</Tab>
                 <Tab>Active Accounts</Tab>
@@ -126,18 +128,21 @@ const ChartTabs = () => {
               </div>
             </div>
             <TabPanel value={0}>
-              <DailyTransactionsChart show={checked} />
+              <TvlChart protocol={"near"} show={checked} />
             </TabPanel>
             <TabPanel value={1}>
-              <NewAccountsChart show={checked} />
+              <DailyTransactionsChart show={checked} />
             </TabPanel>
             <TabPanel value={2}>
-              <ActiveAccountsChart show={checked} />
+              <NewAccountsChart show={checked} />
             </TabPanel>
             <TabPanel value={3}>
-              <NewContractsChart show={checked} />
+              <ActiveAccountsChart show={checked} />
             </TabPanel>
             <TabPanel value={4}>
+              <NewContractsChart show={checked} />
+            </TabPanel>
+            <TabPanel value={5}>
               <ActiveContractsChart show={checked} />
             </TabPanel>
           </TabsUnstyled>

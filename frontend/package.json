@@ -33,6 +33,7 @@
     "js-markdown": "^1.1.5",
     "moment": "^2.29.1",
     "near-api-js": "^0.44.2",
+    "numeral": "^2.0.6",
     "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-autosuggest": "^10.1.0",

@@ -45,16 +45,13 @@ const NewContractsChart = (props) => {
     () => newContracts.map(({ date }) => date.slice(0, 10)).slice(filter[show]),
     [newContracts]
   );
+
   const newContractsCount = React.useMemo(
     () =>
       newContracts
         .map(({ contractsCount }) => Number(contractsCount))
         .slice(filter[show]),
     [newContracts]
-  );
-  const newContractsCountCumulative = React.useMemo(
-    () => cumulativeSumArray(newContractsCount),
-    [newContractsCount]
   );
 
   const getOption = (title, seriesName, data, date) => {
