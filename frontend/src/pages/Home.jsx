@@ -33,7 +33,7 @@ const Home = () => {
       <main>
         <Box className={classes.wrapper}>
           <Box className={classes.container}>
-            <Section title={"Top News"} link={"/news"}>
+            <Section title={"Top News"} link={"/content"}>
               <Box className={classes.blockNews}>
                 <Box className={classes.blockColumn}>
                   <Announce edition={editions.data[0]} />

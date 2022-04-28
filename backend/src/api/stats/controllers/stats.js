@@ -1,4 +1,5 @@
-const moment = require("moment"); // require
+const axios = require("axios");
+const moment = require("moment");
 const CoinGecko = require("coingecko-api");
 
 const CoinGeckoClient = new CoinGecko();
@@ -51,6 +52,16 @@ module.exports = {
         })
       );
       return prices;
+    } catch (e) {
+      console.log("Error:", e);
+    }
+  },
+  async tvl(ctx) {
+    try {
+      const { q } = ctx.query;
+      const url = `${process.env.TVL_CHART_API}/charts/${q}`;
+      const response = await axios.get(url);
+      return response.data;
     } catch (e) {
       console.log("Error:", e);
     }

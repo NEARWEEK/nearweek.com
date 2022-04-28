@@ -157,7 +157,7 @@ const DailyTransactionsChart = (props) => {
           </Typography>
           <Change24HCount
             last24htotal={count.slice(-1)[0]}
-            recent={recentTransactionsCount}
+            currentValue={recentTransactionsCount}
           />
         </Box>
       </Paper>
