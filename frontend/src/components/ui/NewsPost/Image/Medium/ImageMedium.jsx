@@ -27,8 +27,9 @@ const ImageMedium = ({ data }) => {
 
   let imageUrl = placeholder.getRandomPlaceholder("medium");
   if (data.attributes.Image?.data?.attributes) {
-    const { large, medium } = data.attributes.Image.data.attributes.formats;
-    imageUrl = large?.url || medium?.url;
+    const { large, medium, small } =
+      data.attributes.Image.data.attributes.formats;
+    imageUrl = large?.url || medium?.url || small?.url;
   }
 
   const classes = useStyles();
