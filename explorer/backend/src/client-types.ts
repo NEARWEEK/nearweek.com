@@ -1,1 +1,1 @@
-export * from "../../frontend/src/libraries/wamp/types";
+export * from "./libraries/wamp/types";
