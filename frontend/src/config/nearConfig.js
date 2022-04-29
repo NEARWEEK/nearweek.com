@@ -14,7 +14,7 @@ const mainnet = {
   walletUrl: "https://wallet.near.org",
   helperUrl: "https://helper.mainnet.near.org",
   explorerUrl: "https://explorer.near.org",
-  wampNearExplorerUrl: "wss://near-explorer-wamp.onrender.com/ws",
+  wampNearExplorerUrl: "ws://127.0.0.1:8080/ws",
   isTestnet: false,
 };
 
