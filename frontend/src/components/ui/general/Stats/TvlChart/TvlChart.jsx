@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Change24HCount from "../Change24HCount/Change24HCount";
 import ReactEcharts from "echarts-for-react";
+import Loader from "../../Loader/Loader";
 
 const styles = {
   grid: {
@@ -61,8 +62,6 @@ const TvlChart = (props) => {
         .slice(filter[show]),
     [optionsData]
   );
-
-  console.log(optionsDates);
 
   const count = optionsData
     .map((t) => {
@@ -167,6 +166,10 @@ const TvlChart = (props) => {
       ],
     };
   };
+
+  if (optionsData.length === 0) {
+    return <Loader />;
+  }
 
   return (
     <Box className={classes.grid} mt={4}>

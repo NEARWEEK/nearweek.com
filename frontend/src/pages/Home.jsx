@@ -49,13 +49,13 @@ const Home = () => {
               <Subscription />
             </Section>
           </Box>
-          <Box style={{ backgroundColor: "#f7f7f7" }} mt={4}>
+          {/*          <Box style={{ backgroundColor: "#f7f7f7" }} mt={4}>
             <Box className={classes.container} mb={4}>
               <Section title={"NEAR’s week by the numbers"}>
                 <ChartTabs />
               </Section>
             </Box>
-          </Box>
+          </Box>*/}
           <Box className={classes.container}>
             <Section title={"Events"} link={"/events"}>
               <EventsGrid />

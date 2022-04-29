@@ -4,7 +4,7 @@ const testnet = {
   walletUrl: "https://wallet.testnet.near.org",
   helperUrl: "https://helper.testnet.near.org",
   explorerUrl: "https://explorer.testnet.near.org",
-  wampNearExplorerUrl: "wss://wamp.onrender.com/ws",
+  wampNearExplorerUrl: "wss://wamp-pr-966.onrender.com/ws",
   isTestnet: true,
 };
 

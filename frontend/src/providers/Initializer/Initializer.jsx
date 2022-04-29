@@ -11,7 +11,7 @@ export const Initializer = ({ store, history, children }) => {
     (async () => {
       await store.persist.resolveRehydration();
       await onInitApp({ history, setInit });
-      await connection.getSession();
+      //await connection.getSession();
     })();
   }, [store, history, onInitApp]);
 
