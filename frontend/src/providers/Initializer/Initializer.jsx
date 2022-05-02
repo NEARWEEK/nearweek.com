@@ -1,6 +1,6 @@
 import React from "react";
 import { cloneElement, useEffect, useState } from "react";
-import * as connection from "../../libs/wamp/connection";
+import * as wamp from "../../libs/wamp/connection";
 
 export const Initializer = ({ store, history, children }) => {
   const [isInit, setInit] = useState(false);
@@ -11,7 +11,7 @@ export const Initializer = ({ store, history, children }) => {
     (async () => {
       await store.persist.resolveRehydration();
       await onInitApp({ history, setInit });
-      await connection.getSession();
+      await wamp.getSession();
     })();
   }, [store, history, onInitApp]);
 
