@@ -43,8 +43,6 @@ const TvlChart = (props) => {
   const { classes, protocol, show } = props;
   const [optionsData, setData] = useState([]);
 
-  console.log(filter[show]);
-
   const getOptionData = async () => {
     const data = await api.getTvl(protocol);
     setData(data);
@@ -52,7 +50,7 @@ const TvlChart = (props) => {
 
   useEffect(() => {
     getOptionData();
-  }, []);
+  }, [protocol]);
 
   const optionsDates = React.useMemo(
     () =>
