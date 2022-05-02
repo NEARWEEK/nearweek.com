@@ -4,7 +4,7 @@ const testnet = {
   walletUrl: "https://wallet.testnet.near.org",
   helperUrl: "https://helper.testnet.near.org",
   explorerUrl: "https://explorer.testnet.near.org",
-  wampNearExplorerUrl: "wss://wamp-pr-966.onrender.com/ws",
+  wampNearExplorerUrl: `ws://${process.env.REACT_APP_NEAR_EXPLORER_WAMP_HOST}:${process.env.REACT_APP_NEAR_EXPLORER_WAMP_PORT}/ws`,
   isTestnet: true,
 };
 
@@ -14,7 +14,7 @@ const mainnet = {
   walletUrl: "https://wallet.near.org",
   helperUrl: "https://helper.mainnet.near.org",
   explorerUrl: "https://explorer.near.org",
-  wampNearExplorerUrl: "ws://5.161.56.222:8080/ws",
+  wampNearExplorerUrl: `ws://${process.env.REACT_APP_NEAR_EXPLORER_WAMP_HOST}:${process.env.REACT_APP_NEAR_EXPLORER_WAMP_PORT}/ws`,
   isTestnet: false,
 };
 
