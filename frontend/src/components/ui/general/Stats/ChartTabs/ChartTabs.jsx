@@ -33,7 +33,8 @@ const blue = {
 
 const ChartTabs = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
-  const [checked, setChecked] = useState("1w");
+  const [checkedPeriod, setCheckedPeriod] = useState("1w");
+  const [checkedProtocol, setCheckedProtocol] = useState("near");
 
   const classes = useStyles();
 
@@ -99,28 +100,28 @@ const ChartTabs = () => {
               </TabsList>
               <div className={classes.buttonsGroup}>
                 <ToggleButton
-                  selected={checked === "1w"}
+                  selected={checkedPeriod === "1w"}
                   value="1w"
                   onChange={() => {
-                    setChecked("1w");
+                    setCheckedPeriod("1w");
                   }}
                 >
                   1W
                 </ToggleButton>
                 <ToggleButton
-                  selected={checked === "1m"}
+                  selected={checkedPeriod === "1m"}
                   value="1m"
                   onChange={() => {
-                    setChecked("1m");
+                    setCheckedPeriod("1m");
                   }}
                 >
                   1M
                 </ToggleButton>
                 <ToggleButton
-                  selected={checked === "all"}
+                  selected={checkedPeriod === "all"}
                   value="all"
                   onChange={() => {
-                    setChecked("all");
+                    setCheckedPeriod("all");
                   }}
                 >
                   All
@@ -128,22 +129,48 @@ const ChartTabs = () => {
               </div>
             </div>
             <TabPanel value={0}>
-              <TvlChart protocol={"near"} show={checked} />
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-end"
+                mt={2}
+                pr={2}
+                pl={2}
+                className={classes.buttonsGroup}
+              >
+                <ToggleButton
+                  value="near"
+                  selected={checkedProtocol == "near"}
+                  onChange={() => setCheckedProtocol("near")}
+                >
+                  Near
+                </ToggleButton>
+                <ToggleButton
+                  value="aurora"
+                  selected={checkedProtocol == "aurora"}
+                  onChange={() => setCheckedProtocol("aurora")}
+                >
+                  Aurora
+                </ToggleButton>
+              </Box>
+              {checkedProtocol && (
+                <TvlChart protocol={checkedProtocol} show={checkedPeriod} />
+              )}
             </TabPanel>
             <TabPanel value={1}>
-              <DailyTransactionsChart show={checked} />
+              <DailyTransactionsChart show={checkedPeriod} />
             </TabPanel>
             <TabPanel value={2}>
-              <NewAccountsChart show={checked} />
+              <NewAccountsChart show={checkedPeriod} />
             </TabPanel>
             <TabPanel value={3}>
-              <ActiveAccountsChart show={checked} />
+              <ActiveAccountsChart show={checkedPeriod} />
             </TabPanel>
             <TabPanel value={4}>
-              <NewContractsChart show={checked} />
+              <NewContractsChart show={checkedPeriod} />
             </TabPanel>
             <TabPanel value={5}>
-              <ActiveContractsChart show={checked} />
+              <ActiveContractsChart show={checkedPeriod} />
             </TabPanel>
           </TabsUnstyled>
         )}

@@ -8,13 +8,6 @@ const Change24HCount = ({ currentValue = 0, last24htotal = 0 }) => {
     ((parseFloat(currentValue) - parseFloat(last24htotal)) /
       parseFloat(last24htotal)) *
       100 || undefined;
-  console.log(
-    currentValue,
-    last24htotal,
-    parseFloat(currentValue),
-    parseFloat(last24htotal),
-    changes
-  );
   const boxColor = changes < 0 ? "red" : "#27e3a8";
   return (
     <>
