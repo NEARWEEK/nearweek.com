@@ -6,6 +6,7 @@ let sessionPromise = undefined;
 const createSession = async () => {
   return new Promise((resolve, reject) => {
     const { wampNearExplorerUrl } = nearConfig;
+    console.log("wampNearExplorerUrl", wampNearExplorerUrl);
     console.log("Starting WAMP session...");
     const connection = new autobahn.Connection({
       url: wampNearExplorerUrl,
