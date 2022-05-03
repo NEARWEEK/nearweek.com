@@ -184,7 +184,7 @@ const TvlChart = (props) => {
           <Typography>24hr Total</Typography>
           <Typography
             className={classes.total}
-            variant="h3"
+            variant="h4"
             style={{ fontWeight: 900 }}
           >
             {formattedNum(count.slice(-1)[0], true)}

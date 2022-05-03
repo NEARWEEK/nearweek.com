@@ -2,7 +2,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
   tabHeader: {
-    padding: 16,
+    padding: theme.spacing(2),
     borderBottom: "1px solid #ccc",
     display: "flex",
     alignItems: "center",
