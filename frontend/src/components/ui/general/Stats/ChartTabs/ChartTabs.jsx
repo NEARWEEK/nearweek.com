@@ -32,7 +32,6 @@ const blue = {
 };
 
 const ChartTabs = () => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const [checkedPeriod, setCheckedPeriod] = useState("1w");
   const [checkedProtocol, setCheckedProtocol] = useState("near");
 
@@ -87,93 +86,91 @@ const ChartTabs = () => {
   return (
     <Box pb={6}>
       <Paper elevation={0}>
-        {!isMobileMatch && (
-          <TabsUnstyled defaultValue={0}>
-            <div className={classes.tabHeader}>
-              <TabsList>
-                <Tab>Total Value Locked</Tab>
-                <Tab>Transactions</Tab>
-                <Tab>New Accounts</Tab>
-                <Tab>Active Accounts</Tab>
-                <Tab>New Contracts</Tab>
-                <Tab>Active Contracts</Tab>
-              </TabsList>
-              <div className={classes.buttonsGroup}>
-                <ToggleButton
-                  selected={checkedPeriod === "1w"}
-                  value="1w"
-                  onChange={() => {
-                    setCheckedPeriod("1w");
-                  }}
-                >
-                  1W
-                </ToggleButton>
-                <ToggleButton
-                  selected={checkedPeriod === "1m"}
-                  value="1m"
-                  onChange={() => {
-                    setCheckedPeriod("1m");
-                  }}
-                >
-                  1M
-                </ToggleButton>
-                <ToggleButton
-                  selected={checkedPeriod === "all"}
-                  value="all"
-                  onChange={() => {
-                    setCheckedPeriod("all");
-                  }}
-                >
-                  All
-                </ToggleButton>
-              </div>
-            </div>
-            <TabPanel value={0}>
-              <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="flex-end"
-                mt={2}
-                pr={2}
-                pl={2}
-                className={classes.buttonsGroup}
+        <TabsUnstyled defaultValue={0}>
+          <div className={classes.tabHeader}>
+            <TabsList>
+              <Tab>Total Value Locked</Tab>
+              <Tab>Transactions</Tab>
+              <Tab>New Accounts</Tab>
+              <Tab>Active Accounts</Tab>
+              <Tab>New Contracts</Tab>
+              <Tab>Active Contracts</Tab>
+            </TabsList>
+            <div className={classes.buttonsGroup}>
+              <ToggleButton
+                selected={checkedPeriod === "1w"}
+                value="1w"
+                onChange={() => {
+                  setCheckedPeriod("1w");
+                }}
               >
-                <ToggleButton
-                  value="near"
-                  selected={checkedProtocol == "near"}
-                  onChange={() => setCheckedProtocol("near")}
-                >
-                  Near
-                </ToggleButton>
-                <ToggleButton
-                  value="aurora"
-                  selected={checkedProtocol == "aurora"}
-                  onChange={() => setCheckedProtocol("aurora")}
-                >
-                  Aurora
-                </ToggleButton>
-              </Box>
-              {checkedProtocol && (
-                <TvlChart protocol={checkedProtocol} show={checkedPeriod} />
-              )}
-            </TabPanel>
-            <TabPanel value={1}>
-              <DailyTransactionsChart show={checkedPeriod} />
-            </TabPanel>
-            <TabPanel value={2}>
-              <NewAccountsChart show={checkedPeriod} />
-            </TabPanel>
-            <TabPanel value={3}>
-              <ActiveAccountsChart show={checkedPeriod} />
-            </TabPanel>
-            <TabPanel value={4}>
-              <NewContractsChart show={checkedPeriod} />
-            </TabPanel>
-            <TabPanel value={5}>
-              <ActiveContractsChart show={checkedPeriod} />
-            </TabPanel>
-          </TabsUnstyled>
-        )}
+                1W
+              </ToggleButton>
+              <ToggleButton
+                selected={checkedPeriod === "1m"}
+                value="1m"
+                onChange={() => {
+                  setCheckedPeriod("1m");
+                }}
+              >
+                1M
+              </ToggleButton>
+              <ToggleButton
+                selected={checkedPeriod === "all"}
+                value="all"
+                onChange={() => {
+                  setCheckedPeriod("all");
+                }}
+              >
+                All
+              </ToggleButton>
+            </div>
+          </div>
+          <TabPanel value={0}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="flex-end"
+              mt={2}
+              pr={2}
+              pl={2}
+              className={classes.buttonsGroup}
+            >
+              <ToggleButton
+                value="near"
+                selected={checkedProtocol == "near"}
+                onChange={() => setCheckedProtocol("near")}
+              >
+                Near
+              </ToggleButton>
+              <ToggleButton
+                value="aurora"
+                selected={checkedProtocol == "aurora"}
+                onChange={() => setCheckedProtocol("aurora")}
+              >
+                Aurora
+              </ToggleButton>
+            </Box>
+            {checkedProtocol && (
+              <TvlChart protocol={checkedProtocol} show={checkedPeriod} />
+            )}
+          </TabPanel>
+          <TabPanel value={1}>
+            <DailyTransactionsChart show={checkedPeriod} />
+          </TabPanel>
+          <TabPanel value={2}>
+            <NewAccountsChart show={checkedPeriod} />
+          </TabPanel>
+          <TabPanel value={3}>
+            <ActiveAccountsChart show={checkedPeriod} />
+          </TabPanel>
+          <TabPanel value={4}>
+            <NewContractsChart show={checkedPeriod} />
+          </TabPanel>
+          <TabPanel value={5}>
+            <ActiveContractsChart show={checkedPeriod} />
+          </TabPanel>
+        </TabsUnstyled>
       </Paper>
     </Box>
   );

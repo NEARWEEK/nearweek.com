@@ -30,6 +30,4 @@ const getNearConfig = (network) => {
   };
 };
 
-console.log(getNearConfig(process.env.REACT_APP_NETWORK));
-
 export const nearConfig = getNearConfig(process.env.REACT_APP_NETWORK);

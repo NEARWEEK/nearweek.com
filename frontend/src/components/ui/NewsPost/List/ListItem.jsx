@@ -38,10 +38,9 @@ const ListItem = ({ data }) => {
     itemContainer: {
       borderRadius: "12px",
       display: "grid",
-      gridTemplateColumns: !isMobileMatch
-        ? "repeat(auto-fit, minmax(100px, max-content))"
-        : "100%",
+      gridTemplateColumns: !isMobileMatch ? "205px 1fr" : "100%",
       flex: 1,
+      gridTemplateRows: "1fr",
       flexDirection: !isMobileMatch ? "row" : "column",
     },
     postContent: {
@@ -51,6 +50,7 @@ const ListItem = ({ data }) => {
       width: "100%",
       display: "flex",
       flexDirection: "column",
+      justifyContent: "space-between",
     },
     contentBody: {
       display: "grid",

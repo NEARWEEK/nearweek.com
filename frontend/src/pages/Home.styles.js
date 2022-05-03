@@ -3,10 +3,12 @@ import makeStyles from "@mui/styles/makeStyles";
 const styles = (theme) => ({
   wrapper: {},
   container: {
+    display: "flex",
     margin: "0 auto",
+    flexDirection: "column",
     maxWidth: 1376,
-    paddingRight: "16px",
-    paddingLeft: "16px",
+    paddingRight: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
   },
   tabs: {
     display: "flex",

@@ -14,9 +14,14 @@ import Subscription from "../components/ui/general/Subscription/Subscription";
 import CoinsPrice from "../components/ui/general/CoinsPrice/CoinsPrice";
 import { useStyles } from "./Home.styles";
 import ChartTabs from "../components/ui/general/Stats/ChartTabs/ChartTabs";
+import StatsBlocks from "../components/ui/general/Stats/StatsBlocks/StatsBlocks";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const Home = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobileMatch = useMediaQuery(theme.breakpoints.down("md"));
   const [editions, setEditions] = useState({ data: [], meta: {} });
 
   useEffect(async () => {
@@ -52,7 +57,8 @@ const Home = () => {
           <Box style={{ backgroundColor: "#f7f7f7" }} mt={4}>
             <Box className={classes.container} mb={4}>
               <Section title={"NEAR’s week by the numbers"}>
-                <ChartTabs />
+                {!isMobileMatch && <ChartTabs />}
+                <StatsBlocks />
               </Section>
             </Box>
           </Box>

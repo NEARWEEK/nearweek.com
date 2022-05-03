@@ -13,6 +13,9 @@ const styles = (theme) => ({
     maxWidth: "100vw",
     overflowX: "scroll",
     scrollBehavior: "smooth",
+    "& li:not(:last-child)": {
+      borderRight: "1px solid #e1dff5",
+    },
     "&::-webkit-scrollbar": {
       background: "transparent",
       WebkitAppearance: "none",
@@ -21,10 +24,8 @@ const styles = (theme) => ({
     },
   },
   listItem: {
-    color: "#fff",
-    padding: "8px",
-    borderRadius: "4px",
-    margin: "0 4px",
+    paddingRight: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
     whiteSpace: "nowrap",
   },
   card: {
