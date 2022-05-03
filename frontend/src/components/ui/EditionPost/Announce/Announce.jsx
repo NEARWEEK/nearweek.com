@@ -25,7 +25,7 @@ const Announce = ({ edition }) => {
             <h2 className={classes.postTitle}>
               <Link
                 color="inherit"
-                href={`/editions/${edition.attributes.slug}`}
+                href={`/newsletter/${edition.attributes.slug}`}
                 underline="none"
               >
                 {edition.attributes.Title}

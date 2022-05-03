@@ -38,7 +38,7 @@ const Home = () => {
       <main>
         <Box className={classes.wrapper}>
           <Box className={classes.container}>
-            <Section title={"Top News"} link={"/content"}>
+            <Section title={"Highlights"} link={"/content"}>
               <Box className={classes.blockNews}>
                 <Box className={classes.blockColumn}>
                   <Announce edition={editions.data[0]} />
@@ -76,7 +76,7 @@ const Home = () => {
             <VideoSlider />
           </Box>
           <Box className={classes.container}>
-            <Section title={"Latest Editions"} link={"/editions"}>
+            <Section title={"Latest Editions"} link={"/newsletter"}>
               {editions.data.length > 0 && (
                 <EditionsList exclude={editions.data[0].id} />
               )}

@@ -12,7 +12,7 @@ const Menu = () => {
           <li className={classes.menuItem} key={item.name}>
             <NavLink
               className={({ isActive }) => (isActive ? "active" : "inactive")}
-              to={item.link}
+              to={{ pathname: item.link }}
             >
               {item.name}
             </NavLink>

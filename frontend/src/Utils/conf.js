@@ -8,8 +8,12 @@ export const menuItems = [
     link: "/content",
   },
   {
-    name: "Editions",
-    link: "/editions",
+    name: "Newsletter",
+    link: "/newsletter",
+  },
+  {
+    name: "Ecosystem",
+    link: "//www.awesomenear.com/",
   },
   /*  {
     name: "Events",

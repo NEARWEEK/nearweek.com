@@ -27,7 +27,7 @@ library.add(faDiscord);
 
 const EditionPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
-  const match = useMatch(`/editions/:editionId`);
+  const match = useMatch(`/newsletter/:editionId`);
 
   const [edition, setEdition] = useState(null);
   const [meta, setMeta] = useState(null);
@@ -49,7 +49,7 @@ const EditionPost = () => {
   const handleForward = (e) => {
     e.preventDefault();
     if (meta && meta.next) {
-      navigate(`/editions/${meta.next}`);
+      navigate(`/newsletter/${meta.next}`);
       window.location.reload();
     }
   };
@@ -57,7 +57,7 @@ const EditionPost = () => {
   const handleBackward = (e) => {
     e.preventDefault();
     if (meta && meta.prev) {
-      navigate(`/editions/${meta.prev}`);
+      navigate(`/newsletter/${meta.prev}`);
       window.location.reload();
     }
   };
@@ -65,7 +65,7 @@ const EditionPost = () => {
   const handleCurrent = (e) => {
     e.preventDefault();
     if (meta && meta.curr) {
-      navigate(`/editions/${meta.curr}`);
+      navigate(`/newsletter/${meta.curr}`);
       window.location.reload();
     }
   };
@@ -156,7 +156,7 @@ const EditionPost = () => {
               <Box className={classes.contentWrapper}>
                 <Box className={classes.headerBlock}>
                   <Box className={classes.breadcrumb}>
-                    <a className={classes.link} href="/editions">
+                    <a className={classes.link} href="/newsletter">
                       <FontAwesomeIcon
                         className={classes.icon}
                         icon={faChevronLeft}

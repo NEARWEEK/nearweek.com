@@ -13,7 +13,7 @@ import PostDescription from "../../general/PostDescription/PostDescription";
 
 const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
-  const matchEdition = useMatch(`/editions/:editionId`);
+  const matchEdition = useMatch(`/newsletter/:editionId`);
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
@@ -100,7 +100,7 @@ const ListItem = ({ data }) => {
               <div className={classes.blockImage}>
                 <Thumbnail
                   data={data}
-                  url={`/editions/${data.attributes.slug}`}
+                  url={`/newsletter/${data.attributes.slug}`}
                 />
               </div>
             )}
@@ -111,7 +111,7 @@ const ListItem = ({ data }) => {
                     <div className={classes.bodyImage}>
                       <Thumbnail
                         data={data}
-                        url={`/editions/${data.attributes.slug}`}
+                        url={`/newsletter/${data.attributes.slug}`}
                       />
                     </div>
                   </div>
@@ -127,7 +127,7 @@ const ListItem = ({ data }) => {
                     <Link
                       color="inherit"
                       underline="none"
-                      href={`/editions/${data.attributes.slug}`}
+                      href={`/newsletter/${data.attributes.slug}`}
                     >
                       {data.attributes.Title}
                       <span className={classes.postNumber}>
