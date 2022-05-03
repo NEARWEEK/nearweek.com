@@ -59,34 +59,32 @@ const CoinsPrice = () => {
   const CoinBlock = ({ coin }) => {
     return (
       <li className={classes.listItem}>
-        <Card elevation={0} className={classes.card}>
-          <CardContent>
-            <Box className={classes.box}>
-              <Box
-                display="flex"
-                alignItems="center"
-                style={{ fontWeight: 900, fontSize: "1rem" }}
+        <Box elevation={0} className={classes.card}>
+          <Box className={classes.box}>
+            <Box
+              display="flex"
+              alignItems="center"
+              style={{ fontWeight: 900, fontSize: "1rem" }}
+            >
+              <span style={{ marginRight: 8 }}>
+                {COINS_ALIAS[coin.data.symbol]}
+              </span>{" "}
+              <span
+                style={{
+                  color: "#0d00ff",
+                }}
               >
-                <span style={{ marginRight: 8 }}>
-                  {COINS_ALIAS[coin.data.symbol]}
-                </span>{" "}
-                <span
-                  style={{
-                    color: "#0d00ff",
-                  }}
-                >
-                  {getPrice(coin.data.market_data.current_price.usd)}
-                </span>
-              </Box>
-              <Box display="flex" style={{ textTransform: "none" }}>
-                24h:{" "}
-                <ChangePrice24h
-                  value={coin.data.market_data.price_change_percentage_24h}
-                />
-              </Box>
+                {getPrice(coin.data.market_data.current_price.usd)}
+              </span>
             </Box>
-          </CardContent>
-        </Card>
+            <Box display="flex" style={{ textTransform: "none" }}>
+              24h:{" "}
+              <ChangePrice24h
+                value={coin.data.market_data.price_change_percentage_24h}
+              />
+            </Box>
+          </Box>
+        </Box>
       </li>
     );
   };
@@ -147,7 +145,7 @@ const CoinsPrice = () => {
           )}
           <ul ref={scrl} onScroll={scrollCheck} className={classes.list}>
             {prices.length > 0 &&
-              prices.map((item) => (
+              prices.map((item, index) => (
                 <CoinBlock key={item.data.name} coin={item} />
               ))}
           </ul>

@@ -50,6 +50,9 @@ const TvlChart = (props) => {
 
   useEffect(() => {
     getOptionData();
+    return () => {
+      setData([]);
+    };
   }, [protocol]);
 
   const optionsDates = React.useMemo(

@@ -66,4 +66,14 @@ module.exports = {
       console.log("Error:", e);
     }
   },
+  async dao(ctx) {
+    try {
+      const { q } = ctx.query;
+      const url = `${process.env.DAO_STATS_API}`;
+      const response = await axios.get(url);
+      return response.data;
+    } catch (e) {
+      console.log("Error:", e);
+    }
+  },
 };
