@@ -70,8 +70,12 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="editions" element={<Editions />} />
-            <Route exact path="editions/:editionId" element={<EditionPost />} />
+            <Route exact path="newsletter" element={<Editions />} />
+            <Route
+              exact
+              path="newsletter/:editionId"
+              element={<EditionPost />}
+            />
             <Route exact path="content" element={<News />} />
             <Route exact path="content/:articleId" element={<NewsPost />} />
             <Route exact path="events" element={<Events />} />

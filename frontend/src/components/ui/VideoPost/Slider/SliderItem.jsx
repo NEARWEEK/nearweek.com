@@ -51,6 +51,13 @@ const SliderItem = (props) => {
       fontSize: "20px",
       marginTop: "6px",
       marginBottom: "6px",
+      display: "-webkit-box",
+      maxWidth: "100%",
+      lineHeight: "1.5rem",
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: "vertical",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
       "& a": {},
     },
     postBody: {
