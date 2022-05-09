@@ -29,7 +29,7 @@ const Actions = () => {
       {/*{!isMobileMatch && <Search />}*/}
       <PostActions />
       {isSignIn && <UserActions />}
-      {!isSignIn && <Connect />}
+      {/*{!isSignIn && <Connect />}*/}
       {isSignIn && <UploadNews />}
     </div>
   );
