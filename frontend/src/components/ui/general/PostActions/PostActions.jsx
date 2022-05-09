@@ -54,6 +54,11 @@ const PostActions = () => {
       backgroundColor: "#e1dff5 !important",
     },
     button: {
+      "& .small-button": {
+        "& .MuiButton-startIcon": {
+          margin: "0 !important",
+        },
+      },
       margin: theme.spacing(1),
       [theme.breakpoints.down("sm")]: {
         minWidth: "36px !important",
@@ -109,37 +114,46 @@ const PostActions = () => {
 
   const classes = useStyles();
   return (
-    <Box className={classes.postActions}>
-      <Box>
-        <Button
-          className={[classes.button, classes.twitterBtn].join(" ")}
-          variant="contained"
-          disableElevation
-          onClick={handleTwitterButton}
-          startIcon={<TwitterIcon />}
-        >
-          <span className={classes.buttonText}>TWITTER</span>
-        </Button>
-        <Button
-          className={[classes.button, classes.telegramBtn].join(" ")}
-          variant="contained"
-          disableElevation
-          onClick={handleTelegramButton}
-          startIcon={<TelegramIcon />}
-        >
-          <span className={classes.buttonText}>TELEGRAM</span>
-        </Button>
-        <Button
-          className={[classes.button, classes.discordBtn].join(" ")}
-          variant="contained"
-          disableElevation
-          onClick={handleDiscordButton}
-          startIcon={<FontAwesomeIcon icon={faDiscord} />}
-        >
-          <span className={classes.buttonText}>DISCORD</span>
-        </Button>
-      </Box>
-      {/*      <Box>
+    <>
+      {!isSignedIn && (
+        <Box className={classes.postActions}>
+          <Box>
+            <Button
+              className={[classes.button, classes.twitterBtn].join(" ")}
+              variant="contained"
+              disableElevation
+              onClick={handleTwitterButton}
+              startIcon={<TwitterIcon />}
+            >
+              <span
+                className={[
+                  classes.buttonText,
+                  isSignedIn ? "text-hidden" : "",
+                ].join(" ")}
+              >
+                TWITTER
+              </span>
+            </Button>
+            <Button
+              className={[classes.button, classes.telegramBtn].join(" ")}
+              variant="contained"
+              disableElevation
+              onClick={handleTelegramButton}
+              startIcon={<TelegramIcon />}
+            >
+              <span className={classes.buttonText}>TELEGRAM</span>
+            </Button>
+            <Button
+              className={[classes.button, classes.discordBtn].join(" ")}
+              variant="contained"
+              disableElevation
+              onClick={handleDiscordButton}
+              startIcon={<FontAwesomeIcon icon={faDiscord} />}
+            >
+              <span className={classes.buttonText}>DISCORD</span>
+            </Button>
+          </Box>
+          {/*      <Box>
         <Button
           className={classes.likeBtn}
           variant="contained"
@@ -150,7 +164,9 @@ const PostActions = () => {
           Like
         </Button>
       </Box>*/}
-    </Box>
+        </Box>
+      )}
+    </>
   );
 };
 

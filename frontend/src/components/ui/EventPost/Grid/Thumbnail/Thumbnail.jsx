@@ -9,6 +9,7 @@ const Thumbnail = ({ data, url }) => {
     img: {
       width: "100%",
       height: "100%",
+      objectFit: "cover",
       borderRadius: "12px 12px 0 0",
     },
   }));

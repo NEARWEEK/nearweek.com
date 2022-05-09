@@ -40,7 +40,7 @@ const ListItem = ({ data }) => {
       display: "grid",
       gridTemplateColumns: !isMobileMatch ? "205px 1fr" : "100%",
       flex: 1,
-      gridTemplateRows: "1fr",
+      gridTemplateRows: "205px",
       flexDirection: !isMobileMatch ? "row" : "column",
     },
     postContent: {
