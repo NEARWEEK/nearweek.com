@@ -12,6 +12,7 @@ const Thumbnail = ({ data, url }) => {
     img: {
       width: isMobileMatch ? 68 : 205,
       height: isMobileMatch ? 68 : "100%",
+      objectFit: "cover",
       borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px",
     },
   }));

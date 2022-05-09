@@ -73,9 +73,9 @@ const UserActions = () => {
     navigate("/user-profile");
   };
 
-  const useStyles = makeStyles(() => ({
+  const useStyles = makeStyles((theme) => ({
     box: {
-      minWidth: 256,
+      width: 356,
     },
     button: {
       whiteSpace: "nowrap",
@@ -104,7 +104,11 @@ const UserActions = () => {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        <Box display="flex" alignItems="center">
+        <Box
+          display="flex"
+          alignItems="center"
+          style={{ maxWidth: 176, overflow: "hidden" }}
+        >
           <AccountCircleIcon />
           <span className="account-id">{accountId}</span>
         </Box>
@@ -119,19 +123,23 @@ const UserActions = () => {
         onClose={handleClose}
         className={classes.box}
       >
-        <Box display="flex" alignItems="center">
-          <Typography variant="h6" style={{ fontWeight: "bold" }}>
-            {accountId}
-          </Typography>
+        <Box p={2}>
+          <Box display="flex" alignItems="center">
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              {accountId}
+              {accountId}
+              {accountId}
+            </Typography>
+          </Box>
+          <MenuItem onClick={handleProfileClick} disableRipple>
+            <AccountCircleIcon />
+            My Profile
+          </MenuItem>
+          <MenuItem onClick={handleClose} disableRipple>
+            <FileCopyIcon />
+            My News
+          </MenuItem>
         </Box>
-        <MenuItem onClick={handleProfileClick} disableRipple>
-          <AccountCircleIcon />
-          My Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <FileCopyIcon />
-          My News
-        </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <Box display="flex" alignItems="center" justifyContent="center">
           <Button variant="contained" disableElevation>

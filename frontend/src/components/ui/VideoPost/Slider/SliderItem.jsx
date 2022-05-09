@@ -17,6 +17,9 @@ const SliderItem = (props) => {
         height: "auto",
         "& .carousel-item": {
           maxWidth: "100%",
+          "& .react-player__preview": {
+            borderRadius: 12,
+          },
           "& .react-player__shadow": {
             background: "rgba(255, 255, 255, 0.82) !important",
             borderRadius: "72px !important",

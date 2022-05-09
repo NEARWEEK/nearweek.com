@@ -13,7 +13,6 @@ const Actions = () => {
   const wallet = state.main.entities.wallet;
   const isSignIn = wallet.isSignedIn();
 
-  const isMobileMatch = useMediaQuery("(max-width:600px)");
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
@@ -30,7 +29,7 @@ const Actions = () => {
       {/*{!isMobileMatch && <Search />}*/}
       <PostActions />
       {isSignIn && <UserActions />}
-      {/* {!isSignIn && <Connect />}*/}
+      {!isSignIn && <Connect />}
       {isSignIn && <UploadNews />}
     </div>
   );
