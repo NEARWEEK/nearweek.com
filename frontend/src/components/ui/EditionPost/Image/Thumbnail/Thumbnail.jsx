@@ -10,9 +10,10 @@ const Thumbnail = ({ data, url }) => {
   const Image = data?.attributes?.Image || null;
   const useStyles = makeStyles(() => ({
     img: {
-      minWidth: isMobileMatch ? "68px" : "362px",
-      minHeight: isMobileMatch ? "68px" : "100%",
+      width: isMobileMatch ? "68px" : "362px",
+      height: isMobileMatch ? "68px" : "205px",
       borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px",
+      objectFit: "cover",
     },
   }));
   let thumbnail = placeholder.getRandomPlaceholder("small");
@@ -23,14 +24,15 @@ const Thumbnail = ({ data, url }) => {
   return (
     <>
       <a href={url}>
-        <div
+        {/*        <div
           style={{
             backgroundImage: `url('${thumbnail}')`,
             backgroundSize: "cover",
             backgroundPosition: "50% 50%",
           }}
           className={"image " + classes.img}
-        />{" "}
+        />*/}
+        <img src={thumbnail} className={classes.img} />
       </a>
     </>
   );
