@@ -1,9 +1,9 @@
 import * as React from "react";
-import Markdown from "js-markdown";
 import HTMLEllipsis from "react-lines-ellipsis/lib/html";
+import { parseMarkdown } from "../../../../Utils/Utils";
 
 const PostDescription = ({ body }) => {
-  const html = Markdown.parse(body);
+  const html = parseMarkdown(body);
 
   return (
     <HTMLEllipsis

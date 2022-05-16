@@ -143,7 +143,7 @@ const PostActions = () => {
             >
               <span className={classes.buttonText}>TELEGRAM</span>
             </Button>
-            <Button
+            {/*            <Button
               className={[classes.button, classes.discordBtn].join(" ")}
               variant="contained"
               disableElevation
@@ -151,7 +151,7 @@ const PostActions = () => {
               startIcon={<FontAwesomeIcon icon={faDiscord} />}
             >
               <span className={classes.buttonText}>DISCORD</span>
-            </Button>
+            </Button>*/}
           </Box>
           {/*      <Box>
         <Button

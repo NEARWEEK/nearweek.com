@@ -32,10 +32,7 @@ import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
 import { useStyles } from "./News.styles";
-import InputBase from "@mui/material/InputBase";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 import SearchInput from "../components/ui/NewsPost/SearchInput/SearchInput";
 
 const News = () => {
@@ -425,7 +422,7 @@ const News = () => {
                 )}
               </Box>
               <Box className={classes.latestArticles}>
-                <Section title={"Latest News"}>
+                <Section title={"Latest Content"}>
                   {news.data.length > 0 && <NewsGrid news={getLatestNews()} />}
                 </Section>
                 <Subscription />
