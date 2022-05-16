@@ -13,8 +13,8 @@ import VideoSlider from "../components/ui/VideoPost/Slider/VideoSlider";
 import Subscription from "../components/ui/general/Subscription/Subscription";
 import CoinsPrice from "../components/ui/general/CoinsPrice/CoinsPrice";
 import { useStyles } from "./Home.styles";
-import ChartTabs from "../components/ui/general/Stats/ChartTabs/ChartTabs";
-import StatsBlocks from "../components/ui/general/Stats/StatsBlocks/StatsBlocks";
+import ChartTabs from "../components/ui/Stats/ChartTabs/ChartTabs";
+import StatsBlocks from "../components/ui/Stats/StatsBlocks/StatsBlocks";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 

@@ -15,6 +15,12 @@ module.exports = {
     {
       // Path defined with a URL parameter
       method: "GET",
+      path: "/stats/tvl/aggregate",
+      handler: "stats.tvlAggregate",
+    },
+    {
+      // Path defined with a URL parameter
+      method: "GET",
       path: "/stats/dao",
       handler: "stats.dao",
     },

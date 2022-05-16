@@ -66,6 +66,33 @@ module.exports = {
       console.log("Error:", e);
     }
   },
+  async tvlAggregate(ctx) {
+    try {
+      const protocols = ["near", "aurora"];
+      let charts = { total: [] };
+      for (const protocol of protocols) {
+        const url = `${process.env.TVL_CHART_API}/charts/${protocol}`;
+        const response = await axios.get(url);
+        charts[protocol] = response.data;
+      }
+      charts.total = Array.from(charts["near"]).map((near) => {
+        const aggregate = charts["aurora"].find(
+          (aurora) => aurora.date === near.date
+        );
+        return {
+          date: near.date,
+          totalLiquidityUSD: aggregate
+            ? Number(aggregate.totalLiquidityUSD) +
+              Number(near.totalLiquidityUSD)
+            : near.totalLiquidityUSD,
+        };
+      });
+
+      return charts;
+    } catch (e) {
+      console.log("Error:", e);
+    }
+  },
   async dao(ctx) {
     try {
       const { q } = ctx.query;
