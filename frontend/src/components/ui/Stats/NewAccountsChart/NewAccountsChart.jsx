@@ -1,17 +1,11 @@
 import * as React from "react";
 import ReactEcharts from "echarts-for-react";
 import * as echarts from "echarts";
-import moment from "moment";
-import { useChainTransactionStats } from "../../../../libs/wamp/subscriptions";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { withStyles } from "@mui/styles";
-import Typography from "@mui/material/Typography";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useWampSimpleQuery } from "../../../../libs/wamp/wamp";
 import { cumulativeSumArray } from "../../../../libs/stats";
-import Change24HCount from "../Change24HCount/Change24HCount";
 
 const styles = {
   grid: {
@@ -43,6 +37,7 @@ const filter = {
 
 const NewAccountsChart = (props) => {
   const { classes, show } = props;
+
   const newAccounts =
     useWampSimpleQuery("new-accounts-count-aggregated-by-date", []) ?? [];
 
@@ -53,10 +48,13 @@ const NewAccountsChart = (props) => {
         .slice(filter[show]),
     [newAccounts]
   );
-
   const newAccountsDate = React.useMemo(
     () => newAccounts.map(({ date }) => date.slice(0, 10)).slice(filter[show]),
     [newAccounts]
+  );
+  const cumulativeNewAccountsByDate = React.useMemo(
+    () => cumulativeSumArray(newAccountsCount),
+    [newAccountsCount]
   );
 
   const getOption = (title, seriesName, data, date) => {
@@ -140,9 +138,9 @@ const NewAccountsChart = (props) => {
       <Paper elevation={0}>
         <ReactEcharts
           option={getOption(
-            "",
-            "New Accounts",
-            newAccountsCount,
+            "Total Number of New Accounts",
+            "New accounts",
+            cumulativeNewAccountsByDate,
             newAccountsDate
           )}
           style={chartsStyle}

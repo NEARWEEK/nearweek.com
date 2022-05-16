@@ -1,18 +1,17 @@
 import * as React from "react";
 import ReactEcharts from "echarts-for-react";
 import * as echarts from "echarts";
-import { useChainTransactionStats } from "../../../../libs/wamp/subscriptions";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { withStyles } from "@mui/styles";
-import Typography from "@mui/material/Typography";
-import Change24HCount from "../Change24HCount/Change24HCount";
 import { useWampSimpleQuery } from "../../../../libs/wamp/wamp";
+import { useMemo } from "react";
+import { cumulativeSumArray } from "../../../../libs/stats";
 
 const styles = {
   grid: {
     display: "grid",
-    gridTemplateColumns: "20% 80%",
+    gridTemplateColumns: "1fr",
   },
   card: {
     display: "flex",
@@ -28,42 +27,40 @@ const styles = {
 
 const chartsStyle = {
   height: 480,
+  marginTop: 26,
   marginBottom: 26,
+};
+
+const filter = {
+  all: 0,
+  "1w": -7,
+  "1m": -30,
 };
 
 const DailyTransactionsChart = (props) => {
   const { classes, show } = props;
-  const transactionsCountHistoryForTwoWeeks =
-    useChainTransactionStats()?.transactionsCountHistoryForTwoWeeks || [];
-  const recentTransactionsCount =
-    useChainTransactionStats()?.recentTransactionsCount;
 
   const transactionCountByDate =
     useWampSimpleQuery("transactions-count-aggregated-by-date", []) ?? [];
 
-  const filter = {
-    all: 0,
-    "1w": -7,
-    "1m": -30,
-  };
-
-  const transactionsByDate = React.useMemo(
+  const transactionsByDate = useMemo(
     () =>
       transactionCountByDate
         .map(({ transactionsCount }) => Number(transactionsCount))
         .slice(filter[show]),
     [transactionCountByDate]
   );
-
-  const transactionDates = React.useMemo(
+  const transactionsByDateCumulative = useMemo(
+    () => cumulativeSumArray(transactionsByDate),
+    [transactionsByDate]
+  );
+  const transactionDates = useMemo(
     () =>
       transactionCountByDate
         .map(({ date }) => date.slice(0, 10))
         .slice(filter[show]),
     [transactionCountByDate]
   );
-
-  const count = transactionsCountHistoryForTwoWeeks.map((t) => t.total);
 
   const getOption = (title, seriesName, data) => {
     return {
@@ -140,30 +137,16 @@ const DailyTransactionsChart = (props) => {
       ],
     };
   };
+
   return (
     <Box className={classes.grid}>
-      <Paper elevation={0} className={classes.card}>
-        <Box p={4}>
-          <Typography variant="h5" style={{ fontWeight: 900 }}>
-            Total Transactions
-          </Typography>
-          <Typography>24hr Total</Typography>
-          <Typography
-            className={classes.total}
-            variant="h4"
-            style={{ fontWeight: 900 }}
-          >
-            {recentTransactionsCount}
-          </Typography>
-          <Change24HCount
-            last24htotal={count.slice(-1)[0]}
-            currentValue={recentTransactionsCount}
-          />
-        </Box>
-      </Paper>
       <Paper elevation={0}>
         <ReactEcharts
-          option={getOption("", "Txns", transactionsByDate)}
+          option={getOption(
+            "Total Number of Transactions",
+            "Txns",
+            transactionsByDateCumulative
+          )}
           style={chartsStyle}
         />
       </Paper>

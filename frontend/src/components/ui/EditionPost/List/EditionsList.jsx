@@ -50,15 +50,17 @@ const EditionsList = ({ exclude }) => {
     }
   }
 
-  useEffect(async () => {
-    const { data } = await Utils.api.getAllEditions();
-    if (data) {
-      if (exclude) {
-        setEditions(data.filter((item) => item.id !== exclude));
-      } else {
-        setEditions(data);
+  useEffect(() => {
+    (async () => {
+      const { data } = await Utils.api.getAllEditions();
+      if (data) {
+        if (exclude) {
+          setEditions(data.filter((item) => item.id !== exclude));
+        } else {
+          setEditions(data);
+        }
       }
-    }
+    })();
   }, []);
 
   const showMoreHandler = () => {

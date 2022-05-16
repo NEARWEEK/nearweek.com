@@ -5,7 +5,6 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { withStyles } from "@mui/styles";
 import { useWampSimpleQuery } from "../../../../libs/wamp/wamp";
-import { cumulativeSumArray } from "../../../../libs/stats";
 
 const styles = {
   grid: {
@@ -135,7 +134,7 @@ const NewContractsChart = (props) => {
       <Paper elevation={0}>
         <ReactEcharts
           option={getOption(
-            "",
+            "Total Number of New Contracts",
             "New Contracts",
             newContractsCount,
             newContractsDates
