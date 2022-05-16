@@ -14,7 +14,7 @@ const SectionContent = ({ title, items }) => {
         <>
           <Box className={classes.highlightItem} key={index}>
             <Box className={classes.highlightTitle}>
-              <ReadMore>{item.Link}</ReadMore>
+              {item.Link && <ReadMore>{item.Link}</ReadMore>}
             </Box>
           </Box>
           <Box display="flex" flexDirection="column">
