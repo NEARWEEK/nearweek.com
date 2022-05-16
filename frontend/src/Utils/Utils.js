@@ -303,6 +303,11 @@ async function loadTvl(protocol) {
   return await response.json();
 }
 
+async function loadTvlAggregate() {
+  const response = await fetch(`/api/stats/tvl/aggregate`, options);
+  return await response.json();
+}
+
 async function loadStatsDAO() {
   const response = await fetch(`/api/stats/dao`, options);
   return await response.json();
@@ -332,6 +337,7 @@ export const api = {
   getCoinsPrice: loadCoinsPrice,
   getStatsMarketChart: loadStatsMarketChart,
   getTvl: loadTvl,
+  getTvlAggregate: loadTvlAggregate,
   getStatsDAO: loadStatsDAO,
   upload: upload,
 };
