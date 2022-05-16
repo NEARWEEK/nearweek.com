@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SliderItem from "./SliderItem";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,7 +7,6 @@ import "swiper/css/free-mode";
 import makeStyles from "@mui/styles/makeStyles";
 import SwiperCore, { FreeMode, Navigation } from "swiper";
 import * as Utils from "../../../../Utils/Utils";
-import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 
 SwiperCore.use([FreeMode, Navigation]);
 
@@ -21,8 +19,6 @@ const VideoSlider = () => {
       setVideo(data);
     }
   }, []);
-
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
 
   const useStyles = makeStyles(() => ({
     root: {
@@ -37,7 +33,7 @@ const VideoSlider = () => {
         "& .swiper-slide-active": {
           transform: "scale(1)",
         },
-        "@media (max-width: 1024px)": {
+        "@media (max-width: 860px)": {
           "& .swiper-slide": {
             transform: "scale(1)",
           },
@@ -52,14 +48,13 @@ const VideoSlider = () => {
     <div className={classes.root}>
       <div className="swiper-container">
         <Swiper
-          slidesPerView={!isMobileMatch ? 3 : 1}
           breakpoints={{
-            780: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
             600: {
               slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            780: {
+              slidesPerView: 3,
               spaceBetween: 10,
             },
           }}
