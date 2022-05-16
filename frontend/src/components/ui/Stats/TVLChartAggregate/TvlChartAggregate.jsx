@@ -78,8 +78,6 @@ const TvlChartAggregate = (props) => {
     return count;
   }, [optionsData]);
 
-  console.log(aggregateCount);
-
   const getOption = (title, seriesName, date) => {
     return {
       title: {
@@ -178,7 +176,7 @@ const TvlChartAggregate = (props) => {
     };
   };
 
-  if (optionsData.length === 0) {
+  if (Object.entries(optionsData).length === 0) {
     return <Loader />;
   }
 

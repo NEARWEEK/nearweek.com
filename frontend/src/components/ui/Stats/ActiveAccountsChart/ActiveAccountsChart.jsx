@@ -135,7 +135,7 @@ const ActiveAccountsChart = (props) => {
       <Paper elevation={0}>
         <ReactEcharts
           option={getOption(
-            "",
+            "Weekly Number of Active Accounts",
             "Active Accounts",
             accountsByDate,
             accountsByDateDate

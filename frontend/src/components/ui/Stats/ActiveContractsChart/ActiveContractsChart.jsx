@@ -131,7 +131,11 @@ const ActiveContractsChart = (props) => {
     <Box className={classes.grid} mt={4}>
       <Paper elevation={0}>
         <ReactEcharts
-          option={getOption("", "Active Contracts", contractsByDateCount)}
+          option={getOption(
+            "Daily Number of Active Contracts",
+            "Active Contracts",
+            contractsByDateCount
+          )}
           style={chartsStyle}
         />
       </Paper>
