@@ -1,4 +1,6 @@
 import makeStyles from "@mui/styles/makeStyles";
+import Box from "@mui/material/Box";
+import * as React from "react";
 
 const styles = (theme) => ({
   pageWrapper: {
@@ -76,6 +78,11 @@ const styles = (theme) => ({
     color: "#fff",
     margin: "4px 0",
   },
+  postBody: {
+    "& > div": {
+      borderBottom: "1px solid #e1dff5",
+    },
+  },
   postDate: {
     marginRight: 24,
   },
@@ -96,6 +103,11 @@ const styles = (theme) => ({
   actionIcon: {
     color: "#fff",
     fontSize: "14px !important",
+  },
+  blockTitle: {
+    fontSize: "42px",
+    fontWeight: "900",
+    marginBottom: theme.spacing(3),
   },
 });
 
