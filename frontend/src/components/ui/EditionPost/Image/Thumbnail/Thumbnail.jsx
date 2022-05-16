@@ -16,23 +16,20 @@ const Thumbnail = ({ data, url }) => {
       objectFit: "cover",
     },
   }));
-  let thumbnail = placeholder.getRandomPlaceholder("small");
+  let imageUrl = placeholder.getRandomPlaceholder("small");
   if (Image.data) {
-    thumbnail = `${Image.data.attributes.formats.thumbnail.url}`;
+    const { large, medium, small, thumbnail } = Image.data.attributes.formats;
+    imageUrl =
+      small?.url ||
+      medium?.url ||
+      large?.url ||
+      placeholder.getRandomPlaceholder("small");
   }
   const classes = useStyles();
   return (
     <>
       <a href={url}>
-        {/*        <div
-          style={{
-            backgroundImage: `url('${thumbnail}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "50% 50%",
-          }}
-          className={"image " + classes.img}
-        />*/}
-        <img src={thumbnail} className={classes.img} />
+        <img src={imageUrl} className={classes.img} />
       </a>
     </>
   );
