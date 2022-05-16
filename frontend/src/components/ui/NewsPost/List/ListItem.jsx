@@ -22,7 +22,7 @@ const ListItem = ({ data }) => {
     return includeHyperlink;
   };
 
-  const useStyles = makeStyles(() => ({
+  const useStyles = makeStyles((theme) => ({
     teaserBlock: {
       display: "flex",
       width: "100%",
@@ -41,6 +41,9 @@ const ListItem = ({ data }) => {
       gridTemplateColumns: !isMobileMatch ? "205px 1fr" : "100%",
       flex: 1,
       gridTemplateRows: "205px",
+      [theme.breakpoints.down("sm")]: {
+        gridTemplateRows: "145px",
+      },
       flexDirection: !isMobileMatch ? "row" : "column",
     },
     postContent: {
