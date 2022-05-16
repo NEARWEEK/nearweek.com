@@ -11,7 +11,7 @@ const styles = (theme) => ({
     alignItems: "center",
     listStyle: "none",
     maxWidth: "100vw",
-    overflowX: "scroll",
+    overflow: "hidden",
     scrollBehavior: "smooth",
     "& li:not(:last-child)": {
       borderRight: "1px solid #e1dff5",
