@@ -14,11 +14,6 @@ const styles = (theme) => ({
       maxHeight: "100%",
     },
   },
-  hoverPicture: {
-    "&:hover": {
-      transform: "scale(1.2)",
-    },
-  },
   contentWrapper: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
@@ -101,38 +96,6 @@ const styles = (theme) => ({
   actionIcon: {
     color: "#fff",
     fontSize: "14px !important",
-  },
-  containerBody: {
-    marginBottom: "26px",
-    borderBottom: "1px solid #e1dff5",
-  },
-  postBody: {
-    marginBottom: "8px",
-  },
-  readMoreLink: {
-    display: "flex",
-    flexDirection: "column",
-    color: "#0d00ff",
-    fontWeight: "bold",
-    marginBottom: "24px",
-  },
-  blockTitle: {
-    fontSize: "42px",
-    fontWeight: "900",
-    marginBottom: "24px",
-  },
-  highlightItem: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "start",
-    backgroundColor: "#fff",
-    marginBottom: "12px",
-  },
-  highlightTitle: {
-    margin: "0 24px",
-    "& a": {
-      color: "#0d00ff",
-    },
   },
 });
 

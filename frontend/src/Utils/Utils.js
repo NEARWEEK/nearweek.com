@@ -1,6 +1,7 @@
 import moment from "moment";
 import axios from "axios";
 import Numeral from "numeral";
+import Markdown from "js-markdown";
 
 const TOKEN = process.env.REACT_APP_API_KEY;
 export const MOBILE_WIDTH = "600px";
@@ -137,6 +138,10 @@ export const formattedNum = (
   return Number(parseFloat(num).toFixed(5));
 };
 
+export function parseMarkdown(body) {
+  return Markdown.parse(body);
+}
+
 async function loadEditions() {
   try {
     const response = await fetch(
@@ -218,7 +223,6 @@ async function loadLatestNews(page = 1, size = 3) {
 }
 
 async function loadEdition(editionId) {
-  //`/api/editions?populate=deep&filters[slug]=${editionId}`
   const response = await fetch(
     `/api/editions/slug?populate=deep&filters[slug]=${editionId}`,
     options
