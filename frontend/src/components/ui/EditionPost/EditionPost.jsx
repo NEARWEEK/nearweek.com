@@ -187,7 +187,9 @@ const EditionPost = () => {
                 <Box display="flex" mt={4} mb={4}>
                   <ShareButton />
                 </Box>
-                <ReadMore>{edition.attributes.Body}</ReadMore>
+                <Box className={classes.postBody}>
+                  <ReadMore>{edition.attributes.Body}</ReadMore>
+                </Box>
                 <Box>
                   <Box>
                     {edition && edition.attributes.Highlights.length ? (

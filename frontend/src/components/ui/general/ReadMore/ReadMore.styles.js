@@ -3,7 +3,6 @@ import makeStyles from "@mui/styles/makeStyles";
 const styles = (theme) => ({
   container: {
     marginBottom: theme.spacing(3),
-    borderBottom: "1px solid #e1dff5",
   },
   content: {
     marginBottom: theme.spacing(2),

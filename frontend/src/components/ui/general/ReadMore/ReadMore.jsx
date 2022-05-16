@@ -23,7 +23,9 @@ const ReadMore = ({ children }) => {
         className={classes.readMoreLink}
         sx={{ cursor: "pointer" }}
       >
-        {text.length > 330 && isReadMore ? "Read more" : "Show less"}
+        <>
+          {text.length > 330 && <> {isReadMore ? "Read more" : "Show less"}</>}
+        </>
       </Box>
     </Box>
   );
