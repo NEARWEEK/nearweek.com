@@ -18,7 +18,11 @@ const ImageMedium = ({ data }) => {
   if (data.attributes.Image.data) {
     const { large, medium, small, thumbnail } =
       data.attributes.Image.data.attributes.formats;
-    imageUrl = large?.url || medium?.url || small?.url || thumbnail.url;
+    imageUrl =
+      small?.url ||
+      medium?.url ||
+      large?.url ||
+      placeholder.getRandomPlaceholder("medium");
   }
   const classes = useStyles();
   return (

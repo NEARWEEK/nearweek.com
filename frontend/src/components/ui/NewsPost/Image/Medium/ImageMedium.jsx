@@ -29,7 +29,7 @@ const ImageMedium = ({ data }) => {
   if (data.attributes.Image?.data?.attributes) {
     const { large, medium, small } =
       data.attributes.Image.data.attributes.formats;
-    imageUrl = large?.url || medium?.url || small?.url;
+    imageUrl = small?.url || medium?.url || large?.url;
   }
 
   const classes = useStyles();
