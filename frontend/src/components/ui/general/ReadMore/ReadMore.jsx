@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import ReactMarkdown from "react-markdown";
 import * as React from "react";
 import { useStyles } from "./ReadMore.styles";
 import { Collapse } from "react-collapse";
@@ -21,14 +20,12 @@ const ReadMore = ({ children, images }) => {
     setClamped(rleState);
   };
 
-  console.log(clamped);
-
   return (
     <Box className={classes.container}>
       {isReadMore ? (
         <>
           <PostDescription
-            maxLine={3}
+            maxLine={4}
             body={text}
             handleRleState={handleRleState}
           />
