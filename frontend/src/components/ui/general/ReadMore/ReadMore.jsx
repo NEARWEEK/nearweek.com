@@ -9,7 +9,7 @@ import PostDescription from "../PostDescription/PostDescription";
 import Pictures from "../Pictures/Pictures";
 
 const ReadMore = ({ children, images }) => {
-  const text = parseMarkdown(children);
+  const text = children ? parseMarkdown(children) : "";
   const [isReadMore, setIsReadMore] = useState(true);
   const [clamped, setClamped] = useState(false);
   const classes = useStyles();
