@@ -29,11 +29,12 @@ const NewsList = ({ exclude, show = 3 }) => {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
-      {news.length > 0
-        ? news.slice(0, show).map((article) => {
-            return <ListItem key={article.attributes.Title} data={article} />;
-          })
-        : null}
+      {news.length > 0 &&
+        news
+          .slice(0, show)
+          .map((article, index) => (
+            <ListItem key={article.attributes.Title + index} data={article} />
+          ))}
     </Box>
   );
 };
