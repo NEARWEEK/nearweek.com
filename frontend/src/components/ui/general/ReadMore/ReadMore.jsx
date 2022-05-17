@@ -19,7 +19,7 @@ const ReadMore = ({ children, images }) => {
 
   return (
     <Box className={classes.container}>
-      {isReadMore ? <PostDescription maxLine={4} body={text} /> : null}
+      {isReadMore ? <PostDescription maxLine={3} body={text} /> : null}
       <Collapse isOpened={!isReadMore}>
         <div
           dangerouslySetInnerHTML={{ __html: text }}
@@ -37,7 +37,9 @@ const ReadMore = ({ children, images }) => {
         sx={{ cursor: "pointer" }}
       >
         <>
-          {text.length > 330 && <> {isReadMore ? "Read more" : "Show less"}</>}
+          {children.length > 330 && (
+            <> {isReadMore ? "Read more" : "Show less"}</>
+          )}
         </>
       </Box>
     </Box>
