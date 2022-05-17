@@ -4,6 +4,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 import { placeholder } from "../../../../../Utils/placeholder";
+import LazyLoad from "react-lazyload";
 
 const Thumbnail = ({ data, url }) => {
   const Image = data?.attributes?.Image || null;
@@ -11,7 +12,7 @@ const Thumbnail = ({ data, url }) => {
   const useStyles = makeStyles(() => ({
     img: {
       width: isMobileMatch ? 68 : 205,
-      height: isMobileMatch ? 68 : "100%",
+      height: isMobileMatch ? 68 : 205,
       objectFit: "cover",
       borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px",
     },
@@ -30,7 +31,9 @@ const Thumbnail = ({ data, url }) => {
   return (
     <>
       <Link href={url} underline="none">
-        <img src={imageUrl} className={"image " + classes.img} />
+        <LazyLoad height={205} once>
+          <img src={imageUrl} className={"image " + classes.img} />
+        </LazyLoad>
       </Link>
     </>
   );

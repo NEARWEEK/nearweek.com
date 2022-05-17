@@ -1,6 +1,5 @@
 import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import * as Utils from "../../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 import { placeholder } from "../../../../../Utils/placeholder";
@@ -30,7 +29,7 @@ const Thumbnail = ({ data, url }) => {
   return (
     <>
       <a href={url}>
-        <LazyLoad height={200} once>
+        <LazyLoad height={205} once>
           <img src={imageUrl} className={"image " + classes.img} />
         </LazyLoad>
       </a>
