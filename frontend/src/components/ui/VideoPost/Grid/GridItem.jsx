@@ -28,9 +28,9 @@ const GridItem = ({ data }) => {
       flexDirection: "column",
     },
     postVideo: {
-      //borderRadius: "12px 0 0 12px",
       minHeight: 174,
       "& .react-player__preview": {
+        minHeight: 174,
         //borderRadius: "12px 12px 0 0",
         "& .react-player__shadow": {
           background: "rgba(255, 255, 255, 0.82) !important",

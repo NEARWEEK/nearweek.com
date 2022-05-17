@@ -29,8 +29,6 @@ const VideoPanel = () => {
     setFilteredVideo({ ...filteredVideo, data: filtered });
   };
 
-  console.log("filteredVideo", filteredVideo);
-
   return (
     <Section title={"Latest Video"}>
       <SearchBar searchTerm={searchTerm} setSearchTerm={updateInput} />
