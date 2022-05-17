@@ -4,6 +4,7 @@ import * as Utils from "../../../../../Utils/Utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { MOBILE_WIDTH } from "../../../../../Utils/Utils";
 import { placeholder } from "../../../../../Utils/placeholder";
+import LazyLoad from "react-lazyload";
 
 const Thumbnail = ({ data, url }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -29,7 +30,9 @@ const Thumbnail = ({ data, url }) => {
   return (
     <>
       <a href={url}>
-        <img src={imageUrl} className={classes.img} />
+        <LazyLoad height={200} once>
+          <img src={imageUrl} className={"image " + classes.img} />
+        </LazyLoad>
       </a>
     </>
   );
