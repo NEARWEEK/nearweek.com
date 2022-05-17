@@ -30,7 +30,7 @@ const Thumbnail = ({ data, url }) => {
   return (
     <>
       <Link href={url} underline="none">
-        <img src={imageUrl} className={classes.img} />
+        <img src={imageUrl} className={"image " + classes.img} />
       </Link>
     </>
   );
