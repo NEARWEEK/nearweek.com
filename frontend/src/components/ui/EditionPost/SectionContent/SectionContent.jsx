@@ -13,9 +13,7 @@ const SectionContent = ({ title, items }) => {
         <>
           <Box className={classes.highlightItem} key={index}>
             <Box className={classes.highlightTitle}>
-              {item.Link && (
-                <ReadMore images={item.Images}>{item.Link}</ReadMore>
-              )}
+              {item && <ReadMore images={item.Images}>{item.Link}</ReadMore>}
             </Box>
           </Box>
         </>
