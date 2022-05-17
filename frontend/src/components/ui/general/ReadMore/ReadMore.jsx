@@ -21,26 +21,35 @@ const ReadMore = ({ children, images }) => {
     setClamped(rleState);
   };
 
+  console.log(clamped);
+
   return (
     <Box className={classes.container}>
       {isReadMore ? (
-        <PostDescription
-          maxLine={3}
-          body={text}
-          handleRleState={handleRleState}
-        />
+        <>
+          <PostDescription
+            maxLine={3}
+            body={text}
+            handleRleState={handleRleState}
+          />
+        </>
       ) : null}
       <Collapse isOpened={!isReadMore}>
         <div
           dangerouslySetInnerHTML={{ __html: text }}
           className={classes.content}
         />
-        {images && (
+        {images ? (
           <Box display="flex" flexDirection="column">
             <Pictures pictures={images} />
           </Box>
-        )}
+        ) : null}
       </Collapse>
+      {!children && images && (
+        <Box display="flex" flexDirection="column">
+          <Pictures pictures={images} />
+        </Box>
+      )}
       <Box
         onClick={toggleReadMore}
         className={classes.readMoreLink}
