@@ -7,12 +7,14 @@ import Link from "@mui/material/Link";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
 import Box from "@mui/material/Box";
+import ReactMarkdown from "react-markdown";
+import Truncate from "react-truncate";
 import PostDescription from "../../general/PostDescription/PostDescription";
 
 const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const matchEdition = useMatch(`/newsletter/:editionId`);
-  const useStyles = makeStyles(() => ({
+  const useStyles = makeStyles((theme) => ({
     teaserBlock: {
       display: "flex",
       flexDirection: "column",
@@ -21,6 +23,17 @@ const ListItem = ({ data }) => {
       display: "flex",
       flexDirection: !isMobileMatch ? "row" : "column",
       marginBottom: "24px",
+    },
+    itemContainer: {
+      borderRadius: "12px",
+      display: "grid",
+      gridTemplateColumns: !isMobileMatch ? "362px 1fr" : "100%",
+      flex: 1,
+      gridTemplateRows: "205px",
+      [theme.breakpoints.down("sm")]: {
+        gridTemplateRows: "145px",
+      },
+      flexDirection: !isMobileMatch ? "row" : "column",
     },
     bodyImage: {
       borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
@@ -94,59 +107,61 @@ const ListItem = ({ data }) => {
       {data ? (
         <div className={classes.teaserBlock}>
           <div className={classes.postItem}>
-            {!isMobileMatch && (
-              <div className={classes.blockImage}>
-                <Thumbnail
-                  data={data}
-                  url={`/newsletter/${data.attributes.slug}`}
-                />
-              </div>
-            )}
-            <div className={classes.postContent}>
-              <Box className={classes.contentBody}>
-                {isMobileMatch && (
-                  <div className="image-container">
-                    <div className={classes.bodyImage}>
-                      <Thumbnail
-                        data={data}
-                        url={`/newsletter/${data.attributes.slug}`}
-                      />
+            <div className={classes.itemContainer}>
+              {!isMobileMatch && (
+                <div className={classes.blockImage}>
+                  <Thumbnail
+                    data={data}
+                    url={`/newsletter/${data.attributes.slug}`}
+                  />
+                </div>
+              )}
+              <div className={classes.postContent}>
+                <Box className={classes.contentBody}>
+                  {isMobileMatch && (
+                    <div className="image-container">
+                      <div className={classes.bodyImage}>
+                        <Thumbnail
+                          data={data}
+                          url={`/newsletter/${data.attributes.slug}`}
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
-                <div className="body-container">
-                  <div className={classes.postDate}>
-                    <span>
-                      {data.attributes.Period &&
-                        getPubDate(data.attributes.Period)}
-                    </span>
-                  </div>
-                  <h3 className={classes.postTitle}>
-                    <Link
-                      color="inherit"
-                      underline="none"
-                      href={`/newsletter/${data.attributes.slug}`}
-                    >
-                      {data.attributes.Title}
-                      <span className={classes.postNumber}>
-                        #{data.attributes.Number}
-                      </span>
-                    </Link>
-                  </h3>
-                  {!isMobileMatch && (
-                    <PostDescription body={data.attributes.Body} />
                   )}
-                </div>
-              </Box>
-              <Box className={classes.contentFooter}>
-                <div className={classes.postWidgets}>
-                  {/*<Widget icon={"Visibility"} data={data.attributes.views} />*/}
-                  {/*<Widget icon={"ThumbUp"} data={data.attributes.likes} />*/}
-                </div>
-                <div className={classes.footerDate}>
-                  {getTimeAgo(data.attributes.createdAt)}
-                </div>
-              </Box>
+                  <div className="body-container">
+                    <div className={classes.postDate}>
+                      <span>
+                        {data.attributes.Period &&
+                          getPubDate(data.attributes.Period)}
+                      </span>
+                    </div>
+                    <h3 className={classes.postTitle}>
+                      <Link
+                        color="inherit"
+                        underline="none"
+                        href={`/newsletter/${data.attributes.slug}`}
+                      >
+                        {data.attributes.Title}
+                        <span className={classes.postNumber}>
+                          #{data.attributes.Number}
+                        </span>
+                      </Link>
+                    </h3>
+                    {!isMobileMatch && (
+                      <PostDescription body={data.attributes.Body} />
+                    )}
+                  </div>
+                </Box>
+                <Box className={classes.contentFooter}>
+                  <div className={classes.postWidgets}>
+                    {/*<Widget icon={"Visibility"} data={data.attributes.views} />*/}
+                    {/*<Widget icon={"ThumbUp"} data={data.attributes.likes} />*/}
+                  </div>
+                  <div className={classes.footerDate}>
+                    {getTimeAgo(data.attributes.createdAt)}
+                  </div>
+                </Box>
+              </div>
             </div>
           </div>
         </div>

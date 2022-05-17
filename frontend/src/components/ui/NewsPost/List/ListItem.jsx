@@ -65,7 +65,7 @@ const ListItem = ({ data }) => {
       "& .image-container": {
         marginBottom: "16px",
       },
-      "& .image-container .image": {
+      "& .image-container .lazyload-wrapper .image": {
         marginRight: "16px",
       },
     },
