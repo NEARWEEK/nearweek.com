@@ -3,10 +3,10 @@ export const menuItems = [
     name: "Home",
     link: "/",
   },
-  {
+  /*  {
     name: "Content",
     link: "/content",
-  },
+  },*/
   {
     name: "Newsletter",
     link: "/newsletter",
