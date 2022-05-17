@@ -11,15 +11,25 @@ import Pictures from "../Pictures/Pictures";
 const ReadMore = ({ children, images }) => {
   const text = parseMarkdown(children);
   const [isReadMore, setIsReadMore] = useState(true);
+  const [clamped, setClamped] = useState(false);
   const classes = useStyles();
-
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
 
+  const handleRleState = (rleState) => {
+    setClamped(rleState);
+  };
+
   return (
     <Box className={classes.container}>
-      {isReadMore ? <PostDescription maxLine={3} body={text} /> : null}
+      {isReadMore ? (
+        <PostDescription
+          maxLine={3}
+          body={text}
+          handleRleState={handleRleState}
+        />
+      ) : null}
       <Collapse isOpened={!isReadMore}>
         <div
           dangerouslySetInnerHTML={{ __html: text }}
@@ -36,11 +46,7 @@ const ReadMore = ({ children, images }) => {
         className={classes.readMoreLink}
         sx={{ cursor: "pointer" }}
       >
-        <>
-          {children.length > 330 && (
-            <> {isReadMore ? "Read more" : "Show less"}</>
-          )}
-        </>
+        <>{clamped && <> {isReadMore ? "Read more" : "Show less"}</>}</>
       </Box>
     </Box>
   );
