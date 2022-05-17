@@ -9,9 +9,9 @@ import PlaceholderMedium3 from "../images/placeholders/medium/placeholder_3.jpg"
 import PlaceholderSmall3 from "../images/placeholders/small/placeholder_3.jpg";
 
 const placeholders = {
-  large: [Placeholder1, Placeholder2, Placeholder3],
-  medium: [PlaceholderMedium1, PlaceholderMedium2, PlaceholderMedium3],
-  small: [PlaceholderSmall1, PlaceholderSmall2, PlaceholderSmall3],
+  large: [Placeholder1],
+  medium: [PlaceholderMedium1],
+  small: [PlaceholderSmall1],
 };
 
 const getRandomPlaceholder = (size) => {

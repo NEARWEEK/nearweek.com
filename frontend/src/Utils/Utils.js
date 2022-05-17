@@ -166,6 +166,18 @@ async function loadLatestEdition() {
   }
 }
 
+async function loadLatestEditions(start = 0, limit = -1) {
+  try {
+    const response = await fetch(
+      `/api/editions?populate=*&sort=id:desc&pagination[start]=${start}&pagination[limit]=${limit}`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load latest edition:", e);
+  }
+}
+
 async function loadNews() {
   try {
     const response = await fetch(
@@ -337,6 +349,7 @@ async function unsubscribe(query) {
 export const api = {
   getAllEditions: loadEditions,
   getLatestEdition: loadLatestEdition,
+  getLatestEditions: loadLatestEditions,
   getOneEdition: loadEdition,
   getOneArticle: loadArticle,
   getAllNews: loadNews,

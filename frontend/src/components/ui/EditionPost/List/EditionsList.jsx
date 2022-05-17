@@ -6,7 +6,7 @@ import ListItem from "./ListItem";
 import { useMatch } from "react-router";
 import * as Utils from "../../../../Utils/Utils";
 
-const EditionsList = ({ exclude }) => {
+const EditionsList = ({ start, limit, exclude }) => {
   const [editions, setEditions] = useState([]);
   const [moreLength, setMoreLength] = useState(5);
   const matchEdition = useMatch(`/editions/:editionId`);
@@ -52,7 +52,7 @@ const EditionsList = ({ exclude }) => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await Utils.api.getAllEditions();
+      const { data } = await Utils.api.getLatestEditions(start, limit);
       if (data) {
         if (exclude) {
           setEditions(data.filter((item) => item.id !== exclude));

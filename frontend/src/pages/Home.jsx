@@ -105,7 +105,7 @@ const Home = () => {
           <Box className={classes.container}>
             <Section title={"Latest Editions"} link={"/newsletter"}>
               <Suspense fallback={<div>Loading...</div>}>
-                <EditionsList />
+                <EditionsList start={0} limit={5} />
               </Suspense>
             </Section>
           </Box>
