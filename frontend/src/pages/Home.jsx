@@ -41,16 +41,6 @@ const Home = () => {
   const classes = useStyles();
   const theme = useTheme();
   const isMobileMatch = useMediaQuery(theme.breakpoints.down("md"));
-  const [editions, setEditions] = useState({ data: [], meta: {} });
-
-  useEffect(() => {
-    (async () => {
-      const data = await Utils.api.getAllEditions();
-      if (data) {
-        setEditions(data);
-      }
-    })();
-  }, []);
 
   return (
     <>
@@ -65,7 +55,7 @@ const Home = () => {
               <Box className={classes.blockNews}>
                 <Box className={classes.blockColumn}>
                   <Suspense fallback={<div>Loading...</div>}>
-                    <Announce edition={editions.data[0]} />
+                    <Announce />
                   </Suspense>
                 </Box>
                 <Box className={classes.blockColumn}>
@@ -89,7 +79,7 @@ const Home = () => {
                     <ChartTabs />
                   </Suspense>
                 )}
-                <Suspense fallback={<div></div>}>
+                <Suspense fallback={<div>Loading...</div>}>
                   <StatsBlocks />
                 </Suspense>
               </Section>
@@ -114,11 +104,9 @@ const Home = () => {
           </Box>
           <Box className={classes.container}>
             <Section title={"Latest Editions"} link={"/newsletter"}>
-              {editions.data.length > 0 && (
-                <Suspense fallback={<div>Loading...</div>}>
-                  <EditionsList exclude={editions.data[0].id} />
-                </Suspense>
-              )}
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditionsList />
+              </Suspense>
             </Section>
           </Box>
         </Box>
