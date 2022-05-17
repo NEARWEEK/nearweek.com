@@ -9,7 +9,6 @@ import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 import { useStyles } from "../../../../pages/Video.styles";
 
 const SearchResult = ({ video, searchTerm }) => {
-  console.log("video", video);
   const [filterResult, setFilterResult] = useState({ data: [], meta: {} });
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const classes = useStyles();
