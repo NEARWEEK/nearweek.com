@@ -181,7 +181,7 @@ const TvlChartAggregate = (props) => {
   }
 
   return (
-    <Box className={classes.grid} mt={4}>
+    <Box className={classes.grid}>
       <Paper elevation={0} className={classes.card}>
         <Box p={4}>
           <Typography variant="h5" style={{ fontWeight: 900 }}>
