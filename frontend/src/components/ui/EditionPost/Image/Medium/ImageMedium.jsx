@@ -7,7 +7,6 @@ import { placeholder } from "../../../../../Utils/placeholder";
 import LazyLoad from "react-lazyload";
 
 const ImageMedium = ({ data }) => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const useStyles = makeStyles((theme) => ({
     img: {
       width: "100%",
@@ -26,10 +25,15 @@ const ImageMedium = ({ data }) => {
       medium?.url || large?.url || placeholder.getRandomPlaceholder("medium");
   }
   const classes = useStyles();
+
   return (
     <a href={`/newsletter/${data.attributes.slug}`}>
       <LazyLoad height={205} once>
-        <img src={imageUrl} className={classes.img} />
+        <img
+          src={imageUrl}
+          className={classes.img}
+          alt={data.attributes.slug}
+        />
       </LazyLoad>
     </a>
   );
