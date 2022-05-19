@@ -25,6 +25,8 @@ const ReadMore = ({ children, images }) => {
     setClamped(rleState);
   };
 
+  console.log(images);
+
   return (
     <Box className={classes.container}>
       {isReadMore ? (
@@ -43,13 +45,15 @@ const ReadMore = ({ children, images }) => {
         />
         {images ? (
           <>
-            <Box
-              onClick={toggleShowGallery}
-              className={classes.showGalleryLink}
-              sx={{ cursor: "pointer" }}
-            >
-              <> {!showGallery ? "Show gallery" : "Hide gallery"}</>
-            </Box>
+            {images.length > 0 && (
+              <Box
+                onClick={toggleShowGallery}
+                className={classes.showGalleryLink}
+                sx={{ cursor: "pointer" }}
+              >
+                <> {!showGallery ? "Show gallery" : "Hide gallery"}</>
+              </Box>
+            )}
             <Collapse isOpened={showGallery}>
               <div className={classes.gallery}>
                 <Pictures pictures={images} />
@@ -60,13 +64,15 @@ const ReadMore = ({ children, images }) => {
       </Collapse>
       {!children && images && (
         <>
-          <Box
-            onClick={toggleShowGallery}
-            className={classes.showGalleryLink}
-            sx={{ cursor: "pointer" }}
-          >
-            <> {!showGallery ? "Show gallery" : "Hide gallery"}</>
-          </Box>
+          {images.length > 0 && (
+            <Box
+              onClick={toggleShowGallery}
+              className={classes.showGalleryLink}
+              sx={{ cursor: "pointer" }}
+            >
+              <> {!showGallery ? "Show gallery" : "Hide gallery"}</>
+            </Box>
+          )}
           <Collapse isOpened={showGallery}>
             <div className={classes.gallery}>
               <Pictures pictures={images} />
