@@ -1,21 +1,16 @@
 import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
-  teaserBlock: {
-    display: "flex",
-    flex: "1 1 326px",
-  },
-  postItem: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    marginBottom: "24px",
-  },
-  itemContainer: {
-    marginTop: 10,
-    borderRadius: "12px",
-    display: "flex",
-    flexDirection: "column",
+  postContent: {
+    marginTop: theme.spacing(2),
+    minHeight: "25%",
+    borderRadius: 12,
+    background: "#f7f7f7",
+    [theme.breakpoints.down("sm")]: {
+      background: "#fff",
+    },
+    display: "grid",
+    gridTemplateRows: " 326px 1fr 41px",
   },
   postImage: {
     borderRadius: "12px 0 0 12px",
@@ -25,16 +20,6 @@ const styles = (theme) => ({
     height: "100%",
     objectFit: "cover",
     borderRadius: "12px 12px 0 0",
-  },
-  postContent: {
-    minHeight: "25%",
-    borderRadius: 12,
-    background: "#f7f7f7",
-    [theme.breakpoints.down("sm")]: {
-      background: "#fff",
-    },
-    display: "grid",
-    gridTemplateRows: " 326px repeat(auto-fill, 103px) 41px",
   },
   contentBody: {
     padding: "16px 16px 0 16px",
