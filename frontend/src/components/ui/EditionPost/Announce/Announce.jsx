@@ -1,11 +1,10 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import ImageMedium from "../Image/Medium/ImageMedium";
-import Link from "@mui/material/Link";
+import { Link } from "@mui/material";
 import { getPubDate, getTimeAgo } from "../../../../Utils/Utils";
 import Widget from "../../general/Widget/Widget";
 import PostDescription from "../../general/PostDescription/PostDescription";
 import { useStyles } from "./Announce.styles";
-import { useEffect, useState } from "react";
 import * as Utils from "../../../../Utils/Utils";
 
 const Announce = () => {

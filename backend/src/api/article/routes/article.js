@@ -22,6 +22,11 @@ module.exports = {
       handler: "article.findOne",
     },
     {
+      method: "POST",
+      path: "/article",
+      handler: "article.create",
+    },
+    {
       method: "PUT",
       path: "/news/:id/like",
       handler: "article.like",

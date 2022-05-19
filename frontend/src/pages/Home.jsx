@@ -1,14 +1,11 @@
 import React, { lazy, Suspense } from "react";
-import Navbar from "../components/ui/Navbar/Navbar";
-import { useEffect, useState } from "react";
-import * as Utils from "../Utils/Utils";
-import Box from "@mui/material/Box";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import Section from "../components/ui/general/Section/Section";
 import Subscription from "../components/ui/general/Subscription/Subscription";
 import { useStyles } from "./Home.styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+
+const Navbar = lazy(() => import("../components/ui/Navbar/Navbar"));
 
 const CoinsPrice = lazy(() =>
   import("../components/ui/general/CoinsPrice/CoinsPrice")
@@ -44,33 +41,35 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
+      <Suspense fallback={<div>...</div>}>
+        <Navbar />
+      </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         <CoinsPrice />
       </Suspense>
       <main>
-        <Box className={classes.wrapper}>
-          <Box className={classes.container}>
+        <div className={classes.wrapper}>
+          <div className={classes.container}>
             <Section title={"Highlights"} link={"/content"}>
-              <Box className={classes.blockNews}>
-                <Box className={classes.blockColumn}>
+              <div className={classes.blockNews}>
+                <div className={classes.blockColumn}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <Announce />
                   </Suspense>
-                </Box>
-                <Box className={classes.blockColumn}>
+                </div>
+                <div className={classes.blockColumn}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <NewsList show={3} />
                   </Suspense>
-                </Box>
-              </Box>
+                </div>
+              </div>
             </Section>
-          </Box>
-          <Box className={classes.container}>
+          </div>
+          <div className={classes.container}>
             <Section>
               <Subscription />
             </Section>
-          </Box>
+          </div>
           <Box style={{ backgroundColor: "#f7f7f7" }} mt={4}>
             <Box className={classes.container} mb={4}>
               <Section title={"NEAR’s week by the numbers"}>
@@ -109,7 +108,7 @@ const Home = () => {
               </Suspense>
             </Section>
           </Box>
-        </Box>
+        </div>
       </main>
     </>
   );

@@ -50,6 +50,8 @@ const styles = (theme) => ({
     },
   },
   headerContainer: {
+    display: "flex",
+    flexDirection: "row",
     position: "absolute",
     top: 73,
     [theme.breakpoints.down("sm")]: {

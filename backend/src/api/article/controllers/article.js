@@ -29,6 +29,19 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
     return this.transformResponse(sanitizedEntity);
   },
 
+  async create(ctx) {
+    const { body } = ctx.request;
+
+    const { data } = JSON.parse(body);
+
+    const entity = await strapi.entityService.create("api::article.article", {
+      data,
+    });
+    const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+
+    return this.transformResponse(sanitizedEntity);
+  },
+
   async findBySlug(ctx, populate) {
     ctx.query = { ...ctx.query, local: "en" };
 

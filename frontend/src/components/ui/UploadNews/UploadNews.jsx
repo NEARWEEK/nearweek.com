@@ -1,95 +1,112 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
-import Box from "@mui/material/Box";
-import makeStyles from "@mui/styles/makeStyles";
 import SectionHeader from "../general/Section/SectionHeader/SectionHeader";
-import Typography from "@mui/material/Typography";
+import {
+  Typography,
+  Box,
+  TextField,
+  Button,
+  FormControl,
+  MenuItem,
+  Select,
+  Chip,
+  InputLabel,
+} from "@mui/material";
 import ImageUploader from "react-images-upload";
 import { ErrorMessage } from "@hookform/error-message";
-import { TextField, Button } from "@mui/material";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { api } from "../../../Utils/Utils";
-import FormControl from "@mui/material/FormControl";
+import { useStyles } from "./UploadNews.styles";
+import Preview from "./Preview/Preview";
 
 const UploadNews = () => {
   const [pictures, setPictures] = useState([]);
+  const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string().required("Title is required"),
+    Title: Yup.string().required("Title is required"),
     url: Yup.string().required("Url name is required"),
   });
 
-  useEffect(async () => {
-    /*    const response = await api.getCountries();
-    if (response.length > 0) {
-      const supportedIdentityReport = response.filter(
-        (item) => item.supported_identity_report === true
-      );
-      setCountries(supportedIdentityReport);
-    }*/
+  useEffect(() => {
+    (async () => {
+      const { data } = await api.getCategories();
+      if (data.length > 0) {
+        setCategory(
+          data.map((item) => {
+            return {
+              id: item.id,
+              name: item.attributes.Name,
+            };
+          })
+        );
+      }
+    })();
   }, []);
 
-  const formOptions = { resolver: yupResolver(validationSchema) };
+  console.log(category);
+
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      Title: "",
+      category: [],
+    },
+  };
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  function getStyles(name, personName, theme) {
+    return {
+      fontWeight:
+        personName.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
 
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
+    control,
+    watch,
     formState: { errors },
   } = useForm(formOptions);
 
   const onSubmit = (data) => submitButtonHandler(data);
 
   const submitButtonHandler = (data) => {
-    setLoading(true);
+    console.log(data);
+    //setLoading(true);
+  };
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setValue("category", [...category, value]);
   };
 
   const onDrop = async (picture) => {
-    setPictures([...pictures, picture]);
+    setPictures([...picture]);
+    setValue("image", [...picture]);
     //const upload = await api.upload(picture);
   };
-
-  const useStyles = makeStyles((theme) => ({
-    wrapper: {
-      marginLeft: 16,
-      marginRight: 16,
-    },
-    container: {
-      maxWidth: "640px",
-      minWidth: "480px",
-      margin: "0 auto",
-      position: "relative",
-    },
-    content: {
-      display: "flex",
-      flexDirection: "row",
-    },
-    column: {
-      width: "50%",
-      height: "100%",
-    },
-    inputGroup: {
-      marginBottom: "24px !important",
-      textAlign: "left",
-      "& .MuiDivider-root::before": {
-        width: "0 !important",
-      },
-    },
-    input: {
-      "& .MuiFilledInput-root": {
-        borderRadius: 4,
-        "& input": {
-          paddingTop: 16,
-          paddingRight: 36,
-          paddingBottom: 14,
-          paddingLeft: 14,
-        },
-      },
-    },
-  }));
 
   const classes = useStyles();
   return (
@@ -102,16 +119,17 @@ const UploadNews = () => {
           </Box>
           <Box className={classes.content}>
             <Box className={classes.column}>
-              <Typography variant="h5" style={{ fontWeight: 700 }}>
+              <Typography variant="h5" className={classes.columnTitle}>
                 Upload Cover
               </Typography>
               <Box className={classes.inputGroup}>
-                <FormControl {...register("image")}>
+                <FormControl {...register("image")} sx={{ width: "100%" }}>
                   <ImageUploader
                     singleImage={true}
                     withPreview={true}
+                    className={classes.fileUploader}
                     withIcon={true}
-                    buttonText="Choose image"
+                    buttonText="Upload file"
                     onChange={onDrop}
                     imgExtension={[".jpg", ".gif", ".png"]}
                     maxFileSize={5242880}
@@ -132,7 +150,7 @@ const UploadNews = () => {
                     shrink: true,
                     style: { fontSize: 14 },
                   }}
-                  {...register("title")}
+                  {...register("Title")}
                 />
                 {errors && (
                   <ErrorMessage
@@ -146,6 +164,51 @@ const UploadNews = () => {
                     }
                   />
                 )}
+              </Box>
+              <Box className={classes.inputGroup}>
+                <FormControl variant="filled" fullWidth>
+                  <InputLabel id="category-label">Category</InputLabel>
+                  <Controller
+                    control={control}
+                    name="category"
+                    render={({ field }) => {
+                      return (
+                        <Select
+                          labelId="category-label"
+                          id="category-multiple-chip"
+                          multiple
+                          value={field.value}
+                          disableUnderline
+                          onChange={(value) => {
+                            field.onChange(value);
+                          }}
+                          renderValue={(selected) => {
+                            return (
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexWrap: "wrap",
+                                  gap: 0.5,
+                                }}
+                              >
+                                {selected.map((item) => (
+                                  <Chip key={item.name} label={item.name} />
+                                ))}
+                              </Box>
+                            );
+                          }}
+                          MenuProps={MenuProps}
+                        >
+                          {category.map((item) => (
+                            <MenuItem key={item.name} value={item}>
+                              {item.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      );
+                    }}
+                  />
+                </FormControl>
               </Box>
               <Box className={classes.inputGroup}>
                 <TextField
@@ -179,9 +242,11 @@ const UploadNews = () => {
               <Box className={classes.inputGroup}>
                 <TextareaAutosize
                   aria-label="empty textarea"
-                  placeholder="Empty"
+                  maxLength={500}
+                  placeholder="Description"
+                  className={classes.input}
                   style={{ width: "100%" }}
-                  {...register("body")}
+                  {...register("Body")}
                 />
               </Box>
               <Box>
@@ -189,9 +254,10 @@ const UploadNews = () => {
               </Box>
             </Box>
             <Box className={classes.column}>
-              <Typography variant="h5" style={{ fontWeight: 700 }}>
+              <Typography variant="h5" className={classes.columnTitle}>
                 Preview
               </Typography>
+              <Preview pictures={pictures} data={watch()} />
             </Box>
           </Box>
         </Box>
