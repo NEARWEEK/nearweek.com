@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import * as React from "react";
+import React from "react";
 import ReadMore from "../../general/ReadMore/ReadMore";
 import { useStyles } from "./SectionContent.styles";
 
@@ -8,14 +7,14 @@ const SectionContent = ({ title, items }) => {
 
   return (
     <>
-      <Box className={classes.sectionTitle}>{title}</Box>
+      <div className={classes.sectionTitle}>{title}</div>
       {items.map((item, index) => (
         <>
-          <Box className={classes.highlightItem} key={index}>
-            <Box className={classes.highlightTitle}>
+          <div className={classes.highlightItem} key={index}>
+            <div className={classes.highlightTitle}>
               {item && <ReadMore images={item.Images}>{item.Link}</ReadMore>}
-            </Box>
-          </Box>
+            </div>
+          </div>
         </>
       ))}
     </>

@@ -9,7 +9,7 @@ module.exports = ({ env }) => ({
     tasks: cronTasks,
   },
   elastic: {
-    enabled: true,
+    enabled: false,
     host: env("ELASTIC", "http://127.0.0.1:9200"),
   },
 });

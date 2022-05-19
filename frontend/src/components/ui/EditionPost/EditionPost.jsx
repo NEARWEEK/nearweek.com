@@ -2,20 +2,17 @@ import * as React from "react";
 import Navbar from "../Navbar/Navbar";
 import { useMatch } from "react-router";
 import { lazy, Suspense, useEffect, useState } from "react";
-import Box from "@mui/material/Box";
+import { Box, IconButton, Button, useMediaQuery } from "@mui/material";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import * as Utils from "../../../Utils/Utils";
 import { getPubDate, MOBILE_WIDTH } from "../../../Utils/Utils";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Widget from "../general/Widget/Widget";
+//import Widget from "../general/Widget/Widget";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 import ShareButton from "../general/PostActions/ShareButton/ShareButton";
@@ -92,17 +89,13 @@ const EditionPost = () => {
           title={`${edition.attributes.Title} #${edition.attributes.Number}`}
           description={edition.attributes.Body}
           url={document.URL}
-          type={"edition"}
+          type={"article"}
         />
       )}
       <Navbar />
       {edition && (
         <>
-          <Box
-            display="flex"
-            flexDirection="row"
-            className={classes.headerContainer}
-          >
+          <div className={classes.headerContainer}>
             <div
               style={{
                 backgroundImage: `url('${imageUrl}')`,
@@ -113,12 +106,12 @@ const EditionPost = () => {
               }}
               className={"banner " + classes.img}
             />
-          </Box>
-          <Box className={classes.pageWrapper}>
-            <Box className={classes.contentContainer}>
-              <Box className={classes.contentWrapper}>
-                <Box className={classes.headerBlock}>
-                  <Box className={classes.breadcrumb}>
+          </div>
+          <div className={classes.pageWrapper}>
+            <div className={classes.contentContainer}>
+              <div className={classes.contentWrapper}>
+                <div className={classes.headerBlock}>
+                  <div className={classes.breadcrumb}>
                     <a className={classes.link} href="/newsletter">
                       <FontAwesomeIcon
                         className={classes.icon}
@@ -129,19 +122,19 @@ const EditionPost = () => {
                     <span className={classes.current}>
                       {`${edition.attributes.Title} # ${edition.attributes.Number}`}
                     </span>
-                  </Box>
-                  <Box>
+                  </div>
+                  <div>
                     <h2 className={classes.postTitle}>
                       {`${edition.attributes.Title} # ${edition.attributes.Number}`}
                     </h2>
-                    <Box className={classes.headerBlockFooter}>
+                    <div className={classes.headerBlockFooter}>
                       <Box display="inline-flex">
-                        <Box className={classes.postDate}>
+                        <div className={classes.postDate}>
                           <span>
                             {edition.attributes.Period &&
                               getPubDate(edition.attributes.Period)}
                           </span>
-                        </Box>
+                        </div>
                         <div className={classes.postWidgets}>
                           {/*                          <Widget
                             icon={"Visibility"}
@@ -154,7 +147,7 @@ const EditionPost = () => {
                         </div>
                       </Box>
                       {!isMobileMatch && (
-                        <Box>
+                        <div>
                           <IconButton
                             color="primary"
                             className={classes.actionButton}
@@ -179,19 +172,19 @@ const EditionPost = () => {
                               className={classes.actionIcon}
                             />
                           </IconButton>
-                        </Box>
+                        </div>
                       )}
-                    </Box>
-                  </Box>
-                </Box>
+                    </div>
+                  </div>
+                </div>
                 <Box display="flex" mt={4} mb={4}>
                   <ShareButton />
                 </Box>
-                <Box className={classes.postBody}>
+                <div className={classes.postBody}>
                   <ReadMore>{edition.attributes.Body}</ReadMore>
-                </Box>
-                <Box>
-                  <Box>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.Highlights.length ? (
                       <>
                         <SectionContent
@@ -200,141 +193,141 @@ const EditionPost = () => {
                         />
                       </>
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.DAOs.length ? (
                       <SectionContent
                         title={"DAO's"}
                         items={edition.attributes.DAOs}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.DeFI.length ? (
                       <SectionContent
                         title={"DeFI"}
                         items={edition.attributes.DeFI}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.NFTs.length ? (
                       <SectionContent
                         title={"NFTs"}
                         items={edition.attributes.NFTs}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.CommunityGuilds.length ? (
                       <SectionContent
                         title={"Community and Guilds"}
                         items={edition.attributes.CommunityGuilds}
                       />
                     ) : null}
-                  </Box>
-                </Box>
+                  </div>
+                </div>
 
-                <Box>
-                  <Box>
+                <div>
+                  <div>
                     {edition && edition.attributes.Events.length ? (
                       <SectionContent
                         title={"Events"}
                         items={edition.attributes.Events}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.Developers.length ? (
                       <SectionContent
                         title={"Developers"}
                         items={edition.attributes.Developers}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.Gaming.length ? (
                       <SectionContent
                         title={"Gaming"}
                         items={edition.attributes.Gaming}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.weekByNumbers.length ? (
                       <SectionContent
                         title={"Week by numbers"}
                         items={edition.attributes.weekByNumbers}
                       />
                     ) : null}
-                  </Box>
-                </Box>
+                  </div>
+                </div>
 
-                <Box>
-                  <Box>
+                <div>
+                  <div>
                     {edition && edition.attributes.JoinTheEcosystem.length ? (
                       <SectionContent
                         title={"Join The Ecosystem"}
                         items={edition.attributes.JoinTheEcosystem}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.ProjectGrowth.length ? (
                       <SectionContent
                         title={"Project Growth"}
                         items={edition.attributes.ProjectGrowth}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.OpenJobs.length ? (
                       <SectionContent
                         title={"Open jobs in the NEARverse"}
                         items={edition.attributes.OpenJobs}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box>
+                  </div>
+                </div>
+                <div>
+                  <div>
                     {edition && edition.attributes.OtherUpdates.length ? (
                       <SectionContent
                         title={"Other updates"}
                         items={edition.attributes.OtherUpdates}
                       />
                     ) : null}
-                  </Box>
-                </Box>
-                <Box>
-                  <Box className={classes.blockTitle}>{"Latest Editions"}</Box>
-                </Box>
-                <Box>
+                  </div>
+                </div>
+                <div>
+                  <div className={classes.blockTitle}>{"Latest Editions"}</div>
+                </div>
+                <div>
                   <Suspense fallback={<div>Loading...</div>}>
                     <EditionsList exclude={edition.id} />
                   </Suspense>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
+                </div>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>
