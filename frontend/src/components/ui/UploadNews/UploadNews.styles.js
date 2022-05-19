@@ -12,13 +12,13 @@ const styles = (theme) => ({
     position: "relative",
   },
   content: {
-    display: "flex",
-    gap: theme.spacing(3),
-    flexDirection: "row",
+    display: "grid",
+    gridGap: theme.spacing(2),
+    gridTemplateColumns: "50% 50%",
   },
   column: {
-    width: "50%",
-    height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   columnTitle: {
     fontWeight: "700 !important",
@@ -58,6 +58,14 @@ const styles = (theme) => ({
         paddingLeft: 14,
       },
     },
+  },
+  textarea: {
+    backgroundColor: "#f0f0f0",
+    border: 0,
+    borderRadius: 4,
+    padding: theme.spacing(2),
+    width: "100%",
+    maxWidth: "100%",
   },
 });
 

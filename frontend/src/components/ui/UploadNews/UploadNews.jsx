@@ -236,14 +236,15 @@ const UploadNews = () => {
                 )}
               </Box>
               <Box className={classes.inputGroup}>
-                <TextareaAutosize
-                  aria-label="empty textarea"
-                  maxLength={500}
-                  placeholder="Description"
-                  className={classes.input}
-                  style={{ width: "100%" }}
-                  {...register("Body")}
-                />
+                <Box display="flex" sx={{ maxWidth: "100%" }}>
+                  <TextareaAutosize
+                    aria-label="empty textarea"
+                    maxLength={300}
+                    placeholder="Description"
+                    className={classes.textarea}
+                    {...register("Body")}
+                  />
+                </Box>
               </Box>
               <Box>
                 <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
