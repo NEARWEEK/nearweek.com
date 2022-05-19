@@ -10,10 +10,15 @@ import Pictures from "../Pictures/Pictures";
 const ReadMore = ({ children, images }) => {
   const text = children ? parseMarkdown(children) : "";
   const [isReadMore, setIsReadMore] = useState(true);
+  const [showGallery, setShowGallery] = useState(false);
   const [clamped, setClamped] = useState(false);
   const classes = useStyles();
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
+  };
+
+  const toggleShowGallery = () => {
+    setShowGallery(!showGallery);
   };
 
   const handleRleState = (rleState) => {
@@ -37,15 +42,37 @@ const ReadMore = ({ children, images }) => {
           className={classes.content}
         />
         {images ? (
-          <Box display="flex" flexDirection="column">
-            <Pictures pictures={images} />
-          </Box>
+          <>
+            <Box
+              onClick={toggleShowGallery}
+              className={classes.showGalleryLink}
+              sx={{ cursor: "pointer" }}
+            >
+              <> {!showGallery ? "Show gallery" : "Hide gallery"}</>
+            </Box>
+            <Collapse isOpened={showGallery}>
+              <div className={classes.gallery}>
+                <Pictures pictures={images} />
+              </div>
+            </Collapse>
+          </>
         ) : null}
       </Collapse>
       {!children && images && (
-        <Box display="flex" flexDirection="column">
-          <Pictures pictures={images} />
-        </Box>
+        <>
+          <Box
+            onClick={toggleShowGallery}
+            className={classes.showGalleryLink}
+            sx={{ cursor: "pointer" }}
+          >
+            <> {!showGallery ? "Show gallery" : "Hide gallery"}</>
+          </Box>
+          <Collapse isOpened={showGallery}>
+            <div className={classes.gallery}>
+              <Pictures pictures={images} />
+            </div>
+          </Collapse>
+        </>
       )}
       <Box
         onClick={toggleReadMore}

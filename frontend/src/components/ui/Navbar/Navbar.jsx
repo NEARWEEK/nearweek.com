@@ -1,51 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "./Menu/Menu";
 import Logo from "./Logo/Logo";
-import makeStyles from "@mui/styles/makeStyles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import IconButton from "@mui/material/IconButton";
+import {
+  Divider,
+  Toolbar,
+  AppBar,
+  IconButton,
+  Drawer,
+  useMediaQuery,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Drawer from "@mui/material/Drawer";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import ListItemText from "@mui/material/ListItemText";
-import { Divider, ListItemButton, Box, Toolbar, AppBar } from "@mui/material";
-
 import Search from "./Actions/Search/Search";
 import Actions from "./Actions/Actions";
 import MobileMenu from "./Menu/MobileMenu";
+import { useStyles } from "./Navbar.styles";
 
 const Navbar = () => {
   const isMobileMatch = useMediaQuery("(max-width:1364px)");
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const useStyles = makeStyles((theme) => ({
-    container: {
-      marginRight: !isMobileMatch ? theme.spacing(4) : theme.spacing(2),
-      marginLeft: !isMobileMatch ? theme.spacing(4) : theme.spacing(2),
-    },
-    header: {
-      borderBottom: "1px solid #ccc",
-    },
-    row: {
-      display: "flex",
-      flex: 1,
-    },
-    columnLeft: {
-      display: "flex",
-      justifyContent: "flex-start",
-      flex: 0.5,
-    },
-    columnRight: {
-      display: "flex",
-      justifyContent: "flex-end",
-      flex: 0.5,
-    },
-    menuIcon: {
-      color: "#000000de !important",
-    },
-  }));
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -100,14 +73,14 @@ const Navbar = () => {
                 onClose={toggleDrawer(false)}
                 onOpen={toggleDrawer(true)}
               >
-                <Box>
+                <div>
                   <IconButton sx={{ mb: 2 }}>
                     <CloseIcon onClick={toggleDrawer(false)} />
                   </IconButton>
                   <Divider sx={{ mb: 2 }} />
                   <Search />
                   <MobileMenu />
-                </Box>
+                </div>
               </Drawer>
             </div>
           </div>
