@@ -48,6 +48,9 @@
     },
     "LinkTo": {
       "type": "string"
+    },
+    "Author": {
+      "type": "string"
     }
   }
 }

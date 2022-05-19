@@ -21,15 +21,20 @@ import { Controller, useForm } from "react-hook-form";
 import { api } from "../../../Utils/Utils";
 import { useStyles } from "./UploadNews.styles";
 import Preview from "./Preview/Preview";
+import { useStoreState } from "easy-peasy";
 
 const UploadNews = () => {
   const [pictures, setPictures] = useState([]);
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
+  const state = useStoreState((state) => state);
+  const wallet = state.main.entities.wallet;
+  const accountId = wallet.getAccountId();
 
   const validationSchema = Yup.object().shape({
     Title: Yup.string().required("Title is required"),
-    url: Yup.string().required("Url name is required"),
+    Author: Yup.string().required("Title is required"),
+    LinkTo: Yup.string().required("Url name is required"),
   });
 
   useEffect(() => {
@@ -48,13 +53,12 @@ const UploadNews = () => {
     })();
   }, []);
 
-  console.log(category);
-
   const formOptions = {
     resolver: yupResolver(validationSchema),
     defaultValues: {
       Title: "",
-      category: [],
+      Author: accountId,
+      categories: [],
     },
   };
 
@@ -82,7 +86,6 @@ const UploadNews = () => {
     register,
     handleSubmit,
     setValue,
-    getValues,
     control,
     watch,
     formState: { errors },
@@ -93,13 +96,6 @@ const UploadNews = () => {
   const submitButtonHandler = (data) => {
     console.log(data);
     //setLoading(true);
-  };
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setValue("category", [...category, value]);
   };
 
   const onDrop = async (picture) => {
@@ -170,7 +166,7 @@ const UploadNews = () => {
                   <InputLabel id="category-label">Category</InputLabel>
                   <Controller
                     control={control}
-                    name="category"
+                    name="categories"
                     render={({ field }) => {
                       return (
                         <Select
@@ -224,12 +220,12 @@ const UploadNews = () => {
                     shrink: true,
                     style: { fontSize: 14 },
                   }}
-                  {...register("url")}
+                  {...register("LinkTo")}
                 />
                 {errors && (
                   <ErrorMessage
                     errors={errors}
-                    name="url"
+                    name="LinkTo"
                     as={
                       <span
                         className="error-message"
