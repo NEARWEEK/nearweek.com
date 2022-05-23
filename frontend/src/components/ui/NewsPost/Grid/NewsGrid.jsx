@@ -7,10 +7,10 @@ const NewsGrid = ({ news }) => {
   const useStyles = makeStyles((theme) => ({
     gridContainer: {
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fill,minmax(306px, 1fr))",
+      gridTemplateColumns: "repeat(auto-fill,minmax(264px, 1fr))",
       columnGap: "24px",
       [theme.breakpoints.down("sm")]: {
-        gridTemplateColumns: "repeat(auto-fill,minmax(306px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fill,minmax(264px, 1fr))",
       },
     },
   }));

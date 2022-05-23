@@ -22,7 +22,7 @@ const GridItem = ({ data }) => {
   const useStyles = makeStyles(() => ({
     teaserBlock: {
       display: "flex",
-      flex: "1 1 326px",
+      flex: "1",
     },
     postItem: {
       display: "flex",
@@ -41,7 +41,7 @@ const GridItem = ({ data }) => {
     postContent: {
       minHeight: "25%",
       borderRadius: 12,
-      background: matchEdition ? "#fff" : "#f7f7f7",
+      background: "#dddddb",
       display: "grid",
       gridTemplateRows: " 205px repeat(auto-fill, 103px) 41px",
     },

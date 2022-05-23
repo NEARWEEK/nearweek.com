@@ -48,7 +48,7 @@ const ListItem = ({ data }) => {
     },
     postContent: {
       borderRadius: !isMobileMatch ? "0 12px  12px 0" : "12px",
-      background: matchEdition ? "#fff" : "#f7f7f7",
+      background: "#f7f7f7",
       flex: 1,
       width: "100%",
       display: "flex",

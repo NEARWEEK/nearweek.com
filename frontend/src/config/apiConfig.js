@@ -127,7 +127,7 @@ async function loadLatestNews(page = 1, size = 3) {
 
 async function loadUserSubmittedNews(author) {
   const response = await fetch(
-    `/api/findUnpublished?&[author]=${author}`,
+    `/api/findPublished?&[author]=${author}`,
     options
   );
   return await response.json();
@@ -135,7 +135,7 @@ async function loadUserSubmittedNews(author) {
 
 async function loadUserPendingNews(author) {
   const response = await fetch(
-    `/api/findPublished?[author]=${author}`,
+    `/api/findUnpublished?[author]=${author}`,
     options
   );
   return await response.json();
