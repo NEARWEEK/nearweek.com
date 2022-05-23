@@ -166,7 +166,12 @@ const UserActions = () => {
           </MenuItem>
         </Box>
         <Divider sx={{ my: 0.5 }} />
-        <Box display="flex" alignItems="center" justifyContent="center">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ paddingTop: 2, paddingBottom: 2 }}
+        >
           <Button
             variant="contained"
             disableElevation
