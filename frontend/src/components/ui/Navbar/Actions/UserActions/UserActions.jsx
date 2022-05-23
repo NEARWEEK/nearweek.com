@@ -73,6 +73,10 @@ const UserActions = () => {
     navigate("/user-profile");
   };
 
+  const handleUserNewsClick = () => {
+    navigate("/user-news");
+  };
+
   const useStyles = makeStyles((theme) => ({
     box: {
       width: 356,
@@ -135,7 +139,7 @@ const UserActions = () => {
             <AccountCircleIcon />
             My Profile
           </MenuItem>
-          <MenuItem onClick={handleClose} disableRipple>
+          <MenuItem onClick={handleUserNewsClick} disableRipple>
             <FileCopyIcon />
             My News
           </MenuItem>

@@ -108,9 +108,34 @@ async function loadArticle(articleId) {
   }
 }
 
+async function createArticle(data) {
+  const newArticle = await axios({
+    method: "POST",
+    url: "/api/article",
+    data: data,
+  });
+  return newArticle;
+}
+
 async function loadLatestNews(page = 1, size = 3) {
   const response = await fetch(
     `/api/news?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${size}`,
+    options
+  );
+  return await response.json();
+}
+
+async function loadUserSubmittedNews(author) {
+  const response = await fetch(
+    `/api/findUnpublished?&[author]=${author}`,
+    options
+  );
+  return await response.json();
+}
+
+async function loadUserPendingNews(author) {
+  const response = await fetch(
+    `/api/findPublished?[author]=${author}`,
     options
   );
   return await response.json();
@@ -178,6 +203,7 @@ async function upload(file) {
     url: "/api/upload",
     data: formData,
   });
+  return upload_res;
 }
 
 async function loadStatsMarketChart() {
@@ -216,7 +242,10 @@ export const apiConfig = {
   getLatestEditions: loadLatestEditions,
   getOneEdition: loadEdition,
   getOneArticle: loadArticle,
+  postArticle: createArticle,
   getAllNews: loadNews,
+  getSubmitted: loadUserSubmittedNews,
+  getPending: loadUserPendingNews,
   getLatestNews: loadLatestNews,
   getAllEvents: loadEvents,
   getOneEvent: loadOneEvent,

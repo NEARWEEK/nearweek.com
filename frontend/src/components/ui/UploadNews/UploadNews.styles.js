@@ -1,20 +1,38 @@
 import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
+  page: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  pageFooter: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderTop: "1px solid #ccc",
+    paddingTop: theme.spacing(1.5),
+    paddingBottom: theme.spacing(1.5),
+    "& .MuiButton-root": {
+      padding: "8px 32px",
+    },
+  },
+  container: {
+    flex: 1,
+    widths: "100%",
+    maxWidth: "860px",
+    minWidth: "480px",
+  },
   wrapper: {
     marginLeft: 16,
     marginRight: 16,
-  },
-  container: {
-    maxWidth: "860px",
-    minWidth: "480px",
-    margin: "0 auto",
-    position: "relative",
   },
   content: {
     display: "grid",
     gridGap: theme.spacing(2),
     gridTemplateColumns: "50% 50%",
+    [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: "100%",
+    },
   },
   column: {
     display: "flex",

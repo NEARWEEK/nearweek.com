@@ -2,7 +2,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
   postContent: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1.5),
     minHeight: "25%",
     borderRadius: 12,
     background: "#f7f7f7",
