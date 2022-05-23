@@ -4,23 +4,20 @@ import { placeholder } from "../../../../Utils/placeholder";
 import Widget from "../../general/Widget/Widget";
 import Typography from "@mui/material/Typography";
 
-const Preview = ({ pictures, data }) => {
+const Preview = ({ image, data }) => {
   const classes = useStyles();
-
   const [preview, setPreview] = useState(
     placeholder.getRandomPlaceholder("small")
   );
 
   useEffect(() => {
-    if (pictures.length) {
-      const objectUrl = URL.createObjectURL(pictures[0]);
+    if (image.length) {
+      const objectUrl = URL.createObjectURL(image[0]);
       setPreview(objectUrl);
     } else {
       setPreview(placeholder.getRandomPlaceholder("small"));
     }
-  }, [pictures]);
-
-  console.log(data);
+  }, [image]);
 
   return (
     <>
@@ -57,7 +54,9 @@ const Preview = ({ pictures, data }) => {
               {data.Body}
             </Typography>
           ) : (
-            <div>[Description]</div>
+            <Typography variant="body2" mb={2}>
+              [Description]
+            </Typography>
           )}
         </div>
         <div className={classes.contentFooter}>

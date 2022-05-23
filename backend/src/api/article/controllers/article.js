@@ -5,6 +5,7 @@
  */
 
 const { createCoreController } = require("@strapi/strapi").factories;
+const { sanitizeEntity } = require("@strapi/utils");
 
 module.exports = createCoreController("api::article.article", ({ strapi }) => ({
   async like(ctx) {
@@ -32,7 +33,7 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
   async create(ctx) {
     const { body } = ctx.request;
 
-    const { data } = JSON.parse(body);
+    const { data } = JSON.parse(JSON.stringify(body));
 
     const entity = await strapi.entityService.create("api::article.article", {
       data,
@@ -108,5 +109,57 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
       }
     );
     return this.transformResponse(sanitizedEntity, { ids: ids });
+  },
+
+  async findUnpublished(ctx, populate) {
+    const { author } = ctx.request.query;
+
+    const articles = await strapi.entityService.findMany(
+      "api::article.article",
+      {
+        filters: {
+          $and: [
+            {
+              Author: author,
+            },
+            {
+              publishedAt: { $null: true },
+            },
+          ],
+        },
+        populate: "*",
+      }
+    );
+    //sanitize them to hide all private fields
+    const sanitizedEntity = await this.sanitizeOutput(articles, ctx);
+
+    //return result to the /findPublished API
+    return this.transformResponse(sanitizedEntity);
+  },
+
+  async findPublished(ctx, populate) {
+    const { author } = ctx.request.query;
+
+    let articles = await strapi.entityService.findMany("api::article.article", {
+      filters: {
+        $and: [
+          {
+            publishedAt: { $notNull: true },
+          },
+          {
+            Author: author,
+          },
+        ],
+      },
+      populate: "*",
+    });
+
+    console.log(articles);
+
+    //sanitize them to hide all private fields
+    const sanitizedEntity = await this.sanitizeOutput(articles, ctx);
+
+    //return result to the /findPublished API
+    return this.transformResponse(sanitizedEntity);
   },
 }));

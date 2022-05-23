@@ -1,14 +1,17 @@
-import * as React from "react";
+import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import GridItem from "./GridItem";
 import Box from "@mui/material/Box";
 
 const NewsGrid = ({ news }) => {
-  const useStyles = makeStyles(() => ({
+  const useStyles = makeStyles((theme) => ({
     gridContainer: {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill,minmax(306px, 1fr))",
       columnGap: "24px",
+      [theme.breakpoints.down("sm")]: {
+        gridTemplateColumns: "repeat(auto-fill,minmax(306px, 1fr))",
+      },
     },
   }));
   let newsList = [];

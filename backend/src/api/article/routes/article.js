@@ -27,6 +27,22 @@ module.exports = {
       handler: "article.create",
     },
     {
+      method: "GET",
+      path: "/findUnpublished",
+      handler: "article.findUnpublished",
+      config: {
+        policies: [],
+      },
+    },
+    {
+      method: "GET",
+      path: "/findPublished",
+      handler: "article.findPublished",
+      config: {
+        policies: [],
+      },
+    },
+    {
       method: "PUT",
       path: "/news/:id/like",
       handler: "article.like",

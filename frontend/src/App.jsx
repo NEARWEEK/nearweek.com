@@ -20,6 +20,7 @@ import { MessageText } from "./components/ui/general/MessageText/MessageText";
 import { useStoreState } from "easy-peasy";
 import { Helmet } from "react-helmet";
 import { Initializer } from "./providers/Initializer/Initializer";
+import UserNews from "./pages/UserNews";
 
 function App() {
   const message = useStoreState((state) => state.main.messages);
@@ -85,6 +86,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route exact path="user-profile" element={<UserProfile />} />
               <Route exact path="upload-news" element={<UploadNews />} />
+              <Route exact path="user-news" element={<UserNews />} />
             </Route>
           </Routes>
         </Suspense>

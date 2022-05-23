@@ -51,7 +51,7 @@ const styles = (theme) => ({
   blockNews: {
     display: "flex",
     gap: "24px",
-    "@media screen and (max-width: 1280px)": {
+    [theme.breakpoints.down("md")]: {
       flexDirection: "column",
     },
   },
@@ -59,7 +59,7 @@ const styles = (theme) => ({
     flex: 0.5,
     display: "flex",
     maxWidth: "50%",
-    "@media screen and (max-width: 1280px)": {
+    [theme.breakpoints.down("md")]: {
       maxWidth: "100%",
     },
   },
