@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import {
+  Button,
+  Box,
+  Typography,
+  MenuItem,
+  Menu,
+  Divider,
+} from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Divider from "@mui/material/Divider";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import Avatar from "../../../general/Avatar/Avatar";
 
 const UserMenu = styled((props) => (
   <Menu
@@ -30,7 +33,7 @@ const UserMenu = styled((props) => (
   "& .MuiPaper-root": {
     borderRadius: 6,
     marginTop: theme.spacing(1),
-    minWidth: 180,
+    minWidth: 256,
     color:
       theme.palette.mode === "light"
         ? "rgb(55, 65, 81)"
@@ -61,12 +64,19 @@ const UserActions = () => {
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const wallet = useStoreState((state) => state.main.entities.wallet);
+  const { onDisconnectWallet } = useStoreActions((actions) => actions.main);
   const accountId = wallet.getAccountId();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDisconnectWallet = () => {
+    onDisconnectWallet();
   };
 
   const handleProfileClick = () => {
@@ -128,6 +138,9 @@ const UserActions = () => {
         className={classes.box}
       >
         <Box p={2}>
+          <Box display="flex" alignItems="center">
+            <Avatar size={72} seed={accountId} />
+          </Box>
           <Box
             display="flex"
             alignItems="center"
@@ -143,10 +156,10 @@ const UserActions = () => {
               {accountId}
             </Typography>
           </Box>
-          <MenuItem onClick={handleProfileClick} disableRipple>
+          {/*          <MenuItem onClick={handleProfileClick} disableRipple>
             <AccountCircleIcon />
             My Profile
-          </MenuItem>
+          </MenuItem>*/}
           <MenuItem onClick={handleUserNewsClick} disableRipple>
             <FileCopyIcon />
             My News
@@ -154,7 +167,11 @@ const UserActions = () => {
         </Box>
         <Divider sx={{ my: 0.5 }} />
         <Box display="flex" alignItems="center" justifyContent="center">
-          <Button variant="contained" disableElevation>
+          <Button
+            variant="contained"
+            disableElevation
+            onClick={handleDisconnectWallet}
+          >
             Disconnect
           </Button>
         </Box>

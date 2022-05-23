@@ -19,6 +19,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "animal-avatar-generator": "^1.0.5",
     "assert": "^2.0.0",
     "autobahn": "^20.9.2",
     "axios": "^0.26.1",

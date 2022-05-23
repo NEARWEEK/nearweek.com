@@ -9,6 +9,7 @@ import TabContext from "@mui/lab/TabContext";
 import SubmittedNews from "../components/ui/SubmittedNews/SubmittedNews";
 import PendingNews from "../components/ui/PendingNews/PendingNews";
 import { apiConfig } from "../config/apiConfig";
+import Avatar from "../components/ui/general/Avatar/Avatar";
 
 const UserNews = () => {
   const { wallet } = useStoreState((state) => state.main.entities);
@@ -60,6 +61,7 @@ const UserNews = () => {
         <div className={classes.wrapper}>
           <div className={classes.container}>
             <div className={classes.headerBlock}>
+              <Avatar size={120} seed={accountId} />
               <Typography variant="h5" style={{ fontWeight: 900 }}>
                 {accountId}
               </Typography>
