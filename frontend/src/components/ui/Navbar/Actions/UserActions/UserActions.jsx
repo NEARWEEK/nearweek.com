@@ -128,10 +128,18 @@ const UserActions = () => {
         className={classes.box}
       >
         <Box p={2}>
-          <Box display="flex" alignItems="center">
+          <Box
+            display="flex"
+            alignItems="center"
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+            }}
+          >
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {accountId}
-              {accountId}
               {accountId}
             </Typography>
           </Box>
