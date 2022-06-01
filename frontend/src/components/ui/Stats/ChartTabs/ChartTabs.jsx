@@ -18,6 +18,7 @@ import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 import { useStyles } from "./ChartTabs.styles";
 import TvlChart from "../TvlChart/TvlChart";
 import TvlChartAggregate from "../TVLChartAggregate/TvlChartAggregate";
+import ActiveDevelopers from "../ActiveDevelopers/ActiveDevelopers";
 
 const blue = {
   50: "#0d00ff26",
@@ -96,6 +97,7 @@ const ChartTabs = () => {
               <Tab>Active Accounts</Tab>
               <Tab>New Contracts</Tab>
               <Tab>Active Contracts</Tab>
+              <Tab>Active Developers</Tab>
             </TabsList>
             <div className={classes.buttonsGroup}>
               <ToggleButton
@@ -184,6 +186,9 @@ const ChartTabs = () => {
           </TabPanel>
           <TabPanel value={5}>
             <ActiveContractsChart show={checkedPeriod} />
+          </TabPanel>
+          <TabPanel value={6}>
+            <ActiveDevelopers />
           </TabPanel>
         </TabsUnstyled>
       </Paper>

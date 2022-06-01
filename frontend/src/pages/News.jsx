@@ -36,6 +36,7 @@ import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
 import { useStyles } from "./News.styles";
 import Paper from "@mui/material/Paper";
 import SearchInput from "../components/ui/NewsPost/SearchInput/SearchInput";
+import CardGrid from "../components/ui/NewsPost/CardGrid/CardGrid";
 
 const News = () => {
   const classes = useStyles();
