@@ -40,6 +40,8 @@ const filter = {
 const DailyTransactionsChart = (props) => {
   const { classes, show } = props;
 
+  const showTotal = filter[show] === 0;
+
   const transactionCountByDate =
     useWampSimpleQuery("transactions-count-aggregated-by-date", []) ?? [];
 
@@ -141,14 +143,25 @@ const DailyTransactionsChart = (props) => {
   return (
     <Box className={classes.grid}>
       <Paper elevation={0}>
-        <ReactEcharts
-          option={getOption(
-            "Total Number of Transactions",
-            "Txns",
-            transactionsByDateCumulative
-          )}
-          style={chartsStyle}
-        />
+        {showTotal ? (
+          <ReactEcharts
+            option={getOption(
+              "Total Number of Transactions",
+              "Txns",
+              transactionsByDateCumulative
+            )}
+            style={chartsStyle}
+          />
+        ) : (
+          <ReactEcharts
+            option={getOption(
+              "Daily Number of Transactions",
+              "Txns",
+              transactionsByDate
+            )}
+            style={chartsStyle}
+          />
+        )}
       </Paper>
     </Box>
   );
