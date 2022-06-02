@@ -15,7 +15,7 @@ const Thumbnail = ({ data, url }) => {
   }));
 
   let imageUrl = placeholder.getRandomPlaceholder("small");
-  if (Image.data) {
+  if (data?.attributes?.Image.data) {
     const { small, thumbnail } = Image.data.attributes.formats;
     imageUrl = small?.url || thumbnail?.url;
   }

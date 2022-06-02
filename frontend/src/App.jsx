@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Editions from "./pages/Editions";
@@ -21,9 +21,16 @@ import { useStoreState } from "easy-peasy";
 import { Helmet } from "react-helmet";
 import { Initializer } from "./providers/Initializer/Initializer";
 import UserNews from "./pages/UserNews";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
 function App() {
   const message = useStoreState((state) => state.main.messages);
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   let theme = createTheme({
     breakpoints: {
