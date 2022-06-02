@@ -23,7 +23,7 @@ import { Initializer } from "./providers/Initializer/Initializer";
 import UserNews from "./pages/UserNews";
 import ReactGA from "react-ga4";
 
-ReactGA.initialize(process.env.GA_MEASUREMENT_ID.toString());
+ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
 function App() {
   const message = useStoreState((state) => state.main.messages);
