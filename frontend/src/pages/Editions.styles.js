@@ -1,14 +1,6 @@
 import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
-  root: {
-    marginRight: theme.spacing(2),
-    marginLeft: theme.spacing(2),
-  },
-  pageWrapper: {
-    margin: "0 auto",
-    maxWidth: 892,
-  },
   topContainer: {
     marginTop: theme.spacing(4),
   },

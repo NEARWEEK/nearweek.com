@@ -49,6 +49,15 @@ function App() {
       },
     },
     components: {
+      MuiCardContent: {
+        styleOverrides: {
+          root: {
+            "&:last-child": {
+              paddingBottom: 0,
+            },
+          },
+        },
+      },
       MuiToolbar: {
         styleOverrides: {
           root: {

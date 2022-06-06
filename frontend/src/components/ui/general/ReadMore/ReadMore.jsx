@@ -25,8 +25,6 @@ const ReadMore = ({ children, images }) => {
     setClamped(rleState);
   };
 
-  console.log(images);
-
   return (
     <Box className={classes.container}>
       {isReadMore ? (

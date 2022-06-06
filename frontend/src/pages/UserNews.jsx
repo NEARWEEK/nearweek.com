@@ -10,6 +10,7 @@ import SubmittedNews from "../components/ui/SubmittedNews/SubmittedNews";
 import PendingNews from "../components/ui/PendingNews/PendingNews";
 import { apiConfig } from "../config/apiConfig";
 import Avatar from "../components/ui/general/Avatar/Avatar";
+import CoinFeedsNews from "../components/ui/CoinFeedsNews/CoinFeedsNews";
 
 const UserNews = () => {
   const { wallet } = useStoreState((state) => state.main.entities);
@@ -104,12 +105,20 @@ const UserNews = () => {
                       </div>
                     }
                   />
+                  <Tab
+                    className={classes.tab}
+                    value="coinfeeds"
+                    label={<div>CoinFeeds News</div>}
+                  />
                 </Tabs>
                 <TabPanel value="submitted">
                   <SubmittedNews data={submitted} />
                 </TabPanel>
                 <TabPanel value="pending">
                   <PendingNews data={pending} />
+                </TabPanel>
+                <TabPanel value="coinfeeds">
+                  <CoinFeedsNews />
                 </TabPanel>
               </div>
             </TabContext>

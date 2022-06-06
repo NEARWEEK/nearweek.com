@@ -39,6 +39,12 @@ module.exports = {
     {
       // Path defined with a URL parameter
       method: "GET",
+      path: "/stats/coinfeeds",
+      handler: "stats.coinfeeds",
+    },
+    {
+      // Path defined with a URL parameter
+      method: "GET",
       path: "/stats/market-chart",
       handler: "stats.marketChart",
     },

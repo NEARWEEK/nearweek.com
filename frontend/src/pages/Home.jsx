@@ -49,7 +49,7 @@ const Home = () => {
       </Suspense>
       <main>
         <div>
-          <Container maxWidth={1376}>
+          <Container maxWidth="xl">
             <Section title={"Highlights"} link={"/content"}>
               <div className={classes.grid}>
                 <div className={classes.column}>
@@ -65,13 +65,13 @@ const Home = () => {
               </div>
             </Section>
           </Container>
-          <Container maxWidth={1376}>
+          <Container maxWidth="xl">
             <Section>
               <Subscription />
             </Section>
           </Container>
           <Box style={{ backgroundColor: "#f7f7f7" }} mt={4} pb={4}>
-            <Container maxWidth={1376} mb={4}>
+            <Container maxWidth="xl" mb={4}>
               <Section title={"NEAR’s week by the numbers"}>
                 {!isMobileMatch && (
                   <Suspense fallback={<div>Loading...</div>}>
@@ -84,7 +84,7 @@ const Home = () => {
               </Section>
             </Container>
           </Box>
-          <Container maxWidth={1376}>
+          <Container maxWidth="xl">
             <Section title={"Events"} link={"/events"}>
               <Suspense fallback={<div>Loading...</div>}>
                 <EventsGrid />
@@ -92,7 +92,7 @@ const Home = () => {
             </Section>
           </Container>
           <Box style={{ backgroundColor: "#f7f7f7" }}>
-            <Container maxWidth={1376}>
+            <Container maxWidth="xl">
               <Box>
                 <SectionHeader title={"Latest Video"} link={"/video"} />
               </Box>
@@ -101,7 +101,7 @@ const Home = () => {
               <VideoSlider />
             </Suspense>
           </Box>
-          <Container maxWidth={1376}>
+          <Container maxWidth="xl">
             <Section title={"Latest Editions"} link={"/newsletter"}>
               <Suspense fallback={<div>Loading...</div>}>
                 <EditionsList start={0} limit={5} />
