@@ -81,7 +81,7 @@ const GridItem = ({ data }) => {
             href={`/events/${data.attributes.slug}`}
             target="_blank"
           >
-            <LazyLoad overflow={true}>
+            <LazyLoad height={248} offset={100} overflow once>
               <CardMedia
                 component="img"
                 src={imageUrl}
