@@ -265,4 +265,13 @@ module.exports = {
       console.log(`Error:${e}`);
     }
   },
+  async coinfeeds(ctx) {
+    const url = "https://api.coinfeeds.io/coins/news?coins=near&symbol=false";
+    const response = await axios.get(url, {
+      headers: {
+        "x-api-key": process.env.COINFEEDS_API_KEY || "",
+      },
+    });
+    return response.data;
+  },
 };

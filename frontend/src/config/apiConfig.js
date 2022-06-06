@@ -227,11 +227,15 @@ async function loadTvlAggregate() {
 }
 
 async function loadActiveDevelopers(dateRange) {
-  console.log(dateRange);
   const response = await fetch(
     `/api/stats/active-developers?q=${dateRange}`,
     options
   );
+  return await response.json();
+}
+
+async function loadCoinFeeds() {
+  const response = await fetch(`/api/stats/coinfeeds`, options);
   return await response.json();
 }
 
@@ -272,5 +276,6 @@ export const apiConfig = {
   getTvlAggregate: loadTvlAggregate,
   getStatsDAO: loadStatsDAO,
   getActiveDevelopers: loadActiveDevelopers,
+  getCoinFeeds: loadCoinFeeds,
   upload: upload,
 };

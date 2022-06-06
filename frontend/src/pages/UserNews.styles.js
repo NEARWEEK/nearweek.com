@@ -5,7 +5,6 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#f7f7f7f7",
-    height: "100%",
   },
   wrapper: {
     marginLeft: 16,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
-import { Box } from "@mui/material";
+import { Container } from "@mui/material";
 import Announce from "../components/ui/EditionPost/Announce/Announce";
 import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import * as Utils from "../Utils/Utils";
@@ -21,25 +21,23 @@ const Editions = () => {
   return (
     <>
       <Navbar />
-      <div className={classes.root}>
-        <div className={classes.pageWrapper}>
+      <main>
+        <Container maxWidth="md">
           <div className={classes.topContainer}>
             <Announce edition={editions.data[0]} />
           </div>
           <div className={classes.latestEditions}>
             <div>
-              <div className={classes.container}>
-                <Section title={"Latest Editions"}>
-                  {editions.data.length > 0 && (
-                    <EditionsList editions={editions.data} />
-                  )}
-                </Section>
-              </div>
+              <Section title={"Latest Editions"}>
+                {editions.data.length > 0 && (
+                  <EditionsList editions={editions.data} />
+                )}
+              </Section>
               <Subscription />
             </div>
           </div>
-        </div>
-      </div>
+        </Container>
+      </main>
     </>
   );
 };

@@ -1,17 +1,8 @@
 import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
-  latestPost: {
-    width: "100%",
-    background: "#f7f7f7",
-    borderRadius: "12px",
-  },
   content: {
     padding: "24px 24px 0",
-  },
-  image: {
-    borderRadius: "12px 12px 0 0",
-    width: "100%",
   },
   postDate: {
     color: "#2013fb",
