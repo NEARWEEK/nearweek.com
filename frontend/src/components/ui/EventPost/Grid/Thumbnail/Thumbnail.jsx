@@ -21,17 +21,7 @@ const Thumbnail = ({ data, url }) => {
   const classes = useStyles();
   return (
     <>
-      <Link href={url} underline="none">
-        {/*        <div
-          style={{
-            backgroundImage: `url('${thumbnail}')`,
-            backgroundSize: "cover",
-            minWidth: "205px",
-            minHeight: "205px",
-            backgroundPosition: "50% 50%",
-          }}
-          className={classes.img}
-        />*/}
+      <Link href={url} underline="none" target="_blank">
         <img src={imageUrl} className={classes.img} />
       </Link>
     </>

@@ -188,7 +188,7 @@ const ChartTabs = () => {
             <ActiveContractsChart show={checkedPeriod} />
           </TabPanel>
           <TabPanel value={6}>
-            <ActiveDevelopers />
+            <ActiveDevelopers show={checkedPeriod} />
           </TabPanel>
         </TabsUnstyled>
       </Paper>

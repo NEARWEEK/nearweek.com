@@ -114,6 +114,7 @@ const Announce = ({ event }) => {
                   color="inherit"
                   href={`/events/${event.attributes.slug}`}
                   underline="none"
+                  target="_blank"
                 >
                   {event.attributes.Title}
                 </Link>

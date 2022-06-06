@@ -22,7 +22,7 @@ const Thumbnail = ({ data, url }) => {
   const classes = useStyles();
   return (
     <>
-      <a href={url}>
+      <a href={url} target="_blank" rel="noreferrer">
         <div
           style={{
             backgroundImage: `url('${thumbnail}')`,

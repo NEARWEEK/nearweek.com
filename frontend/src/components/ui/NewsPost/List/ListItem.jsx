@@ -197,6 +197,7 @@ const ListItem = ({ data }) => {
                           color="inherit"
                           underline="none"
                           href={`/content/${data.attributes.slug}`}
+                          target="_blank"
                         >
                           {data.attributes.Title}
                         </Link>
@@ -206,6 +207,7 @@ const ListItem = ({ data }) => {
                           color="inherit"
                           underline="none"
                           href={`${data.attributes.LinkTo}`}
+                          target="_blank"
                         >
                           {data.attributes.Title}
                         </Link>

@@ -8,11 +8,8 @@ import {
   MOBILE_WIDTH,
 } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
-import Link from "@mui/material/Link";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Widget from "../../general/Widget/Widget";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box, Typography, Link } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PostDescription from "../../general/PostDescription/PostDescription";
 
@@ -138,6 +135,7 @@ const ListItem = ({ data }) => {
                       color="inherit"
                       underline="none"
                       href={`/events/${data.attributes.slug}`}
+                      target="_blank"
                     >
                       {data.attributes.Title}{" "}
                     </Link>

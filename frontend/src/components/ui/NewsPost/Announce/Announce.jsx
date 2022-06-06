@@ -1,9 +1,7 @@
 import * as React from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import ImageMedium from "../Image/Medium/ImageMedium";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-import Widget from "../../general/Widget/Widget";
 import { getTimeAgo } from "../../../../Utils/Utils";
 import Truncate from "react-truncate";
 import ReactMarkdown from "react-markdown";
@@ -56,6 +54,7 @@ const Announce = ({ article }) => {
                   color="inherit"
                   href={`/content/${article.attributes.slug}`}
                   underline="none"
+                  target="_blank"
                 >
                   {article.attributes.Title}
                 </Link>
@@ -65,6 +64,7 @@ const Announce = ({ article }) => {
                   color="inherit"
                   href={`${article.attributes.LinkTo}`}
                   underline="none"
+                  target="_blank"
                 >
                   {article.attributes.Title}
                 </Link>

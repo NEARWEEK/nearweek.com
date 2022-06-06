@@ -39,6 +39,7 @@ const Announce = () => {
                 color="inherit"
                 href={`/newsletter/${edition.data[0].attributes.slug}`}
                 underline="none"
+                target="_blank"
               >
                 {edition.data[0].attributes.Title}
                 <span className={classes.postNumber}>

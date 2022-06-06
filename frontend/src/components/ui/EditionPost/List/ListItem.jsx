@@ -140,6 +140,7 @@ const ListItem = ({ data }) => {
                         color="inherit"
                         underline="none"
                         href={`/newsletter/${data.attributes.slug}`}
+                        target="_blank"
                       >
                         {data.attributes.Title}
                         <span className={classes.postNumber}>

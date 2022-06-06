@@ -26,7 +26,11 @@ const ImageMedium = ({ data }) => {
   }
   const classes = useStyles();
   return (
-    <a href={`/events/${data.attributes.slug}`}>
+    <a
+      href={`/events/${data.attributes.slug}`}
+      target="_blank"
+      rel="noreferrer"
+    >
       <div
         style={{
           backgroundImage: `url(${imageUrl})`,

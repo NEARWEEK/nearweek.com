@@ -116,6 +116,7 @@ const GridItem = ({ data }) => {
                       color="inherit"
                       href={`/events/${data.attributes.slug}`}
                       underline="none"
+                      target="_blank"
                     >
                       {data.attributes.Title}
                     </Link>

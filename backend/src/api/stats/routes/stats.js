@@ -21,6 +21,12 @@ module.exports = {
     {
       // Path defined with a URL parameter
       method: "GET",
+      path: "/stats/active-developers",
+      handler: "stats.activeDevelopers",
+    },
+    {
+      // Path defined with a URL parameter
+      method: "GET",
       path: "/stats/dao",
       handler: "stats.dao",
     },
