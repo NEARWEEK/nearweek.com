@@ -1,43 +1,23 @@
-import Thumbnail from "../../EventPost/Grid/Thumbnail/Thumbnail";
-import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
 import * as React from "react";
+import {
+  Box,
+  Link,
+  Typography,
+  Card,
+  CardMedia,
+  CardActionArea,
+  CardContent,
+  CardActions,
+} from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Typography from "@mui/material/Typography";
-import Widget from "../../general/Widget/Widget";
 import { getEventDay, getTimeAgo } from "../../../../Utils/Utils";
-import Truncate from "react-truncate";
-import ReactMarkdown from "react-markdown";
 import PostDescription from "../../general/PostDescription/PostDescription";
+import { placeholder } from "../../../../Utils/placeholder";
+import LazyLoad from "react-lazyload";
 
 const GridItem = ({ data }) => {
   const useStyles = makeStyles(() => ({
-    teaserBlock: {
-      display: "flex",
-      flex: "1 1 326px",
-    },
-    postItem: {
-      display: "flex",
-      flexDirection: "column",
-      width: "100%",
-      marginBottom: "24px",
-    },
-    itemContainer: {
-      borderRadius: "12px",
-      display: "grid",
-      gridTemplateRows: "248px repeat(auto-fill, 189px)",
-    },
-    postImage: {
-      borderRadius: "12px 0 0 12px",
-    },
-    postContent: {
-      minHeight: "25%",
-      background: "#f7f7f7",
-    },
-    contentBody: {
-      padding: "16px 16px 0 16px",
-    },
     postCategory: {
       color: "#2013fb",
       fontWeight: "bold",
@@ -62,8 +42,9 @@ const GridItem = ({ data }) => {
       marginTop: 0,
     },
     contentFooter: {
+      flex: 1,
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "flex-end",
       padding: "12px",
       borderTop: "1px solid #c8c6c6",
     },
@@ -84,58 +65,64 @@ const GridItem = ({ data }) => {
 
   const classes = useStyles();
 
+  let imageUrl = placeholder.getRandomPlaceholder("large");
+  if (data.attributes.Image.data) {
+    imageUrl = data.attributes.Image.data.attributes.url;
+  }
+
   return (
     <>
       {data ? (
-        <div className={classes.teaserBlock}>
-          <div className={classes.postItem}>
-            <div className={classes.itemContainer}>
-              <div className={classes.postImage}>
-                <Thumbnail
-                  data={data}
-                  url={`/events/${data.attributes.slug}`}
-                />
+        <Card
+          elevation={0}
+          sx={{ backgroundColor: "#f7f7f7", borderRadius: "12px", mb: 3 }}
+        >
+          <CardActionArea
+            href={`/events/${data.attributes.slug}`}
+            target="_blank"
+          >
+            <LazyLoad overflow={true}>
+              <CardMedia
+                component="img"
+                src={imageUrl}
+                sx={{ maxHeight: 248 }}
+              />
+            </LazyLoad>
+          </CardActionArea>
+          <CardContent>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography color="primary" style={{ fontWeight: 600 }}>
+                {getEventDay(data.attributes.StartDate)}
+              </Typography>
+              <Typography display="flex" style={{ fontWeight: 600 }}>
+                <LocationOnIcon style={{ color: "#2013fb" }} />
+                {data.attributes.Location}
+              </Typography>
+            </Box>
+            <h3 className={classes.postTitle}>
+              <Link
+                color="inherit"
+                href={`/events/${data.attributes.slug}`}
+                underline="none"
+                target="_blank"
+              >
+                {data.attributes.Title}
+              </Link>
+            </h3>
+            <PostDescription body={data.attributes.Body} />
+          </CardContent>
+          <CardActions sx={{ p: 0 }}>
+            <div className={classes.contentFooter}>
+              <div className={classes.footerDate}>
+                {getTimeAgo(data.attributes.createdAt)}
               </div>
-              <Box className={classes.postContent}>
-                <Box className={classes.contentBody}>
-                  <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <Typography color="primary" style={{ fontWeight: 600 }}>
-                      {getEventDay(data.attributes.StartDate)}
-                    </Typography>
-                    <Typography display="flex" style={{ fontWeight: 600 }}>
-                      <LocationOnIcon style={{ color: "#2013fb" }} />
-                      {data.attributes.Location}
-                    </Typography>
-                  </Box>
-                  <h3 className={classes.postTitle}>
-                    <Link
-                      color="inherit"
-                      href={`/events/${data.attributes.slug}`}
-                      underline="none"
-                      target="_blank"
-                    >
-                      {data.attributes.Title}
-                    </Link>
-                  </h3>
-                  <PostDescription body={data.attributes.Body} />
-                </Box>
-                <div className={classes.contentFooter}>
-                  <div className={classes.postWidgets}>
-                    {/*<Widget icon={"Visibility"} data={data.attributes.views} />*/}
-                    {/* <Widget icon={"ThumbUp"} data={data.attributes.likes} />*/}
-                  </div>
-                  <div className={classes.footerDate}>
-                    {getTimeAgo(data.attributes.createdAt)}
-                  </div>
-                </div>
-              </Box>
             </div>
-          </div>
-        </div>
+          </CardActions>
+        </Card>
       ) : null}
     </>
   );
