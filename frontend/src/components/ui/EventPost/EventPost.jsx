@@ -1,14 +1,11 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import * as Utils from "../../../Utils/Utils";
 import Navbar from "../Navbar/Navbar";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
 import { useMatch } from "react-router";
-import Widget from "../general/Widget/Widget";
-import PostActions from "../general/PostActions/PostActions";
 import SectionHeader from "../general/Section/SectionHeader/SectionHeader";
 import ReactMarkdown from "react-markdown";
 import Subscription from "../general/Subscription/Subscription";

@@ -1,12 +1,7 @@
 import React from "react";
 import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
-import {
-  getEventDay,
-  getPubDate,
-  getTimeAgo,
-  MOBILE_WIDTH,
-} from "../../../../Utils/Utils";
+import { getEventDay, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Box, Typography, Link } from "@mui/material";
