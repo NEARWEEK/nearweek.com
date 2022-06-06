@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import Section from "../components/ui/general/Section/Section";
 import Subscription from "../components/ui/general/Subscription/Subscription";
@@ -48,30 +48,30 @@ const Home = () => {
         <CoinsPrice />
       </Suspense>
       <main>
-        <div className={classes.wrapper}>
-          <div className={classes.container}>
+        <div>
+          <Container maxWidth={1376}>
             <Section title={"Highlights"} link={"/content"}>
-              <div className={classes.blockNews}>
-                <div className={classes.blockColumn}>
+              <div className={classes.grid}>
+                <div className={classes.column}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <Announce />
                   </Suspense>
                 </div>
-                <div className={classes.blockColumn}>
+                <div className={classes.column}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <NewsList show={3} />
                   </Suspense>
                 </div>
               </div>
             </Section>
-          </div>
-          <div className={classes.container}>
+          </Container>
+          <Container maxWidth={1376}>
             <Section>
               <Subscription />
             </Section>
-          </div>
-          <Box style={{ backgroundColor: "#f7f7f7" }} mt={4}>
-            <Box className={classes.container} mb={4}>
+          </Container>
+          <Box style={{ backgroundColor: "#f7f7f7" }} mt={4} pb={4}>
+            <Container maxWidth={1376} mb={4}>
               <Section title={"NEAR’s week by the numbers"}>
                 {!isMobileMatch && (
                   <Suspense fallback={<div>Loading...</div>}>
@@ -82,32 +82,32 @@ const Home = () => {
                   <StatsBlocks />
                 </Suspense>
               </Section>
-            </Box>
+            </Container>
           </Box>
-          <Box className={classes.container}>
+          <Container maxWidth={1376}>
             <Section title={"Events"} link={"/events"}>
               <Suspense fallback={<div>Loading...</div>}>
                 <EventsGrid />
               </Suspense>
             </Section>
-          </Box>
+          </Container>
           <Box style={{ backgroundColor: "#f7f7f7" }}>
-            <Box className={classes.container}>
-              <Box className={classes.wrapper}>
+            <Container maxWidth={1376}>
+              <Box>
                 <SectionHeader title={"Latest Video"} link={"/video"} />
               </Box>
-            </Box>
+            </Container>
             <Suspense fallback={<div>Loading...</div>}>
               <VideoSlider />
             </Suspense>
           </Box>
-          <Box className={classes.container}>
+          <Container maxWidth={1376}>
             <Section title={"Latest Editions"} link={"/newsletter"}>
               <Suspense fallback={<div>Loading...</div>}>
                 <EditionsList start={0} limit={5} />
               </Suspense>
             </Section>
-          </Box>
+          </Container>
         </div>
       </main>
     </>
