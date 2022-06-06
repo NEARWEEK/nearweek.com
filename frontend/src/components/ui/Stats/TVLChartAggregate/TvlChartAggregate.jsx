@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import Change24HCount from "../Change24HCount/Change24HCount";
 import ReactEcharts from "echarts-for-react";
 import Loader from "../../general/Loader/Loader";
-import * as _ from "lodash";
 
 const styles = {
   grid: {
@@ -50,8 +49,6 @@ const TvlChartAggregate = (props) => {
     })();
   }, []);
 
-  //console.log(optionsData);
-
   const aggregateDates = useMemo(() => {
     if (optionsData.total) {
       return optionsData.total
@@ -63,8 +60,6 @@ const TvlChartAggregate = (props) => {
     }
     return [];
   }, [optionsData]);
-
-  //console.log(aggregateDates);
 
   const aggregateCount = useMemo(() => {
     let count = {};

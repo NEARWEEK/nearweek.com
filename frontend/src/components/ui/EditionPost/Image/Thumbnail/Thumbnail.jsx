@@ -28,7 +28,7 @@ const Thumbnail = ({ data, url }) => {
   const classes = useStyles();
   return (
     <>
-      <a href={url}>
+      <a href={url} target="_blank" rel="noreferrer">
         <LazyLoad height={205} once>
           <img src={imageUrl} className={"image " + classes.img} />
         </LazyLoad>

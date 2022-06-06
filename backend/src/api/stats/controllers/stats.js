@@ -1,6 +1,7 @@
 const axios = require("axios");
 const moment = require("moment");
 const CoinGecko = require("coingecko-api");
+const btoa = require("btoa");
 
 const CoinGeckoClient = new CoinGecko();
 
@@ -101,6 +102,167 @@ module.exports = {
       return response.data;
     } catch (e) {
       console.log("Error:", e);
+    }
+  },
+  async activeDevelopers(ctx) {
+    try {
+      const { q } = ctx.query;
+      let filter = { unit: "date", value: 7 };
+      if (q === "all") {
+        filter.unit = "month";
+        filter.value = 12;
+      }
+      if (q === "1m") {
+        filter.unit = "day";
+        filter.value = 30;
+      }
+      if (q === "1w") {
+        filter.unit = "day";
+        filter.value = 7;
+      }
+      const account = process.env.MIXPANEL_SERVICE_ACCOUNT;
+      const password = process.env.MIXPANEL_SERVICE_PASSWORD;
+      const url = `https://mixpanel.com/api/2.0/insights?project_id=2169825&workspace_id=328491`;
+      let body = {
+        bookmark: {
+          sections: {
+            show: [
+              {
+                dataset: "$mixpanel",
+                value: {
+                  id: 1035953,
+                  name: "Monthly Active User",
+                  resourceType: "cohorts",
+                },
+                resourceType: "cohorts",
+                profileType: null,
+                search: "",
+                dataGroupId: null,
+                math: "unique",
+                perUserAggregation: null,
+                property: null,
+              },
+            ],
+            cohorts: [],
+            group: [],
+            filter: [
+              {
+                dataset: "$mixpanel",
+                value: "$cohorts",
+                resourceType: "events",
+                profileType: null,
+                search: "",
+                dataGroupId: null,
+                filterType: "list",
+                filterOperator: "does not contain",
+                filterValue: [
+                  {
+                    cohort: {
+                      id: 1035956,
+                      name: "Monthly Active Validator",
+                      negated: false,
+                    },
+                  },
+                ],
+                propertyObjectKey: null,
+              },
+            ],
+            formula: [],
+            time: [
+              {
+                dateRangeType: "in the last",
+                window: filter,
+                unit: filter.unit,
+              },
+            ],
+          },
+          columnWidths: {
+            bar: {},
+          },
+          displayOptions: {
+            chartType: "line",
+            plotStyle: "standard",
+            analysis: "linear",
+            value: "absolute",
+          },
+          sorting: {
+            bar: {
+              sortBy: "column",
+              colSortAttrs: [
+                {
+                  sortBy: "value",
+                  sortOrder: "desc",
+                },
+              ],
+            },
+            line: {
+              sortBy: "value",
+              sortOrder: "desc",
+              valueField: "averageValue",
+              colSortAttrs: [
+                {
+                  sortBy: "value",
+                  sortOrder: "desc",
+                  valueField: "averageValue",
+                },
+              ],
+            },
+            table: {
+              sortBy: "column",
+              colSortAttrs: [
+                {
+                  sortBy: "label",
+                  sortOrder: "asc",
+                },
+              ],
+            },
+            "insights-metric": {
+              sortBy: "value",
+              sortOrder: "desc",
+              valueField: "totalValue",
+              colSortAttrs: [
+                {
+                  sortBy: "value",
+                  sortOrder: "desc",
+                  valueField: "totalValue",
+                },
+              ],
+            },
+            pie: {
+              sortBy: "value",
+              sortOrder: "desc",
+              valueField: "totalValue",
+              colSortAttrs: [
+                {
+                  sortBy: "value",
+                  sortOrder: "desc",
+                  valueField: "totalValue",
+                },
+              ],
+            },
+          },
+        },
+        queryLimits: {},
+        use_query_cache: true,
+        tracking_props: {
+          is_main_query_for_report: true,
+          query_reason: null,
+          report_name: "insights",
+          bookmark_id: 11264352,
+          has_unsaved_changes: true,
+        },
+      };
+      const response = await axios({
+        method: "post",
+        url,
+        headers: {
+          Authorization: "Basic " + btoa(account + ":" + password),
+        },
+        data: body,
+      });
+      return response.data;
+    } catch (e) {
+      console.log(`Error:${e}`);
     }
   },
 };

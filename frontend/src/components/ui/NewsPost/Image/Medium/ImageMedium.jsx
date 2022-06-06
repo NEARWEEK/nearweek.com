@@ -37,12 +37,16 @@ const ImageMedium = ({ data }) => {
   return (
     <>
       {!isHyperlink() && (
-        <a href={`/content/${data.attributes.slug}`}>
+        <a
+          href={`/content/${data.attributes.slug}`}
+          target="_blank"
+          rel="noreferrer"
+        >
           <img src={imageUrl} className={classes.img} />
         </a>
       )}
       {isHyperlink() && (
-        <a href={`${data.attributes.LinkTo}`}>
+        <a href={`${data.attributes.LinkTo}`} target="_blank" rel="noreferrer">
           <img src={imageUrl} className={classes.img} />
         </a>
       )}

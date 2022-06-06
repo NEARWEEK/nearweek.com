@@ -23,7 +23,7 @@ const Thumbnail = ({ data, url }) => {
   const classes = useStyles();
   return (
     <>
-      <Link href={url} underline="none">
+      <Link href={url} underline="none" target="_blank">
         <img src={imageUrl} className={classes.img} />
       </Link>
     </>

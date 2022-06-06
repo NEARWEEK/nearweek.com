@@ -27,7 +27,11 @@ const ImageMedium = ({ data }) => {
   const classes = useStyles();
 
   return (
-    <a href={`/newsletter/${data.attributes.slug}`}>
+    <a
+      href={`/newsletter/${data.attributes.slug}`}
+      target="_blank"
+      rel="noreferrer"
+    >
       <LazyLoad height={205} once>
         <img
           src={imageUrl}

@@ -37,7 +37,9 @@ const SectionHeader = ({ title, link }) => {
         <>
           {link && (
             <div className={classes.blockLink}>
-              <a href={link}>SHOW MORE</a>
+              <a href={link} target="_blank" rel="noreferrer">
+                SHOW MORE
+              </a>
             </div>
           )}
         </>

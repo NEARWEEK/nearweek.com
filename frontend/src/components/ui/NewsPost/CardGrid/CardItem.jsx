@@ -196,6 +196,7 @@ const CardItem = ({ data }) => {
                 ? `/content/${data.attributes.slug}`
                 : `${data.attributes.LinkTo}`
             }
+            target="_blank"
           >
             <CardMedia
               component="img"
@@ -227,6 +228,7 @@ const CardItem = ({ data }) => {
                   color="inherit"
                   href={`/content/${data.attributes.slug}`}
                   underline="none"
+                  target="_blank"
                 >
                   {data.attributes.Title}
                 </Link>
@@ -236,6 +238,7 @@ const CardItem = ({ data }) => {
                   color="inherit"
                   href={`${data.attributes.LinkTo}`}
                   underline="none"
+                  target="_blank"
                 >
                   {data.attributes.Title}
                 </Link>

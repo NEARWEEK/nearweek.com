@@ -226,6 +226,15 @@ async function loadTvlAggregate() {
   return await response.json();
 }
 
+async function loadActiveDevelopers(dateRange) {
+  console.log(dateRange);
+  const response = await fetch(
+    `/api/stats/active-developers?q=${dateRange}`,
+    options
+  );
+  return await response.json();
+}
+
 async function loadStatsDAO() {
   const response = await fetch(`/api/stats/dao`, options);
   return await response.json();
@@ -262,5 +271,6 @@ export const apiConfig = {
   getTvl: loadTvl,
   getTvlAggregate: loadTvlAggregate,
   getStatsDAO: loadStatsDAO,
+  getActiveDevelopers: loadActiveDevelopers,
   upload: upload,
 };
