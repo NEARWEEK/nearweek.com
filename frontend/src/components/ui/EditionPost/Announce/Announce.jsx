@@ -13,7 +13,7 @@ import * as Utils from "../../../../Utils/Utils";
 import { placeholder } from "../../../../Utils/placeholder";
 import LazyLoad from "react-lazyload";
 
-const Announce = () => {
+const Announce = ({ isFront = false }) => {
   const [edition, setEdition] = useState({ data: [], meta: {} });
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Announce = () => {
               <CardMedia
                 component="img"
                 src={imageUrl}
-                sx={{ maxHeight: 419 }}
+                sx={{ maxHeight: isFront ? 419 : 502 }}
               />
             </LazyLoad>
           </CardActionArea>
