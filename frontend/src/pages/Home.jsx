@@ -1,9 +1,8 @@
 import React, { lazy, Suspense } from "react";
-import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Container, Grid, useMediaQuery, useTheme } from "@mui/material";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import Section from "../components/ui/general/Section/Section";
 import Subscription from "../components/ui/general/Subscription/Subscription";
-import { useStyles } from "./Home.styles";
 
 const Navbar = lazy(() => import("../components/ui/Navbar/Navbar"));
 
@@ -35,7 +34,6 @@ const StatsBlocks = lazy(() =>
 );
 
 const Home = () => {
-  const classes = useStyles();
   const theme = useTheme();
   const isMobileMatch = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -51,18 +49,18 @@ const Home = () => {
         <div>
           <Container maxWidth="xl">
             <Section title={"Highlights"} link={"/content"}>
-              <div className={classes.grid}>
-                <div className={classes.column}>
+              <Grid container spacing={3} columns={{ sm: 4, md: 8, lg: 12 }}>
+                <Grid item sm={4} md={4} lg={6}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <Announce />
                   </Suspense>
-                </div>
-                <div className={classes.column}>
+                </Grid>
+                <Grid item sm={4} md={4} lg={6}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <NewsList show={3} />
                   </Suspense>
-                </div>
-              </div>
+                </Grid>
+              </Grid>
             </Section>
           </Container>
           <Container maxWidth="xl">

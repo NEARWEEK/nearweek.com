@@ -15,7 +15,12 @@ const Block = ({ title, data, icon }) => {
         <Typography variant="h5" style={{ fontWeight: 900 }}>
           {title}
         </Typography>
-        <Box display="flex" alignItems="center" justifyContent="space-between">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ mb: 2 }}
+        >
           <Typography variant="h4" style={{ fontWeight: 900 }} color="primary">
             {data}
           </Typography>

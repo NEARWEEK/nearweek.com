@@ -34,9 +34,10 @@ const styles = (theme) => ({
   postFooter: {
     display: "flex",
     justifyContent: "space-between",
+    flexDirection: "column",
+    alignItems: "flex-end",
     padding: "12px 24px",
     borderTop: "1px solid #c8c6c6",
-    borderRadius: "0 0 12px 12px",
   },
   postWidgets: {
     display: "flex",

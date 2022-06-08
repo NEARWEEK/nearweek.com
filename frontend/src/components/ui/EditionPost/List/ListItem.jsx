@@ -7,8 +7,6 @@ import Link from "@mui/material/Link";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Widget from "../../general/Widget/Widget";
 import Box from "@mui/material/Box";
-import ReactMarkdown from "react-markdown";
-import Truncate from "react-truncate";
 import PostDescription from "../../general/PostDescription/PostDescription";
 
 const ListItem = ({ data }) => {
