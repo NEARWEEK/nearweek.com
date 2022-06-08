@@ -37,7 +37,7 @@ const Announce = () => {
       {edition.data.length > 0 ? (
         <Card
           elevation={0}
-          sx={{ borderRadius: "12px", backgroundColor: "#f7f7f7" }}
+          sx={{ borderRadius: "12px", backgroundColor: "#dddcdc" }}
         >
           <CardActionArea
             href={`/newsletter/${edition.data[0].attributes.slug}`}

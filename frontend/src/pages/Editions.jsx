@@ -2,25 +2,19 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import { Container } from "@mui/material";
 import Announce from "../components/ui/EditionPost/Announce/Announce";
-import * as Utils from "../Utils/Utils";
 import Section from "../components/ui/general/Section/Section";
 import Subscription from "../components/ui/general/Subscription/Subscription";
 import { useStyles } from "./Editions.styles";
+import Box from "@mui/material/Box";
 
 const EditionsList = lazy(() =>
   import("../components/ui/EditionPost/List/EditionsList")
 );
 
-const Editions = () => {
-  const [editions, setEditions] = useState({ data: [], meta: {} });
-  const classes = useStyles();
+const NewsList = lazy(() => import("../components/ui/NewsPost/List/NewsList"));
 
-  useEffect(async () => {
-    const data = await Utils.api.getLatestEdition();
-    if (data) {
-      setEditions(data);
-    }
-  }, []);
+const Editions = () => {
+  const classes = useStyles();
 
   return (
     <>
@@ -28,18 +22,23 @@ const Editions = () => {
       <main>
         <Container maxWidth="md">
           <div className={classes.topContainer}>
-            <Announce edition={editions.data[0]} />
+            <Announce />
           </div>
           <div className={classes.latestEditions}>
-            <div>
-              <Section title={"Latest Editions"}>
-                <Suspense fallback={<div>Loading...</div>}>
-                  <EditionsList start={1} />
-                </Suspense>
-              </Section>
-              <Subscription />
-            </div>
+            <Section title={"Latest Editions"}>
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditionsList start={1} />
+              </Suspense>
+            </Section>
+            <Subscription />
           </div>
+          <Box sx={{ pb: 4 }}>
+            <Section title={"Read also"}>
+              <Suspense fallback={<div>Loading...</div>}>
+                <NewsList show={"all"} showMore={true} />
+              </Suspense>
+            </Section>
+          </Box>
         </Container>
       </main>
     </>
