@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import { Container } from "@mui/material";
 import Announce from "../components/ui/EditionPost/Announce/Announce";
-import EditionsList from "../components/ui/EditionPost/List/EditionsList";
 import * as Utils from "../Utils/Utils";
 import Section from "../components/ui/general/Section/Section";
 import Subscription from "../components/ui/general/Subscription/Subscription";
 import { useStyles } from "./Editions.styles";
 
+const EditionsList = lazy(() =>
+  import("../components/ui/EditionPost/List/EditionsList")
+);
+
 const Editions = () => {
   const [editions, setEditions] = useState({ data: [], meta: {} });
   const classes = useStyles();
+
   useEffect(async () => {
-    const data = await Utils.api.getAllEditions();
+    const data = await Utils.api.getLatestEdition();
     if (data) {
       setEditions(data);
     }
@@ -29,9 +33,9 @@ const Editions = () => {
           <div className={classes.latestEditions}>
             <div>
               <Section title={"Latest Editions"}>
-                {editions.data.length > 0 && (
-                  <EditionsList editions={editions.data} />
-                )}
+                <Suspense fallback={<div>Loading...</div>}>
+                  <EditionsList start={1} />
+                </Suspense>
               </Section>
               <Subscription />
             </div>
