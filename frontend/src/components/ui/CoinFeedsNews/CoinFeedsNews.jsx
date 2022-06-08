@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { api } from "../../../Utils/Utils";
+import { api, getTimeAgo } from "../../../Utils/Utils";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,9 +9,13 @@ import CardContent from "@mui/material/CardContent";
 import LazyLoad from "react-lazyload";
 import makeStyles from "@mui/styles/makeStyles";
 import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import CardActions from "@mui/material/CardActions";
 
 const CoinFeedsNews = () => {
   const [feedsNews, setFeedsNews] = useState([]);
+
+  console.log(feedsNews);
 
   useEffect(() => {
     (async () => {
@@ -81,6 +85,9 @@ const CoinFeedsNews = () => {
               </LazyLoad>
             </CardActionArea>
             <CardContent>
+              <Box display="inline-flex" className={classes.postCategory}>
+                {feed.newsSiteName}
+              </Box>
               <h3 className={classes.feedTitle} title={feed.title}>
                 <Link
                   color="inherit"
@@ -92,6 +99,13 @@ const CoinFeedsNews = () => {
                 </Link>
               </h3>
             </CardContent>
+            <CardActions
+              sx={{ borderTop: "1px solid #ccc", justifyContent: "flex-end" }}
+            >
+              <div className={classes.footerDate}>
+                {getTimeAgo(feed.publishDate)}
+              </div>
+            </CardActions>
           </Card>
         </Grid>
       ))}

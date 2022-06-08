@@ -7,7 +7,6 @@ import {
   CardContent,
 } from "@mui/material";
 import { getPubDate, getTimeAgo } from "../../../../Utils/Utils";
-import Widget from "../../general/Widget/Widget";
 import PostDescription from "../../general/PostDescription/PostDescription";
 import { useStyles } from "./Announce.styles";
 import * as Utils from "../../../../Utils/Utils";
@@ -78,10 +77,6 @@ const Announce = () => {
               </div>
             </div>
             <div className={classes.postFooter}>
-              <div className={classes.postWidgets}>
-                {/*<Widget icon={"Visibility"} data={edition.attributes.views} />*/}
-                {/*<Widget icon={"ThumbUp"} data={edition.attributes.likes} />*/}
-              </div>
               <div className={classes.footerDate}>
                 {getTimeAgo(edition.data[0].attributes.createdAt)}
               </div>
