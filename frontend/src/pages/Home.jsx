@@ -52,7 +52,7 @@ const Home = () => {
               <Grid container spacing={3} columns={{ sm: 4, md: 8, lg: 12 }}>
                 <Grid item sm={4} md={4} lg={6}>
                   <Suspense fallback={<div>Loading...</div>}>
-                    <Announce />
+                    <Announce isFront={true} />
                   </Suspense>
                 </Grid>
                 <Grid item sm={4} md={4} lg={6}>
