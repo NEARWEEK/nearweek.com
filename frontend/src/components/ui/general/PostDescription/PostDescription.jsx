@@ -11,7 +11,11 @@ const PostDescription = ({ body, maxLine = 2, handleRleState }) => {
   const useStyles = makeStyles((theme) => ({
     textEllipsis: {
       "& p": {
-        margin: 0,
+        marginTop: 0,
+        marginBottom: theme.spacing(1),
+      },
+      "& h4": {
+        marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
       },
     },

@@ -137,7 +137,11 @@ const NewsPost = () => {
             <Box>
               <Section title={"Read also"}>
                 <Suspense fallback={<div>Loading...</div>}>
-                  <NewsList exclude={[article.id]} />
+                  <NewsList
+                    exclude={[article.id]}
+                    show={"all"}
+                    showMore={true}
+                  />
                 </Suspense>
               </Section>
             </Box>
