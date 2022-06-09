@@ -5,6 +5,13 @@ import { apiConfig } from "../config/apiConfig";
 
 export const MOBILE_WIDTH = "600px";
 
+export const addBlankTargets = (s) => {
+  return ("" + s).replace(
+    /<a\s+href=/gi,
+    '<a target="_blank" rel="noopener noreferrer" href='
+  );
+};
+
 const priceFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",

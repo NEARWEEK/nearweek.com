@@ -1,10 +1,6 @@
 import * as React from "react";
 import HTMLEllipsis from "react-lines-ellipsis/lib/html";
-import { parseMarkdown } from "../../../../Utils/Utils";
-
-function addBlankTargets(s) {
-  return ("" + s).replace(/<a\s+href=/gi, '<a target="_blank" href=');
-}
+import { addBlankTargets, parseMarkdown } from "../../../../Utils/Utils";
 
 const PostDescription = ({ body, maxLine = 2, handleRleState }) => {
   let html = parseMarkdown(body);
