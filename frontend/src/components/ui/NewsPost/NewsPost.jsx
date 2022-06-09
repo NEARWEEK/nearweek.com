@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import * as Utils from "../../../Utils/Utils";
 import { useMatch } from "react-router";
 import Navbar from "../Navbar/Navbar";
 import Box from "@mui/material/Box";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import ReactMarkdown from "react-markdown";
-import NewsList from "./List/NewsList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
-import Widget from "../general/Widget/Widget";
 import Section from "../general/Section/Section";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
@@ -17,6 +14,8 @@ import ShareButton from "../general/PostActions/ShareButton/ShareButton";
 import { useStyles } from "./NewsPost.styles";
 import ReadMore from "../general/ReadMore/ReadMore";
 import * as React from "react";
+
+const NewsList = lazy(() => import("./CardList/NewsList"));
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
