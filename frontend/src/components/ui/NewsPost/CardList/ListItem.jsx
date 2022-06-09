@@ -120,9 +120,8 @@ const ListItem = ({ data }) => {
       color: "#656364",
     },
     img: {
-      width: isMobileMatch ? 68 : 205,
-      height: isMobileMatch ? 68 : 205,
-      objectFit: "cover",
+      width: isMobileMatch ? "68px !important" : "205px !important",
+      height: isMobileMatch ? "68px !important" : "205px !important",
       borderRadius: !isMobileMatch ? 0 : "12px",
     },
   }));
