@@ -9,8 +9,8 @@ const PostDescription = ({ body, maxLine = 2, handleRleState }) => {
   html = addBlankTargets(html);
 
   const useStyles = makeStyles((theme) => ({
-    htmlEllipsis: {
-      "& > p": {
+    textEllipsis: {
+      "& p": {
         margin: 0,
         marginBottom: theme.spacing(1),
       },
@@ -29,7 +29,7 @@ const PostDescription = ({ body, maxLine = 2, handleRleState }) => {
       maxLine={maxLine}
       ellipsis="..."
       basedOn="words"
-      className={classes.htmlEllipsis}
+      className={classes.textEllipsis}
       onReflow={handleReflow}
     />
   );
