@@ -95,10 +95,10 @@ const ListItem = ({ data }) => {
       fontSize: "16px",
       lineHeight: "24px",
       marginTop: 0,
-      //      overflow: "hidden",
-      //      display: "-webkit-box",
-      //      WebkitLineClamp: 2,
-      //      WebkitBoxOrient: "vertical",
+      overflow: "hidden",
+      display: "-webkit-box",
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: "vertical",
     },
     contentFooter: {
       display: "flex",
@@ -258,7 +258,10 @@ const ListItem = ({ data }) => {
                   </h3>
                   {!isMobileMatch && (
                     <div className={classes.postBody}>
-                      <PostDescription body={data.attributes.Body} />
+                      <PostDescription
+                        maxLine={2}
+                        body={data.attributes.Body}
+                      />
                     </div>
                   )}
                 </div>
