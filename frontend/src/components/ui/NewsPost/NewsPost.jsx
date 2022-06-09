@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect, useState } from "react";
 import * as Utils from "../../../Utils/Utils";
 import { useMatch } from "react-router";
@@ -16,6 +15,8 @@ import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 import ShareButton from "../general/PostActions/ShareButton/ShareButton";
 import { useStyles } from "./NewsPost.styles";
+import ReadMore from "../general/ReadMore/ReadMore";
+import * as React from "react";
 
 const NewsPost = () => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
@@ -129,9 +130,7 @@ const NewsPost = () => {
               <ShareButton />
             </Box>
             <Box className={classes.containerBody}>
-              <ReactMarkdown className={classes.postBody}>
-                {article.attributes.Body}
-              </ReactMarkdown>
+              <ReadMore>{article.attributes.Body}</ReadMore>
             </Box>
             <Box display="flex" alignItems="center">
               <ShareButton />
