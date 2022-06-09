@@ -3,12 +3,13 @@ import Box from "@mui/material/Box";
 import * as React from "react";
 import { useStyles } from "./ReadMore.styles";
 import { Collapse } from "react-collapse";
-import { parseMarkdown } from "../../../../Utils/Utils";
+import { addBlankTargets, parseMarkdown } from "../../../../Utils/Utils";
 import PostDescription from "../PostDescription/PostDescription";
 import Pictures from "../Pictures/Pictures";
 
 const ReadMore = ({ children, images }) => {
-  const text = children ? parseMarkdown(children) : "";
+  let text = children ? parseMarkdown(children) : "";
+  text = addBlankTargets(text);
   const [isReadMore, setIsReadMore] = useState(true);
   const [showGallery, setShowGallery] = useState(false);
   const [clamped, setClamped] = useState(false);
