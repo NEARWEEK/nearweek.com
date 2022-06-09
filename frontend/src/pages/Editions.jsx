@@ -11,7 +11,9 @@ const EditionsList = lazy(() =>
   import("../components/ui/EditionPost/List/EditionsList")
 );
 
-const NewsList = lazy(() => import("../components/ui/NewsPost/List/NewsList"));
+const NewsList = lazy(() =>
+  import("../components/ui/NewsPost/CardList/NewsList")
+);
 
 const Editions = () => {
   const classes = useStyles();
