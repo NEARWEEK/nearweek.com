@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import * as Utils from "../Utils/Utils";
@@ -27,7 +27,6 @@ import { dateRangeFormat, MOBILE_WIDTH } from "../Utils/Utils";
 import moment from "moment";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Section from "../components/ui/general/Section/Section";
-import NewsList from "../components/ui/NewsPost/List/NewsList";
 import Subscription from "../components/ui/general/Subscription/Subscription";
 import GridCarousel from "../components/ui/VideoPost/GridCarousel/GridCarousel";
 import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
@@ -37,6 +36,10 @@ import { useStyles } from "./News.styles";
 import Paper from "@mui/material/Paper";
 import SearchInput from "../components/ui/NewsPost/SearchInput/SearchInput";
 import CardGrid from "../components/ui/NewsPost/CardGrid/CardGrid";
+
+const NewsList = lazy(() =>
+  import("../components/ui/NewsPost/CardList/NewsList")
+);
 
 const News = () => {
   const classes = useStyles();
@@ -420,16 +423,23 @@ const News = () => {
                 )}
                 {isMobileMatch && (
                   <Box className={classes.blockColumn}>
-                    {news.data.length > 0 && <NewsList news={getNews()} />}
+                    {
+                      news.data.length > 0 && (
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <NewsList show={4} />
+                        </Suspense>
+                      )
+                      /*<NewsList news={getNews()} />*/
+                    }
                   </Box>
                 )}
               </Box>
-              <Box className={classes.latestArticles}>
+              <Box className={classes.latestArticles} sx={{ pb: 4 }}>
                 <Section title={"Latest Content"}>
-                  {news.data.length > 0 && <NewsGrid news={getLatestNews()} />}
+                  {news.data.length > 0 && <CardGrid news={getLatestNews()} />}
                 </Section>
-                <Subscription />
               </Box>
+              <Subscription />
             </>
           ) : (
             <FilterResult filterResult={filterResult} />
