@@ -47,7 +47,7 @@ const Announce = ({ isFront = false }) => {
               <CardMedia
                 component="img"
                 src={imageUrl}
-                sx={{ maxHeight: isFront ? 419 : 502 }}
+                className={isFront ? classes.imageFront : classes.image}
               />
             </LazyLoad>
           </CardActionArea>

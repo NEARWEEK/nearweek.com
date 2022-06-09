@@ -13,7 +13,9 @@ const Announce = lazy(() =>
   import("../components/ui/EditionPost/Announce/Announce")
 );
 
-const NewsList = lazy(() => import("../components/ui/NewsPost/List/NewsList"));
+const NewsList = lazy(() =>
+  import("../components/ui/NewsPost/CardList/NewsList")
+);
 const EventsGrid = lazy(() =>
   import("../components/ui/EventPost/Grid/EventsGrid")
 );

@@ -9,6 +9,21 @@ const styles = (theme) => ({
     fontWeight: "bold",
     fontSize: "14px",
   },
+  imageFront: {
+    maxHeight: 419,
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: 284,
+    },
+  },
+  image: {
+    maxHeight: 502,
+    [theme.breakpoints.down("md")]: {
+      maxHeight: 419,
+    },
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: 284,
+    },
+  },
   postTitle: {
     fontSize: "48px",
     fontWeight: "900",
