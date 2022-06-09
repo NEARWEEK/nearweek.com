@@ -1,4 +1,4 @@
-import { lazy, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import * as Utils from "../../../Utils/Utils";
 import { useMatch } from "react-router";
 import Navbar from "../Navbar/Navbar";
@@ -136,7 +136,9 @@ const NewsPost = () => {
             </Box>
             <Box>
               <Section title={"Read also"}>
-                <NewsList exclude={[article.id]} />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <NewsList exclude={[article.id]} />
+                </Suspense>
               </Section>
             </Box>
           </Box>
