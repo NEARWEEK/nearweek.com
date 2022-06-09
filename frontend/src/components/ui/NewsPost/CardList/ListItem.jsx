@@ -92,9 +92,6 @@ const ListItem = ({ data }) => {
       color: "#2013fb",
     },
     postBody: {
-      fontSize: "16px",
-      lineHeight: "24px",
-      marginTop: 0,
       overflow: "hidden",
       display: "-webkit-box",
       WebkitLineClamp: 2,
