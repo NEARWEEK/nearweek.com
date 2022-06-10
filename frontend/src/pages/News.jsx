@@ -423,14 +423,11 @@ const News = () => {
                 )}
                 {isMobileMatch && (
                   <Box className={classes.blockColumn}>
-                    {
-                      news.data.length > 0 && (
-                        <Suspense fallback={<div>Loading...</div>}>
-                          <NewsList show={4} />
-                        </Suspense>
-                      )
-                      /*<NewsList news={getNews()} />*/
-                    }
+                    {news.data.length > 0 && (
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <NewsList show={4} />
+                      </Suspense>
+                    )}
                   </Box>
                 )}
               </Box>
