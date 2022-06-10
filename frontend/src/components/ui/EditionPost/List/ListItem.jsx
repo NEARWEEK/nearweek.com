@@ -1,16 +1,23 @@
-import React from "react";
-import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
 import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
-import Link from "@mui/material/Link";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Widget from "../../general/Widget/Widget";
-import Box from "@mui/material/Box";
 import PostDescription from "../../general/PostDescription/PostDescription";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Link,
+  Box,
+  useMediaQuery,
+} from "@mui/material";
+import LazyLoad from "react-lazyload";
+import { placeholder } from "../../../../Utils/placeholder";
+import useTheme from "@mui/material/styles/useTheme";
 
 const ListItem = ({ data }) => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const theme = useTheme();
+  const isMobileMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const matchEdition = useMatch(`/newsletter/:editionId`);
   const useStyles = makeStyles((theme) => ({
     teaserBlock: {
@@ -49,19 +56,22 @@ const ListItem = ({ data }) => {
       background: matchEdition ? "#fff" : "#f7f7f7",
     },
     contentBody: {
-      display: "flex",
+      display: "grid",
+      gridTemplateColumns: isMobileMatch
+        ? "86px repeat(auto-fit, minmax(100px, 100%))"
+        : "repeat(auto-fit, minmax(100px, 100%))",
       alignItems: "flex-start",
       padding: "16px 16px 0 16px",
       "& .image-container": {
         marginBottom: "16px",
       },
-      "& .image-container .image": {
+      "& .image-container .lazyload-wrapper .image": {
         marginRight: "16px",
       },
     },
     contentFooter: {
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "flex-end",
       marginTop: "auto",
       padding: "12px",
       borderTop: "1px solid #c8c6c6",
@@ -80,9 +90,10 @@ const ListItem = ({ data }) => {
       color: "#2013fb",
     },
     postBody: {
-      fontSize: "16px",
-      lineHeight: "24px",
-      marginTop: 0,
+      overflow: "hidden",
+      display: "-webkit-box",
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: "vertical",
     },
     postWidgets: {
       display: "flex",
@@ -97,74 +108,117 @@ const ListItem = ({ data }) => {
       fontSize: "12px",
       color: "#656364",
     },
+    img: {
+      width: isMobileMatch ? "68px !important" : "362px !important",
+      height: isMobileMatch ? "68px !important" : "205px !important",
+      borderRadius: !isMobileMatch ? 0 : "12px",
+    },
   }));
+
+  let imageUrl = placeholder.getRandomPlaceholder("large");
+  if (data.attributes.Image.data) {
+    imageUrl = data.attributes.Image.data.attributes.url;
+  }
 
   const classes = useStyles();
   return (
     <>
-      {data ? (
-        <div className={classes.teaserBlock}>
-          <div className={classes.postItem}>
-            <div className={classes.itemContainer}>
-              {!isMobileMatch && (
-                <div className={classes.blockImage}>
-                  <Thumbnail
-                    data={data}
-                    url={`/newsletter/${data.attributes.slug}`}
+      {data && (
+        <Card
+          sx={{
+            display: "flex",
+            width: "100%",
+            borderRadius: "12px",
+            mb: 3,
+            backgroundColor: "#f7f7f7",
+          }}
+          elevation={0}
+        >
+          {!isMobileMatch && (
+            <>
+              <CardActionArea
+                sx={{ width: "auto", height: "100%" }}
+                href={`/newsletter/${data.attributes.slug}`}
+                target="_blank"
+              >
+                <LazyLoad height={205} once>
+                  <CardMedia
+                    component="img"
+                    image={imageUrl}
+                    className={classes.img}
                   />
-                </div>
-              )}
-              <div className={classes.postContent}>
-                <Box className={classes.contentBody}>
-                  {isMobileMatch && (
-                    <div className="image-container">
-                      <div className={classes.bodyImage}>
-                        <Thumbnail
-                          data={data}
-                          url={`/newsletter/${data.attributes.slug}`}
-                        />
-                      </div>
-                    </div>
-                  )}
-                  <div className="body-container">
-                    <div className={classes.postDate}>
-                      <span>
-                        {data.attributes.Period &&
-                          getPubDate(data.attributes.Period)}
-                      </span>
-                    </div>
-                    <h3 className={classes.postTitle}>
-                      <Link
-                        color="inherit"
-                        underline="none"
+                </LazyLoad>
+              </CardActionArea>
+            </>
+          )}
+          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
+            <CardContent
+              sx={{
+                flex: "1 0 auto",
+                p: 0,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className={classes.contentBody}>
+                {isMobileMatch && (
+                  <div className="image-container">
+                    <div className={classes.postImage}>
+                      <CardActionArea
                         href={`/newsletter/${data.attributes.slug}`}
                         target="_blank"
                       >
-                        {data.attributes.Title}
-                        <span className={classes.postNumber}>
-                          #{data.attributes.Number}
-                        </span>
-                      </Link>
-                    </h3>
-                    {!isMobileMatch && (
-                      <PostDescription body={data.attributes.Body} />
-                    )}
+                        <LazyLoad height={205} once>
+                          <CardMedia
+                            component="img"
+                            image={imageUrl}
+                            className={classes.img}
+                          />
+                        </LazyLoad>
+                      </CardActionArea>
+                    </div>
                   </div>
-                </Box>
-                <Box className={classes.contentFooter}>
-                  <div className={classes.postWidgets}>
-                    {/*<Widget icon={"Visibility"} data={data.attributes.views} />*/}
-                    {/*<Widget icon={"ThumbUp"} data={data.attributes.likes} />*/}
+                )}
+                <div className={classes.bodyContainer}>
+                  <div className={classes.postDate}>
+                    <span>
+                      {data.attributes.Period &&
+                        getPubDate(data.attributes.Period)}
+                    </span>
                   </div>
-                  <div className={classes.footerDate}>
-                    {getTimeAgo(data.attributes.createdAt)}
-                  </div>
-                </Box>
+                  <h3 className={classes.postTitle}>
+                    <Link
+                      color="inherit"
+                      underline="none"
+                      href={`/newsletter/${data.attributes.slug}`}
+                      target="_blank"
+                    >
+                      {data.attributes.Title}
+                      <span className={classes.postNumber}>
+                        #{data.attributes.Number}
+                      </span>
+                    </Link>
+                  </h3>
+                  {!isMobileMatch && (
+                    <div className={classes.postBody}>
+                      <PostDescription
+                        maxLine={2}
+                        body={data.attributes.Body}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
+              <div className={classes.contentFooter}>
+                <div className={classes.footerDate}>
+                  {getTimeAgo(data.attributes.createdAt)}
+                </div>
+              </div>
+            </CardContent>
+          </Box>
+        </Card>
+      )}
     </>
   );
 };

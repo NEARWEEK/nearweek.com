@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import makeStyles from "@mui/styles/makeStyles";
-import Box from "@mui/material/Box";
+import { Box, Button } from "@mui/material";
 import * as Utils from "../../../../Utils/Utils";
-import { Button } from "@mui/material";
 
 const NewsList = ({ exclude, show = 3, showMore = false }) => {
   const [news, setNews] = useState([]);

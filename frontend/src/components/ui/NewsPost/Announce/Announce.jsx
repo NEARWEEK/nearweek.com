@@ -6,6 +6,7 @@ import { getTimeAgo } from "../../../../Utils/Utils";
 import Truncate from "react-truncate";
 import ReactMarkdown from "react-markdown";
 import { useStyles } from "./Announce.styles";
+import Categories from "../Categories/Categories";
 
 const Announce = ({ article }) => {
   const categories = article && article.attributes.categories.data;
@@ -32,18 +33,7 @@ const Announce = ({ article }) => {
               {article && (
                 <Box display="inline-flex">
                   {article.attributes.categories.data ? (
-                    <>
-                      {article.attributes.categories.data.map((item, index) => (
-                        <>
-                          {index > 0 &&
-                            index < article.attributes.categories.data.length &&
-                            "•"}{" "}
-                          <Box className={classes.categoryItem} key={index}>
-                            {item.attributes.Name}
-                          </Box>
-                        </>
-                      ))}
-                    </>
+                    <Categories data={article} />
                   ) : null}
                 </Box>
               )}

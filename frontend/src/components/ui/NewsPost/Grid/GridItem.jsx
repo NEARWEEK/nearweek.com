@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Thumbnail from "./Thumbnail/Thumbnail";
 import Widget from "../../general/Widget/Widget";
 import { getTimeAgo } from "../../../../Utils/Utils";
+import Categories from "../Categories/Categories";
 
 const GridItem = ({ data }) => {
   const matchEdition = useMatch(`/content/:articleId`);
@@ -119,24 +120,7 @@ const GridItem = ({ data }) => {
                   {data && (
                     <Box display="inline-flex" className={classes.postCategory}>
                       {data.attributes.categories.data ? (
-                        <>
-                          {data.attributes.categories.data.map(
-                            (item, index) => (
-                              <>
-                                {index > 0 &&
-                                  index <
-                                    data.attributes.categories.data.length &&
-                                  "•"}{" "}
-                                <Box
-                                  className={classes.categoryItem}
-                                  key={index}
-                                >
-                                  {item.attributes.Name}
-                                </Box>
-                              </>
-                            )
-                          )}
-                        </>
+                        <Categories data={data} />
                       ) : null}
                     </Box>
                   )}
