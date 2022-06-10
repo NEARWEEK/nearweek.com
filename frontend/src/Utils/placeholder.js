@@ -37,5 +37,5 @@ const getRandomPlaceholder = (size) => {
 };
 
 export const placeholder = {
-  getRandomPlaceholder: getRandomPlaceholder,
+  getRandomPlaceholder,
 };

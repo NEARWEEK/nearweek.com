@@ -1,23 +1,22 @@
-import Thumbnail from "../List/Thumbnail/Thumbnail";
-import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import { useMatch } from "react-router";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
-import Widget from "../../general/Widget/Widget";
+import {
+  Link,
+  Box,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { getTimeAgo } from "../../../../Utils/Utils";
 import PostDescription from "../../general/PostDescription/PostDescription";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
 import { placeholder } from "../../../../Utils/placeholder";
-import CardContent from "@mui/material/CardContent";
 import LazyLoad from "react-lazyload";
 
 const ListItem = ({ data }) => {
-  const matchEdition = useMatch(`/content/:articleId`);
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const theme = useTheme();
+  const isMobileMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const categories = data.attributes.categories.data;
 
   const isHyperlink = () => {
@@ -28,31 +27,15 @@ const ListItem = ({ data }) => {
     return includeHyperlink;
   };
 
+  const getLinkUrl = (data) => {
+    return isHyperlink()
+      ? data.attributes.LinkTo
+      : `/content/${data.attributes.slug}`;
+  };
+
   const useStyles = makeStyles((theme) => ({
-    teaserBlock: {
-      display: "flex",
-      width: "100%",
-      flexDirection: "column",
-    },
-    postItem: {
-      display: "flex",
-      flexDirection: "row",
-    },
     postImage: {
       borderRadius: "12px 0 0 12px",
-    },
-    itemContainer: {
-      display: "flex",
-      flex: 1,
-    },
-    postContent: {
-      borderRadius: !isMobileMatch ? "0 12px  12px 0" : "12px",
-      background: "#f7f7f7",
-      flex: 1,
-      width: "100%",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
     },
     contentBody: {
       display: "grid",
@@ -72,24 +55,21 @@ const ListItem = ({ data }) => {
       maxWidth: "100%",
     },
     postCategory: {
+      display: "inline-flex",
       color: "#2013fb",
       fontWeight: "bold",
       fontSize: "14px",
     },
-    categoryItem: {
-      marginLeft: "6px",
-      marginRight: "6px",
-    },
     postTitle: {
       marginTop: "6px",
       marginBottom: "6px",
-      fontSize: isMobileMatch ? "16px" : "20px",
+      fontSize: 20,
+      [theme.breakpoints.down("md")]: {
+        fontSize: 16,
+      },
       overflow: "hidden",
       whiteSpace: "nowrap",
       textOverflow: "ellipsis",
-    },
-    postNumber: {
-      color: "#2013fb",
     },
     postBody: {
       overflow: "hidden",
@@ -99,18 +79,9 @@ const ListItem = ({ data }) => {
     },
     contentFooter: {
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "flex-end",
       padding: "12px",
       borderTop: "1px solid #c8c6c6",
-    },
-    postWidgets: {
-      display: "flex",
-      alignItems: "center",
-      color: "rgba(0, 0, 0, 0.54)",
-    },
-    postWidget: {
-      color: "#656364",
-      paddingRight: "24px",
     },
     footerDate: {
       fontSize: "12px",
@@ -144,36 +115,19 @@ const ListItem = ({ data }) => {
         >
           {!isMobileMatch && (
             <>
-              {!isHyperlink() && (
-                <CardActionArea
-                  sx={{ width: "auto", height: "100%" }}
-                  href={`/content/${data.attributes.slug}`}
-                  target="_blank"
-                >
-                  <LazyLoad height={205} once>
-                    <CardMedia
-                      component="img"
-                      image={imageUrl}
-                      className={classes.img}
-                    />
-                  </LazyLoad>
-                </CardActionArea>
-              )}
-              {isHyperlink() && (
-                <CardActionArea
-                  sx={{ width: "auto", height: "100%" }}
-                  href={`${data.attributes.LinkTo}`}
-                  target="_blank"
-                >
-                  <LazyLoad height={205} once>
-                    <CardMedia
-                      component="img"
-                      image={imageUrl}
-                      className={classes.img}
-                    />
-                  </LazyLoad>
-                </CardActionArea>
-              )}
+              <CardActionArea
+                sx={{ width: "auto", height: "100%" }}
+                href={getLinkUrl(data)}
+                target="_blank"
+              >
+                <LazyLoad height={205} once>
+                  <CardMedia
+                    component="img"
+                    image={imageUrl}
+                    className={classes.img}
+                  />
+                </LazyLoad>
+              </CardActionArea>
             </>
           )}
           <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
@@ -190,24 +144,21 @@ const ListItem = ({ data }) => {
                 {isMobileMatch && (
                   <div className="image-container">
                     <div className={classes.postImage}>
-                      {!isHyperlink() && (
-                        <Thumbnail
-                          data={data}
-                          url={`/content/${data.attributes.slug}`}
-                        />
-                      )}
-                      {isHyperlink() && (
-                        <Thumbnail
-                          data={data}
-                          url={`${data.attributes.LinkTo}`}
-                        />
-                      )}
+                      <CardActionArea href={getLinkUrl(data)} target="_blank">
+                        <LazyLoad height={205} once>
+                          <CardMedia
+                            component="img"
+                            image={imageUrl}
+                            className={classes.img}
+                          />
+                        </LazyLoad>
+                      </CardActionArea>
                     </div>
                   </div>
                 )}
                 <div className={classes.bodyContainer}>
                   {data && (
-                    <Box display="inline-flex" className={classes.postCategory}>
+                    <Box className={classes.postCategory}>
                       {data.attributes.categories.data ? (
                         <>
                           {data.attributes.categories.data.map(
@@ -218,7 +169,10 @@ const ListItem = ({ data }) => {
                                     data.attributes.categories.data.length &&
                                   "•"}{" "}
                                 <Box
-                                  className={classes.categoryItem}
+                                  sx={{
+                                    marginLeft: index !== 0 ? 0.75 : 0,
+                                    marginRight: 0.75,
+                                  }}
                                   key={index}
                                 >
                                   {item.attributes.Name}
@@ -231,26 +185,14 @@ const ListItem = ({ data }) => {
                     </Box>
                   )}
                   <h3 className={classes.postTitle}>
-                    {!isHyperlink() && (
-                      <Link
-                        color="inherit"
-                        underline="none"
-                        href={`/content/${data.attributes.slug}`}
-                        target="_blank"
-                      >
-                        {data.attributes.Title}
-                      </Link>
-                    )}
-                    {isHyperlink() && (
-                      <Link
-                        color="inherit"
-                        underline="none"
-                        href={`${data.attributes.LinkTo}`}
-                        target="_blank"
-                      >
-                        {data.attributes.Title}
-                      </Link>
-                    )}
+                    <Link
+                      color="inherit"
+                      underline="none"
+                      href={getLinkUrl(data)}
+                      target="_blank"
+                    >
+                      {data.attributes.Title}
+                    </Link>
                   </h3>
                   {!isMobileMatch && (
                     <div className={classes.postBody}>
@@ -263,10 +205,6 @@ const ListItem = ({ data }) => {
                 </div>
               </div>
               <div className={classes.contentFooter}>
-                <div className={classes.postWidgets}>
-                  {/*<Widget icon={"Visibility"} data={data.attributes.Views} />*/}
-                  {/*<Widget icon={"ThumbUp"} data={data.attributes.Likes} />*/}
-                </div>
                 <div className={classes.footerDate}>
                   {getTimeAgo(data.attributes.createdAt)}
                 </div>
