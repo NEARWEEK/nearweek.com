@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import { placeholder } from "../../../../Utils/placeholder";
 import Grid from "@mui/material/Grid";
+import Categories from "../Categories/Categories";
 
 const CardItem = ({ data }) => {
   const matchEdition = useMatch(`/content/:articleId`);
@@ -27,33 +28,8 @@ const CardItem = ({ data }) => {
   };
 
   const useStyles = makeStyles(() => ({
-    teaserBlock: {
-      display: "flex",
-      flex: "1",
-    },
-    postItem: {
-      display: "flex",
-      flexDirection: "column",
-      width: "100%",
-      marginBottom: "24px",
-    },
-    itemContainer: {
-      borderRadius: "12px",
-      display: "flex",
-      flexDirection: "column",
-    },
     postImage: {
       borderRadius: "12px 0 0 12px",
-    },
-    postContent: {
-      minHeight: "25%",
-      borderRadius: 12,
-      background: "#dddddb",
-      display: "grid",
-      gridTemplateRows: " 205px repeat(auto-fill, 103px) 41px",
-    },
-    contentBody: {
-      padding: "16px 16px 0 16px",
     },
     postCategory: {
       color: "#2013fb",
@@ -112,80 +88,6 @@ const CardItem = ({ data }) => {
   return (
     <Grid item xs={12} sm={6} md={3}>
       {data ? (
-        /*<div className={classes.teaserBlock}>
-          <div className={classes.postItem}>
-            <div className={classes.itemContainer}>
-              <div className={classes.postContent}>
-                <div className={classes.postImage}>
-                  {!isHyperlink() && (
-                    <Thumbnail
-                      data={data}
-                      url={`/content/${data.attributes.slug}`}
-                    />
-                  )}
-                  {isHyperlink() && (
-                    <Thumbnail data={data} url={`${data.attributes.LinkTo}`} />
-                  )}
-                </div>
-                <div className={classes.contentBody}>
-                  {data && (
-                    <Box display="inline-flex" className={classes.postCategory}>
-                      {data.attributes.categories.data ? (
-                        <>
-                          {data.attributes.categories.data.map(
-                            (item, index) => (
-                              <>
-                                {index > 0 &&
-                                  index <
-                                    data.attributes.categories.data.length &&
-                                  "•"}{" "}
-                                <Box
-                                  className={classes.categoryItem}
-                                  key={index}
-                                >
-                                  {item.attributes.Name}
-                                </Box>
-                              </>
-                            )
-                          )}
-                        </>
-                      ) : null}
-                    </Box>
-                  )}
-                  <h3 className={classes.postTitle}>
-                    {!isHyperlink() && (
-                      <Link
-                        color="inherit"
-                        href={`/content/${data.attributes.slug}`}
-                        underline="none"
-                      >
-                        {data.attributes.Title}
-                      </Link>
-                    )}
-                    {isHyperlink() && (
-                      <Link
-                        color="inherit"
-                        href={`${data.attributes.LinkTo}`}
-                        underline="none"
-                      >
-                        {data.attributes.Title}
-                      </Link>
-                    )}
-                  </h3>
-                </div>
-                <div className={classes.contentFooter}>
-                  <div className={classes.postWidgets}>
-                    {/!*<Widget icon={"Visibility"} data={data.attributes.Views} />*!/}
-                    {/!*<Widget icon={"ThumbUp"} data={data.attributes.Likes} />*!/}
-                  </div>
-                  <div className={classes.footerDate}>
-                    {getTimeAgo(data.attributes.createdAt)}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>*/
         <Card
           sx={{ maxWidth: 306, borderRadius: 2, backgroundColor: "#f2f2f2f2" }}
           elevation={0}
@@ -208,18 +110,7 @@ const CardItem = ({ data }) => {
           <CardContent>
             <Box display="inline-flex" className={classes.postCategory}>
               {data.attributes.categories.data ? (
-                <>
-                  {data.attributes.categories.data.map((item, index) => (
-                    <>
-                      {index > 0 &&
-                        index < data.attributes.categories.data.length &&
-                        "•"}{" "}
-                      <Box className={classes.categoryItem} key={index}>
-                        {item.attributes.Name}
-                      </Box>
-                    </>
-                  ))}
-                </>
+                <Categories data={data} />
               ) : null}
             </Box>
             <h3 className={classes.postTitle}>

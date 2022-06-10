@@ -7,7 +7,6 @@ import LazyLoad from "react-lazyload";
 
 const Thumbnail = ({ data, url }) => {
   const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
-  const Image = data?.attributes?.Image || null;
   const useStyles = makeStyles(() => ({
     img: {
       width: isMobileMatch ? "68px" : "362px",
@@ -16,6 +15,7 @@ const Thumbnail = ({ data, url }) => {
       objectFit: "cover",
     },
   }));
+  const Image = data?.attributes?.Image || null;
   let imageUrl = placeholder.getRandomPlaceholder("small");
   if (Image.data) {
     const { large, medium, small, thumbnail } = Image.data.attributes.formats;

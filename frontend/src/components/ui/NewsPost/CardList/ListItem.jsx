@@ -13,6 +13,7 @@ import { getTimeAgo } from "../../../../Utils/Utils";
 import PostDescription from "../../general/PostDescription/PostDescription";
 import { placeholder } from "../../../../Utils/placeholder";
 import LazyLoad from "react-lazyload";
+import Categories from "../Categories/Categories";
 
 const ListItem = ({ data }) => {
   const theme = useTheme();
@@ -160,27 +161,7 @@ const ListItem = ({ data }) => {
                   {data && (
                     <Box className={classes.postCategory}>
                       {data.attributes.categories.data ? (
-                        <>
-                          {data.attributes.categories.data.map(
-                            (item, index) => (
-                              <>
-                                {index > 0 &&
-                                  index <
-                                    data.attributes.categories.data.length &&
-                                  "•"}{" "}
-                                <Box
-                                  sx={{
-                                    marginLeft: index !== 0 ? 0.75 : 0,
-                                    marginRight: 0.75,
-                                  }}
-                                  key={index}
-                                >
-                                  {item.attributes.Name}
-                                </Box>
-                              </>
-                            )
-                          )}
-                        </>
+                        <Categories data={data} />
                       ) : null}
                     </Box>
                   )}
