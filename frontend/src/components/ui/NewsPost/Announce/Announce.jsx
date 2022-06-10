@@ -1,12 +1,17 @@
-import * as React from "react";
-import ImageMedium from "../Image/Medium/ImageMedium";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
+import {
+  Link,
+  Box,
+  Card,
+  CardMedia,
+  CardActionArea,
+  CardContent,
+} from "@mui/material";
 import { getTimeAgo } from "../../../../Utils/Utils";
-import Truncate from "react-truncate";
-import ReactMarkdown from "react-markdown";
 import { useStyles } from "./Announce.styles";
 import Categories from "../Categories/Categories";
+import { placeholder } from "../../../../Utils/placeholder";
+import LazyLoad from "react-lazyload";
+import PostDescription from "../../general/PostDescription/PostDescription";
 
 const Announce = ({ article }) => {
   const categories = article && article.attributes.categories.data;
@@ -19,63 +24,72 @@ const Announce = ({ article }) => {
     return includeHyperlink;
   };
 
+  let imageUrl = placeholder.getRandomPlaceholder("large");
+  if (article?.attributes.Image.data) {
+    imageUrl = article.attributes.Image.data.attributes.url;
+  }
+
   const classes = useStyles();
 
   return (
     <>
       {article ? (
-        <div className={classes.latestPost}>
-          <div className={classes.image}>
-            <ImageMedium data={article} />
-          </div>
-          <div className={classes.content}>
-            <div className={classes.postCategory}>
-              {article && (
-                <Box display="inline-flex">
-                  {article.attributes.categories.data ? (
-                    <Categories data={article} />
-                  ) : null}
-                </Box>
-              )}
-            </div>
-            <h2 className={classes.postTitle}>
-              {!isHyperlink() && (
+        <Card
+          sx={{ backgroundColor: "#dbd9d7", borderRadius: "12px" }}
+          elevation={0}
+        >
+          <CardActionArea
+            href={
+              !isHyperlink()
+                ? `/content/${article.attributes.slug}`
+                : `${article.attributes.LinkTo}`
+            }
+            target="_blank"
+          >
+            <LazyLoad height={362} once>
+              <CardMedia
+                component="img"
+                image={imageUrl}
+                className={classes.image}
+              />
+            </LazyLoad>
+          </CardActionArea>
+          <CardContent sx={{ p: 0 }}>
+            <div className={classes.content}>
+              <div className={classes.postCategory}>
+                {article && (
+                  <Box display="inline-flex">
+                    {article.attributes.categories.data ? (
+                      <Categories data={article} />
+                    ) : null}
+                  </Box>
+                )}
+              </div>
+              <h2 className={classes.postTitle}>
                 <Link
                   color="inherit"
-                  href={`/content/${article.attributes.slug}`}
+                  href={
+                    !isHyperlink()
+                      ? `/content/${article.attributes.slug}`
+                      : `${article.attributes.LinkTo}`
+                  }
                   underline="none"
                   target="_blank"
                 >
                   {article.attributes.Title}
                 </Link>
-              )}
-              {isHyperlink() && (
-                <Link
-                  color="inherit"
-                  href={`${article.attributes.LinkTo}`}
-                  underline="none"
-                  target="_blank"
-                >
-                  {article.attributes.Title}
-                </Link>
-              )}
-            </h2>
-            <p className={classes.postBody}>
-              <Truncate lines={2}>
-                <ReactMarkdown>{article.attributes.Body}</ReactMarkdown>
-              </Truncate>
-            </p>
-          </div>
-          <div className={classes.postFooter}>
-            <div className={classes.postWidgets}>
-              {/*<Widget icon={"Visibility"} data={article.attributes.Views} />*/}
-              {/*<Widget icon={"ThumbUp"} data={article.attributes.Likes} />*/}
+              </h2>
+              <div className={classes.postBody}>
+                <PostDescription body={article.attributes.Body} />
+              </div>
             </div>
-            <div className={classes.footerDate}>
-              {getTimeAgo(article.attributes.createdAt)}
+            <div className={classes.postFooter}>
+              <div className={classes.footerDate}>
+                {getTimeAgo(article.attributes.createdAt)}
+              </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       ) : null}
     </>
   );

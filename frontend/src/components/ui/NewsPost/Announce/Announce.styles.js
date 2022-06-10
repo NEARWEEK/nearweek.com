@@ -1,20 +1,14 @@
 import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
-  latestPost: {
-    marginBottom: "36px",
-    width: "100%",
-    background: "#dbd9d7",
-    borderRadius: "12px",
-    display: "grid",
-    gridTemplateRows: "419px repeat(auto-fill, 253px) 41px",
-  },
   content: {
     padding: "24px 24px 0",
   },
   image: {
-    borderRadius: "12px 12px 0 0",
-    width: "100%",
+    maxHeight: 419,
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: 284,
+    },
   },
   postCategory: {
     color: "#2013fb",
@@ -45,10 +39,9 @@ const styles = (theme) => ({
   },
   postFooter: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     padding: "12px 24px",
     borderTop: "1px solid #c8c6c6",
-    borderRadius: "0 0 12px 12px",
   },
   postWidgets: {
     display: "flex",
