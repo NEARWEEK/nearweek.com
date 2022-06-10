@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import * as Utils from "../Utils/Utils";
@@ -10,19 +10,20 @@ import {
   TextField,
   InputAdornment,
   FormControl,
+  Stack,
+  Paper,
+  Chip,
+  Divider,
+  Container,
 } from "@mui/material";
-import Announce from "../components/ui/NewsPost/Announce/Announce";
 import NewsGrid from "../components/ui/NewsPost/Grid/NewsGrid";
-import Stack from "@mui/material/Stack";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import EventIcon from "@mui/icons-material/Event";
-import Chip from "@mui/material/Chip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
-import Divider from "@mui/material/Divider";
 import { dateRangeFormat, MOBILE_WIDTH } from "../Utils/Utils";
 import moment from "moment";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -33,9 +34,13 @@ import GridVideo from "../components/ui/VideoPost/Grid/GridVideo";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
 import { useStyles } from "./News.styles";
-import Paper from "@mui/material/Paper";
 import SearchInput from "../components/ui/NewsPost/SearchInput/SearchInput";
 import CardGrid from "../components/ui/NewsPost/CardGrid/CardGrid";
+import Grid from "@mui/material/Grid";
+
+const Announce = lazy(() =>
+  import("../components/ui/NewsPost/Announce/Announce")
+);
 
 const NewsList = lazy(() =>
   import("../components/ui/NewsPost/CardList/NewsList")
@@ -406,31 +411,32 @@ const News = () => {
   return (
     <>
       <Navbar />
-
-      <Box className={classes.wrapper}>
-        <Box className={classes.container}>
+      <Box component="main">
+        <Container maxWidth={1440}>
           <FilterPanel searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           {!filterResult.data.length > 0 ? (
             <>
-              <Box className={classes.topContainer}>
-                <Box className={classes.blockColumn}>
-                  <Announce article={news.data[0]} />
-                </Box>
+              <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid item xs={12} sm={12} md={6}>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Announce article={news.data[0]} />
+                  </Suspense>
+                </Grid>
                 {!isMobileMatch && (
-                  <Box className={classes.blockColumn}>
+                  <Grid item xs={12} sm={12} md={6}>
                     {news.data.length > 0 && <NewsGrid news={getNews()} />}
-                  </Box>
+                  </Grid>
                 )}
                 {isMobileMatch && (
-                  <Box className={classes.blockColumn}>
+                  <Grid item xs={12} sm={12} md={6}>
                     {news.data.length > 0 && (
                       <Suspense fallback={<div>Loading...</div>}>
                         <NewsList show={4} />
                       </Suspense>
                     )}
-                  </Box>
+                  </Grid>
                 )}
-              </Box>
+              </Grid>
               <Box className={classes.latestArticles} sx={{ pb: 4 }}>
                 <Section title={"Latest Content"}>
                   {news.data.length > 0 && <CardGrid news={getLatestNews()} />}
@@ -441,28 +447,24 @@ const News = () => {
           ) : (
             <FilterResult filterResult={filterResult} />
           )}
-          <Box className={classes.wrapper}>
-            <Section title={"Events"} link={"/events"}>
-              <EventsGrid show={3} />
-            </Section>
-          </Box>
-        </Box>
-      </Box>
-      <Box style={{ backgroundColor: "#f7f7f7", marginTop: "36px" }}>
-        <Box className={classes.wrapper}>
-          <Box className={classes.container}>
+          <Section title={"Events"} link={"/events"}>
+            <EventsGrid show={3} />
+          </Section>
+        </Container>
+        <Box style={{ backgroundColor: "#f7f7f7", marginTop: "36px" }}>
+          <Container maxWidth={1440}>
             <SectionHeader title={"Latest Video"} link={"/video"} />
-          </Box>
+          </Container>
+          {!isMobileMatch ? (
+            <GridCarousel />
+          ) : (
+            <Container maxWidth={1440}>
+              <Box className={classes.videoGrid}>
+                <GridVideo />
+              </Box>
+            </Container>
+          )}
         </Box>
-        {!isMobileMatch ? (
-          <GridCarousel />
-        ) : (
-          <Box className={classes.wrapper}>
-            <Box className={classes.videoGrid}>
-              <GridVideo />
-            </Box>
-          </Box>
-        )}
       </Box>
     </>
   );
