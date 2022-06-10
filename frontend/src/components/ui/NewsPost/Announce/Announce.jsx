@@ -54,6 +54,7 @@ const Announce = ({ article }) => {
               />
             </LazyLoad>
           </CardActionArea>
+          <Box sx={{ flexGrow: 1 }} />
           <CardContent sx={{ p: 0 }}>
             <div className={classes.content}>
               <div className={classes.postCategory}>
@@ -80,7 +81,7 @@ const Announce = ({ article }) => {
                 </Link>
               </h2>
               <div className={classes.postBody}>
-                <PostDescription body={article.attributes.Body} />
+                <PostDescription maxLine={4} body={article.attributes.Body} />
               </div>
             </div>
             <div className={classes.postFooter}>
