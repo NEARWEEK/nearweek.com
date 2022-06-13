@@ -426,7 +426,7 @@ const News = () => {
           {!filterResult.data.length > 0 ? (
             <>
               <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-                <Grid item xs={12} sm={12} md={6}>
+                <Grid item sx={{ display: "flex" }} xs={12} sm={12} md={6}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <Announce article={news.data[0]} />
                   </Suspense>
@@ -460,7 +460,14 @@ const News = () => {
                     {news.data.length > 0 && (
                       <Grid container spacing={2} md={12}>
                         {getLatestNews().map((data, index) => (
-                          <Grid item md={3} sm={6} xs={12} key={index}>
+                          <Grid
+                            item
+                            md={3}
+                            sm={6}
+                            xs={12}
+                            key={index}
+                            sx={{ display: "flex" }}
+                          >
                             <CardItem data={data} />
                           </Grid>
                         ))}

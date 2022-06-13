@@ -63,7 +63,13 @@ const CardItem = ({ data }) => {
     <>
       {data ? (
         <Card
-          sx={{ borderRadius: 2, backgroundColor: "#f2f2f2f2" }}
+          sx={{
+            display: "flex",
+            flex: 1,
+            flexDirection: "column",
+            borderRadius: 2,
+            backgroundColor: "#f2f2f2f2",
+          }}
           elevation={0}
         >
           <CardActionArea
@@ -81,7 +87,7 @@ const CardItem = ({ data }) => {
               alt={data.attributes.Title}
             />
           </CardActionArea>
-          <CardContent>
+          <CardContent sx={{ pb: 0 }}>
             <Box display="inline-flex" className={classes.postCategory}>
               {categories ? <Categories data={data} /> : null}
             </Box>
@@ -101,7 +107,11 @@ const CardItem = ({ data }) => {
             </h3>
           </CardContent>
           <CardActions
-            sx={{ borderTop: "1px solid #ccc", justifyContent: "flex-end" }}
+            sx={{
+              borderTop: "1px solid #ccc",
+              justifyContent: "flex-end",
+              mt: "auto",
+            }}
           >
             <div className={classes.footerDate}>
               {getTimeAgo(data.attributes.createdAt)}
