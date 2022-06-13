@@ -7,6 +7,7 @@ import Thumbnail from "./Thumbnail/Thumbnail";
 import Widget from "../../general/Widget/Widget";
 import { getTimeAgo } from "../../../../Utils/Utils";
 import Categories from "../Categories/Categories";
+import Card from "@mui/material/Card";
 
 const GridItem = ({ data }) => {
   const matchEdition = useMatch(`/content/:articleId`);
@@ -21,15 +22,10 @@ const GridItem = ({ data }) => {
   };
 
   const useStyles = makeStyles(() => ({
-    teaserBlock: {
-      display: "flex",
-      flex: "1",
-    },
     postItem: {
       display: "flex",
       flexDirection: "column",
       width: "100%",
-      marginBottom: "24px",
     },
     itemContainer: {
       borderRadius: "12px",
@@ -101,7 +97,7 @@ const GridItem = ({ data }) => {
   return (
     <>
       {data ? (
-        <div className={classes.teaserBlock}>
+        <Card sx={{ display: "flex", flex: 1, mb: 3 }}>
           <div className={classes.postItem}>
             <div className={classes.itemContainer}>
               <div className={classes.postContent}>
@@ -159,7 +155,7 @@ const GridItem = ({ data }) => {
               </div>
             </div>
           </div>
-        </div>
+        </Card>
       ) : null}
     </>
   );
