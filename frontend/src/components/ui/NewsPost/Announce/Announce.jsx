@@ -35,7 +35,13 @@ const Announce = ({ article }) => {
     <>
       {article ? (
         <Card
-          sx={{ backgroundColor: "#dbd9d7", borderRadius: "12px" }}
+          sx={{
+            display: "flex",
+            flex: 1,
+            flexDirection: "column",
+            backgroundColor: "#dbd9d7",
+            borderRadius: "12px",
+          }}
           elevation={0}
         >
           <CardActionArea
