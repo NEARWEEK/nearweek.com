@@ -17,7 +17,8 @@ import Categories from "../Categories/Categories";
 
 const CardItem = ({ data }) => {
   const matchEdition = useMatch(`/content/:articleId`);
-  const categories = data.attributes.categories.data;
+  console.log(data);
+  const categories = data?.attributes?.categories?.data || [];
 
   const isHyperlink = () => {
     let includeHyperlink = false;
@@ -86,10 +87,10 @@ const CardItem = ({ data }) => {
   }
 
   return (
-    <Grid item xs={12} sm={6} md={3}>
+    <>
       {data ? (
         <Card
-          sx={{ maxWidth: 306, borderRadius: 2, backgroundColor: "#f2f2f2f2" }}
+          sx={{ borderRadius: 2, backgroundColor: "#f2f2f2f2" }}
           elevation={0}
         >
           <CardActionArea
@@ -104,36 +105,26 @@ const CardItem = ({ data }) => {
               component="img"
               height="209"
               image={imageUrl}
-              alt="green iguana"
+              alt={data.attributes.Title}
             />
           </CardActionArea>
           <CardContent>
             <Box display="inline-flex" className={classes.postCategory}>
-              {data.attributes.categories.data ? (
-                <Categories data={data} />
-              ) : null}
+              {categories ? <Categories data={data} /> : null}
             </Box>
             <h3 className={classes.postTitle}>
-              {!isHyperlink() && (
-                <Link
-                  color="inherit"
-                  href={`/content/${data.attributes.slug}`}
-                  underline="none"
-                  target="_blank"
-                >
-                  {data.attributes.Title}
-                </Link>
-              )}
-              {isHyperlink() && (
-                <Link
-                  color="inherit"
-                  href={`${data.attributes.LinkTo}`}
-                  underline="none"
-                  target="_blank"
-                >
-                  {data.attributes.Title}
-                </Link>
-              )}
+              <Link
+                color="inherit"
+                href={
+                  !isHyperlink()
+                    ? `/content/${data.attributes.slug}`
+                    : `${data.attributes.LinkTo}`
+                }
+                underline="none"
+                target="_blank"
+              >
+                {data.attributes.Title}
+              </Link>
             </h3>
           </CardContent>
           <CardActions
@@ -145,7 +136,7 @@ const CardItem = ({ data }) => {
           </CardActions>
         </Card>
       ) : null}
-    </Grid>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import Navbar from "../components/ui/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import * as Utils from "../Utils/Utils";
@@ -37,6 +37,7 @@ import { useStyles } from "./News.styles";
 import SearchInput from "../components/ui/NewsPost/SearchInput/SearchInput";
 import CardGrid from "../components/ui/NewsPost/CardGrid/CardGrid";
 import Grid from "@mui/material/Grid";
+import CardItem from "../components/ui/NewsPost/CardGrid/CardItem";
 
 const Announce = lazy(() =>
   import("../components/ui/NewsPost/Announce/Announce")
@@ -424,7 +425,15 @@ const News = () => {
                 </Grid>
                 {!isMobileMatch && (
                   <Grid item xs={12} sm={12} md={6}>
-                    {news.data.length > 0 && <NewsGrid news={getNews()} />}
+                    {news.data.length > 0 && (
+                      <Grid container spacing={2}>
+                        {getNews().map((data, index) => (
+                          <Grid item sm={4} md={6} key={index}>
+                            <CardItem data={data} />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    )}
                   </Grid>
                 )}
                 {isMobileMatch && (
@@ -439,7 +448,18 @@ const News = () => {
               </Grid>
               <Box className={classes.latestArticles} sx={{ pb: 4 }}>
                 <Section title={"Latest Content"}>
-                  {news.data.length > 0 && <CardGrid news={getLatestNews()} />}
+                  <Grid item xs={12} sm={12} md={12}>
+                    {news.data.length > 0 && (
+                      <Grid container spacing={2} md={12}>
+                        {getLatestNews().map((data, index) => (
+                          <Grid item md={3} sm={6} xs={12} key={index}>
+                            <CardItem data={data} />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    )}
+                  </Grid>
+                  {/* {news.data.length > 0 && <CardGrid news={getLatestNews()} />}*/}
                 </Section>
               </Box>
               <Subscription />
