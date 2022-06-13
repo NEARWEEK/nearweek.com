@@ -112,10 +112,10 @@ const UserNews = () => {
                   />
                 </Tabs>
                 <TabPanel value="submitted">
-                  <SubmittedNews data={submitted} />
+                  <SubmittedNews news={submitted} />
                 </TabPanel>
                 <TabPanel value="pending">
-                  <PendingNews data={pending} />
+                  <PendingNews news={pending} />
                 </TabPanel>
                 <TabPanel value="coinfeeds">
                   <CoinFeedsNews />

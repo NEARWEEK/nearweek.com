@@ -1,23 +1,18 @@
-import * as React from "react";
-import Link from "@mui/material/Link";
+import {
+  Link,
+  Box,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  CardActions,
+} from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import { useMatch } from "react-router";
-import Box from "@mui/material/Box";
-import Widget from "../../general/Widget/Widget";
 import { getTimeAgo } from "../../../../Utils/Utils";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import CardActions from "@mui/material/CardActions";
 import { placeholder } from "../../../../Utils/placeholder";
-import Grid from "@mui/material/Grid";
 import Categories from "../Categories/Categories";
 
 const CardItem = ({ data }) => {
-  const matchEdition = useMatch(`/content/:articleId`);
-  console.log(data);
   const categories = data?.attributes?.categories?.data || [];
 
   const isHyperlink = () => {
@@ -29,17 +24,10 @@ const CardItem = ({ data }) => {
   };
 
   const useStyles = makeStyles(() => ({
-    postImage: {
-      borderRadius: "12px 0 0 12px",
-    },
     postCategory: {
       color: "#2013fb",
       fontWeight: "bold",
       fontSize: "14px",
-    },
-    categoryItem: {
-      marginRight: "6px",
-      marginLeft: "6px",
     },
     postTitle: {
       fontSize: "20px",
@@ -57,21 +45,6 @@ const CardItem = ({ data }) => {
       fontSize: "16px",
       lineHeight: "24px",
       marginTop: 0,
-    },
-    contentFooter: {
-      display: "flex",
-      justifyContent: "space-between",
-      padding: "12px",
-      borderTop: "1px solid #c8c6c6",
-    },
-    postWidgets: {
-      display: "flex",
-      alignItems: "center",
-      color: "rgba(0, 0, 0, 0.54)",
-    },
-    postWidget: {
-      color: "#656364",
-      paddingRight: "24px",
     },
     footerDate: {
       fontSize: "12px",

@@ -1,10 +1,18 @@
-import React from "react";
-import CardGrid from "../NewsPost/CardGrid/CardGrid";
+import Grid from "@mui/material/Grid";
+import CardItem from "../NewsPost/CardGrid/CardItem";
 
-const PendingNews = ({ data }) => {
+const PendingNews = ({ news = [] }) => {
   return (
     <>
-      <CardGrid news={data} />
+      {news.length > 0 && (
+        <Grid container spacing={2} md={12}>
+          {news.map((data, index) => (
+            <Grid item md={3} sm={6} xs={12} key={index}>
+              <CardItem data={data} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </>
   );
 };
