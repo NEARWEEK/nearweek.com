@@ -12,6 +12,7 @@ import Categories from "../Categories/Categories";
 import { placeholder } from "../../../../Utils/placeholder";
 import LazyLoad from "react-lazyload";
 import PostDescription from "../../general/PostDescription/PostDescription";
+import CardActions from "@mui/material/CardActions";
 
 const Announce = ({ article }) => {
   const categories = article && article.attributes.categories.data;
@@ -60,42 +61,45 @@ const Announce = ({ article }) => {
               />
             </LazyLoad>
           </CardActionArea>
-          <Box sx={{ flexGrow: 1 }} />
-          <CardContent sx={{ p: 0 }}>
-            <div className={classes.content}>
-              <div className={classes.postCategory}>
-                {article && (
-                  <Box display="inline-flex">
-                    {article.attributes.categories.data ? (
-                      <Categories data={article} />
-                    ) : null}
-                  </Box>
-                )}
-              </div>
-              <h2 className={classes.postTitle}>
-                <Link
-                  color="inherit"
-                  href={
-                    !isHyperlink()
-                      ? `/content/${article.attributes.slug}`
-                      : `${article.attributes.LinkTo}`
-                  }
-                  underline="none"
-                  target="_blank"
-                >
-                  {article.attributes.Title}
-                </Link>
-              </h2>
-              <div className={classes.postBody}>
-                <PostDescription maxLine={4} body={article.attributes.Body} />
-              </div>
+          <CardContent sx={{ pb: 0 }}>
+            <div className={classes.postCategory}>
+              {article && (
+                <Box display="inline-flex">
+                  {article.attributes.categories.data && (
+                    <Categories data={article} />
+                  )}
+                </Box>
+              )}
             </div>
-            <div className={classes.postFooter}>
-              <div className={classes.footerDate}>
-                {getTimeAgo(article.attributes.createdAt)}
-              </div>
+            <h2 className={classes.postTitle}>
+              <Link
+                color="inherit"
+                href={
+                  !isHyperlink()
+                    ? `/content/${article.attributes.slug}`
+                    : `${article.attributes.LinkTo}`
+                }
+                underline="none"
+                target="_blank"
+              >
+                {article.attributes.Title}
+              </Link>
+            </h2>
+            <div className={classes.postBody}>
+              <PostDescription maxLine={4} body={article.attributes.Body} />
             </div>
           </CardContent>
+          <CardActions
+            sx={{
+              borderTop: "1px solid #ccc",
+              justifyContent: "flex-end",
+              mt: "auto",
+            }}
+          >
+            <div className={classes.footerDate}>
+              {getTimeAgo(article.attributes.createdAt)}
+            </div>
+          </CardActions>
         </Card>
       ) : null}
     </>

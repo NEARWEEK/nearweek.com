@@ -105,7 +105,7 @@ const CoinFeedsNews = () => {
                 />
               </LazyLoad>
             </CardActionArea>
-            <CardContent>
+            <CardContent sx={{ pb: 0 }}>
               <Box display="inline-flex" className={classes.postCategory}>
                 {feed.newsSiteName}
               </Box>

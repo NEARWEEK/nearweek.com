@@ -29,28 +29,10 @@ const styles = (theme) => ({
     WebkitBoxOrient: "vertical",
     WebkitLineClamp: 2,
   },
-  postNumber: {
-    color: "#2013fb",
-  },
   postBody: {
     fontSize: "18px",
     lineHeight: "24px",
     marginTop: 0,
-  },
-  postFooter: {
-    display: "flex",
-    justifyContent: "flex-end",
-    padding: "12px 24px",
-    borderTop: "1px solid #c8c6c6",
-  },
-  postWidgets: {
-    display: "flex",
-    alignItems: "center",
-    color: "rgba(0, 0, 0, 0.54)",
-  },
-  postWidget: {
-    color: "#656364",
-    paddingRight: "24px",
   },
   footerDate: {
     fontSize: "12px",
