@@ -15,8 +15,8 @@ import {
   Chip,
   Divider,
   Container,
+  Grid,
 } from "@mui/material";
-import NewsGrid from "../components/ui/NewsPost/Grid/NewsGrid";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -35,8 +35,6 @@ import SectionHeader from "../components/ui/general/Section/SectionHeader/Sectio
 import EventsGrid from "../components/ui/EventPost/Grid/EventsGrid";
 import { useStyles } from "./News.styles";
 import SearchInput from "../components/ui/NewsPost/SearchInput/SearchInput";
-import CardGrid from "../components/ui/NewsPost/CardGrid/CardGrid";
-import Grid from "@mui/material/Grid";
 import CardItem from "../components/ui/NewsPost/CardGrid/CardItem";
 
 const Announce = lazy(() =>
@@ -406,7 +404,17 @@ const News = () => {
   };
 
   const FilterResult = ({ filterResult }) => {
-    return <NewsGrid news={filterResult.data} />;
+    return (
+      <>
+        <Grid container spacing={2} md={12}>
+          {filterResult.data.map((data, index) => (
+            <Grid item md={3} sm={6} xs={12} key={index}>
+              <CardItem data={data} />
+            </Grid>
+          ))}
+        </Grid>
+      </>
+    );
   };
 
   return (
@@ -459,7 +467,6 @@ const News = () => {
                       </Grid>
                     )}
                   </Grid>
-                  {/* {news.data.length > 0 && <CardGrid news={getLatestNews()} />}*/}
                 </Section>
               </Box>
               <Subscription />

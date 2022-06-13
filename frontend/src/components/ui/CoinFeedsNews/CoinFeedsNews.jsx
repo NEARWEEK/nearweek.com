@@ -15,8 +15,6 @@ import CardActions from "@mui/material/CardActions";
 const CoinFeedsNews = () => {
   const [feedsNews, setFeedsNews] = useState([]);
 
-  console.log(feedsNews);
-
   useEffect(() => {
     (async () => {
       const { newsFeed } = await api.getCoinFeeds();
