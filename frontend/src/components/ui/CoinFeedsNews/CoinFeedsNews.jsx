@@ -11,6 +11,10 @@ import makeStyles from "@mui/styles/makeStyles";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import Loader from "../general/Loader/Loader";
 
 const CoinFeedsNews = () => {
   const [feedsNews, setFeedsNews] = useState([]);
@@ -67,11 +71,30 @@ const CoinFeedsNews = () => {
 
   const classes = useStyles();
 
+  if (!feedsNews.length) {
+    return <Loader />;
+  }
+
   return (
     <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
       {feedsNews.map((feed) => (
-        <Grid key={feed.title} item xs={2} sm={4} md={3}>
-          <Card elevation={0} sx={{ borderRadius: "12px" }}>
+        <Grid
+          sx={{ display: "flex" }}
+          key={feed.title}
+          item
+          xs={2}
+          sm={4}
+          md={3}
+        >
+          <Card
+            elevation={0}
+            sx={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              borderRadius: "12px",
+            }}
+          >
             <CardActionArea href={feed.url} target="_blank">
               <LazyLoad height={209} once>
                 <CardMedia
@@ -98,8 +121,20 @@ const CoinFeedsNews = () => {
               </h3>
             </CardContent>
             <CardActions
-              sx={{ borderTop: "1px solid #ccc", justifyContent: "flex-end" }}
+              sx={{
+                marginTop: "auto",
+                borderTop: "1px solid #ccc",
+                justifyContent: "space-between",
+              }}
             >
+              <div>
+                <IconButton aria-label="up">
+                  <ThumbUpIcon />
+                </IconButton>
+                <IconButton aria-label="down">
+                  <ThumbDownIcon />
+                </IconButton>
+              </div>
               <div className={classes.footerDate}>
                 {getTimeAgo(feed.publishDate)}
               </div>
