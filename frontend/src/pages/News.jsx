@@ -408,7 +408,14 @@ const News = () => {
       <>
         <Grid container spacing={2} md={12}>
           {filterResult.data.map((data, index) => (
-            <Grid item md={3} sm={6} xs={12} key={index}>
+            <Grid
+              item
+              sx={{ display: "flex" }}
+              md={3}
+              sm={6}
+              xs={12}
+              key={index}
+            >
               <CardItem data={data} />
             </Grid>
           ))}
