@@ -1,23 +1,6 @@
 import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
-  page: {
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#f7f7f7f7",
-  },
-  wrapper: {
-    marginLeft: 16,
-    marginRight: 16,
-  },
-  container: {
-    margin: "0 auto",
-    position: "relative",
-    "& p img": {
-      maxWidth: "100%",
-      maxHeight: "100%",
-    },
-  },
   tabs: {
     borderBottom: "1px solid #ccc",
   },
