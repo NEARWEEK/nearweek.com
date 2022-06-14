@@ -1,5 +1,5 @@
 import makeStyles from "@mui/styles/makeStyles";
-import { getPubDate, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
+import { getPubDate, getTimeAgo } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
 import PostDescription from "../../general/PostDescription/PostDescription";
 import {
@@ -20,41 +20,6 @@ const ListItem = ({ data }) => {
   const isMobileMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const matchEdition = useMatch(`/newsletter/:editionId`);
   const useStyles = makeStyles((theme) => ({
-    teaserBlock: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    postItem: {
-      display: "flex",
-      flexDirection: !isMobileMatch ? "row" : "column",
-      marginBottom: "24px",
-    },
-    itemContainer: {
-      borderRadius: "12px",
-      display: "grid",
-      gridTemplateColumns: !isMobileMatch ? "362px 1fr" : "100%",
-      flex: 1,
-      gridTemplateRows: "205px",
-      [theme.breakpoints.down("sm")]: {
-        gridTemplateRows: "145px",
-      },
-      flexDirection: !isMobileMatch ? "row" : "column",
-    },
-    bodyImage: {
-      borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
-    },
-    blockImage: {
-      borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
-      minHeight: 205,
-    },
-    postContent: {
-      width: "100%",
-      display: "flex",
-      flexDirection: "column",
-      flex: 1,
-      borderRadius: !isMobileMatch ? "0 12px  12px 0" : "12px",
-      background: matchEdition ? "#fff" : "#f7f7f7",
-    },
     contentBody: {
       display: "grid",
       gridTemplateColumns: isMobileMatch
@@ -130,7 +95,7 @@ const ListItem = ({ data }) => {
             width: "100%",
             borderRadius: "12px",
             mb: 3,
-            backgroundColor: "#f7f7f7",
+            backgroundColor: matchEdition ? "#fff" : "#f7f7f7",
           }}
           elevation={0}
         >
