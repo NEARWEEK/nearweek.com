@@ -18,28 +18,11 @@ import LazyLoad from "react-lazyload";
 
 const GridItem = ({ data }) => {
   const useStyles = makeStyles(() => ({
-    postCategory: {
-      color: "#2013fb",
-      fontWeight: "bold",
-      fontSize: "14px",
-    },
-    categoryItem: {
-      marginRight: "6px",
-      marginLeft: "6px",
-    },
     postTitle: {
       fontSize: "20px",
       marginTop: "6px",
       marginBottom: "6px",
       "& a": {},
-    },
-    postNumber: {
-      color: "#2013fb",
-    },
-    postBody: {
-      fontSize: "16px",
-      lineHeight: "24px",
-      marginTop: 0,
     },
     contentFooter: {
       flex: 1,
@@ -47,15 +30,6 @@ const GridItem = ({ data }) => {
       justifyContent: "flex-end",
       padding: "12px",
       borderTop: "1px solid #c8c6c6",
-    },
-    postWidgets: {
-      display: "flex",
-      alignItems: "center",
-      color: "rgba(0, 0, 0, 0.54)",
-    },
-    postWidget: {
-      color: "#656364",
-      paddingRight: "24px",
     },
     footerDate: {
       fontSize: "12px",

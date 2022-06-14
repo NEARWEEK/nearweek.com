@@ -3,7 +3,7 @@ import * as Utils from "../../../Utils/Utils";
 import Navbar from "../Navbar/Navbar";
 import { Box, Container } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
+import { getTimeAgo } from "../../../Utils/Utils";
 import { useMatch } from "react-router";
 import SectionHeader from "../general/Section/SectionHeader/SectionHeader";
 import ReactMarkdown from "react-markdown";
@@ -16,12 +16,14 @@ import EventsGrid from "./Grid/EventsGrid";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 import { useStyles } from "./EventPost.styles";
+import useTheme from "@mui/material/styles/useTheme";
 
 const NewsList = lazy(() => import("../NewsPost/CardList/NewsList"));
 
 const EventPost = () => {
   const [event, setEvent] = useState(null);
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const theme = useTheme();
+  const isMobileMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const match = useMatch(`/events/:eventId`);
   const classes = useStyles();
 
@@ -68,7 +70,7 @@ const EventPost = () => {
               />
             </Box>
           </Box>
-          <Box className={classes.container}>
+          <Box>
             <Box className={classes.headerBlock}>
               {!isMobileMatch && (
                 <Box className={classes.description}>
@@ -102,7 +104,7 @@ const EventPost = () => {
                 </h2>
                 <Box className={classes.headerBlockFooter}>
                   <Box display="inline-flex">
-                    <div className={classes.postWidgets}></div>
+                    <div className={classes.postWidgets} />
                   </Box>
                   <Box className={classes.postDate}>
                     <span>{getTimeAgo(event.attributes.createdAt)}</span>
@@ -144,7 +146,7 @@ const EventPost = () => {
               </Section>
             </Box>
             <Box>
-              <Section title={"Read also"} link={"/news"}>
+              <Section title={"Read also"} link={"/content"}>
                 <Suspense fallback={<div>Loading...</div>}>
                   <NewsList show={"all"} showMore={true} />
                 </Suspense>

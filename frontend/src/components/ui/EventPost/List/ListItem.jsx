@@ -1,15 +1,24 @@
-import React from "react";
-import Thumbnail from "../Image/Thumbnail/Thumbnail";
 import makeStyles from "@mui/styles/makeStyles";
-import { getEventDay, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
+import { getEventDay, getTimeAgo } from "../../../../Utils/Utils";
 import { useMatch } from "react-router";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { Box, Typography, Link } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Link,
+  Card,
+  CardMedia,
+  CardActionArea,
+  CardContent,
+  useMediaQuery,
+} from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PostDescription from "../../general/PostDescription/PostDescription";
+import useTheme from "@mui/material/styles/useTheme";
+import { placeholder } from "../../../../Utils/placeholder";
 
 const ListItem = ({ data }) => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const theme = useTheme();
+  const isMobileMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const matchEdition = useMatch(`/events/:eventId`);
   const useStyles = makeStyles(() => ({
     teaserBlock: {
@@ -19,7 +28,6 @@ const ListItem = ({ data }) => {
     postItem: {
       display: "flex",
       flexDirection: !isMobileMatch ? "row" : "column",
-      marginBottom: "24px",
     },
     bodyImage: {
       borderRadius: !isMobileMatch ? "12px 0 0 12px" : "12px 12px 0 0",
@@ -34,7 +42,7 @@ const ListItem = ({ data }) => {
       flexDirection: "column",
       flex: 1,
       borderRadius: !isMobileMatch ? "0 12px  12px 0" : "12px",
-      background: matchEdition ? "#fff" : "#f7f7f7",
+      // background: matchEdition ? "#fff" : "#f7f7f7",
     },
     contentBody: {
       padding: "16px 16px 0 16px",
@@ -85,18 +93,36 @@ const ListItem = ({ data }) => {
     },
   }));
 
+  let imageUrl = placeholder.getRandomPlaceholder("large");
+  if (data?.attributes.Image.data) {
+    imageUrl = `${data.attributes.Image.data.attributes.url}`;
+  }
+
   const classes = useStyles();
   return (
     <>
       {data ? (
-        <div className={classes.teaserBlock}>
+        <Card
+          sx={{
+            backgroundColor: matchEdition ? "#f7f7f7" : "#fff",
+            mb: 3,
+            borderRadius: "12px",
+          }}
+          elevation={0}
+        >
           <div className={classes.postItem}>
             {!isMobileMatch && (
               <div className={classes.blockImage}>
-                <Thumbnail
-                  data={data}
-                  url={`/events/${data.attributes.slug}`}
-                />
+                <CardActionArea
+                  href={`/events/${data.attributes.slug}`}
+                  target="_blank"
+                >
+                  <CardMedia
+                    component="img"
+                    image={imageUrl}
+                    sx={{ maxHeight: "205px", width: "362px" }}
+                  />
+                </CardActionArea>
               </div>
             )}
             <div className={classes.postContent}>
@@ -104,14 +130,20 @@ const ListItem = ({ data }) => {
                 {isMobileMatch && (
                   <div className="image-container">
                     <div className={classes.bodyImage}>
-                      <Thumbnail
-                        data={data}
-                        url={`/events/${data.attributes.slug}`}
-                      />
+                      <CardActionArea
+                        href={`/events/${data.attributes.slug}`}
+                        target="_blank"
+                      >
+                        <CardMedia
+                          component="img"
+                          image={imageUrl}
+                          sx={{ maxHeight: "205px", width: "362px" }}
+                        />
+                      </CardActionArea>
                     </div>
                   </div>
                 )}
-                <div className="body-container">
+                <CardContent sx={{ p: 0 }}>
                   <Box
                     display="flex"
                     justifyContent="space-between"
@@ -138,7 +170,7 @@ const ListItem = ({ data }) => {
                   {!isMobileMatch && (
                     <PostDescription body={data.attributes.Body} />
                   )}
-                </div>
+                </CardContent>
               </Box>
               <Box className={classes.contentFooter}>
                 <div className={classes.postWidgets}>
@@ -151,7 +183,7 @@ const ListItem = ({ data }) => {
               </Box>
             </div>
           </div>
-        </div>
+        </Card>
       ) : null}
     </>
   );

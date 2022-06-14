@@ -1,31 +1,37 @@
-import * as React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import ImageMedium from "../Image/Medium/ImageMedium";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
-import Widget from "../../general/Widget/Widget";
-import { getEventDay, getTimeAgo, MOBILE_WIDTH } from "../../../../Utils/Utils";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Typography from "@mui/material/Typography";
+import {
+  Link,
+  Box,
+  Card,
+  CardMedia,
+  CardActionArea,
+  Typography,
+  CardContent,
+  useMediaQuery,
+} from "@mui/material";
+import { getEventDay, getTimeAgo } from "../../../../Utils/Utils";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Truncate from "react-truncate";
 import ReactMarkdown from "react-markdown";
+import useTheme from "@mui/material/styles/useTheme";
+import { placeholder } from "../../../../Utils/placeholder";
 
 const Announce = ({ event }) => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
+  const theme = useTheme();
+  const isMobileMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const useStyles = makeStyles(() => ({
+  const useStyles = makeStyles((theme) => ({
     latestPost: {
       display: "flex",
       marginTop: !isMobileMatch ? 16 : 0,
-      marginBottom: 36,
+      marginBottom: theme.spacing(4),
       width: "100%",
       flexDirection: isMobileMatch ? "column" : "unset",
       background: "#dbd9d7",
       borderRadius: !isMobileMatch ? 12 : 0,
     },
     postContent: {
-      flex: 0.3,
+      flex: 0.4,
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
@@ -34,8 +40,7 @@ const Announce = ({ event }) => {
       padding: "24px 24px 0",
     },
     image: {
-      flex: 0.7,
-      borderRadius: !isMobileMatch ? "12px 0 0 12px" : 0,
+      flex: 0.6,
       width: "100%",
     },
     postHeader: {
@@ -47,9 +52,6 @@ const Announce = ({ event }) => {
       fontWeight: "900",
       marginTop: "12px",
       marginBottom: "12px",
-    },
-    postNumber: {
-      color: "#2013fb",
     },
     postBody: {
       fontSize: "18px",
@@ -76,21 +78,38 @@ const Announce = ({ event }) => {
       fontSize: "12px",
       color: "#656364",
     },
-    categoryItem: {
-      marginRight: "6px",
-      marginLeft: "6px",
-    },
   }));
+
+  let imageUrl = placeholder.getRandomPlaceholder("large");
+  if (event?.attributes?.Image.data) {
+    imageUrl = event.attributes.Image.data.attributes.url;
+  }
 
   const classes = useStyles();
   return (
     <>
       {event ? (
-        <div className={classes.latestPost}>
+        <Card
+          className={classes.latestPost}
+          elevation={0}
+          sx={{
+            backgroundColor: "#dbd9d7",
+            borderRadius: { sm: 0, md: "12px" },
+          }}
+        >
           <div className={classes.image}>
-            <ImageMedium data={event} />
+            <CardActionArea
+              href={`/events/${event.attributes.slug}`}
+              target="_blank"
+            >
+              <CardMedia
+                component="img"
+                image={imageUrl}
+                sx={{ maxHeight: "526px" }}
+              />
+            </CardActionArea>
           </div>
-          <div className={classes.postContent}>
+          <CardContent sx={{ p: 0 }} className={classes.postContent}>
             <Box className={classes.contentBody}>
               <div className={classes.postHeader}>
                 {event && (
@@ -134,8 +153,8 @@ const Announce = ({ event }) => {
                 {getTimeAgo(event.attributes.createdAt)}
               </div>
             </Box>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       ) : null}
     </>
   );
