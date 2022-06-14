@@ -22,16 +22,6 @@ const styles = (theme) => ({
     margin: "0 auto",
     width: "100%",
   },
-  wrapper: {
-    marginLeft: 16,
-    marginRight: 16,
-  },
-  container: {
-    maxWidth: "1376px",
-    minWidth: "200px",
-    margin: "0 auto",
-    position: "relative",
-  },
   headerBlock: {
     display: "flex",
     flexDirection: "column",
