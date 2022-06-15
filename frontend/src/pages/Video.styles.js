@@ -1,6 +1,4 @@
 import makeStyles from "@mui/styles/makeStyles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { MOBILE_WIDTH } from "../Utils/Utils";
 
 const styles = (theme) => ({
   container: {
@@ -49,7 +47,6 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    // marginBottom: useMediaQuery(`(max-width:${MOBILE_WIDTH})`) ? 16 : 36,
     marginBottom: {
       sm: 16,
       md: 36, // small laptop
