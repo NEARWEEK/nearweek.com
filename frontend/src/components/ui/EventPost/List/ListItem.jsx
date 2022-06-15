@@ -15,6 +15,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PostDescription from "../../general/PostDescription/PostDescription";
 import useTheme from "@mui/material/styles/useTheme";
 import { placeholder } from "../../../../Utils/placeholder";
+import LazyLoad from "react-lazyload";
 
 const ListItem = ({ data }) => {
   const theme = useTheme();
@@ -91,6 +92,11 @@ const ListItem = ({ data }) => {
       fontSize: "12px",
       color: "#656364",
     },
+    img: {
+      width: isMobileMatch ? "68px !important" : "362px !important",
+      height: isMobileMatch ? "68px !important" : "205px !important",
+      borderRadius: !isMobileMatch ? 0 : "12px",
+    },
   }));
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
@@ -117,11 +123,13 @@ const ListItem = ({ data }) => {
                   href={`/events/${data.attributes.slug}`}
                   target="_blank"
                 >
-                  <CardMedia
-                    component="img"
-                    image={imageUrl}
-                    sx={{ maxHeight: "205px", width: "362px" }}
-                  />
+                  <LazyLoad height={205} once>
+                    <CardMedia
+                      component="img"
+                      image={imageUrl}
+                      className={classes.img}
+                    />
+                  </LazyLoad>
                 </CardActionArea>
               </div>
             )}
