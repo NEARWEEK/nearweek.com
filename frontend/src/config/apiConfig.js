@@ -12,6 +12,30 @@ const options = {
   credentials: "include",
 };
 
+async function loadAudio() {
+  try {
+    const response = await fetch(
+      `/api/audio-space?populate=*&sort=id:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load editions", e);
+  }
+}
+
+async function loadAudioCategories() {
+  try {
+    const response = await fetch(
+      `/api/audio-categories?populate=*&sort=id:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load category", e);
+  }
+}
+
 async function loadEditions() {
   try {
     const response = await fetch(
@@ -277,5 +301,7 @@ export const apiConfig = {
   getStatsDAO: loadStatsDAO,
   getActiveDevelopers: loadActiveDevelopers,
   getCoinFeeds: loadCoinFeeds,
+  getAudio: loadAudio,
+  getAudioCategories: loadAudioCategories,
   upload: upload,
 };

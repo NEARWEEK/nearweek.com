@@ -11,7 +11,7 @@ const Categories = ({ data }) => {
               marginLeft: index !== 0 ? 0.75 : 0,
               marginRight: 0.75,
             }}
-            key={index}
+            key={item.attributes.Name}
           >
             {item.attributes.Name}
           </Box>

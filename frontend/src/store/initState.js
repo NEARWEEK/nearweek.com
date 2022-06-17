@@ -9,7 +9,6 @@ const _initState = {
   messages: null,
   entities: {
     near: null,
-    keyStore: null,
     wallet: null,
   },
 };

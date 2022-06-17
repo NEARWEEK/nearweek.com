@@ -15,6 +15,10 @@ export const menuItems = [
     name: "Ecosystem",
     link: "//www.awesomenear.com/",
   },
+  {
+    name: "Audio Space",
+    link: "/audio-space",
+  },
   /*  {
     name: "Events",
     link: "/events",

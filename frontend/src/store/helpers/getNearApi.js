@@ -4,13 +4,8 @@ import { nearConfig } from "../../config/nearConfig";
 const { networkId, nodeUrl, walletUrl } = nearConfig;
 
 export const getNearApi = async () => {
-  const keyStore = new keyStores.BrowserLocalStorageKeyStore();
-
   const near = await connect({
-    networkId,
-    nodeUrl,
-    walletUrl,
-    keyStore,
+    ...nearConfig,
   });
 
   const wallet = new WalletConnection(near, "nearweek");
@@ -18,6 +13,5 @@ export const getNearApi = async () => {
   return {
     near,
     wallet,
-    keyStore,
   };
 };

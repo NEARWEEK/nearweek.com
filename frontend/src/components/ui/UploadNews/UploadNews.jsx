@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SectionHeader from "../general/Section/SectionHeader/SectionHeader";
 import {
-  Typography,
   Box,
-  TextField,
   Button,
+  Chip,
   FormControl,
+  InputLabel,
   MenuItem,
   Select,
-  Chip,
-  InputLabel,
+  TextField,
+  Typography,
 } from "@mui/material";
 import ImageUploader from "react-images-upload";
 import { ErrorMessage } from "@hookform/error-message";
@@ -29,10 +29,14 @@ const UploadNews = () => {
   const [image, setImage] = useState([]);
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+
   const state = useStoreState((state) => state);
   const wallet = state.main.entities.wallet;
   const accountId = wallet.getAccountId();
-  const showMessage = useStoreActions((actions) => actions.main.showMessage);
+  const onSubmitArticle = useStoreActions(
+    (actions) => actions.main.onSubmitArticle
+  );
 
   const validationSchema = Yup.object().shape({
     Title: Yup.string().required("Title is required"),
@@ -85,15 +89,36 @@ const UploadNews = () => {
     formState: { errors },
   } = useForm(formOptions);
 
+  console.log(errors);
+
   const onSubmit = (data) => submitButtonHandler(data);
 
-  const onCancel = () =>
-    reset({
-      Title: "",
-      Body: "",
-      LinkTo: "",
-      categories: [],
-    });
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      onReset();
+    }
+  }, [isSubmitSuccessful]);
+
+  const onReset = () => {
+    reset(
+      {
+        Author: accountId,
+        Title: "",
+        Body: "",
+        LinkTo: "",
+        categories: [],
+      },
+      {
+        keepErrors: true,
+        keepDirty: true,
+        keepIsSubmitted: false,
+        keepTouched: false,
+        keepIsValid: false,
+        keepSubmitCount: false,
+      }
+    );
+    setIsSubmitSuccessful(false);
+  };
 
   const submitButtonHandler = async (data) => {
     setLoading(true);
@@ -102,15 +127,7 @@ const UploadNews = () => {
       data.Image = uploadImage.data[0].id;
     }
     data.categories = { ...data }.categories.map((category) => category.id);
-    const newArticle = await apiConfig.postArticle({ data });
-    showMessage("You successfully created your article!");
-    reset({
-      Title: "",
-      Body: "",
-      LinkTo: "",
-      categories: [],
-    });
-    setLoading(false);
+    await onSubmitArticle({ data, setLoading, setIsSubmitSuccessful });
   };
 
   const onDrop = async (image) => {
@@ -284,7 +301,7 @@ const UploadNews = () => {
         </Box>
       </Box>
       <Box className={classes.pageFooter}>
-        <Button onClick={onCancel}>Cancel</Button>
+        <Button onClick={onReset}>Cancel</Button>
         <LoadingButton
           variant="contained"
           disableElevation

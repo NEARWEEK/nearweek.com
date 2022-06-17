@@ -12,7 +12,7 @@ export const main = persist(
   },
   {
     storage: "localStorage",
-    allow: ["temporary", "error"],
+    allow: ["error"],
   }
 );
 
