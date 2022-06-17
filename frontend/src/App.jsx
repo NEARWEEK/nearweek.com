@@ -98,13 +98,14 @@ function App() {
             <Route exact path="events" element={<Events />} />
             <Route exact path="events/:eventId" element={<EventPost />} />
             <Route exact path="video" element={<Video />} />
-            <Route exact path="audio-space" element={<AudioSpace />} />
+            <Route exact path="audio-spaces" element={<AudioSpace />} />
             <Route exact path="video/:videoId" element={<VideoPost />} />
             <Route element={<ProtectedRoute />}>
               <Route exact path="user-profile" element={<UserProfile />} />
               <Route exact path="upload-news" element={<UploadNews />} />
               <Route exact path="user-news" element={<UserNews />} />
             </Route>
+            <Route exact path="*" element={<Home />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

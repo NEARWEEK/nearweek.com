@@ -17,7 +17,8 @@ import { placeholder } from "../Utils/placeholder";
 import CardActions from "@mui/material/CardActions";
 import Categories from "../components/ui/Audio/Categories/Categories";
 import LazyLoad from "react-lazyload";
-import CardActionArea from "@mui/material/CardActionArea";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import CardHeader from "@mui/material/CardHeader";
 
 const AudioSpace = () => {
   const [spaces, setSpaces] = useState([]);
@@ -106,6 +107,7 @@ const AudioSpace = () => {
                         flex: 1,
                         borderRadius: "12px",
                         backgroundColor: "#f7f7f7",
+                        border: "1px solid #f7f7f7",
                       }}
                       elevation={0}
                     >
@@ -123,7 +125,7 @@ const AudioSpace = () => {
                           flex: 1,
                         }}
                       >
-                        <CardContent sx={{ flex: "1 0 auto" }}>
+                        <CardContent sx={{ flex: "1 0 auto", pb: 0 }}>
                           <Typography component="div" variant="h5">
                             {item.attributes.Title}
                           </Typography>
