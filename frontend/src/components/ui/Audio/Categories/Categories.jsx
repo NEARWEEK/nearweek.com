@@ -17,6 +17,7 @@ const Categories = ({
           variant="outlined"
           sx={{
             backgroundColor: selected.includes("all") ? "#555" : "transparent",
+            color: selected.includes("all") ? "#fff" : "inherit",
           }}
           onClick={() => handleClick("all")}
           size={size}
@@ -33,6 +34,9 @@ const Categories = ({
                   backgroundColor: selected.includes(item.attributes.Name)
                     ? "#555"
                     : "transparent",
+                  color: selected.includes(item.attributes.Name)
+                    ? "#fff"
+                    : "inherit",
                 }}
                 onClick={() => handleClick(item.attributes.Name)}
                 size={size}

@@ -1,6 +1,6 @@
 import Navbar from "../components/ui/Navbar/Navbar";
 import { Box, Container } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { apiConfig as api } from "../config/apiConfig";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -16,6 +16,8 @@ import Grid from "@mui/material/Grid";
 import { placeholder } from "../Utils/placeholder";
 import CardActions from "@mui/material/CardActions";
 import Categories from "../components/ui/Audio/Categories/Categories";
+import LazyLoad from "react-lazyload";
+import CardActionArea from "@mui/material/CardActionArea";
 
 const AudioSpace = () => {
   const [spaces, setSpaces] = useState([]);
@@ -61,12 +63,18 @@ const AudioSpace = () => {
     setSelectedCategories(selected);
   };
 
+  const getImageUrl = (item) => {
+    return item.attributes.Image.data
+      ? item.attributes.Image.data.attributes.url
+      : placeholder.getRandomPlaceholder("large");
+  };
+
   return (
     <>
       <Navbar />
       <Box component="main">
         <Container>
-          <Box sx={{ borderBottom: "1px solid #ccc", mt: 6, mb: 2, p: 2 }}>
+          <Box sx={{ borderBottom: "1px solid #ccc", mt: 6, mb: 2, p: 1 }}>
             <Categories
               data={categories}
               all
@@ -85,22 +93,36 @@ const AudioSpace = () => {
                   );
                 })
                 .map((item, index) => (
-                  <Grid item md={3} key={index}>
+                  <Grid
+                    item
+                    md={3}
+                    key={index}
+                    sx={{ display: "flex", flexDirection: "column" }}
+                  >
                     <Card
                       sx={{
                         display: "flex",
                         flexDirection: "column",
+                        flex: 1,
                         borderRadius: "12px",
                         backgroundColor: "#f7f7f7",
                       }}
                       elevation={0}
                     >
-                      <CardMedia
-                        component="img"
-                        image={placeholder.getRandomPlaceholder("large")}
-                        sx={{ height: 205 }}
-                      />
-                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <LazyLoad height={205} once>
+                        <CardMedia
+                          component="img"
+                          image={getImageUrl(item)}
+                          sx={{ height: 205 }}
+                        />
+                      </LazyLoad>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          flex: 1,
+                        }}
+                      >
                         <CardContent sx={{ flex: "1 0 auto" }}>
                           <Typography component="div" variant="h5">
                             {item.attributes.Title}
@@ -114,7 +136,7 @@ const AudioSpace = () => {
                           </Typography>
                           <Categories data={item.attributes.categories.data} />
                         </CardContent>
-                        <CardActions>
+                        <CardActions sx={{ mt: "auto" }}>
                           <audio
                             controls
                             preload="none"
