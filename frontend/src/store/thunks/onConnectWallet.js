@@ -9,11 +9,12 @@ export const getRoute = {
 };
 
 export const onConnectWallet = thunk(async (actions, _, helpers) => {
-  const store = helpers.getStoreState();
-  const wallet = store.main.entities.wallet;
+  const state = helpers.getStoreState();
+  const wallet = state.main.entities.wallet;
   const redirectAction = "redirect-from-wallet";
 
-  wallet.requestSignIn({
+  await wallet.requestSignIn({
+    contractId: process.env.REACT_APP_CONTRACT_ID,
     successUrl: getRoute.callbackUrl({ redirectAction }),
     failureUrl: getRoute.callbackUrl({
       redirectAction,

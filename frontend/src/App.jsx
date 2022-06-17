@@ -22,6 +22,7 @@ import { Helmet } from "react-helmet";
 import { Initializer } from "./providers/Initializer/Initializer";
 import UserNews from "./pages/UserNews";
 import ReactGA from "react-ga4";
+import AudioSpace from "./pages/AudioSpace";
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
@@ -97,6 +98,7 @@ function App() {
             <Route exact path="events" element={<Events />} />
             <Route exact path="events/:eventId" element={<EventPost />} />
             <Route exact path="video" element={<Video />} />
+            <Route exact path="audio-space" element={<AudioSpace />} />
             <Route exact path="video/:videoId" element={<VideoPost />} />
             <Route element={<ProtectedRoute />}>
               <Route exact path="user-profile" element={<UserProfile />} />

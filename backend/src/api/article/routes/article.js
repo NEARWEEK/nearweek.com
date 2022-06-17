@@ -25,6 +25,9 @@ module.exports = {
       method: "POST",
       path: "/article",
       handler: "article.create",
+      config: {
+        policies: ["global::is-nearUser"],
+      },
     },
     {
       method: "GET",

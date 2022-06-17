@@ -7,13 +7,14 @@ export const onInitApp = thunk(async (actions, payload, helpers) => {
   global.Buffer = Buffer;
   const { history, setInit } = payload;
   const { redirectAction } = qs.parse(history.location.search);
-
+  const onRedirectFromWallet = actions.onRedirectFromWallet;
   const setNearApi = actions.setNearApi;
 
-  setNearApi(await getNearApi());
+  const nearApi = await getNearApi();
+  setNearApi(nearApi);
 
   if (redirectAction && redirectAction === "redirect-from-wallet")
-    history.replace(history.location.pathname);
+    onRedirectFromWallet({ history });
 
   setInit(true);
 });
