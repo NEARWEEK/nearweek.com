@@ -17,6 +17,10 @@ const AudioControls = ({ isPlaying, audioRef, onPlayPauseClick }) => {
 
   const [trackProgress, setTrackProgress] = useState(0);
   const [volume, setVolume] = useState(audioRef.current.volume * 100);
+  const [volumeSlider, openVolumeSlider] = useState(false);
+  const toggleVolumeSlider = (value) => () => {
+    openVolumeSlider(value);
+  };
   const { duration } = audioRef.current;
 
   const handleProgressChange = (value) => {
@@ -64,63 +68,79 @@ const AudioControls = ({ isPlaying, audioRef, onPlayPauseClick }) => {
   useEffect(() => {}, []);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flex: 1,
-        alignItems: "center",
-        pl: 1,
-        pb: 1,
-      }}
-    >
-      <IconButton
-        size="small"
-        aria-label="play/pause"
-        onClick={() => onPlayPauseClick(!isPlaying)}
+    <Grid container sx={{ display: "flex", alignItems: "center" }}>
+      <Grid item>
+        <IconButton
+          size="small"
+          aria-label="play/pause"
+          onClick={() => onPlayPauseClick(!isPlaying)}
+        >
+          {!isPlaying ? (
+            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+          ) : (
+            <PauseIcon sx={{ height: 38, width: 38 }} />
+          )}
+        </IconButton>
+      </Grid>
+      <Grid
+        item
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flex: 1,
+        }}
       >
-        {!isPlaying ? (
-          <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-        ) : (
-          <PauseIcon sx={{ height: 38, width: 38 }} />
-        )}
-      </IconButton>
-      <Typography variant="span" sx={{ fontSize: 12, mr: 1 }}>
-        {audioRef.current.currentTime
-          ? formatDuration(audioRef.current.currentTime)
-          : "00.00"}
-        / {duration ? formatDuration(duration) : "00.00"}
-      </Typography>
-      <Slider
-        size="small"
-        min={0}
-        max={duration ? duration : `${duration}`}
-        sx={{ flex: 1 }}
-        value={trackProgress}
-        onChange={(e) => handleProgressChange(e.target.value)}
-      />
-
-      <IconButton
-        size="small"
-        onMouseUp={() => console.log}
-        onMouseLeave={() => console.log}
-      >
-        <VolumeUpIcon />
-      </IconButton>
-      <Paper sx={{ flex: "0 0 auto", height: 56, p: "10px 0" }}>
+        <Typography variant="span" sx={{ fontSize: 12, mr: 2 }}>
+          {audioRef.current.currentTime
+            ? formatDuration(audioRef.current.currentTime)
+            : "00.00"}
+          / {duration ? formatDuration(duration) : "00.00"}
+        </Typography>
         <Slider
-          orientation="vertical"
           size="small"
           min={0}
-          max={100}
-          aria-labelledby="volume-control"
-          value={volume}
-          onChange={(e) => handleVolumeChange(e.target.value)}
+          max={duration ? duration : `${duration}`}
+          sx={{ flex: 1, mr: 1 }}
+          value={trackProgress}
+          onChange={(e) => handleProgressChange(e.target.value)}
         />
-      </Paper>
-      <IconButton size="small">
-        <MoreVertIcon />
-      </IconButton>
-    </Box>
+      </Grid>
+      <Grid
+        item
+        sx={{ flex: "0 0 auto", position: "relative" }}
+        onMouseEnter={toggleVolumeSlider(true)}
+        onMouseLeave={toggleVolumeSlider(false)}
+      >
+        <VolumeUpIcon />
+        {volumeSlider && (
+          <Paper
+            sx={{
+              flex: "1 1 auto",
+              height: 56,
+              top: "-100%",
+              zIndex: 10,
+              p: "10px 0",
+              position: "absolute",
+            }}
+          >
+            <Slider
+              orientation="vertical"
+              size="small"
+              min={0}
+              max={100}
+              aria-labelledby="volume-control"
+              value={volume}
+              onChange={(e) => handleVolumeChange(e.target.value)}
+            />
+          </Paper>
+        )}
+      </Grid>
+      <Grid item>
+        <IconButton size="small">
+          <MoreVertIcon />
+        </IconButton>
+      </Grid>
+    </Grid>
   );
 };
 

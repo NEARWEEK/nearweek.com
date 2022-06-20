@@ -19,9 +19,6 @@ const AudioSpacesPlayer = ({ item }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useNoRenderRef(item.audioSrc);
 
-  // Destructure for conciseness
-  const { duration } = audioRef.current;
-
   useEffect(() => {
     if (isPlaying) {
       audioRef.current.play();
@@ -78,20 +75,12 @@ const AudioSpacesPlayer = ({ item }) => {
               </Typography>
               <Categories data={item.attributes.categories.data} />
             </CardContent>
-            <Box sx={{ display: "flex" }}>
+            <CardActions sx={{ mt: "auto" }}>
               <AudioControls
                 isPlaying={isPlaying}
                 audioRef={audioRef}
                 onPlayPauseClick={setIsPlaying}
               />
-            </Box>
-            <CardActions sx={{ mt: "auto" }}>
-              <audio controls preload="none" style={{ width: "100%" }}>
-                <source
-                  src={item.attributes.File.data.attributes.url}
-                  type={item.attributes.File.data.attributes.mime}
-                />
-              </audio>
             </CardActions>
           </Box>
         </Card>
