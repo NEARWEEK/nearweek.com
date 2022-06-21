@@ -13,8 +13,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
 import { Menu } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ContentCopy from "@mui/icons-material/ContentCopy";
 
-const AudioControls = ({ isPlaying, audioRef, onPlayPauseClick }) => {
+const AudioControls = ({ data, isPlaying, audioRef, onPlayPauseClick }) => {
   const intervalRef = useRef();
 
   const [trackProgress, setTrackProgress] = useState(0);
@@ -157,9 +161,23 @@ const AudioControls = ({ isPlaying, audioRef, onPlayPauseClick }) => {
             "aria-labelledby": "menu-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Copy link</MenuItem>
-          <MenuItem onClick={handleClose}>Copy link</MenuItem>
-          <MenuItem onClick={handleClose}>Copy link</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <ContentCopy fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Copy link</ListItemText>
+          </MenuItem>
+          <Divider />
+          {data.attributes.ext_links.map((item) => (
+            <MenuItem
+              component="a"
+              key={item.Name}
+              href={item.link_to}
+              target="_blank"
+            >
+              Listen on {item.Name}
+            </MenuItem>
+          ))}
         </Menu>
       </Grid>
     </Grid>
