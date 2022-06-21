@@ -11,6 +11,8 @@ import Paper from "@mui/material/Paper";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import { Menu } from "@mui/material";
 
 const AudioControls = ({ isPlaying, audioRef, onPlayPauseClick }) => {
   const intervalRef = useRef();
@@ -65,7 +67,14 @@ const AudioControls = ({ isPlaying, audioRef, onPlayPauseClick }) => {
     }
   }, [isPlaying]);
 
-  useEffect(() => {}, []);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Grid container sx={{ display: "flex", alignItems: "center" }}>
@@ -136,9 +145,22 @@ const AudioControls = ({ isPlaying, audioRef, onPlayPauseClick }) => {
         )}
       </Grid>
       <Grid item>
-        <IconButton size="small">
+        <IconButton size="small" id="menu-button" onClick={handleMenuClick}>
           <MoreVertIcon />
         </IconButton>
+        <Menu
+          id="menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "menu-button",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Copy link</MenuItem>
+          <MenuItem onClick={handleClose}>Copy link</MenuItem>
+          <MenuItem onClick={handleClose}>Copy link</MenuItem>
+        </Menu>
       </Grid>
     </Grid>
   );
