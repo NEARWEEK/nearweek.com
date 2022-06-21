@@ -39,6 +39,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::audio-category.audio-category"
+    },
+    "ext_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ext-links.external-links"
     }
   }
 }

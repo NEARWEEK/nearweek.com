@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_ext_links_external_links",
+  "info": {
+    "displayName": "External links",
+    "icon": "external-link-square-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "link_to": {
+      "type": "string",
+      "required": true
+    },
+    "Name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

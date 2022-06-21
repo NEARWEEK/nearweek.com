@@ -77,6 +77,7 @@ const AudioSpacesPlayer = ({ item }) => {
             </CardContent>
             <CardActions sx={{ mt: "auto" }}>
               <AudioControls
+                data={item}
                 isPlaying={isPlaying}
                 audioRef={audioRef}
                 onPlayPauseClick={setIsPlaying}
