@@ -16,7 +16,7 @@ export const menuItems = [
     link: "//www.awesomenear.com/",
   },
   {
-    name: "Audio Spaces",
+    name: "Audio",
     link: "/audio-spaces",
   },
   /*  {
