@@ -2,12 +2,17 @@ import Navbar from "../components/ui/Navbar/Navbar";
 import { Box, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { apiConfig as api } from "../config/apiConfig";
-
-import useTheme from "@mui/material/styles/useTheme";
 import Grid from "@mui/material/Grid";
 import { placeholder } from "../Utils/placeholder";
 import Categories from "../components/ui/Audio/Categories/Categories";
 import AudioSpacesPlayer from "../components/ui/Audio/AudioSpacesPlayer/AudioSpacesPlayer";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
+import EventIcon from "@mui/icons-material/Event";
+import TabPanel from "@mui/lab/TabPanel";
+import TabContext from "@mui/lab/TabContext";
+import Typography from "@mui/material/Typography";
 
 const AudioSpace = () => {
   const [spaces, setSpaces] = useState([]);
@@ -27,6 +32,12 @@ const AudioSpace = () => {
     })();
     return () => setSpaces([]);
   }, []);
+
+  const [tabValue, setTabValue] = useState("0");
+
+  const handleChangeTab = (event, newValue) => {
+    setTabValue(newValue);
+  };
 
   const getImageUrl = (item) => {
     return item.attributes.Image.data
@@ -67,35 +78,59 @@ const AudioSpace = () => {
       <Navbar />
       <Box component="main">
         <Container>
-          <Box sx={{ borderBottom: "1px solid #ccc", mt: 6, mb: 2, p: 1 }}>
-            <Categories
-              data={categories}
-              all
-              selected={selectedCategories}
-              size="big"
-              handleClick={handleFilter}
-            />
-          </Box>
-          <Grid container spacing={2} columns={{ md: 12 }}>
-            {spaces.length > 0 &&
-              spaces
-                .filter((f) => {
-                  if (selectedCategories.includes("all")) return f;
-                  return f.attributes.categories.data.find((category) =>
-                    selectedCategories.includes(category.attributes.Name)
-                  );
-                })
-                .map((item, index) => (
-                  <Grid
-                    item
-                    md={3}
-                    key={index}
-                    sx={{ display: "flex", flexDirection: "column" }}
-                  >
-                    <AudioSpacesPlayer item={item} />
-                  </Grid>
-                ))}
-          </Grid>
+          <TabContext value={tabValue}>
+            <Tabs value={tabValue} onChange={handleChangeTab} aria-label="tabs">
+              <Tab icon={<LibraryMusicIcon />} label="AUDIO" value="0" />
+              <Tab icon={<EventIcon />} label="SCHEDULE" value="1" />
+            </Tabs>
+            <TabPanel value="0" sx={{ p: 0 }}>
+              <Box>
+                <Box
+                  sx={{ borderBottom: "1px solid #ccc", mt: 1, mb: 2, p: 1 }}
+                >
+                  <Categories
+                    data={categories}
+                    all
+                    selected={selectedCategories}
+                    size="big"
+                    handleClick={handleFilter}
+                  />
+                </Box>
+                <Grid container spacing={2} columns={{ md: 12 }}>
+                  {spaces.length > 0 &&
+                    spaces
+                      .filter((f) => {
+                        if (selectedCategories.includes("all")) return f;
+                        return f.attributes.categories.data.find((category) =>
+                          selectedCategories.includes(category.attributes.Name)
+                        );
+                      })
+                      .map((item, index) => (
+                        <Grid
+                          item
+                          md={3}
+                          key={index}
+                          sx={{ display: "flex", flexDirection: "column" }}
+                        >
+                          <AudioSpacesPlayer item={item} />
+                        </Grid>
+                      ))}
+                </Grid>
+              </Box>
+            </TabPanel>
+            <TabPanel value="1">
+              <Box>
+                <iframe
+                  src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FKiev&title=Schedule&hl=en_GB&src=dGVzdG5lYXJ3ZWVrQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=dWsudWtyYWluaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043"
+                  style={{ border: 0 }}
+                  width="100%"
+                  height="600"
+                  frameBorder="0"
+                  scrolling="no"
+                />
+              </Box>
+            </TabPanel>
+          </TabContext>
         </Container>
       </Box>
     </>
