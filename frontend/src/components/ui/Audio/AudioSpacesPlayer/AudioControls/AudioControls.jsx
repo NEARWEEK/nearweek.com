@@ -22,7 +22,7 @@ const AudioControls = ({ data, isPlaying, audioRef, onPlayPauseClick }) => {
   const intervalRef = useRef();
 
   const [trackProgress, setTrackProgress] = useState(0);
-  const [volume, setVolume] = useState(audioRef.current.volume * 100);
+  const [volume, setVolume] = useState((audioRef.current.volume * 100) / 2);
   const [volumeSlider, openVolumeSlider] = useState(false);
   const toggleVolumeSlider = (value) => () => {
     openVolumeSlider(value);
@@ -34,8 +34,6 @@ const AudioControls = ({ data, isPlaying, audioRef, onPlayPauseClick }) => {
     audioRef.current.currentTime = value;
     setTrackProgress(audioRef.current.currentTime);
   };
-
-  console.log(audioRef.current.volume, volume);
 
   const handleVolumeChange = (value) => {
     if (audioRef.current) {
@@ -143,6 +141,7 @@ const AudioControls = ({ data, isPlaying, audioRef, onPlayPauseClick }) => {
               max={100}
               aria-labelledby="volume-control"
               value={volume}
+              defaultValue={20}
               onChange={(e) => handleVolumeChange(e.target.value)}
             />
           </Paper>
