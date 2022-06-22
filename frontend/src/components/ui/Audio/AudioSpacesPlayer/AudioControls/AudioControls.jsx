@@ -110,7 +110,7 @@ const AudioControls = ({ data, isPlaying, audioRef, onPlayPauseClick }) => {
         <Slider
           size="small"
           min={0}
-          max={duration ? duration : `${duration}`}
+          max={duration ? duration : 0}
           sx={{ flex: 1, mr: 1 }}
           value={trackProgress}
           onChange={(e) => handleProgressChange(e.target.value)}
