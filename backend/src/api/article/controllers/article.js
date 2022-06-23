@@ -113,24 +113,25 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
   },
 
   async getWidget() {
-    const articles = await strapi.entityService.findMany(
-      "api::article.article",
-      {
-        populate: "*",
-      }
-    );
+    try {
+      const articles = await strapi.entityService.findMany(
+        "api::article.article",
+        {
+          populate: "*",
+        }
+      );
 
-    const getTime = (timestamp) => {
-      return moment(timestamp).fromNow();
-    };
+      const getTime = (timestamp) => {
+        return moment(timestamp).fromNow();
+      };
 
-    const joinArray = (array, separator = "") => {
-      return array.join(separator);
-    };
+      const joinArray = (array, separator = "") => {
+        return array.join(separator);
+      };
 
-    const widget = articles
-      .map(
-        (article) => `<div class="box">
+      const widget = articles
+        .map(
+          (article) => `<div class="box">
                        <div class="box-header">
                           <div class="categories">
                             ${joinArray(
@@ -162,12 +163,15 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
                             <hr class="line">
                         </div>
                     </div>`
-      )
-      .splice(0, 5);
+        )
+        .splice(0, 5);
 
-    return `<div class="container">
+      return `<div class="container">
                 <div class="list">${joinArray(widget)}</div>
             </div>`;
+    } catch (e) {
+      return `<div>OOOps! Something went wrong...</div>`;
+    }
   },
 
   async findUnpublished(ctx, populate) {
