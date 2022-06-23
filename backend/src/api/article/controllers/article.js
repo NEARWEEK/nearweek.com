@@ -6,6 +6,7 @@
 
 const { createCoreController } = require("@strapi/strapi").factories;
 const { sanitizeEntity } = require("@strapi/utils");
+const moment = require("moment");
 
 module.exports = createCoreController("api::article.article", ({ strapi }) => ({
   async like(ctx) {
@@ -111,21 +112,62 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
     return this.transformResponse(sanitizedEntity, { ids: ids });
   },
 
-  async getWidget(ctx, populate) {
-    // some custom logic here
-    ctx.query = { ...ctx.query, local: "en" };
+  async getWidget() {
+    const articles = await strapi.entityService.findMany(
+      "api::article.article",
+      {
+        populate: "*",
+      }
+    );
 
-    // Calling the default core action
-    const { data, meta } = await super.find(ctx, { populate });
+    const getTime = (timestamp) => {
+      return moment(timestamp).fromNow();
+    };
 
-    //console.log("data", data[0].attributes.Images);
+    const joinArray = (array, separator = "") => {
+      return array.join(separator);
+    };
 
-    // some more custom logic
-    meta.date = Date.now();
+    const widget = articles
+      .map(
+        (article) => `<div class="box">
+                       <div class="box-header">
+                          <div class="categories">
+                            ${joinArray(
+                              article.categories.map(
+                                (category, index) =>
+                                  `<div class="category ${
+                                    index === 0 ? "first" : ""
+                                  }">${category.Name}</div>`
+                              ),
+                              "·"
+                            )}
+                          </div>
+                       </div>
+                       <a class="link" href="${
+                         article.LinkTo
+                           ? article.LinkTo
+                           : `/content/${article.slug}`
+                       }" target="_blank">
+                            <h6 class="title">${article.Title}</h6>
+                        </a>
+                        <div class="box-footer">
+                            <div class="footer-content">
+                                <div>NEARWEEK</div>
+                                <div class="splitter">·</div>
+                                <div>${getTime(article.createdAt)}</div>
+                            </div>
+                        </div>
+                        <div class="box-splitter">
+                            <hr class="line">
+                        </div>
+                    </div>`
+      )
+      .splice(0, 5);
 
-    return `<ul class="list">
-<li>Widget work</li>
-</ul>`;
+    return `<div class="container">
+                <div class="list">${joinArray(widget)}</div>
+            </div>`;
   },
 
   async findUnpublished(ctx, populate) {
