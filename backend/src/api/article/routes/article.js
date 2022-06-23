@@ -46,6 +46,14 @@ module.exports = {
       },
     },
     {
+      method: "GET",
+      path: "/feeds/widget",
+      handler: "article.getWidget",
+      config: {
+        policies: [],
+      },
+    },
+    {
       method: "PUT",
       path: "/news/:id/like",
       handler: "article.like",

@@ -111,6 +111,23 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
     return this.transformResponse(sanitizedEntity, { ids: ids });
   },
 
+  async getWidget(ctx, populate) {
+    // some custom logic here
+    ctx.query = { ...ctx.query, local: "en" };
+
+    // Calling the default core action
+    const { data, meta } = await super.find(ctx, { populate });
+
+    //console.log("data", data[0].attributes.Images);
+
+    // some more custom logic
+    meta.date = Date.now();
+
+    return `<ul class="list">
+<li>Widget work</li>
+</ul>`;
+  },
+
   async findUnpublished(ctx, populate) {
     const { author } = ctx.request.query;
 
