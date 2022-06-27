@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_occupations",
+  "info": {
+    "singularName": "job-occupation",
+    "pluralName": "job-occupations",
+    "displayName": "Job Occupation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

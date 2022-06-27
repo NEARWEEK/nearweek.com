@@ -1,7 +1,7 @@
 var wrgsv = {
   idBox: "wrgsv",
-  url_wiget: "http://5.161.56.222/api/feeds/widget",
-  url_style: "http://5.161.56.222/css/widget.css",
+  url_wiget: "http://127.0.0.1:1337/api/feeds/widget",
+  url_style: "http://127.0.0.1:1337/css/widget.css",
   init: function (id) {
     if (!id) {
       id = this.idBox;
