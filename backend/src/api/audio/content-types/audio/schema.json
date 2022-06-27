@@ -44,6 +44,9 @@
       "type": "component",
       "repeatable": true,
       "component": "ext-links.external-links"
+    },
+    "frame": {
+      "type": "richtext"
     }
   }
 }

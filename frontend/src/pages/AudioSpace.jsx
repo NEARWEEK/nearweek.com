@@ -112,7 +112,17 @@ const AudioSpace = () => {
                           key={index}
                           sx={{ display: "flex", flexDirection: "column" }}
                         >
-                          <AudioSpacesPlayer item={item} />
+                          {!item.attributes.frame && (
+                            <AudioSpacesPlayer item={item} />
+                          )}
+                          {item.attributes.frame && (
+                            <Box
+                              sx={{ flex: 1 }}
+                              dangerouslySetInnerHTML={{
+                                __html: item.attributes.frame,
+                              }}
+                            />
+                          )}
                         </Grid>
                       ))}
                 </Grid>

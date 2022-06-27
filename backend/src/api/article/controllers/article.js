@@ -167,6 +167,10 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
         .splice(0, 5);
 
       return `<div class="container">
+                <div>NEARWEEK.COM</div>
+                <div class="box-splitter">
+                    <hr class="line">
+                </div>
                 <div class="list">${joinArray(widget)}</div>
             </div>`;
     } catch (e) {
