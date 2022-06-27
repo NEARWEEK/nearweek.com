@@ -1,3 +1,0 @@
-[submodule "backend/src/extensions/elastic"]
-	path = backend/src/extensions/elastic
-	url = https://github.com/marefati110/strapi-plugin-elasticsearch.git
