@@ -24,6 +24,18 @@ async function loadAudio() {
   }
 }
 
+async function loadJobs() {
+  try {
+    const response = await fetch(
+      `/api/jobs?populate=deep&sort=id:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load jobs", e);
+  }
+}
+
 async function loadAudioCategories() {
   try {
     const response = await fetch(
@@ -303,5 +315,6 @@ export const apiConfig = {
   getCoinFeeds: loadCoinFeeds,
   getAudio: loadAudio,
   getAudioCategories: loadAudioCategories,
+  getJobs: loadJobs,
   upload: upload,
 };
