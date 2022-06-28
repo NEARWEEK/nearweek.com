@@ -7,6 +7,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import NoLogo from "../images/nologo.jpg";
+import { getEventDay, getTimeAgo } from "../Utils/Utils";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -60,6 +61,14 @@ const Jobs = () => {
                           justifyContent: "center",
                         }}
                       >
+                        <Typography
+                          variant="subtitle1"
+                          color="text.secondary"
+                          component="div"
+                          sx={{ fontSize: "12px" }}
+                        >
+                          {getEventDay(job.attributes.createdAt)}
+                        </Typography>
                         <Typography
                           variant="subtitle1"
                           color="text.secondary"
