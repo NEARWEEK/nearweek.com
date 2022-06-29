@@ -36,6 +36,42 @@ async function loadJobs() {
   }
 }
 
+async function loadJobTypes() {
+  try {
+    const response = await fetch(
+      `/api/job-types?populate=deep&sort=id:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load job types", e);
+  }
+}
+
+async function loadJobDepartments() {
+  try {
+    const response = await fetch(
+      `/api/job-departments?populate=deep&sort=id:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load job departments", e);
+  }
+}
+
+async function loadJobOccupations() {
+  try {
+    const response = await fetch(
+      `/api/job-occupations?populate=deep&sort=id:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load job occupations", e);
+  }
+}
+
 async function loadAudioCategories() {
   try {
     const response = await fetch(
@@ -316,5 +352,8 @@ export const apiConfig = {
   getAudio: loadAudio,
   getAudioCategories: loadAudioCategories,
   getJobs: loadJobs,
+  getJobTypes: loadJobTypes,
+  getJobDepartments: loadJobDepartments,
+  getJobOccupations: loadJobOccupations,
   upload: upload,
 };
