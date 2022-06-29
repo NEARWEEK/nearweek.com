@@ -42,23 +42,33 @@ function usePagination(data, itemsPerPage) {
   return { next, prev, jump, currentData, currentPage, maxPage };
 }
 
+const DEF_FILTERS = {
+  job_type: [],
+  job_department: [],
+  job_occupations: [],
+};
+
+const PER_PAGE = 5;
+
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
+  const [currData, setCurrData] = useState([]);
   const [jobTypes, setJobTypes] = useState([]);
   const [jobDepartments, setJobDepartments] = useState([]);
   const [jobOccupations, setJobOccupations] = useState([]);
+  const [filters, setFilters] = useState(DEF_FILTERS);
   const [showFilters, setShowFilters] = useState(false);
   let [page, setPage] = useState(1);
-  const PER_PAGE = 5;
 
-  const count = Math.ceil(jobs.length / PER_PAGE);
-  const _DATA = usePagination(jobs, PER_PAGE);
+  const count = Math.ceil(currData.length / PER_PAGE);
+  let _DATA = usePagination(currData, PER_PAGE);
 
   useEffect(() => {
     (async () => {
       const { data } = await api.getJobs();
       if (data) {
         setJobs(data);
+        setCurrData(data);
         const jTypes = await api.getJobTypes();
         if (jTypes.data) {
           setJobTypes(jTypes.data);
@@ -85,8 +95,30 @@ const Jobs = () => {
     setShowFilters(!showFilters);
   };
 
-  const handleJobTypeFilter = (value) => {
-    const filteredJobs = [...jobs].filter((job) => job.attributes);
+  const handleChangeFilter = (name, value, state) => {
+    setFilters({
+      ...filters,
+      [name]: !filters[name].includes(value)
+        ? [...filters[name], value]
+        : [...filters[name].filter((item) => item !== value)],
+    });
+  };
+
+  const handleApplyFilters = () => {
+    let filteredJobs = [...jobs];
+    for (const key in filters) {
+      if (filters[key].length > 0) {
+        filteredJobs = [...filteredJobs].filter((item) =>
+          filters[key].includes(item.attributes[key].data[0].attributes.Title)
+        );
+      }
+    }
+    setCurrData(filteredJobs);
+  };
+
+  const handleClearFilters = () => {
+    setFilters(DEF_FILTERS);
+    setCurrData(jobs);
   };
 
   return (
@@ -119,8 +151,15 @@ const Jobs = () => {
                             <FormControlLabel
                               control={
                                 <Checkbox
-                                  checked={false}
-                                  onChange={handleChangePage}
+                                  checked={filters["job_department"].includes(
+                                    department.attributes.Title
+                                  )}
+                                  onChange={(e) =>
+                                    handleChangeFilter(
+                                      "job_department",
+                                      department.attributes.Title
+                                    )
+                                  }
                                   name={department.attributes.Title}
                                 />
                               }
@@ -143,8 +182,15 @@ const Jobs = () => {
                             <FormControlLabel
                               control={
                                 <Checkbox
-                                  checked={false}
-                                  onChange={handleChangePage}
+                                  checked={filters["job_occupations"].includes(
+                                    occupation.attributes.Title
+                                  )}
+                                  onChange={(e) =>
+                                    handleChangeFilter(
+                                      "job_occupations",
+                                      occupation.attributes.Title
+                                    )
+                                  }
                                   name={occupation.attributes.Title}
                                 />
                               }
@@ -167,8 +213,15 @@ const Jobs = () => {
                             <FormControlLabel
                               control={
                                 <Checkbox
-                                  checked={false}
-                                  onChange={handleChangePage}
+                                  checked={filters["job_type"].includes(
+                                    type.attributes.Title
+                                  )}
+                                  onChange={(e) =>
+                                    handleChangeFilter(
+                                      "job_type",
+                                      type.attributes.Title
+                                    )
+                                  }
                                   name={type.attributes.Title}
                                 />
                               }
@@ -179,11 +232,23 @@ const Jobs = () => {
                     </FormGroup>
                   </FormControl>
                 </Box>
-                <Box sx={{ flex: 1, display: "flex", alignSelf: "flex-end" }}>
-                  <Button variant="contained" disableElevation>
+                <Box
+                  sx={{
+                    flex: 1,
+                    mr: 2,
+                    display: "flex",
+                    alignSelf: "flex-end",
+                    gap: 2,
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    disableElevation
+                    onClick={handleApplyFilters}
+                  >
                     Apply
                   </Button>
-                  <Button>Clear</Button>
+                  <Button onClick={handleClearFilters}>Clear</Button>
                 </Box>
               </>
             )}
