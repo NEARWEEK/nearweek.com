@@ -15,6 +15,7 @@ import FormLabel from "@mui/material/FormLabel";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Stack from "@mui/material/Stack";
 
 function usePagination(data, itemsPerPage) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,8 +68,8 @@ const Jobs = () => {
     (async () => {
       const { data } = await api.getJobs();
       if (data) {
-        setJobs(data);
         setCurrData(data);
+        setJobs(data);
         const jTypes = await api.getJobTypes();
         if (jTypes.data) {
           setJobTypes(jTypes.data);
@@ -86,6 +87,22 @@ const Jobs = () => {
     return () => setJobs([]);
   }, []);
 
+  const handleApply = (url) => {
+    if (!url) return;
+    url = url.match(/^http[s]?:\/\//) ? url : "https://" + url;
+    window.open(url, "_blank");
+  };
+
+  const getJobCountByCategoryName = (category, name) => {
+    let count = 0;
+    for (const item of jobs) {
+      if (item.attributes[category].data[0].attributes.Title === name) {
+        count += 1;
+      }
+    }
+    return count;
+  };
+
   const handleChangePage = (e, p) => {
     setPage(p);
     _DATA.jump(p);
@@ -95,7 +112,7 @@ const Jobs = () => {
     setShowFilters(!showFilters);
   };
 
-  const handleChangeFilter = (name, value, state) => {
+  const handleChangeFilter = (name, value) => {
     setFilters({
       ...filters,
       [name]: !filters[name].includes(value)
@@ -163,7 +180,12 @@ const Jobs = () => {
                                   name={department.attributes.Title}
                                 />
                               }
-                              label={department.attributes.Title}
+                              label={`${
+                                department.attributes.Title
+                              } (${getJobCountByCategoryName(
+                                "job_department",
+                                department.attributes.Title
+                              )})`}
                             />
                           </>
                         ))}
@@ -194,7 +216,12 @@ const Jobs = () => {
                                   name={occupation.attributes.Title}
                                 />
                               }
-                              label={occupation.attributes.Title}
+                              label={`${
+                                occupation.attributes.Title
+                              } (${getJobCountByCategoryName(
+                                "job_occupations",
+                                occupation.attributes.Title
+                              )})`}
                             />
                           </>
                         ))}
@@ -225,7 +252,12 @@ const Jobs = () => {
                                   name={type.attributes.Title}
                                 />
                               }
-                              label={type.attributes.Title}
+                              label={`${
+                                type.attributes.Title
+                              } (${getJobCountByCategoryName(
+                                "job_type",
+                                type.attributes.Title
+                              )})`}
                             />
                           </>
                         ))}
@@ -255,7 +287,7 @@ const Jobs = () => {
           </Box>
           {_DATA.currentData().map((job) => (
             <>
-              <Card sx={{ display: "flex", mb: 3 }}>
+              <Card sx={{ display: "flex", mb: 3 }} key={job.attributes.Title}>
                 <CardMedia
                   component="img"
                   sx={{ width: 151 }}
@@ -299,13 +331,39 @@ const Jobs = () => {
                       <Typography component="div" variant="h5">
                         {job.attributes.Title}
                       </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        color="text.secondary"
-                        component="div"
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        divider={<span>{"•"}</span>}
                       >
-                        {job.attributes.job_type.data[0].attributes.Title}
-                      </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          color="text.secondary"
+                          component="div"
+                        >
+                          {
+                            job.attributes.job_department.data[0].attributes
+                              .Title
+                          }
+                        </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          color="text.secondary"
+                          component="div"
+                        >
+                          {job.attributes.job_type.data[0].attributes.Title}
+                        </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          color="text.secondary"
+                          component="div"
+                        >
+                          {
+                            job.attributes.job_occupations.data[0].attributes
+                              .Title
+                          }
+                        </Typography>
+                      </Stack>
                     </CardContent>
                   </Box>
                   <Box
@@ -318,14 +376,12 @@ const Jobs = () => {
                       pb: 1,
                     }}
                   >
+                    <Button>Share</Button>
                     <Button
-                      variant="outlined"
+                      variant="contained"
+                      onClick={() => handleApply(job.attributes.apply_link)}
                       disableElevation
-                      color="secondary"
                     >
-                      Share
-                    </Button>
-                    <Button variant="contained" disableElevation>
                       Apply
                     </Button>
                   </Box>
