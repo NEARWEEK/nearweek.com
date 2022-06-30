@@ -39,6 +39,10 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::job-company.job-company"
+    },
+    "apply_link": {
+      "type": "string",
+      "required": true
     }
   }
 }
