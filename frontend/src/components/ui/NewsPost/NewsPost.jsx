@@ -41,7 +41,7 @@ const NewsPost = () => {
 
   return (
     <>
-      {article && (
+      {article.attributes.Seo && (
         <PageMetaTags
           title={article.attributes.Title}
           description={article.attributes.Body}
