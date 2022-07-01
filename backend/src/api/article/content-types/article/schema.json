@@ -51,6 +51,11 @@
     },
     "Author": {
       "type": "string"
+    },
+    "Seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

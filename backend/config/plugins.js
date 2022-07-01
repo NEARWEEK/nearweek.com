@@ -1,4 +1,7 @@
 module.exports = ({ env }) => ({
+  seo: {
+    enabled: true,
+  },
   email: {
     config: {
       provider: "sendgrid",
