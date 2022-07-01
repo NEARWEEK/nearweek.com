@@ -25,7 +25,9 @@ const AudioSpace = () => {
       if (data) {
         for (let item of data) {
           item.imageSrc = getImageUrl(item);
-          item.audioSrc = new Audio(item.attributes.File.data.attributes.url);
+          item.audioSrc = item.attributes.File.data
+            ? new Audio(item.attributes.File.data.attributes.url)
+            : null;
         }
         setSpaces(data);
       }
