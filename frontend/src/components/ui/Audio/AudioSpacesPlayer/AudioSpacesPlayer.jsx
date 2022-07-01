@@ -20,17 +20,20 @@ const AudioSpacesPlayer = ({ item }) => {
   const audioRef = useNoRenderRef(item.audioSrc);
 
   useEffect(() => {
-    if (isPlaying) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
     }
   }, [isPlaying]);
 
   useEffect(() => {
-    // Pause and clean up on unmount
     return () => {
-      audioRef.current.pause();
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
     };
   }, []);
 
@@ -76,12 +79,14 @@ const AudioSpacesPlayer = ({ item }) => {
               <Categories data={item.attributes.categories.data} />
             </CardContent>
             <CardActions sx={{ mt: "auto" }}>
-              <AudioControls
-                data={item}
-                isPlaying={isPlaying}
-                audioRef={audioRef}
-                onPlayPauseClick={setIsPlaying}
-              />
+              {item.audioSrc && (
+                <AudioControls
+                  data={item}
+                  isPlaying={isPlaying}
+                  audioRef={audioRef}
+                  onPlayPauseClick={setIsPlaying}
+                />
+              )}
             </CardActions>
           </Box>
         </Card>
