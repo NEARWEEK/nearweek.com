@@ -59,10 +59,11 @@ module.exports = {
     },
     {
       method: "GET",
-      path: "/feeds/widget",
+      path: "/share/widgets/news-widget",
       handler: "article.getWidget",
       config: {
         policies: [],
+        auth: false,
       },
     },
     {
