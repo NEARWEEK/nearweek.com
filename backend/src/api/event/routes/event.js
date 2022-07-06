@@ -12,6 +12,11 @@ module.exports = {
       method: "GET",
       path: "/events",
       handler: "event.find",
+    },
+    {
+      method: "GET",
+      path: "/show-events",
+      handler: "event.find",
       config: {
         auth: false,
       },

@@ -123,7 +123,7 @@ async function loadLatestEditions(start = 0, limit = -1) {
 async function loadNews() {
   try {
     const response = await fetch(
-      `/api/news?populate=*&sort=createdAt:desc`,
+      `/api/news?populate=deep&sort=createdAt:desc`,
       options
     );
     return await response.json();

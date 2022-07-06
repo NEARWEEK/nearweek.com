@@ -11,6 +11,15 @@ module.exports = {
       path: "/news",
       handler: "article.find",
       config: {
+        policies: [],
+      },
+    },
+    {
+      method: "GET",
+      path: "/show-news",
+      handler: "article.find",
+      config: {
+        policies: [],
         auth: false,
       },
     },

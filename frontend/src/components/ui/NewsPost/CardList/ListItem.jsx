@@ -16,9 +16,10 @@ import LazyLoad from "react-lazyload";
 import Categories from "../Categories/Categories";
 
 const ListItem = ({ data }) => {
+  console.log(data);
   const theme = useTheme();
   const isMobileMatch = useMediaQuery(theme.breakpoints.down("sm"));
-  const categories = data.attributes.categories.data;
+  const categories = data.attributes.categories?.data || [];
 
   const isHyperlink = () => {
     let includeHyperlink = false;

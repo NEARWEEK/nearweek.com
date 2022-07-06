@@ -23,6 +23,10 @@ export const menuItems = [
     name: "Near Jobs",
     link: "/jobs",
   },
+  {
+    name: "Widgets",
+    link: "/widgets",
+  },
   /*  {
     name: "Events",
     link: "/events",

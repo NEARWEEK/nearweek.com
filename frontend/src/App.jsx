@@ -24,6 +24,7 @@ import UserNews from "./pages/UserNews";
 import ReactGA from "react-ga4";
 import AudioSpace from "./pages/AudioSpace";
 import Jobs from "./pages/Jobs";
+import Widgets from "./pages/Widgets";
 
 ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
@@ -107,6 +108,7 @@ function App() {
               <Route exact path="user-news" element={<UserNews />} />
             </Route>
             <Route exact path="jobs" element={<Jobs />} />
+            <Route exact path="widgets" element={<Widgets />} />
             <Route exact path="*" element={<Home />} />
           </Routes>
         </Suspense>

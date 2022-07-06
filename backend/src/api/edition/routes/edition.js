@@ -12,6 +12,14 @@ module.exports = {
       handler: "edition.find",
       config: {
         policies: [],
+      },
+    },
+    {
+      method: "GET",
+      path: "/show-editions",
+      handler: "edition.find",
+      config: {
+        policies: [],
         auth: false,
       },
     },
