@@ -30,6 +30,8 @@ const NewsPost = () => {
     }
   }, []);
 
+  console.log(article);
+
   let imageUrl = placeholder.getRandomPlaceholder("large");
   if (article && article.attributes.Image?.data) {
     const { large, medium } = article.attributes.Image.data.attributes.formats;
@@ -41,7 +43,7 @@ const NewsPost = () => {
 
   return (
     <>
-      {article.attributes.Seo && (
+      {article && article.attributes.Seo && (
         <PageMetaTags
           title={article.attributes.Title}
           description={article.attributes.Body}
