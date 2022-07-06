@@ -10,6 +10,10 @@ module.exports = {
       method: "GET",
       path: "/editions",
       handler: "edition.find",
+      config: {
+        policies: [],
+        auth: false,
+      },
     },
     {
       method: "GET",
