@@ -21,6 +21,9 @@ code {
 pre {
   background: #333;
   white-space: pre-wrap;
+  color: #ffffff;
+  padding: 24px;
+  font-weight: bold;
 }
 
 code {

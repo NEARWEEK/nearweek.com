@@ -9,7 +9,7 @@ const Widgets = () => {
       <Box component="main">
         <Container>
           <SectionHeader title={"Widgets"} />
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", gap: "24px" }}>
             <Box>
               <iframe
                 id="xxx"
@@ -28,9 +28,7 @@ const Widgets = () => {
                           <meta name="viewport" content="width=device-width">
                       </head>
                       <body style="width:100%">
-                          <div id="something-else-in-your-website">
                             <div id="nearweek-news" className="nearweek-news-widget"></div>
-                          </div>
                           <link
                             href="http://5.161.56.222/js/widgets/news-widget/index.css"
                             rel="stylesheet"
@@ -42,19 +40,11 @@ const Widgets = () => {
               />
             </Box>
             <Box>
-              <Typography variant="body2">Please copy this code</Typography>
+              <Typography variant="body2">Copy:</Typography>
               <pre>
-                {`<div id="something-else-in-your-website">
-                    <div
-                        id="nearweek-news"
-                        className="nearweek-news-widget"
-                    ></div>
-                </div>
-                    <link
-                    href="http://5.161.56.222/js/widgets/news-widget/index.css"
-                    rel="stylesheet"
-                    />
-                    <script src="http://5.161.56.222/js/widgets/news-widget/index.js"></script>`}
+                {`<div id="nearweek-news" class="nearweek-news-widget"></div>
+<link  href="http://5.161.56.222/js/widgets/news-widget/index.css" rel="stylesheet" />
+<script src="http://5.161.56.222/js/widgets/news-widget/index.js"></script>`}
               </pre>
             </Box>
           </Box>
