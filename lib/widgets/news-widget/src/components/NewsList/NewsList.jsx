@@ -10,7 +10,7 @@ function classNames(...classes) {
 
 const NewsList = () => {
   return (
-    <div className="container bg-white dark:bg-gray-900 max-w-sm rounded px-2 py-2 shadow-lg">
+    <div className="container bg-white dark:bg-gray-900 max-w-sm rounded border border-gray-200 px-2 py-2 shadow-lg">
       <div className="flex px-2 py-2 justify-between text-gray-800">
         <h3 className="dark:text-white font-bold">NEARWEEK.COM</h3>
         <ThemeSwitcher />
