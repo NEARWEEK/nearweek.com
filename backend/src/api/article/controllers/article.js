@@ -114,65 +114,28 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
 
   async getWidget() {
     try {
-      const articles = await strapi.entityService.findMany(
-        "api::article.article",
-        {
-          populate: "*",
-        }
-      );
-
-      const getTime = (timestamp) => {
-        return moment(timestamp).fromNow();
-      };
-
-      const joinArray = (array, separator = "") => {
-        return array.join(separator);
-      };
-
-      const widget = articles
-        .map(
-          (article) => `<div class="box">
-                       <div class="box-header">
-                          <div class="categories">
-                            ${joinArray(
-                              article.categories.map(
-                                (category, index) =>
-                                  `<div class="category ${
-                                    index === 0 ? "first" : ""
-                                  }">${category.Name}</div>`
-                              ),
-                              "·"
-                            )}
+      const widget = `
+                      <!doctype html>
+                      <html>
+                      <head>
+                          <title>News widget</title>
+                          <meta charset="utf-8">
+                          <meta name="viewport" content="width=device-width">
+                      </head>
+                      <body style="width:100%">
+                          <div id="something-else-in-your-website">
+                            <div id="nearweek-news" className="nearweek-news-widget"></div>
                           </div>
-                       </div>
-                       <a class="link" href="${
-                         article.LinkTo
-                           ? article.LinkTo
-                           : `/content/${article.slug}`
-                       }" target="_blank">
-                            <h6 class="title">${article.Title}</h6>
-                        </a>
-                        <div class="box-footer">
-                            <div class="footer-content">
-                                <div>NEARWEEK</div>
-                                <div class="splitter">·</div>
-                                <div>${getTime(article.createdAt)}</div>
-                            </div>
-                        </div>
-                        <div class="box-splitter">
-                            <hr class="line">
-                        </div>
-                    </div>`
-        )
-        .splice(0, 5);
+                          <link
+                            href="http://5.161.56.222/js/widgets/news-widget/index.css"
+                            rel="stylesheet"
+                          />
+                          <script src="http://5.161.56.222/js/widgets/news-widget/index.js"></script>
+                      </body>
+                      </html>
+          `;
 
-      return `<div class="container">
-                <div>NEARWEEK.COM</div>
-                <div class="box-splitter">
-                    <hr class="line">
-                </div>
-                <div class="list">${joinArray(widget)}</div>
-            </div>`;
+      return widget;
     } catch (e) {
       return `<div>OOOps! Something went wrong...</div>`;
     }
