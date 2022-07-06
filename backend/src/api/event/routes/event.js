@@ -12,6 +12,9 @@ module.exports = {
       method: "GET",
       path: "/events",
       handler: "event.find",
+      config: {
+        auth: false,
+      },
     },
     {
       method: "GET",

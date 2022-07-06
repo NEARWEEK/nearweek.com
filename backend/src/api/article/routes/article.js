@@ -10,6 +10,9 @@ module.exports = {
       method: "GET",
       path: "/news",
       handler: "article.find",
+      config: {
+        auth: false,
+      },
     },
     {
       method: "GET",
