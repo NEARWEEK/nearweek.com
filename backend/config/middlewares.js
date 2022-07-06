@@ -1,6 +1,17 @@
 module.exports = [
   "strapi::errors",
-  "strapi::security",
+  {
+    name: "strapi::security",
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          "frame-ancestors": ["'self'"],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
   "strapi::cors",
   "strapi::poweredBy",
   "strapi::logger",
