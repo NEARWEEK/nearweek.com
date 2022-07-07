@@ -65,7 +65,7 @@ const Editions = () => {
             key={"edition-" + index}
             target="_blank"
             rel="noopener noreferrer">
-            <div className="max-w-sm w-full flex flex-col mb-2">
+            <div className="w-full flex flex-col mb-2">
               <div className="bg-gray-100 dark:bg-gray-900 rounded px-2 flex flex-col justify-between leading-normal">
                 <div className="mb-4">
                   <p className="text-xs text-blue-700 py-1 font-bold flex items-center">

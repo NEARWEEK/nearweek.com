@@ -65,7 +65,7 @@ const Events = () => {
             key={"edition-" + index}
             target="_blank"
             rel="noreferrer">
-            <div className="max-w-sm w-full flex flex-col mb-2">
+            <div className="w-full flex flex-col mb-2">
               <div className="bg-gray-100 dark:bg-gray-900 rounded flex flex-col justify-between leading-normal">
                 <div className="px-2">
                   <div className="mb-4">
