@@ -4,9 +4,7 @@ module.exports = [
     name: "strapi::security",
     config: {
       contentSecurityPolicy: {
-        useDefaults: true,
         directives: {
-          "frame-ancestors": ["http:", "https:", "http://localhost"],
           upgradeInsecureRequests: null,
         },
       },
