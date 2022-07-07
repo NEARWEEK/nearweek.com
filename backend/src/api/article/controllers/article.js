@@ -122,13 +122,13 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
                           <meta charset="utf-8">
                           <meta name="viewport" content="width=device-width">
                           <link
-                            href="http://5.161.56.222/js/widgets/news-widget/index.css" rel="stylesheet"/>
+                            href="/js/widgets/news-widget/index.css" rel="stylesheet"/>
                       </head>
                       <body style="width:100%">
                           <div id="something-else-in-your-website">
                             <div id="nearweek-news" className="nearweek-news-widget"></div>
                           </div>
-                          <script src="http://5.161.56.222/js/widgets/news-widget/index.js"></script>
+                          <script src="/js/widgets/news-widget/index.js"></script>
                       </body>
                       </html>
           `;
