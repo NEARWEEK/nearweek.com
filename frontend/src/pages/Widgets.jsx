@@ -25,7 +25,7 @@ const Widgets = () => {
                   id="xxx"
                   title="xxx"
                   width="100%"
-                  height="560px"
+                  height="100%"
                   frameBorder="no"
                   allowTransparency="true"
                   scrolling="no"
