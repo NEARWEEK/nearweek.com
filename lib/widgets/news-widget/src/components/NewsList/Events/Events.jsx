@@ -69,7 +69,7 @@ const Events = () => {
               <div className="bg-gray-100 dark:bg-gray-900 rounded flex flex-col justify-between leading-normal">
                 <div className="px-2">
                   <div className="mb-4">
-                    <div className="flex justify-between text-xs text-blue-700 py-1 font-bold flex items-center">
+                    <div className="flex flex-wrap gap-2 justify-between text-xs text-blue-700 py-1 font-bold flex items-center">
                       <div>{event.period}</div>
                       <div className="flex">
                         <LocationMarkerIcon className="h-4 w-4 text-blue-500" />
