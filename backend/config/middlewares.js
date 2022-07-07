@@ -6,7 +6,8 @@ module.exports = [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          "frame-ancestors": ["'self'", "https:", "*"],
+          "default-src": ["*"],
+          "frame-ancestors": ["'self'", "https:", "http:", "*"],
           upgradeInsecureRequests: null,
         },
       },
