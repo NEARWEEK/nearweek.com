@@ -17,26 +17,9 @@ const Widgets = () => {
                 width="100%"
                 height="560px"
                 frameBorder="no"
-                allowTransparency
+                allowtransparency="true"
                 scrolling="no"
-                srcDoc={`
-                      <!doctype html>
-                      <html>
-                      <head>
-                          <title>Chat bot</title>
-                          <meta charset="utf-8">
-                          <meta name="viewport" content="width=device-width">
-                      </head>
-                      <body style="width:100%">
-                            <div id="nearweek-news" className="nearweek-news-widget"></div>
-                          <link
-                            href="http://5.161.56.222/js/widgets/news-widget/index.css"
-                            rel="stylesheet"
-                          />
-                          <script src="http://5.161.56.222/js/widgets/news-widget/index.js"></script>
-                      </body>
-                      </html>
-          `}
+                src="http://5.161.56.222/api/share/widgets/news-widget"
               />
             </Box>
             <Box>
