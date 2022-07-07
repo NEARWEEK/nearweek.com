@@ -47,8 +47,7 @@ const Widgets = () => {
                   <IframeResizer
                     width="100%"
                     frameBorder="0"
-                    heightCalculationMethod="lowestElement"
-                    scrolling="no"
+                    heightCalculationMethod="bodyScroll"
                     src="http://5.161.56.222/api/share/widgets/news-widget"
                   />
                 </CardContent>
