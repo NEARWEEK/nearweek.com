@@ -67,7 +67,7 @@ const News = () => {
                     {article.period}
                   </p>
                   <div
-                    className="text-blue-700 underline text-sm font-bold dark:text-white line-clamp-2"
+                    className="text-blue-700 underline text-sm font-600 dark:text-white line-clamp-2"
                     dangerouslySetInnerHTML={{ __html: article.title }}
                   />
                 </div>
