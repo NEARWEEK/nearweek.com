@@ -16,7 +16,7 @@ const NewsList = () => {
         <ThemeSwitcher />
       </div>
       <Tab.Group>
-        <Tab.List className="flex space-x-1 rounded-xl p-1">
+        <Tab.List className="flex space-x-1 border-b border-gray-400">
           <Tab
             className={({ selected }) =>
               classNames(
@@ -54,7 +54,7 @@ const NewsList = () => {
             Events
           </Tab>
         </Tab.List>
-        <Tab.Panels className="my-2">
+        <Tab.Panels>
           <Tab.Panel
             className={classNames(
               "rounded-xl dark:bg-gray-800 p-3",
