@@ -2,7 +2,6 @@ import Navbar from "../components/ui/Navbar/Navbar";
 import {
   Box,
   Container,
-  Typography,
   Card,
   CardContent,
   CardActions,
@@ -15,6 +14,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
+import IframeResizer from "iframe-resizer-react";
 
 const Widgets = () => {
   const [expanded, setExpanded] = useState(false);
@@ -44,13 +44,9 @@ const Widgets = () => {
               <Card>
                 <CardHeader title="News Widget"></CardHeader>
                 <CardContent>
-                  <iframe
-                    id="xxx"
-                    title="xxx"
+                  <IframeResizer
                     width="100%"
-                    height="415px"
-                    frameBorder="no"
-                    allowtransparency="true"
+                    heightCalculationMethod="bodyScroll"
                     scrolling="no"
                     src="http://5.161.56.222/api/share/widgets/news-widget"
                   />
