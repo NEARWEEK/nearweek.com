@@ -1,7 +1,11 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../index";
-import { LocationMarkerIcon } from "@heroicons/react/solid";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  LocationMarkerIcon
+} from "@heroicons/react/solid";
 
 const EVENTS_URL = `${process.env.REACT_APP_EVENTS_BASE_URL}`;
 
@@ -20,6 +24,7 @@ const Events = () => {
   });
 
   const nextPageDisabled = pageMeta.page === pageMeta.pageCount;
+  const prevPageDisabled = pageMeta.page === 1;
 
   useEffect(() => {
     (async () => {
@@ -71,7 +76,7 @@ const Events = () => {
                   <div className="mb-4">
                     <div className="flex flex-wrap gap-2 justify-between text-xs text-blue-700 py-1 font-bold flex items-center">
                       <div>{event.period}</div>
-                      <div className="flex">
+                      <div className="flex items-center text-gray-600">
                         <LocationMarkerIcon className="h-4 w-4 text-blue-500" />
                         {event.attributes.Location}
                       </div>
@@ -86,23 +91,30 @@ const Events = () => {
             </div>
           </a>
         ))}
-      <div className="flex py-2 px-2 justify-between">
-        <button
-          disabled={pageMeta.page === 1}
-          className={
-            "bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l "
-          }
-          onClick={handlePrevPage}>
-          Prev
-        </button>
-        <button
-          disabled={nextPageDisabled}
-          className={
-            "bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-r"
-          }
-          onClick={handleNextPage}>
-          Next
-        </button>
+      <div className="flex py-2 px-2 items-center justify-between">
+        {!prevPageDisabled ? (
+          <span className="flex" onClick={handlePrevPage}>
+            <ChevronLeftIcon className="h-6 w-6 text-dark-500 cursor-pointer" />
+          </span>
+        ) : (
+          <span className="flex">
+            <ChevronLeftIcon className="h-6 w-6 text-gray-400" />
+          </span>
+        )}
+        <span className="text-xs text-gray-600">
+          {pageMeta.page}
+          {" of "}
+          {pageMeta.pageCount}
+        </span>
+        {!nextPageDisabled ? (
+          <span className="flex" onClick={handleNextPage}>
+            <ChevronRightIcon className="h-6 w-6 text-dark-500 cursor-pointer" />
+          </span>
+        ) : (
+          <span className="flex">
+            <ChevronRightIcon className="h-6 w-6 text-gray-400" />
+          </span>
+        )}
       </div>
     </>
   );
