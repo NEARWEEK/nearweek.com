@@ -1,6 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../index";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 
 const EDITIONS_URL = `${process.env.REACT_APP_EDITIONS_BASE_URL}`;
 
@@ -20,7 +21,7 @@ const Editions = () => {
   });
 
   const nextPageDisabled = pageMeta.page === pageMeta.pageCount;
-
+  const prevPageDisabled = pageMeta.page === 1;
   useEffect(() => {
     (async () => {
       const response = await axiosInstance.get(
@@ -80,23 +81,30 @@ const Editions = () => {
             </div>
           </a>
         ))}
-      <div className="flex py-2 px-2 justify-between">
-        <button
-          disabled={pageMeta.page === 1}
-          className={
-            "bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l "
-          }
-          onClick={handlePrevPage}>
-          Prev
-        </button>
-        <button
-          disabled={nextPageDisabled}
-          className={
-            "bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-r"
-          }
-          onClick={handleNextPage}>
-          Next
-        </button>
+      <div className="flex py-2 px-2 items-center justify-between">
+        {!prevPageDisabled ? (
+          <span className="flex" onClick={handlePrevPage}>
+            <ChevronLeftIcon className="h-6 w-6 text-dark-500 cursor-pointer" />
+          </span>
+        ) : (
+          <span className="flex">
+            <ChevronLeftIcon className="h-6 w-6 text-gray-400" />
+          </span>
+        )}
+        <span className="text-xs text-gray-600">
+          {pageMeta.page}
+          {" of "}
+          {pageMeta.pageCount}
+        </span>
+        {!nextPageDisabled ? (
+          <span className="flex" onClick={handleNextPage}>
+            <ChevronRightIcon className="h-6 w-6 text-dark-500 cursor-pointer" />
+          </span>
+        ) : (
+          <span className="flex">
+            <ChevronRightIcon className="h-6 w-6 text-gray-400" />
+          </span>
+        )}
       </div>
     </>
   );
