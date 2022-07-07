@@ -3,9 +3,9 @@ import NewsList from "./components/NewsList/NewsList";
 
 const App = () => {
   return (
-    <div>
+    <>
       <NewsList />
-    </div>
+    </>
   );
 };
 

@@ -48,9 +48,9 @@ const Widgets = () => {
                     id="xxx"
                     title="xxx"
                     width="100%"
-                    height="100%"
+                    height="415px"
                     frameBorder="no"
-                    allowTransparency="true"
+                    allowtransparency="true"
                     scrolling="no"
                     src="http://5.161.56.222/api/share/widgets/news-widget"
                   />
