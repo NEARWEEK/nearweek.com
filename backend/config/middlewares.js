@@ -6,10 +6,10 @@ module.exports = [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          "frame-ancestors": ["'self'"],
           upgradeInsecureRequests: null,
         },
       },
+      frameguard: false,
     },
   },
   "strapi::cors",
