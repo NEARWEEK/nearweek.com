@@ -39,8 +39,8 @@ const Widgets = () => {
       <Box component="main">
         <Container>
           <SectionHeader title={"Widgets"} />
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
+          <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid item xs={4} sm={4} md={4}>
               <Card>
                 <CardHeader title="News Widget"></CardHeader>
                 <CardContent>
