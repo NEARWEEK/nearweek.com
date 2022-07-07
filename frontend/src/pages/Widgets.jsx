@@ -1,6 +1,15 @@
 import Navbar from "../components/ui/Navbar/Navbar";
-import { Box, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  CardActions,
+} from "@mui/material";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
+import IconButton from "@mui/material/IconButton";
+import ShareIcon from "@mui/icons-material/Share";
 
 const Widgets = () => {
   return (
@@ -10,18 +19,25 @@ const Widgets = () => {
         <Container>
           <SectionHeader title={"Widgets"} />
           <Box sx={{ display: "flex", gap: "24px" }}>
-            <Box>
-              <iframe
-                id="xxx"
-                title="xxx"
-                width="100%"
-                height="560px"
-                frameBorder="no"
-                allowtransparency="true"
-                scrolling="no"
-                src="http://5.161.56.222/api/share/widgets/news-widget"
-              />
-            </Box>
+            <Card>
+              <CardContent>
+                <iframe
+                  id="xxx"
+                  title="xxx"
+                  width="100%"
+                  height="560px"
+                  frameBorder="no"
+                  allowTransparency="true"
+                  scrolling="no"
+                  src="http://5.161.56.222/api/share/widgets/news-widget"
+                />
+              </CardContent>
+              <CardActions disableSpacing>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+              </CardActions>
+            </Card>
             <Box>
               <Typography variant="body2">Copy:</Typography>
               <pre>
