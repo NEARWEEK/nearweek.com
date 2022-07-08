@@ -29,7 +29,7 @@ const News = () => {
       if (response.data) {
         for (let item of response.data.data) {
           item.period = getTimeAgo(item.attributes.createdAt);
-          item.url = `${process.env.REACT_APP_BASE_URL}/news/${item.attributes.slug}`;
+          item.url = `${process.env.REACT_APP_BASE_URL}/content/${item.attributes.slug}`;
           item.title = `${item.attributes.Title}`;
         }
         setNews(response.data.data);
