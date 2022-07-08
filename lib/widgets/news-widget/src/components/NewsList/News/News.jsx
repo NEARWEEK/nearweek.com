@@ -62,7 +62,7 @@ const News = () => {
         news.map((article, index) => (
           <a
             href={article.url}
-            key={"edition-" + index}
+            key={"article-" + index}
             target="_blank"
             rel="noopener noreferrer">
             <div className="w-full flex flex-col mb-2">
