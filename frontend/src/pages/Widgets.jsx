@@ -69,6 +69,7 @@ const Widgets = () => {
                     <IframeResizer
                       className={classes.iframe}
                       width="100%"
+                      height="100%"
                       frameBorder="0"
                       scrolling="no"
                       src="http://5.161.56.222/api/share/widgets/news-widget"
