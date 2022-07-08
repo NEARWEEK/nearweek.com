@@ -63,6 +63,7 @@ const Events = () => {
 
   return (
     <>
+      <div className="text-sm font-bold p-2 dark:text-white">Latest Events</div>
       {events.length > 0 &&
         events.map((event, index) => (
           <a

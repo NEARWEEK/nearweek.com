@@ -55,7 +55,7 @@ const News = () => {
 
   return (
     <>
-      <div className="text-sm font-bold p-2">
+      <div className="text-sm font-bold p-2 dark:text-white">
         NEAR Protocol news for last month
       </div>
       {news.length > 0 &&

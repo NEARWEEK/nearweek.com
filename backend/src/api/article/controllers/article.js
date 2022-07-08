@@ -125,9 +125,7 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
                             href="/js/widgets/news-widget/index.css" rel="stylesheet"/>
                       </head>
                       <body style="width:100%">
-                          <div id="something-else-in-your-website">
-                            <div id="nearweek-news" className="nearweek-news-widget"></div>
-                          </div>
+                          <div id="nearweek-news" class="nearweek-news-widget"></div>
                           <script src="/js/widgets/news-widget/index.js"></script>
                       </body>
                       </html>

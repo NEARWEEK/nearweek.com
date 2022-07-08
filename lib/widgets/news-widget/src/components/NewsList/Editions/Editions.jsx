@@ -59,6 +59,9 @@ const Editions = () => {
 
   return (
     <>
+      <div className="text-sm font-bold p-2 dark:text-white">
+        Latest Editions
+      </div>
       {editions.length > 0 &&
         editions.map((edition, index) => (
           <a
