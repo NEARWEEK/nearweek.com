@@ -11,6 +11,10 @@ function getPubDate(period) {
   return `${dateFrom} - ${dateTo}`;
 }
 
+function getTimeAgo(date) {
+  return moment(date).fromNow();
+}
+
 const Editions = () => {
   const [editions, setEditions] = useState([]);
   const [pageMeta, setPageMeta] = useState({
@@ -70,8 +74,8 @@ const Editions = () => {
             target="_blank"
             rel="noopener noreferrer">
             <div className="w-full flex flex-col mb-2">
-              <div className="bg-gray-200 dark:bg-gray-900 rounded px-2 flex flex-col justify-between leading-normal">
-                <div className="mb-4">
+              <div className="bg-gray-200 dark:bg-gray-900 rounded-lg px-2 flex flex-col justify-between leading-normal">
+                <div className="mb-2">
                   <p className="text-xs text-blue-700 py-1 font-bold flex items-center">
                     {edition.period}
                   </p>
@@ -79,6 +83,9 @@ const Editions = () => {
                     className="text-gray-700 font-bold text-xl dark:text-white"
                     dangerouslySetInnerHTML={{ __html: edition.title }}
                   />
+                  <div className="text-xs text-gray-700 dark:text-gray-400 flex items-center justify-end">
+                    {getTimeAgo(edition.attributes.createdAt)}
+                  </div>
                 </div>
               </div>
             </div>

@@ -14,6 +14,10 @@ function getEventDay(date) {
   return `${dateFormatted}`;
 }
 
+function getTimeAgo(date) {
+  return moment(date).fromNow();
+}
+
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [pageMeta, setPageMeta] = useState({
@@ -72,9 +76,9 @@ const Events = () => {
             target="_blank"
             rel="noreferrer">
             <div className="w-full flex flex-col mb-2">
-              <div className="bg-gray-200 dark:bg-gray-900 rounded flex flex-col justify-between leading-normal">
+              <div className="bg-gray-200 dark:bg-gray-900 rounded-lg flex flex-col justify-between leading-normal">
                 <div className="px-2">
-                  <div className="mb-4">
+                  <div className="mb-2">
                     <div className="flex flex-wrap gap-2 justify-between text-xs text-blue-700 py-1 font-bold flex items-center">
                       <div>{event.period}</div>
                       <div className="flex items-center text-gray-600">
@@ -86,6 +90,9 @@ const Events = () => {
                       className="text-gray-700 font-bold text-xl dark:text-white"
                       dangerouslySetInnerHTML={{ __html: event.title }}
                     />
+                    <div className="text-xs text-gray-700 dark:text-gray-400 flex items-center justify-end">
+                      {getTimeAgo(event.attributes.createdAt)}
+                    </div>
                   </div>
                 </div>
               </div>
