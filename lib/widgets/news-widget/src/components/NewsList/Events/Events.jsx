@@ -41,7 +41,7 @@ const Events = () => {
             ? `${process.env.REACT_APP_BASE_URL}${item.attributes.Image.data.attributes.url}`
             : null;
           item.period = getEventDay(item.attributes.StartDate);
-          item.url = `${process.env.REACT_APP_BASE_URL}/editions/${item.attributes.slug}`;
+          item.url = `${process.env.REACT_APP_BASE_URL}/events/${item.attributes.slug}`;
           item.title = `${item.attributes.Title}`;
         }
         setEvents(response.data.data);

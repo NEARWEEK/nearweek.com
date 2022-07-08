@@ -34,7 +34,7 @@ const Editions = () => {
       if (response.data) {
         for (let item of response.data.data) {
           item.period = getPubDate(item.attributes.Period);
-          item.url = `${process.env.REACT_APP_BASE_URL}/editions/${item.attributes.slug}`;
+          item.url = `${process.env.REACT_APP_BASE_URL}/newsletter/${item.attributes.slug}`;
           item.title = `${item.attributes.Title}${" "}
                         <span class="text-blue-700">#${
                           item.attributes.Number
