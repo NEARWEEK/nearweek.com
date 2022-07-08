@@ -51,21 +51,21 @@ const NewsList = () => {
         <Tab.Panels>
           <Tab.Panel
             className={classNames(
-              "rounded-xl bg-gray-200/[0.12] dark:bg-gray-800 p-3",
+              "rounded-xl bg-gray-50 dark:bg-gray-800 p-3",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}>
             <News />
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
-              "rounded-xl bg-gray-200/[0.12] dark:bg-gray-800 p-3",
+              "rounded-xl bg-gray-50 dark:bg-gray-800 p-3",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}>
             <Editions />
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
-              "rounded-xl bg-gray-200/[0.12] dark:bg-gray-800 p-3",
+              "rounded-xl bg-gray-50 dark:bg-gray-800 p-3",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}>
             <Events />

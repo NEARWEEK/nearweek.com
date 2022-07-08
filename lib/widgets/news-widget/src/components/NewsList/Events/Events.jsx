@@ -72,7 +72,7 @@ const Events = () => {
             target="_blank"
             rel="noreferrer">
             <div className="w-full flex flex-col mb-2">
-              <div className="bg-gray-100 dark:bg-gray-900 rounded flex flex-col justify-between leading-normal">
+              <div className="bg-gray-200 dark:bg-gray-900 rounded flex flex-col justify-between leading-normal">
                 <div className="px-2">
                   <div className="mb-4">
                     <div className="flex flex-wrap gap-2 justify-between text-xs text-blue-700 py-1 font-bold flex items-center">
