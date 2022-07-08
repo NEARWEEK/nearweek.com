@@ -66,7 +66,7 @@ const News = () => {
             target="_blank"
             rel="noopener noreferrer">
             <div className="w-full flex flex-col mb-2">
-              <div className="bg-gray-100 dark:bg-gray-900 rounded px-2 flex flex-col justify-between leading-normal">
+              <div className="bg-gray-200 dark:bg-gray-900 rounded px-2 flex flex-col justify-between leading-normal">
                 <div className="mb-4">
                   <p className="text-xs text-gray-600 py-1 font-bold flex items-center">
                     {article.period}
