@@ -16,15 +16,13 @@ const NewsList = () => {
         <ThemeSwitcher />
       </div>
       <Tab.Group>
-        <Tab.List className="flex space-x-1 border-b border-gray-400">
+        <Tab.List className="flex space-x-1 border-b border-gray-400 mb-2">
           <Tab
             className={({ selected }) =>
               classNames(
                 "w-full rounded-lg py-2.5 text-sm font-medium leading-5",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none",
-                selected
-                  ? "text-blue-700 dark:bg-white/[0.12]"
-                  : "text-gray-700 hover:bg-white/[0.12] hover:text-blue-700"
+                selected ? "text-blue-700" : "text-gray-700 hover:text-blue-700"
               )
             }>
             News
@@ -34,9 +32,7 @@ const NewsList = () => {
               classNames(
                 "w-full rounded-lg py-2.5 text-sm font-medium leading-5",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none",
-                selected
-                  ? "text-blue-700 dark:bg-white/[0.12]"
-                  : "text-gray-700 hover:bg-white/[0.12] hover:text-blue-700"
+                selected ? "text-blue-700" : "text-gray-700 hover:text-blue-700"
               )
             }>
             Editions
@@ -46,9 +42,7 @@ const NewsList = () => {
               classNames(
                 "w-full rounded-lg py-2.5 text-sm font-medium leading-5",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none",
-                selected
-                  ? "text-blue-700 dark:bg-white/[0.12]"
-                  : "text-gray-700 hover:bg-white/[0.12] hover:text-blue-700"
+                selected ? "text-blue-700" : "text-gray-700 hover:text-blue-700"
               )
             }>
             Events
@@ -57,21 +51,21 @@ const NewsList = () => {
         <Tab.Panels>
           <Tab.Panel
             className={classNames(
-              "rounded-xl dark:bg-gray-800 p-3",
+              "rounded-xl bg-gray-200/[0.12] dark:bg-gray-800 p-3",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}>
             <News />
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
-              "rounded-xl  dark:bg-gray-800 p-3",
+              "rounded-xl bg-gray-200/[0.12] dark:bg-gray-800 p-3",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}>
             <Editions />
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
-              "rounded-xl dark:bg-gray-800 p-3",
+              "rounded-xl bg-gray-200/[0.12] dark:bg-gray-800 p-3",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}>
             <Events />

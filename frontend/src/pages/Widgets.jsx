@@ -15,10 +15,22 @@ import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import IframeResizer from "iframe-resizer-react";
+import { makeStyles } from "@mui/styles";
 
 const Widgets = () => {
   const [expanded, setExpanded] = useState(false);
 
+  const useStyles = makeStyles({
+    iframe: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      width: "100%",
+      height: "100%",
+    },
+  });
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -33,6 +45,8 @@ const Widgets = () => {
     }),
   }));
 
+  const classes = useStyles();
+
   return (
     <>
       <Navbar />
@@ -42,14 +56,24 @@ const Widgets = () => {
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid item xs={4} sm={4} md={4}>
               <Card>
-                <CardHeader title="News Widget"></CardHeader>
+                <CardHeader title="News Widget" />
                 <CardContent>
-                  <IframeResizer
-                    width="100%"
-                    frameBorder="0"
-                    heightCalculationMethod="bodyScroll"
-                    src="http://5.161.56.222/api/share/widgets/news-widget"
-                  />
+                  <Box
+                    sx={{
+                      position: "relative",
+                      overflow: "hidden",
+                      width: "100%",
+                      paddingTop: "120%",
+                    }}
+                  >
+                    <IframeResizer
+                      className={classes.iframe}
+                      width="100%"
+                      frameBorder="0"
+                      scrolling="no"
+                      src="http://5.161.56.222/api/share/widgets/news-widget"
+                    />
+                  </Box>
                 </CardContent>
                 <CardActions>
                   <ExpandMore
@@ -64,9 +88,7 @@ const Widgets = () => {
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                   <CardContent>
                     <pre>
-                      {`<div id="nearweek-news" class="nearweek-news-widget"></div>
-<link  href="http://5.161.56.222/js/widgets/news-widget/index.css" rel="stylesheet" />
-<script src="http://5.161.56.222/js/widgets/news-widget/index.js"></script>`}
+                      {`<iframe width="100%" height="460px" frameBorder="0" scrolling="no" src="http://5.161.56.222/api/share/widgets/news-widget"></iframe>`}
                     </pre>
                   </CardContent>
                 </Collapse>
