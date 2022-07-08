@@ -14,7 +14,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
-import IframeResizer from "iframe-resizer-react";
 import { makeStyles } from "@mui/styles";
 
 const Widgets = () => {
@@ -22,13 +21,13 @@ const Widgets = () => {
 
   const useStyles = makeStyles({
     iframe: {
+      display: "block",
       position: "absolute",
       top: 0,
       left: 0,
-      bottom: 0,
-      right: 0,
-      width: "100%",
+      border: 0,
       height: "100%",
+      width: "100%",
     },
   });
   const handleExpandClick = () => {
@@ -45,8 +44,6 @@ const Widgets = () => {
     }),
   }));
 
-  const classes = useStyles();
-
   return (
     <>
       <Navbar />
@@ -58,23 +55,14 @@ const Widgets = () => {
               <Card>
                 <CardHeader title="News Widget" />
                 <CardContent>
-                  <Box
-                    sx={{
-                      position: "relative",
-                      overflow: "hidden",
-                      width: "100%",
-                      paddingTop: "120%",
-                    }}
-                  >
-                    <IframeResizer
-                      className={classes.iframe}
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      scrolling="no"
-                      src="http://5.161.56.222/api/share/widgets/news-widget"
-                    />
-                  </Box>
+                  <iframe
+                    width="100%"
+                    height={460}
+                    frameBorder="0"
+                    scrolling="yes"
+                    style={{ position: "relative", height: 460 }}
+                    src="http://5.161.56.222/api/share/widgets/news-widget"
+                  />
                 </CardContent>
                 <CardActions>
                   <ExpandMore
