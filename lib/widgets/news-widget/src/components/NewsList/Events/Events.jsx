@@ -72,7 +72,7 @@ const Events = () => {
         events.map((event, index) => (
           <a
             href={event.url}
-            key={"edition-" + index}
+            key={"event-" + index}
             target="_blank"
             rel="noreferrer">
             <div className="w-full flex flex-col mb-2">
