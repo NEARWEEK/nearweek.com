@@ -83,6 +83,38 @@ const Widgets = () => {
                 </Collapse>
               </Card>
             </Grid>
+            <Grid item xs={4} sm={4} md={4}>
+              <Card>
+                <CardHeader title="Active accounts" />
+                <CardContent>
+                  <iframe
+                    width="100%"
+                    height={460}
+                    frameBorder="0"
+                    scrolling="yes"
+                    style={{ position: "relative", height: 460 }}
+                    src="http://5.161.56.222/api/share/widgets/chart-widget"
+                  />
+                </CardContent>
+                <CardActions>
+                  <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    <ShareIcon />
+                  </ExpandMore>
+                </CardActions>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  <CardContent>
+                    <pre>
+                      {`<iframe width="100%" height="200px" frameBorder="0" scrolling="no" src="http://5.161.56.222/api/share/widgets/charts-widget"></iframe>`}
+                    </pre>
+                  </CardContent>
+                </Collapse>
+              </Card>
+            </Grid>
           </Grid>
         </Container>
       </Box>
