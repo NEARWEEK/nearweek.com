@@ -36,7 +36,7 @@ module.exports = {
                             href="/js/widgets/charts-widget/index.css" rel="stylesheet"/>
                       </head>
                       <body style="width:100%">
-                          <div id="nearweek-news" class="nearweek-news-widget"></div>
+                          <div id="nearweek-charts" class="nearweek-charts-widget"></div>
                           <script src="/js/widgets/charts-widget/index.js"></script>
                       </body>
                       </html>
