@@ -27,15 +27,20 @@ module.exports = {
       handler: "widgets.getChartWidget",
       config: {
         policies: [],
+        contentSecurityPolicy: {
+          directives: {
+            "connect-src": ["'self'"],
+          },
+        },
         middlewares: [
           async (ctx, next) => {
             await next();
             ctx.set(
               "Content-Security-Policy",
-              ctx.response.header["content-security-policy"].replace(
-                /frame-ancestors 'self';/g,
-                ""
-              )
+              ctx.response.header["content-security-policy"]
+                .replace(/frame-ancestors 'self';/g, "")
+                .replace(/connect-src 'self' https:;/g, "")
+                .replace(/default-src 'self';/g, "")
             );
           },
         ],
