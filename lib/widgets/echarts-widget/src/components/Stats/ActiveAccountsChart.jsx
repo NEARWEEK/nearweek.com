@@ -1,8 +1,17 @@
 import { useWampSimpleQuery } from "../../libs/wamp/wamp";
 import React from "react";
 import ReactEcharts from "echarts-for-react";
+import moment from "moment";
 
-const ActiveAccountsChart = () => {
+const filter = {
+  all: 0,
+  "1w": -7,
+  "1m": -30
+};
+
+const ActiveAccountsChart = (props) => {
+  const { show } = props;
+  console.log(show);
   const accountsByDateCount =
     useWampSimpleQuery("active-accounts-count-aggregated-by-date", []) ?? [];
 
@@ -10,16 +19,20 @@ const ActiveAccountsChart = () => {
     () =>
       accountsByDateCount
         .map(({ accountsCount }) => Number(accountsCount))
-        .slice(-7),
-    [accountsByDateCount]
+        .slice(filter[show]),
+    [accountsByDateCount, show]
   );
   const accountsByDateDate = React.useMemo(
-    () => accountsByDateCount.map(({ date }) => date.slice(0, 10)).slice(-7),
-    [accountsByDateCount]
+    () =>
+      accountsByDateCount
+        .map(({ date }) => date.slice(0, 10))
+        .slice(filter[show]),
+    [accountsByDateCount, show]
   );
 
   const getOption = (title, seriesName, data, date) => {
     return {
+      backgroundColor: "transparent",
       legend: {
         show: true,
         textStyle: {
@@ -36,7 +49,6 @@ const ActiveAccountsChart = () => {
         {
           name: "Weekly Number of Active Accounts",
           nameLocation: "end",
-          // the default nameGap=15 would move the text to the right
           nameGap: 0,
           nameTextStyle: {
             align: "right",
@@ -44,10 +56,12 @@ const ActiveAccountsChart = () => {
             padding: [30, 0, 0, 0]
           },
           axisLabel: {
+            formatter: function (params) {
+              return moment(params).format("MMM DD");
+            },
             fontSize: "8",
             color: "inherit"
           },
-          color: "#fff",
           show: true,
           type: "category",
           boundaryGap: false,
@@ -85,7 +99,7 @@ const ActiveAccountsChart = () => {
   };
 
   return (
-    <div className="rounded-xl py-2 dark:bg-gray-900">
+    <div className="rounded-xl py-2 bg-gray-100 dark:bg-gray-900">
       <ReactEcharts
         option={getOption(
           "",
@@ -93,7 +107,7 @@ const ActiveAccountsChart = () => {
           accountsByDate,
           accountsByDateDate
         )}
-        style={{ height: "100%", minHeight: 250, width: "100%" }}
+        style={{ height: "100%", minHeight: 200, width: "100%" }}
       />
     </div>
   );

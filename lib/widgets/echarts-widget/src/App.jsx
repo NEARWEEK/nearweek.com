@@ -1,10 +1,10 @@
 import React from "react";
-import NewsList from "./components/NewsList/NewsList";
+import Chart from "./components/Chart/Chart";
 
 const App = () => {
   return (
     <>
-      <NewsList />
+      <Chart />
     </>
   );
 };
