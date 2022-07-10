@@ -9,7 +9,7 @@ const Chart = () => {
   console.log(selected);
 
   return (
-    <div className="container bg-white dark:bg-gray-800 w-full h-full rounded-lg border border-gray-200 px-2 py-2 shadow-lg">
+    <div className="container max-w-sm bg-white dark:bg-gray-800 w-full h-full rounded-lg border border-gray-200 px-2 py-2 shadow-lg">
       <div className="flex px-2 py-2 justify-between text-gray-800">
         <h3 className="dark:text-white font-bold">
           <a href="//nearweek.com" target="_blank" rel="noreferrer">
