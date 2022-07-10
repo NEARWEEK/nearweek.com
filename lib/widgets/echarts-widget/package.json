@@ -13,6 +13,7 @@
     "assert": "^2.0.0",
     "autobahn": "^20.9.2",
     "autoprefixer": "^9.8.6",
+    "clsx": "^1.2.1",
     "echarts": "^5.3.3",
     "echarts-for-react": "^3.0.2",
     "moment": "^2.29.3",
