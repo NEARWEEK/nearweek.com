@@ -31,7 +31,8 @@ const Chart = () => {
                 "dark:bg-gray-800 bg-gray-200 text-gray-600 dark:text-gray-100":
                   selected === "1w"
               }
-            )}>
+            )}
+          >
             week
           </button>
           <button
@@ -42,7 +43,8 @@ const Chart = () => {
                 "dark:bg-gray-800 bg-gray-200 text-gray-600 dark:text-gray-100":
                   selected === "1m"
               }
-            )}>
+            )}
+          >
             month
           </button>
         </div>

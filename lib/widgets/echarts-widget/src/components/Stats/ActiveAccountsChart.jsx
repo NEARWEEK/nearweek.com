@@ -1,7 +1,24 @@
+import { useMemo } from "react";
 import { useWampSimpleQuery } from "../../libs/wamp/wamp";
-import React from "react";
-import ReactEcharts from "echarts-for-react";
+import ReactEchartsCore from "echarts-for-react/lib/core";
+import * as echarts from "echarts/lib/echarts";
+import { LineChart } from "echarts/charts";
+import {
+  GridComponent,
+  LegendComponent,
+  TooltipComponent
+} from "echarts/components";
+import { CanvasRenderer } from "echarts/renderers";
+
 import moment from "moment";
+
+echarts.use([
+  TooltipComponent,
+  GridComponent,
+  LegendComponent,
+  LineChart,
+  CanvasRenderer
+]);
 
 const filter = {
   all: 0,
@@ -11,18 +28,17 @@ const filter = {
 
 const ActiveAccountsChart = (props) => {
   const { show } = props;
-  console.log(show);
   const accountsByDateCount =
     useWampSimpleQuery("active-accounts-count-aggregated-by-date", []) ?? [];
 
-  const accountsByDate = React.useMemo(
+  const accountsByDate = useMemo(
     () =>
       accountsByDateCount
         .map(({ accountsCount }) => Number(accountsCount))
         .slice(filter[show]),
     [accountsByDateCount, show]
   );
-  const accountsByDateDate = React.useMemo(
+  const accountsByDateDate = useMemo(
     () =>
       accountsByDateCount
         .map(({ date }) => date.slice(0, 10))
@@ -99,8 +115,9 @@ const ActiveAccountsChart = (props) => {
   };
 
   return (
-    <div className="rounded-xl py-2 bg-gray-100 dark:bg-gray-900">
-      <ReactEcharts
+    <div id="echart" className="rounded-xl py-2 bg-gray-100 dark:bg-gray-900">
+      <ReactEchartsCore
+        echarts={echarts}
         option={getOption(
           "",
           "Active Accounts",
