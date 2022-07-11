@@ -16,29 +16,31 @@ const Chart = () => {
         <ThemeSwitcher />
       </div>
       <div className="rounded-md bg-gray-300 dark:bg-gray-600 p-2">
-        <div className="rounded-md bg-gray-100  dark:bg-gray-900 p-1 m-1">
-          <button
-            onClick={() => setSelected("1w")}
-            className={clsx(
-              "rounded-md font-bold text-xs py-2 px-3 mx-1 text-gray-400",
-              {
-                "dark:bg-gray-800 bg-gray-300 text-gray-600 dark:text-gray-100":
-                  selected === "1w"
-              }
-            )}>
-            week
-          </button>
-          <button
-            onClick={() => setSelected("1m")}
-            className={clsx(
-              "rounded-md font-bold text-xs py-2 px-3 mx-1 text-gray-400 ",
-              {
-                "dark:bg-gray-800 bg-gray-300 text-gray-600 dark:text-gray-100":
-                  selected === "1m"
-              }
-            )}>
-            month
-          </button>
+        <div className="rounded-md bg-gray-100  dark:bg-gray-900">
+          <div className="px-1 py-1 m-1">
+            <button
+              onClick={() => setSelected("1w")}
+              className={clsx(
+                "rounded-md font-bold text-xs py-2 px-3 mx-1 text-gray-400",
+                {
+                  "dark:bg-gray-800 bg-gray-300 text-gray-600 dark:text-gray-100":
+                    selected === "1w"
+                }
+              )}>
+              week
+            </button>
+            <button
+              onClick={() => setSelected("1m")}
+              className={clsx(
+                "rounded-md font-bold text-xs py-2 px-3 mx-1 text-gray-400 ",
+                {
+                  "dark:bg-gray-800 bg-gray-300 text-gray-600 dark:text-gray-100":
+                    selected === "1m"
+                }
+              )}>
+              month
+            </button>
+          </div>
         </div>
         <ActiveAccountsChart show={selected} />
       </div>
