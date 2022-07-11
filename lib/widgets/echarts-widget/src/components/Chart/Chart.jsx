@@ -19,9 +19,6 @@ const Chart = () => {
         <ThemeSwitcher />
       </div>
       <div className="">
-        <div className="text-xs font-bold text-teal-600 text-center">
-          Select records from last
-        </div>
         <div className="rounded-md bg-gray-100  dark:bg-gray-900 p-1 m-1">
           <button
             onClick={() => setSelected("1w")}
@@ -31,8 +28,7 @@ const Chart = () => {
                 "dark:bg-gray-800 bg-gray-200 text-gray-600 dark:text-gray-100":
                   selected === "1w"
               }
-            )}
-          >
+            )}>
             week
           </button>
           <button
@@ -43,8 +39,7 @@ const Chart = () => {
                 "dark:bg-gray-800 bg-gray-200 text-gray-600 dark:text-gray-100":
                   selected === "1m"
               }
-            )}
-          >
+            )}>
             month
           </button>
         </div>
