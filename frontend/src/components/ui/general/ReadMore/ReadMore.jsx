@@ -27,7 +27,7 @@ const ReadMore = ({ children, images }) => {
   };
 
   return (
-    <Box className={classes.container}>
+    <Box sx={{ marginBottom: 3 }} className="ck-content">
       {isReadMore ? (
         <>
           <PostDescription
