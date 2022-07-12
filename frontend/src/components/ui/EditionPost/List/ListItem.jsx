@@ -21,17 +21,11 @@ const ListItem = ({ data }) => {
   const matchEdition = useMatch(`/newsletter/:editionId`);
   const useStyles = makeStyles((theme) => ({
     contentBody: {
-      display: "grid",
-      gridTemplateColumns: isMobileMatch
-        ? "86px repeat(auto-fit, minmax(100px, 100%))"
-        : "repeat(auto-fit, minmax(100px, 100%))",
+      display: "inline-flex",
       alignItems: "flex-start",
-      padding: "16px 16px 0 16px",
+      padding: "16px 16px 0 0",
       "& .image-container": {
         marginBottom: "16px",
-      },
-      "& .image-container .lazyload-wrapper .image": {
-        marginRight: "16px",
       },
     },
     contentFooter: {
@@ -74,15 +68,15 @@ const ListItem = ({ data }) => {
       color: "#656364",
     },
     img: {
-      width: isMobileMatch ? "68px !important" : "362px !important",
+      width: isMobileMatch ? "122px !important" : "362px !important",
       height: isMobileMatch ? "68px !important" : "205px !important",
       borderRadius: !isMobileMatch ? 0 : "12px",
     },
   }));
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
-  if (data.attributes.Image.data) {
-    imageUrl = data.attributes.Image.data.attributes.url;
+  if (data.attributes.Thumbnail.data) {
+    imageUrl = data.attributes.Thumbnail.data.attributes.url;
   }
 
   const classes = useStyles();
@@ -145,7 +139,7 @@ const ListItem = ({ data }) => {
                     </div>
                   </div>
                 )}
-                <div className={classes.bodyContainer}>
+                <Box sx={{ flex: 1, paddingLeft: 2 }}>
                   <div className={classes.postDate}>
                     <span>
                       {data.attributes.Period &&
@@ -173,7 +167,7 @@ const ListItem = ({ data }) => {
                       />
                     </div>
                   )}
-                </div>
+                </Box>
               </div>
               <div className={classes.contentFooter}>
                 <div className={classes.footerDate}>

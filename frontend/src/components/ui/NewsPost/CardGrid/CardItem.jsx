@@ -55,8 +55,8 @@ const CardItem = ({ data }) => {
   const classes = useStyles();
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
-  if (data.attributes.Image.data) {
-    imageUrl = data.attributes.Image.data.attributes.url;
+  if (data.attributes.Thumbnail.data) {
+    imageUrl = data.attributes.Thumbnail.data.attributes.url;
   }
 
   return (

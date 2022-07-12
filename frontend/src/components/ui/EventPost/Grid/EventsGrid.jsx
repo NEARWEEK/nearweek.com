@@ -1,14 +1,10 @@
-import makeStyles from "@mui/styles/makeStyles";
-import Box from "@mui/material/Box";
 import * as React from "react";
 import GridItem from "./GridItem";
 import * as Utils from "../../../../Utils/Utils";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { MOBILE_WIDTH } from "../../../../Utils/Utils";
 import { useEffect, useState } from "react";
+import Grid from "@mui/material/Grid";
 
 const EventsGrid = ({ exclude, show = 3 }) => {
-  const isMobileMatch = useMediaQuery(`(max-width:${MOBILE_WIDTH})`);
   const [events, setEvents] = useState([]);
 
   useEffect(async () => {
@@ -22,26 +18,19 @@ const EventsGrid = ({ exclude, show = 3 }) => {
     }
   }, []);
 
-  const useStyles = makeStyles(() => ({
-    gridContainer: {
-      display: "grid",
-      gridTemplateColumns: isMobileMatch
-        ? "repeat(auto-fill,minmax(326px, 1fr))"
-        : "repeat(auto-fill,minmax(400px, 1fr))",
-      columnGap: "24px",
-    },
-  }));
-
-  const classes = useStyles();
-
   return (
-    <Box className={classes.gridContainer}>
-      {events.length > 0
-        ? events.slice(0, show).map((event, i) => {
-            return <GridItem key={i} data={event} />;
-          })
-        : null}
-    </Box>
+    <Grid
+      container
+      spacing={{ xs: 2, md: 3 }}
+      columns={{ xs: 2, sm: 4, md: 8, lg: 12 }}
+    >
+      {events.length > 0 &&
+        events.slice(0, show).map((event, i) => (
+          <Grid item xs={2} sm={2} md={4} lg={4} key={i}>
+            <GridItem key={i} data={event} />
+          </Grid>
+        ))}
+    </Grid>
   );
 };
 
