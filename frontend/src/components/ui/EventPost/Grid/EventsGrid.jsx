@@ -21,12 +21,12 @@ const EventsGrid = ({ exclude, show = 3 }) => {
   return (
     <Grid
       container
-      spacing={{ xs: 2, md: 3 }}
+      spacing={{ xs: 1, md: 2 }}
       columns={{ xs: 2, sm: 4, md: 8, lg: 12 }}
     >
       {events.length > 0 &&
         events.slice(0, show).map((event, i) => (
-          <Grid item xs={2} sm={2} md={4} lg={4} key={i}>
+          <Grid item xs={2} sm={2} md={4} lg={3} key={i}>
             <GridItem key={i} data={event} />
           </Grid>
         ))}

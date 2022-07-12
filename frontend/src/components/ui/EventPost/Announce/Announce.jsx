@@ -11,10 +11,9 @@ import {
 } from "@mui/material";
 import { getEventDay, getTimeAgo } from "../../../../Utils/Utils";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Truncate from "react-truncate";
-import ReactMarkdown from "react-markdown";
 import useTheme from "@mui/material/styles/useTheme";
 import { placeholder } from "../../../../Utils/placeholder";
+import PostDescription from "../../general/PostDescription/PostDescription";
 
 const Announce = ({ event }) => {
   const theme = useTheme();
@@ -139,9 +138,7 @@ const Announce = ({ event }) => {
                 </Link>
               </h2>
               <p className={classes.postBody}>
-                <Truncate lines={2}>
-                  <ReactMarkdown>{event.attributes.Body}</ReactMarkdown>
-                </Truncate>
+                <PostDescription body={event.attributes.Body} maxLine={6} />
               </p>
             </Box>
             <Box className={classes.contentFooter}>
