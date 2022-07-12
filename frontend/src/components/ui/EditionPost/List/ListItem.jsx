@@ -23,7 +23,7 @@ const ListItem = ({ data }) => {
     contentBody: {
       display: "inline-flex",
       alignItems: "flex-start",
-      padding: "16px 16px 0 0",
+      padding: "16px 16px 0 16px",
       "& .image-container": {
         marginBottom: "16px",
       },

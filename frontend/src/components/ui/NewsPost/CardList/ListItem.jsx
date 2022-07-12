@@ -39,17 +39,11 @@ const ListItem = ({ data }) => {
       borderRadius: "12px 0 0 12px",
     },
     contentBody: {
-      display: "grid",
-      gridTemplateColumns: isMobileMatch
-        ? "86px repeat(auto-fit, minmax(100px, 100%))"
-        : "repeat(auto-fit, minmax(100px, 100%))",
+      display: "inline-flex",
       alignItems: "flex-start",
       padding: "16px 16px 0 16px",
       "& .image-container": {
         marginBottom: "16px",
-      },
-      "& .image-container .lazyload-wrapper .image": {
-        marginRight: "16px",
       },
     },
     bodyContainer: {
@@ -157,7 +151,10 @@ const ListItem = ({ data }) => {
                     </div>
                   </div>
                 )}
-                <div className={classes.bodyContainer}>
+                <Box
+                  sx={{ flex: 1, paddingLeft: 2 }}
+                  className={classes.bodyContainer}
+                >
                   {data && (
                     <Box className={classes.postCategory}>
                       {data.attributes.categories.data ? (
@@ -183,7 +180,7 @@ const ListItem = ({ data }) => {
                       />
                     </div>
                   )}
-                </div>
+                </Box>
               </div>
               <div className={classes.contentFooter}>
                 <div className={classes.footerDate}>
