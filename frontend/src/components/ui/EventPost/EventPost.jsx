@@ -17,6 +17,8 @@ import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 import { useStyles } from "./EventPost.styles";
 import useTheme from "@mui/material/styles/useTheme";
+import ReadMore from "../general/ReadMore/ReadMore";
+import * as React from "react";
 
 const NewsList = lazy(() => import("../NewsPost/CardList/NewsList"));
 
@@ -124,9 +126,7 @@ const EventPost = () => {
             />
             <SectionHeader title={"About Event"} />
             <Box className={classes.containerBody}>
-              <ReactMarkdown className={classes.postBody}>
-                {event.attributes.Body}
-              </ReactMarkdown>
+              <ReadMore>{event.attributes.Body}</ReadMore>
             </Box>
             <Subscription />
             <Box>
