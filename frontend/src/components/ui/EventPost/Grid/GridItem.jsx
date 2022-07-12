@@ -55,11 +55,11 @@ const GridItem = ({ data }) => {
             href={`/events/${data.attributes.slug}`}
             target="_blank"
           >
-            <LazyLoad height={248} once>
+            <LazyLoad height={235} once>
               <CardMedia
                 component="img"
                 src={imageUrl}
-                sx={{ maxHeight: 248 }}
+                sx={{ maxHeight: 235 }}
               />
             </LazyLoad>
           </CardActionArea>
