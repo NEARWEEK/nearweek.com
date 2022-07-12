@@ -89,7 +89,7 @@ const ListItem = ({ data }) => {
       color: "#656364",
     },
     img: {
-      width: isMobileMatch ? "68px !important" : "248px !important",
+      width: isMobileMatch ? "90px !important" : "248px !important",
       height: isMobileMatch ? "68px !important" : "186px !important",
       borderRadius: !isMobileMatch ? 0 : "12px",
     },
