@@ -109,7 +109,13 @@ const AudioSpacesPlayer = ({ item }) => {
           elevation={0}
         >
           <CardHeader
-            sx={{ p: 1, color: "#555" }}
+            sx={{
+              p: 1,
+              color: "#555",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
             title={
               <Typography
                 variant="span"
