@@ -1,13 +1,25 @@
-import Card from "@mui/material/Card";
 import LazyLoad from "react-lazyload";
-import CardMedia from "@mui/material/CardMedia";
-import { Box } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Typography,
+  Menu,
+  MenuItem,
+  Divider,
+  Grid,
+} from "@mui/material";
 import Categories from "../Categories/Categories";
-import CardActions from "@mui/material/CardActions";
 import { useEffect, useRef, useState } from "react";
 import AudioControls from "./AudioControls/AudioControls";
+import IconButton from "@mui/material/IconButton";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ContentCopy from "@mui/icons-material/ContentCopy";
+import ListItemText from "@mui/material/ListItemText";
 
 function useNoRenderRef(currentValue) {
   const ref = useRef(currentValue);
@@ -37,6 +49,51 @@ const AudioSpacesPlayer = ({ item }) => {
     };
   }, []);
 
+  const PlayerMenu = () => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleMenuClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+    return (
+      <>
+        <IconButton size="small" id="menu-button" onClick={handleMenuClick}>
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "menu-button",
+          }}
+        >
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <ContentCopy fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Copy link</ListItemText>
+          </MenuItem>
+          <Divider />
+          {item.attributes.ext_links.map((menuItem) => (
+            <MenuItem
+              component="a"
+              key={menuItem.Name}
+              href={menuItem.link_to}
+              target="_blank"
+            >
+              Listen on {menuItem.Name}
+            </MenuItem>
+          ))}
+        </Menu>
+      </>
+    );
+  };
+
   return (
     <>
       {item && (
@@ -51,11 +108,16 @@ const AudioSpacesPlayer = ({ item }) => {
           }}
           elevation={0}
         >
-          <LazyLoad height={205} once>
+          <CardHeader
+            sx={{ p: 1, color: "#555" }}
+            title={item.attributes.Title}
+            action={<PlayerMenu />}
+          />
+          <LazyLoad height={160} once>
             <CardMedia
               component="img"
               image={item.imageSrc}
-              sx={{ height: 205 }}
+              sx={{ height: 160 }}
             />
           </LazyLoad>
           <Box
@@ -65,24 +127,33 @@ const AudioSpacesPlayer = ({ item }) => {
               flex: 1,
             }}
           >
-            <CardContent sx={{ flex: "1 0 auto", pb: 0 }}>
-              <Typography component="div" variant="h5">
+            <CardContent sx={{ flex: "1 0 auto", pb: 0, pt: 0 }}>
+              {/*              <Typography component="div" variant="h5">
                 {item.attributes.Title}
-              </Typography>
+              </Typography>*/}
               <Typography
-                variant="subtitle1"
-                color="text.secondary"
+                sx={{
+                  p: 0,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: "vertical",
+                }}
                 component="div"
-              >
-                [{item.attributes.Description || "-"}]
-              </Typography>
+                color="text.secondary"
+                dangerouslySetInnerHTML={{
+                  __html: item.attributes.Description,
+                }}
+              />
               <Categories data={item.attributes.categories.data} />
             </CardContent>
-            <CardActions sx={{ mt: "auto" }}>
+            <CardActions sx={{ mt: "auto", pt: 0, pb: 0 }}>
               {item.audioSrc && (
                 <AudioControls
                   data={item}
                   isPlaying={isPlaying}
+                  setIsPlaying={setIsPlaying}
                   audioRef={audioRef}
                   onPlayPauseClick={setIsPlaying}
                 />
