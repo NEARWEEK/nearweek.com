@@ -110,15 +110,24 @@ const AudioSpacesPlayer = ({ item }) => {
         >
           <CardHeader
             sx={{ p: 1, color: "#555" }}
-            title={item.attributes.Title}
+            title={
+              <Typography
+                variant="span"
+                sx={{ fontSize: 12, fontWeight: "bold", wordBreak: "keep-all" }}
+              >
+                {item.attributes.Title}
+              </Typography>
+            }
             action={<PlayerMenu />}
           />
           <LazyLoad height={160} once>
-            <CardMedia
-              component="img"
-              image={item.imageSrc}
-              sx={{ height: 160 }}
-            />
+            <Box sx={{ pl: 2, pr: 2 }}>
+              <CardMedia
+                component="img"
+                image={item.imageSrc}
+                sx={{ height: 160, borderRadius: 2 }}
+              />
+            </Box>
           </LazyLoad>
           <Box
             sx={{
