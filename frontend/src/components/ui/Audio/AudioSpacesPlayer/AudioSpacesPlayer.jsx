@@ -162,9 +162,9 @@ const AudioSpacesPlayer = ({ item }) => {
                   __html: item.attributes.Description,
                 }}
               />
-              <Categories data={item.attributes.categories.data} />
+              {/* <Categories data={item.attributes.categories.data} />*/}
             </CardContent>
-            <CardActions sx={{ mt: "auto", pt: 0, pb: 0 }}>
+            <CardActions sx={{ mt: "auto", pt: 0, pb: 1 }}>
               {item.audioSrc && (
                 <AudioControls
                   data={item}
