@@ -47,7 +47,6 @@ const AudioControls = ({
   audioRef.current.onended = onEnded;
 
   const handleProgressChange = (value) => {
-    console.log(value);
     clearInterval(intervalRef.current);
     audioRef.current.currentTime = value;
     setTrackProgress(audioRef.current.currentTime);
