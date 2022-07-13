@@ -150,6 +150,7 @@ const AudioSpacesPlayer = ({ item }) => {
                   WebkitBoxOrient: "vertical",
                 }}
                 component="div"
+                className="ck-content"
                 color="text.secondary"
                 dangerouslySetInnerHTML={{
                   __html: item.attributes.Description,
