@@ -21,6 +21,7 @@ import Replay10Icon from "@mui/icons-material/Replay10";
 import Forward30Icon from "@mui/icons-material/Forward30";
 import ListItemText from "@mui/material/ListItemText";
 import ContentCopy from "@mui/icons-material/ContentCopy";
+import makeStyles from "@mui/styles/makeStyles";
 
 const AudioControls = ({
   data,
@@ -38,6 +39,24 @@ const AudioControls = ({
     openVolumeSlider(value);
   };
   const { duration } = audioRef.current;
+
+  const useStyles = makeStyles((theme) => ({
+    slider: {
+      marginBottom: "10px !important",
+      height: "6px !important",
+      color: "#333 !important",
+      "& .MuiSlider-rail": {
+        height: "6px",
+      },
+      "& .MuiSlider-markLabel": {
+        fontSize: "0.55rem !important",
+        top: "25px !important",
+      },
+      "& .MuiSlider-mark": {
+        display: "none !important",
+      },
+    },
+  }));
 
   const onEnded = () => {
     setTrackProgress(0);
@@ -90,6 +109,8 @@ const AudioControls = ({
     }
   }, [isPlaying]);
 
+  const classes = useStyles();
+
   return (
     <Box sx={{ flex: 1 }}>
       <Grid container sx={{ display: "flex", alignItems: "center" }}>
@@ -103,22 +124,35 @@ const AudioControls = ({
           }}
         >
           <Slider
+            className={classes.slider}
             size="small"
             min={0}
             max={duration ? duration : 0}
-            sx={{ flex: 1, mr: 1, ml: 1 }}
+            sx={{ flex: 1, mr: 2, ml: 2 }}
             value={trackProgress}
+            marks={[
+              {
+                value: 0,
+                label: audioRef.current.currentTime
+                  ? formatDuration(audioRef.current.currentTime)
+                  : "00.00",
+              },
+              {
+                value: duration ? duration : 100,
+                label: duration ? formatDuration(duration) : "00.00",
+              },
+            ]}
             onChange={(e) => handleProgressChange(e.target.value)}
           />
         </Grid>
-        <Grid item>
+        {/*        <Grid item>
           <Typography variant="span" sx={{ fontSize: 11, color: "#333" }}>
             {audioRef.current.currentTime
               ? formatDuration(audioRef.current.currentTime)
               : "00.00"}
-            {/*/ {duration ? formatDuration(duration) : "00.00"}*/}
+            / {duration ? formatDuration(duration) : "00.00"}
           </Typography>
-        </Grid>
+        </Grid>*/}
         {/*        <Grid
           item
           sx={{ flex: "0 0 auto", position: "relative" }}
@@ -163,7 +197,6 @@ const AudioControls = ({
             <Replay10Icon />
           </IconButton>
           <IconButton
-            size="large"
             sx={{
               border: "1px solid #333",
               mr: 1,

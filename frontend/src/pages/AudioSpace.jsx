@@ -15,66 +15,13 @@ import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 import Typography from "@mui/material/Typography";
 import TwitterSpaces from "../components/ui/Audio/TwitterSpaces/TwitterSpaces";
+import Podcasts from "../components/ui/Audio/Podcasts/Podcasts";
 
 const AudioSpace = () => {
-  const [spaces, setSpaces] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState(["all"]);
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await api.getAudio();
-      if (data) {
-        for (let item of data) {
-          item.imageSrc = getImageUrl(item);
-          item.audioSrc = item.attributes.File.data
-            ? new Audio(item.attributes.File.data.attributes.url)
-            : null;
-        }
-        setSpaces(data);
-      }
-    })();
-    return () => setSpaces([]);
-  }, []);
-
   const [tabValue, setTabValue] = useState("0");
 
   const handleChangeTab = (event, newValue) => {
     setTabValue(newValue);
-  };
-
-  const getImageUrl = (item) => {
-    return item.attributes.Image.data
-      ? item.attributes.Image.data.attributes.url
-      : placeholder.getRandomPlaceholder("large");
-  };
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await api.getAudioCategories();
-      if (data) {
-        setCategories(data);
-      }
-    })();
-    return () => setCategories([]);
-  }, []);
-
-  const handleFilter = (value) => {
-    let selected = [...selectedCategories].filter((item) => item !== "all");
-    if (!selected.includes(value)) {
-      if (value === "all") {
-        selected = ["all"];
-      } else {
-        selected.push(value);
-      }
-    } else {
-      for (let i = 0; i < selected.length; i++) {
-        if (selected[i] === value) {
-          selected.splice(i, 1);
-        }
-      }
-    }
-    setSelectedCategories(selected);
   };
 
   return (
@@ -89,57 +36,15 @@ const AudioSpace = () => {
               onChange={handleChangeTab}
               aria-label="tabs"
             >
-              <Tab icon={<TwitterIcon />} label="TwitterSpaces" value="0" />
-              <Tab icon={<LibraryMusicIcon />} label="AUDIO" value="1" />
-              <Tab icon={<EventIcon />} label="SCHEDULE" value="2" />
+              <Tab icon={<TwitterIcon />} label="Twitter Spaces" value="0" />
+              <Tab icon={<LibraryMusicIcon />} label="Podcasts" value="1" />
+              <Tab icon={<EventIcon />} label="Schedule" value="2" />
             </Tabs>
             <TabPanel value="0">
               <TwitterSpaces />
             </TabPanel>
             <TabPanel value="1" sx={{ p: 0 }}>
-              <Box>
-                <Box
-                  sx={{ borderBottom: "1px solid #ccc", mt: 1, mb: 2, p: 1 }}
-                >
-                  <Categories
-                    data={categories}
-                    all
-                    selected={selectedCategories}
-                    size="big"
-                    handleClick={handleFilter}
-                  />
-                </Box>
-                <Grid container spacing={2} columns={{ md: 12 }}>
-                  {spaces.length > 0 &&
-                    spaces
-                      .filter((f) => {
-                        if (selectedCategories.includes("all")) return f;
-                        return f.attributes.categories.data.find((category) =>
-                          selectedCategories.includes(category.attributes.Name)
-                        );
-                      })
-                      .map((item, index) => (
-                        <Grid
-                          item
-                          md={3}
-                          key={index}
-                          sx={{ display: "flex", flexDirection: "column" }}
-                        >
-                          {!item.attributes.frame && (
-                            <AudioSpacesPlayer item={item} />
-                          )}
-                          {item.attributes.frame && (
-                            <Box
-                              sx={{ flex: 1 }}
-                              dangerouslySetInnerHTML={{
-                                __html: item.attributes.frame,
-                              }}
-                            />
-                          )}
-                        </Grid>
-                      ))}
-                </Grid>
-              </Box>
+              <Podcasts />
             </TabPanel>
             <TabPanel value="2">
               <Box>

@@ -1,31 +1,17 @@
-import AudioSpacesPlayer from "../AudioSpacesPlayer/AudioSpacesPlayer";
-import { Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { apiConfig as api } from "../../../../config/apiConfig";
-import { placeholder } from "../../../../Utils/placeholder";
+import { Box, Grid } from "@mui/material";
 import Categories from "../Categories/Categories";
 
-const TwitterSpaces = () => {
+const Podcasts = () => {
   const [spaces, setSpaces] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState(["all"]);
 
-  const getImageUrl = (item) => {
-    return item.attributes.Image.data
-      ? item.attributes.Image.data.attributes.url
-      : placeholder.getRandomPlaceholder("large");
-  };
-
   useEffect(() => {
     (async () => {
-      const { data } = await api.getTwitterSpaces();
+      const { data } = await api.getAudio();
       if (data) {
-        for (let item of data) {
-          item.imageSrc = getImageUrl(item);
-          item.audioSrc = item.attributes.File.data
-            ? new Audio(item.attributes.File.data.attributes.url)
-            : null;
-        }
         setSpaces(data);
       }
     })();
@@ -87,7 +73,14 @@ const TwitterSpaces = () => {
                 key={index}
                 sx={{ display: "flex", flexDirection: "column" }}
               >
-                <AudioSpacesPlayer item={item} />
+                {item.attributes.frame && (
+                  <Box
+                    sx={{ flex: 1 }}
+                    dangerouslySetInnerHTML={{
+                      __html: item.attributes.frame,
+                    }}
+                  />
+                )}
               </Grid>
             ))}
       </Grid>
@@ -95,4 +88,4 @@ const TwitterSpaces = () => {
   );
 };
 
-export default TwitterSpaces;
+export default Podcasts;
