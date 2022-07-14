@@ -4,7 +4,7 @@
   "info": {
     "singularName": "audio",
     "pluralName": "audio-space",
-    "displayName": "Audio",
+    "displayName": "Podcasts",
     "description": ""
   },
   "options": {
@@ -15,25 +15,6 @@
     "Title": {
       "type": "string",
       "required": true
-    },
-    "File": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "audios"
-      ]
-    },
-    "Description": {
-      "type": "richtext"
-    },
-    "Image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
     },
     "categories": {
       "type": "relation",

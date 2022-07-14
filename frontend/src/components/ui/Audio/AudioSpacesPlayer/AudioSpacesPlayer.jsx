@@ -124,7 +124,6 @@ const AudioSpacesPlayer = ({ item }) => {
                 {item.attributes.Title}
               </Typography>
             }
-            action={<PlayerMenu />}
           />
           <LazyLoad height={160} once>
             <Box sx={{ pl: 2, pr: 2 }}>

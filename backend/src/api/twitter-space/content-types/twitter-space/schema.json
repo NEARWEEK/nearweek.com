@@ -4,7 +4,8 @@
   "info": {
     "singularName": "twitter-space",
     "pluralName": "twitter-spaces",
-    "displayName": "TwitterSpaces"
+    "displayName": "TwitterSpaces",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,8 +15,29 @@
     "Title": {
       "type": "string"
     },
-    "Code": {
+    "File": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "audios"
+      ]
+    },
+    "Description": {
       "type": "richtext"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "audio_categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::audio-category.audio-category"
     }
   }
 }
