@@ -321,6 +321,18 @@ async function unsubscribe(query) {
   return await response.json();
 }
 
+async function loadTwitterSpaces() {
+  try {
+    const response = await fetch(
+      `/api/twitter-spaces?populate=deep&sort=createdAt:desc`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load twitter spaces:", e);
+  }
+}
+
 export const apiConfig = {
   getAllEditions: loadEditions,
   getLatestEdition: loadLatestEdition,
@@ -356,4 +368,5 @@ export const apiConfig = {
   getJobDepartments: loadJobDepartments,
   getJobOccupations: loadJobOccupations,
   upload: upload,
+  getTwitterSpaces: loadTwitterSpaces,
 };

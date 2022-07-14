@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "twitter_spaces",
+  "info": {
+    "singularName": "twitter-space",
+    "pluralName": "twitter-spaces",
+    "displayName": "TwitterSpaces"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Code": {
+      "type": "richtext"
+    }
+  }
+}
