@@ -66,6 +66,13 @@ const ListItem = ({ data }) => {
       whiteSpace: "nowrap",
       textOverflow: "ellipsis",
     },
+    link: {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      display: "-webkit-box",
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: "vertical",
+    },
     postBody: {
       overflow: "hidden",
       display: "-webkit-box",
@@ -166,6 +173,7 @@ const ListItem = ({ data }) => {
                     <Link
                       color="inherit"
                       underline="none"
+                      className={classes.link}
                       href={getLinkUrl(data)}
                       target="_blank"
                     >
