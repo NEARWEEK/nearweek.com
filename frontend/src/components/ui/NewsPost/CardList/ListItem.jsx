@@ -62,9 +62,6 @@ const ListItem = ({ data }) => {
       [theme.breakpoints.down("md")]: {
         fontSize: 16,
       },
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      textOverflow: "ellipsis",
     },
     link: {
       overflow: "hidden",
