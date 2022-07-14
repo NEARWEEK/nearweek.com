@@ -41,7 +41,7 @@ const ListItem = ({ data }) => {
     contentBody: {
       display: "inline-flex",
       alignItems: "flex-start",
-      padding: "16px 16px 0 0",
+      padding: "16px 16px 0 16px",
       "& .image-container": {
         marginBottom: "16px",
       },
@@ -146,6 +146,7 @@ const ListItem = ({ data }) => {
                       <CardActionArea href={getLinkUrl(data)} target="_blank">
                         <LazyLoad height={205} once>
                           <CardMedia
+                            sx={{ marginRight: 2 }}
                             component="img"
                             image={imageUrl}
                             className={classes.img}
@@ -155,10 +156,7 @@ const ListItem = ({ data }) => {
                     </div>
                   </div>
                 )}
-                <Box
-                  sx={{ flex: 1, paddingLeft: 2 }}
-                  className={classes.bodyContainer}
-                >
+                <Box sx={{ flex: 1 }} className={classes.bodyContainer}>
                   {data && (
                     <Box className={classes.postCategory}>
                       {data.attributes.categories.data ? (
