@@ -6,8 +6,20 @@ import { addBlankTargets, parseMarkdown } from "../../../../Utils/Utils";
 import PostDescription from "../PostDescription/PostDescription";
 import Pictures from "../Pictures/Pictures";
 
-const ReadMore = ({ children, images }) => {
-  let text = children ? parseMarkdown(children, { dialect: "DERBY" }) : "";
+const isHTML = (text) => {
+  try {
+    const fragment = new DOMParser().parseFromString(text, "text/html");
+    return fragment.body.children.length > 0;
+  } catch (error) {
+    console.log(error);
+  }
+  return false;
+};
+
+const ReadMore = ({ children = "", images }) => {
+  let text = !isHTML(children)
+    ? parseMarkdown(children, { dialect: "DERBY" })
+    : children;
   text = addBlankTargets(text);
   const [isReadMore, setIsReadMore] = useState(true);
   const [showGallery, setShowGallery] = useState(false);
