@@ -2,24 +2,16 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import { useStyles } from "./ReadMore.styles";
 import { Collapse } from "react-collapse";
-import { addBlankTargets, parseMarkdown } from "../../../../Utils/Utils";
+import {
+  addBlankTargets,
+  isHTML,
+  parseMarkdown,
+} from "../../../../Utils/Utils";
 import PostDescription from "../PostDescription/PostDescription";
 import Pictures from "../Pictures/Pictures";
 
-const isHTML = (text) => {
-  try {
-    const fragment = new DOMParser().parseFromString(text, "text/html");
-    return fragment.body.children.length > 0;
-  } catch (error) {
-    console.log(error);
-  }
-  return false;
-};
-
-const ReadMore = ({ children = "", images }) => {
-  let text = !isHTML(children)
-    ? parseMarkdown(children, { dialect: "DERBY" })
-    : children;
+const ReadMore = ({ children, images }) => {
+  let text = children && !isHTML(children) ? parseMarkdown(children) : "";
   text = addBlankTargets(text);
   const [isReadMore, setIsReadMore] = useState(true);
   const [showGallery, setShowGallery] = useState(false);
@@ -95,7 +87,7 @@ const ReadMore = ({ children = "", images }) => {
         className={classes.readMoreLink}
         sx={{ cursor: "pointer" }}
       >
-        <>{clamped && <> {isReadMore ? "Read more" : "Show less"}</>}</>
+        <>{clamped && <span> {isReadMore ? "Show more" : "Show less"}</span>}</>
       </Box>
     </Box>
   );

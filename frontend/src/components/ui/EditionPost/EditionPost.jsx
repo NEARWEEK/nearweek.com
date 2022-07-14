@@ -11,13 +11,17 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import * as Utils from "../../../Utils/Utils";
-import { getPubDate, MOBILE_WIDTH } from "../../../Utils/Utils";
+import {
+  getPubDate,
+  isHTML,
+  MOBILE_WIDTH,
+  parseMarkdown,
+} from "../../../Utils/Utils";
 //import Widget from "../general/Widget/Widget";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 import ShareButton from "../general/PostActions/ShareButton/ShareButton";
 import { useStyles } from "./EditionPost.styles";
-import ReadMore from "../general/ReadMore/ReadMore";
 import SectionContent from "./SectionContent/SectionContent";
 
 library.add(faDiscord);
@@ -38,6 +42,9 @@ const EditionPost = () => {
       match.params.editionId
     );
     if (data) {
+      if (!isHTML(data.attributes.Body)) {
+        data.attributes.Body = parseMarkdown(data.attributes.Body);
+      }
       setEdition(data);
     }
     if (meta) {
@@ -181,7 +188,12 @@ const EditionPost = () => {
                   <ShareButton />
                 </Box>
                 <div className={classes.postBody}>
-                  <ReadMore>{edition.attributes.Body}</ReadMore>
+                  {/* <ReadMore>{edition.attributes.Body}</ReadMore>*/}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: edition.attributes.Body,
+                    }}
+                  />
                 </div>
                 <div>
                   <div>

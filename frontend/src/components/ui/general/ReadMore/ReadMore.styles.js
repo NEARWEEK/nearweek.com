@@ -19,7 +19,18 @@ const styles = (theme) => ({
     flexDirection: "column",
     color: "#0d00ff",
     fontWeight: "bold",
+    alignItems: "center",
     marginBottom: theme.spacing(3),
+    "& span": {
+      flex: 1,
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: theme.spacing(2),
+      borderRadius: theme.spacing(1.5),
+      border: "1px solid #ccc",
+    },
   },
   showGalleryLink: {
     display: "flex",

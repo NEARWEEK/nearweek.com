@@ -3,7 +3,7 @@ import * as Utils from "../../../Utils/Utils";
 import Navbar from "../Navbar/Navbar";
 import { Box, Container } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { getTimeAgo } from "../../../Utils/Utils";
+import { getTimeAgo, isHTML, parseMarkdown } from "../../../Utils/Utils";
 import { useMatch } from "react-router";
 import SectionHeader from "../general/Section/SectionHeader/SectionHeader";
 import ReactMarkdown from "react-markdown";
@@ -17,8 +17,6 @@ import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 import { useStyles } from "./EventPost.styles";
 import useTheme from "@mui/material/styles/useTheme";
-import ReadMore from "../general/ReadMore/ReadMore";
-import * as React from "react";
 
 const NewsList = lazy(() => import("../NewsPost/CardList/NewsList"));
 
@@ -32,6 +30,9 @@ const EventPost = () => {
   useEffect(async () => {
     const { data } = await Utils.api.getOneEvent(match.params.eventId);
     if (data) {
+      if (!isHTML(data.attributes.Body)) {
+        data.attributes.Body = parseMarkdown(data.attributes.Body);
+      }
       setEvent(data);
     }
   }, []);
@@ -126,7 +127,10 @@ const EventPost = () => {
             />
             <SectionHeader title={"About Event"} />
             <Box className={classes.containerBody}>
-              <ReadMore>{event.attributes.Body}</ReadMore>
+              {/* <ReadMore>{event.attributes.Body}</ReadMore>*/}
+              <Box
+                dangerouslySetInnerHTML={{ __html: event.attributes.Body }}
+              />
             </Box>
             <Subscription />
             <Box>
