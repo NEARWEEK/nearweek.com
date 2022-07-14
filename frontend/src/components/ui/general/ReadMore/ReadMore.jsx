@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import * as React from "react";
 import { useStyles } from "./ReadMore.styles";
 import { Collapse } from "react-collapse";
 import { addBlankTargets, parseMarkdown } from "../../../../Utils/Utils";
@@ -8,7 +7,7 @@ import PostDescription from "../PostDescription/PostDescription";
 import Pictures from "../Pictures/Pictures";
 
 const ReadMore = ({ children, images }) => {
-  let text = children ? parseMarkdown(children) : "";
+  let text = children ? parseMarkdown(children, { dialect: "DERBY" }) : "";
   text = addBlankTargets(text);
   const [isReadMore, setIsReadMore] = useState(true);
   const [showGallery, setShowGallery] = useState(false);
