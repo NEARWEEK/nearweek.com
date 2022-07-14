@@ -1,6 +1,7 @@
 import React from "react";
 import ReadMore from "../../general/ReadMore/ReadMore";
 import { useStyles } from "./SectionContent.styles";
+import Box from "@mui/material/Box";
 
 const SectionContent = ({ title, items }) => {
   const classes = useStyles();
@@ -12,7 +13,11 @@ const SectionContent = ({ title, items }) => {
         <>
           <div className={classes.highlightItem} key={index}>
             <div className={classes.highlightTitle}>
-              {item && <ReadMore images={item.Images}>{item.Link}</ReadMore>}
+              {item && (
+                <Box sx={{ display: "flex" }}>
+                  <ReadMore images={item.Images}>{item.Link}</ReadMore>
+                </Box>
+              )}
             </div>
           </div>
         </>

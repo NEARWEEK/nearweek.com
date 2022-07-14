@@ -5,11 +5,23 @@ import { apiConfig } from "../config/apiConfig";
 
 export const MOBILE_WIDTH = "600px";
 
+export const isHTML = (text) => {
+  try {
+    const fragment = new DOMParser().parseFromString(text, "text/html");
+    return fragment.body.children.length > 0;
+  } catch (error) {
+    console.log(error);
+  }
+  return false;
+};
+
 export const addBlankTargets = (s) => {
-  return ("" + s).replace(
-    /<a\s+href=/gi,
-    '<a target="_blank" rel="noopener noreferrer" href='
-  );
+  return s
+    ? ("" + s).replace(
+        /<a\s+href=/gi,
+        '<a target="_blank" rel="noopener noreferrer" href='
+      )
+    : s;
 };
 
 const priceFormatter = new Intl.NumberFormat("en-US", {

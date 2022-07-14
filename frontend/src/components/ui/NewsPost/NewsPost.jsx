@@ -6,14 +6,17 @@ import Box from "@mui/material/Box";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { getTimeAgo, MOBILE_WIDTH } from "../../../Utils/Utils";
+import {
+  getTimeAgo,
+  isHTML,
+  MOBILE_WIDTH,
+  parseMarkdown,
+} from "../../../Utils/Utils";
 import Section from "../general/Section/Section";
 import { placeholder } from "../../../Utils/placeholder";
 import PageMetaTags from "../general/PageMetaTags/PageMetaTags";
 import ShareButton from "../general/PostActions/ShareButton/ShareButton";
 import { useStyles } from "./NewsPost.styles";
-import ReadMore from "../general/ReadMore/ReadMore";
-import * as React from "react";
 
 const NewsList = lazy(() => import("./CardList/NewsList"));
 
@@ -26,11 +29,12 @@ const NewsPost = () => {
   useEffect(async () => {
     const { data } = await Utils.api.getOneArticle(match.params.articleId);
     if (data) {
+      if (!isHTML(data.attributes.Body)) {
+        data.attributes.Body = parseMarkdown(data.attributes.Body);
+      }
       setArticle(data);
     }
   }, []);
-
-  console.log(article);
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
   if (article && article.attributes.Image?.data) {
@@ -131,7 +135,10 @@ const NewsPost = () => {
               <ShareButton />
             </Box>
             <Box className={classes.containerBody}>
-              <ReadMore>{article.attributes.Body}</ReadMore>
+              {/* <ReadMore>{article.attributes.Body}</ReadMore>*/}
+              <Box
+                dangerouslySetInnerHTML={{ __html: article.attributes.Body }}
+              />
             </Box>
             <Box display="flex" alignItems="center">
               <ShareButton />
