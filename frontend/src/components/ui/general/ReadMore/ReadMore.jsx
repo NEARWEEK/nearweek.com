@@ -14,13 +14,13 @@ const ReadMore = ({ children, images }) => {
   let text = children && !isHTML(children) ? parseMarkdown(children) : "";
   text = addBlankTargets(text);
   const [isReadMore, setIsReadMore] = useState(true);
-  const [showGallery, setShowGallery] = useState(false);
+
   const [clamped, setClamped] = useState(false);
   const classes = useStyles();
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
-
+  const [showGallery, setShowGallery] = useState(false);
   const toggleShowGallery = () => {
     setShowGallery(!showGallery);
   };
