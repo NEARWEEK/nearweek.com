@@ -439,6 +439,9 @@
     background: hsl(0, 0%, 87%);
     border: 0;
 }
+.ck-content figure img, .ck-content p img  {
+    max-width: 100%;
+}
 /* ckeditor5-mention/theme/mention.css */
 .ck-content .mention {
     background: var(--ck-color-mention-background);
