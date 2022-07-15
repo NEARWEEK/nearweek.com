@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import * as Utils from "../../../Utils/Utils";
 import { useMatch } from "react-router";
 import Navbar from "../Navbar/Navbar";
-import Box from "@mui/material/Box";
+import { Box, Container } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -54,9 +54,9 @@ const NewsPost = () => {
         />
       )}
       <Navbar />
-      {article && (
-        <Box className={classes.pageWrapper}>
-          <Box className={classes.contentContainer}>
+      <Box component="main">
+        {article && (
+          <Container maxWidth="md">
             <Box className={classes.breadcrumb}>
               <a className={classes.link} href="/content">
                 <FontAwesomeIcon
@@ -77,7 +77,7 @@ const NewsPost = () => {
                   backgroundPosition: "50% 50%",
                   maxWidth: "900px",
                   minWidth: "200px",
-                  minHeight: isMobileMatch ? "186px" : "582px",
+                  minHeight: isMobileMatch ? "270px" : "600px",
                 }}
                 className={classes.img}
               />
@@ -135,6 +135,7 @@ const NewsPost = () => {
             <Box className={classes.containerBody}>
               {/* <ReadMore>{article.attributes.Body}</ReadMore>*/}
               <Box
+                className="ck-content"
                 dangerouslySetInnerHTML={{ __html: article.attributes.Body }}
               />
             </Box>
@@ -152,9 +153,9 @@ const NewsPost = () => {
                 </Suspense>
               </Section>
             </Box>
-          </Box>
-        </Box>
-      )}
+          </Container>
+        )}
+      </Box>
     </>
   );
 };

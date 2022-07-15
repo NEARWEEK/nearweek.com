@@ -43,7 +43,7 @@ const Events = () => {
       <Navbar />
       <Box component="main">
         {!isMobileMatch ? (
-          <Container maxWidth={1440}>
+          <Container maxWidth="lg">
             <Box className={classes.topContainer}>
               <Announce event={events.data[0]} />
             </Box>
@@ -53,7 +53,7 @@ const Events = () => {
             <Announce event={events.data[0]} />
           </Box>
         )}
-        <Container maxWidth={1440}>
+        <Container maxWidth="lg">
           <Box className={classes.latestEvents}>
             <Section title={"Latest Events"}>
               {events.data.length > 0 && (
@@ -63,18 +63,18 @@ const Events = () => {
           </Box>
         </Container>
         <Box style={{ backgroundColor: "#f7f7f7" }}>
-          <Container maxWidth={1440}>
+          <Container maxWidth="lg">
             <SectionHeader title={"Latest Video"} link={"/video"} />
           </Container>
           {!isMobileMatch ? (
             <GridCarousel />
           ) : (
-            <Container maxWidth={1440}>
+            <Container maxWidth="lg">
               <GridVideo />
             </Container>
           )}
         </Box>
-        <Container maxWidth={1440}>
+        <Container maxWidth="lg">
           <Section title={"Latest Editions"} link={"/editions"}>
             {editions.data.length > 0 && (
               <EditionsList editions={editions.data} />
