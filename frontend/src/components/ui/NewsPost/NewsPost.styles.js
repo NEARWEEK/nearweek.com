@@ -6,7 +6,7 @@ const styles = (theme) => ({
     marginRight: 16,
   },
   contentContainer: {
-    maxWidth: 900,
+    maxWidth: 800,
     minWidth: 200,
     margin: "0 auto",
     position: "relative",
