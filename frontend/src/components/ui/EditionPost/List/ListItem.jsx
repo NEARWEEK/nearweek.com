@@ -23,7 +23,7 @@ const ListItem = ({ data }) => {
     contentBody: {
       display: "inline-flex",
       alignItems: "flex-start",
-      padding: "16px 16px 0 0",
+      padding: "16px 16px 0 16px",
       "& .image-container": {
         marginBottom: "16px",
       },
@@ -132,6 +132,7 @@ const ListItem = ({ data }) => {
                           <CardMedia
                             component="img"
                             image={imageUrl}
+                            sx={{ mr: 2 }}
                             className={classes.img}
                           />
                         </LazyLoad>
@@ -139,7 +140,7 @@ const ListItem = ({ data }) => {
                     </div>
                   </div>
                 )}
-                <Box sx={{ flex: 1, paddingLeft: 2 }}>
+                <Box sx={{ flex: 1 }}>
                   <div className={classes.postDate}>
                     <span>
                       {data.attributes.Period &&
