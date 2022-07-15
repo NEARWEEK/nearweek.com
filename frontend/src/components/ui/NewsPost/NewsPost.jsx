@@ -37,10 +37,8 @@ const NewsPost = () => {
   }, []);
 
   let imageUrl = placeholder.getRandomPlaceholder("large");
-  if (article && article.attributes.Image?.data) {
-    const { large, medium } = article.attributes.Image.data.attributes.formats;
-    imageUrl =
-      large?.url || medium?.url || placeholder.getRandomPlaceholder("large");
+  if (article && article.attributes.Image.data) {
+    imageUrl = article.attributes.Image.data.attributes.url;
   }
 
   const classes = useStyles();
