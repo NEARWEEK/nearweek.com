@@ -2,7 +2,7 @@
 
 const fs = require("fs-extra");
 const xml = require("xml");
-const Cheerio = require("cheerio");
+const cheerio = require("cheerio");
 
 const YOUR_WEBSITE = process.env.BASE_URL;
 
@@ -14,24 +14,23 @@ function buildFeed(posts) {
   const feedItems = [];
 
   feedItems.push(
-    ...sortedPosts.map(function (post) {
-      const $ = Cheerio.load(post.content, {
+    ...sortedPosts.map((post) => {
+      const ch = cheerio.load(post.content, {
         decodeEntities: false,
       });
 
       // replace relative links with absolute
-      $("a[href^='/'], img[src^='/']").each(function (elem) {
-        console.log(elem);
-        const $this = $(elem);
-        if ($this.attr("href")) {
-          $this.attr("href", `${YOUR_WEBSITE}/${$this.attr("href")}`);
+      ch("a[href^='/'], img[src^='/']").each((i, e) => {
+        const _this = e;
+        if (_this.attr("href")) {
+          _this.attr("href", `${YOUR_WEBSITE}/${_this.attr("href")}`);
         }
-        if ($this.attr("src")) {
-          $this.attr("src", `${YOUR_WEBSITE}/${$this.attr("src")}`);
+        if (_this.attr("src")) {
+          _this.attr("src", `${YOUR_WEBSITE}/${_this.attr("src")}`);
         }
       });
 
-      const postContent = $("body").html();
+      const postContent = ch("body").html();
 
       const feedItem = {
         item: [
@@ -45,7 +44,6 @@ function buildFeed(posts) {
               `${YOUR_WEBSITE}/${post.slug}/`,
             ],
           },
-          { image: post.image ? [{ url: YOUR_WEBSITE + post.image }] : null },
           {
             description: {
               _cdata: postContent,
@@ -88,7 +86,7 @@ async function createRssFeed(posts) {
           {
             link: `${YOUR_WEBSITE}/`,
           },
-          { description: "YOUR-WEBSITE-DESCRIPTION" },
+          { description: "Your weekly dose of news from the NEARverse!" },
           { language: "en-US" },
           ...buildFeed(posts),
         ],
