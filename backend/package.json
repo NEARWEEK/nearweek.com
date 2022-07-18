@@ -24,7 +24,9 @@
     "bcryptjs": "^2.4.3",
     "bs58": "^5.0.0",
     "btoa": "^1.2.1",
+    "cheerio": "^1.0.0-rc.12",
     "coingecko-api": "^1.0.10",
+    "fs-extra": "^10.1.0",
     "mailchimp-api-v3": "^1.15.0",
     "moment": "^2.29.2",
     "near-api-js": "^0.45.1",
@@ -32,7 +34,8 @@
     "sqlite3": "5.0.2",
     "strapi-plugin-ckeditor5": "^2.1.1-rc.1",
     "strapi-plugin-populate-deep": "^0.1.2",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "xml": "^1.0.1"
   },
   "author": {
     "name": "A Strapi developer"

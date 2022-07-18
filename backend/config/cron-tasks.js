@@ -1,4 +1,5 @@
 const indexer = require("./functions/indexer");
+const feedsTasks = require("./feeds/tasks/feedsTask");
 
 module.exports = {
   "10 * * * * *": async ({ strapi }) => {
@@ -27,5 +28,16 @@ module.exports = {
     } catch (e) {
       console.log("Error", e);
     }
+  },
+  // 1
+  "10 * * * *": {
+    // 2
+    task: async () => {
+      await feedsTasks.updateFeed();
+    },
+    // 3
+    options: {
+      tz: "Asia/Kolkata",
+    },
   },
 };
