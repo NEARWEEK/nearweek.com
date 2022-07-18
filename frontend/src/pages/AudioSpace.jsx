@@ -49,7 +49,7 @@ const AudioSpace = () => {
             <TabPanel value="2">
               <Box>
                 <iframe
-                  src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FKiev&title=Schedule&hl=en_GB&src=dGVzdG5lYXJ3ZWVrQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=dWsudWtyYWluaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043"
+                  src="https://calendar.google.com/calendar/embed?src=news%40nearweek.com&ctz=Europe%2FCopenhagen"
                   style={{ border: 0 }}
                   width="100%"
                   height="600"
