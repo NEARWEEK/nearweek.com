@@ -3,6 +3,7 @@ import { Box, Container, Grid, useMediaQuery, useTheme } from "@mui/material";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import Section from "../components/ui/general/Section/Section";
 import Subscription from "../components/ui/general/Subscription/Subscription";
+import Footer from "../components/ui/Footer/Footer";
 
 const Navbar = lazy(() => import("../components/ui/Navbar/Navbar"));
 
@@ -110,6 +111,9 @@ const Home = () => {
           </Container>
         </div>
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };

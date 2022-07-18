@@ -44,3 +44,7 @@ code {
   line-height: 19px;
   color: #ddd;
 }
+
+footer {
+  border: 1px solid #ccc;
+}
