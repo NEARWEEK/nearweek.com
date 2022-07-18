@@ -21,6 +21,7 @@ function buildFeed(posts) {
 
       // replace relative links with absolute
       $("a[href^='/'], img[src^='/']").each(function (elem) {
+        console.log(elem);
         const $this = $(elem);
         if ($this.attr("href")) {
           $this.attr("href", `${YOUR_WEBSITE}/${$this.attr("href")}`);
@@ -44,7 +45,7 @@ function buildFeed(posts) {
               `${YOUR_WEBSITE}/${post.slug}/`,
             ],
           },
-          { image: post.image ? [{ url: post.image }] : null },
+          { image: post.image ? [{ url: YOUR_WEBSITE + post.image }] : null },
           {
             description: {
               _cdata: postContent,

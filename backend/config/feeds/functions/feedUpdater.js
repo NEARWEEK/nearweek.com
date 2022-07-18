@@ -8,7 +8,6 @@ async function getNewFeedItemsFromAPI() {
     populate: "deep",
   });
   for (let article of results) {
-    console.log(article.Thumbnail);
     mapFeeds.push({
       title: article.Title,
       slug: "content/" + article.slug,
