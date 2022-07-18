@@ -45,11 +45,6 @@ function buildFeed(posts) {
             ],
           },
           {
-            image: post.image
-              ? [{ url: `${YOUR_WEBSITE}${post.image}` }]
-              : null,
-          },
-          {
             description: {
               _cdata: postContent,
             },
@@ -91,7 +86,7 @@ async function createRssFeed(posts) {
           {
             link: `${YOUR_WEBSITE}/`,
           },
-          { description: "YOUR-WEBSITE-DESCRIPTION" },
+          { description: "Your weekly dose of news from the NEARverse!" },
           { language: "en-US" },
           ...buildFeed(posts),
         ],
