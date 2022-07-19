@@ -73,7 +73,7 @@ const ListItem = ({ data }) => {
     postBody: {
       overflow: "hidden",
       display: "-webkit-box",
-      WebkitLineClamp: 2,
+      WebkitLineClamp: 1,
       WebkitBoxOrient: "vertical",
     },
     contentFooter: {
