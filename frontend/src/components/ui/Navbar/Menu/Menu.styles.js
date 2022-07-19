@@ -9,7 +9,7 @@ const styles = (theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-    gap: "14px",
+    gap: "16px",
     fontSize: "14px",
     fontWeight: "bold",
     letterSpacing: "1px",
