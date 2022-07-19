@@ -76,7 +76,7 @@ const TwitterSpaces = () => {
           spaces
             .filter((f) => {
               if (selectedCategories.includes("all")) return f;
-              return f.attributes.categories.data.find((category) =>
+              return f.attributes.audio_categories.data.find((category) =>
                 selectedCategories.includes(category.attributes.Name)
               );
             })
