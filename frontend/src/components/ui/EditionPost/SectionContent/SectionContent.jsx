@@ -111,7 +111,7 @@ const SectionContent = ({ title, items }) => {
             <Button onClick={showMoreHandler}>Show more</Button>
           </Box>
         )}
-        {moreLength === items.length && (
+        {items.length > 5 && moreLength === items.length && (
           <Box component="span" sx={{ margin: "18px 0" }}>
             <Button onClick={showLessHandler}>Show less</Button>
           </Box>
