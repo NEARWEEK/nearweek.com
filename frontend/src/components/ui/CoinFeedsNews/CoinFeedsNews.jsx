@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { api, getTimeAgo } from "../../../Utils/Utils";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import CardContent from "@mui/material/CardContent";
+import { getTimeAgo } from "../../../Utils/Utils";
+import {
+  Card,
+  CardActionArea,
+  CardMedia,
+  Grid,
+  CardContent,
+  Link,
+  Box,
+  IconButton,
+  CardActions,
+} from "@mui/material";
 import LazyLoad from "react-lazyload";
 import makeStyles from "@mui/styles/makeStyles";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import Loader from "../general/Loader/Loader";
+import { useCoinfeedsNews } from "../hooks/useCoinfeedsNews";
 
 const CoinFeedsNews = () => {
-  const [feedsNews, setFeedsNews] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const { newsFeed } = await api.getCoinFeeds();
-      setFeedsNews(newsFeed);
-    })();
-  }, []);
+  const { feedsNews } = useCoinfeedsNews();
 
   const useStyles = makeStyles(() => ({
     contentBody: {

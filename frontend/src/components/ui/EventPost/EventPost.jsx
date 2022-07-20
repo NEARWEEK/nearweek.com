@@ -6,7 +6,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { getTimeAgo, isHTML, parseMarkdown } from "../../../Utils/Utils";
 import { useMatch } from "react-router";
 import SectionHeader from "../general/Section/SectionHeader/SectionHeader";
-import ReactMarkdown from "react-markdown";
 import Subscription from "../general/Subscription/Subscription";
 import Section from "../general/Section/Section";
 import EditionsList from "../EditionPost/List/EditionsList";

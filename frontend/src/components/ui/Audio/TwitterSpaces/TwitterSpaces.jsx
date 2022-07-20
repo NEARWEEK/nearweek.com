@@ -1,46 +1,14 @@
 import AudioSpacesPlayer from "../AudioSpacesPlayer/AudioSpacesPlayer";
 import { Box, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
-import { apiConfig as api } from "../../../../config/apiConfig";
-import { placeholder } from "../../../../Utils/placeholder";
+import { useState } from "react";
 import Categories from "../Categories/Categories";
+import { useAudioCategories } from "../../hooks/useAudioCategories";
+import { useTwitterSpaces } from "../../hooks/useTwitterSpaces";
 
 const TwitterSpaces = () => {
-  const [spaces, setSpaces] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const { spaces } = useTwitterSpaces();
+  const { categories } = useAudioCategories();
   const [selectedCategories, setSelectedCategories] = useState(["all"]);
-
-  const getImageUrl = (item) => {
-    return item.attributes.Image.data
-      ? item.attributes.Image.data.attributes.url
-      : placeholder.getRandomPlaceholder("large");
-  };
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await api.getTwitterSpaces();
-      if (data) {
-        for (let item of data) {
-          item.imageSrc = getImageUrl(item);
-          item.audioSrc = item.attributes.File.data
-            ? new Audio(item.attributes.File.data.attributes.url)
-            : null;
-        }
-        setSpaces(data);
-      }
-    })();
-    return () => setSpaces([]);
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await api.getAudioCategories();
-      if (data) {
-        setCategories(data);
-      }
-    })();
-    return () => setCategories([]);
-  }, []);
 
   const handleFilter = (value) => {
     let selected = [...selectedCategories].filter((item) => item !== "all");
