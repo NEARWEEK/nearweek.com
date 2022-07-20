@@ -35,7 +35,7 @@ export function getTimeAgo(date) {
 }
 
 export function getEventDay(date) {
-  const dateFormatted = moment(date).format("DD MMMM, YYYY").toUpperCase();
+  const dateFormatted = moment(date).format("DD MMM, YYYY").toUpperCase();
   return `${dateFormatted}`;
 }
 
