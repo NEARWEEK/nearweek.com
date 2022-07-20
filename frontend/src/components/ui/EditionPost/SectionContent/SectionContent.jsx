@@ -12,11 +12,11 @@ const SectionContent = ({ title, items }) => {
   const classes = useStyles();
 
   const showMoreHandler = () => {
-    if (moreLength < items.length) {
-      const nextLength =
-        items.length - moreLength < 5 ? items.length - moreLength : 5;
-      setMoreLength(moreLength + nextLength);
-    }
+    setMoreLength(items.length);
+  };
+
+  const showLessHandler = () => {
+    setMoreLength(5);
   };
 
   const LinkContent = ({ item, images }) => {
@@ -82,7 +82,6 @@ const SectionContent = ({ title, items }) => {
             <div className={classes.highlightTitle}>
               {item && (
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  {/*<ReadMore images={item.Images}>{item.Link}</ReadMore>*/}
                   <LinkContent item={item} images={item.Images} />
                 </Box>
               )}
@@ -90,28 +89,34 @@ const SectionContent = ({ title, items }) => {
           </div>
         </>
       ))}
-      {items.length > moreLength && (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#fff",
-            marginBottom: "24px",
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#fff",
+          marginBottom: "24px",
+          fontWeight: "bold",
+          "& button": {
+            textTransform: "none",
             fontWeight: "bold",
-            "& button": {
-              textTransform: "none",
-              fontWeight: "bold",
-              fontSize: "20px",
-            },
-          }}
-        >
+            fontSize: "20px",
+          },
+        }}
+      >
+        {items.length > moreLength && (
           <Box component="span" sx={{ margin: "18px 0" }}>
             <Button onClick={showMoreHandler}>Show more</Button>
           </Box>
-        </Box>
-      )}
+        )}
+        {moreLength === items.length && (
+          <Box component="span" sx={{ margin: "18px 0" }}>
+            <Button onClick={showLessHandler}>Show less</Button>
+          </Box>
+        )}
+      </Box>
     </>
   );
 };

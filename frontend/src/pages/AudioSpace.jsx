@@ -1,19 +1,11 @@
 import Navbar from "../components/ui/Navbar/Navbar";
-import { Box, Container } from "@mui/material";
-import { useEffect, useState } from "react";
-import { apiConfig as api } from "../config/apiConfig";
-import Grid from "@mui/material/Grid";
-import { placeholder } from "../Utils/placeholder";
-import Categories from "../components/ui/Audio/Categories/Categories";
-import AudioSpacesPlayer from "../components/ui/Audio/AudioSpacesPlayer/AudioSpacesPlayer";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import { Box, Container, Tabs, Tab } from "@mui/material";
+import { useState } from "react";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import EventIcon from "@mui/icons-material/Event";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
-import Typography from "@mui/material/Typography";
 import TwitterSpaces from "../components/ui/Audio/TwitterSpaces/TwitterSpaces";
 import Podcasts from "../components/ui/Audio/Podcasts/Podcasts";
 
