@@ -15,18 +15,7 @@ import LazyLoad from "react-lazyload";
 import { useLatestEdition } from "../../hooks/useLatestEdition";
 
 const Announce = ({ isFront = false }) => {
-  //const [edition, setEdition] = useState({ data: [], meta: {} });
   const { edition } = useLatestEdition();
-  console.log(edition);
-  /*
-  useEffect(() => {
-    (async () => {
-      const data = await Utils.api.getLatestEdition();
-      if (data) {
-        setEdition(data);
-      }
-    })();
-  }, []);*/
 
   const classes = useStyles();
 
