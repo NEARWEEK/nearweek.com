@@ -16,7 +16,7 @@ async function getNewFeedItemsFromAPI() {
       content: article.Body,
     });
   }
-  return mapFeeds;
+  return mapFeeds.sort((o1, o2) => new Date(o1.date) - new Date(o2.date));
 }
 
 async function main() {
