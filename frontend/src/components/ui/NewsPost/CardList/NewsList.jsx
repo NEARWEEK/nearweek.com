@@ -37,8 +37,6 @@ const NewsList = ({ exclude, show = 3, showMore = false }) => {
     }
   };
 
-  console.log("exclude", exclude);
-
   const classes = useStyles();
   return (
     <Box sx={{ gap: 3, display: "flex", flexWrap: "wrap", maxWidth: "100%" }}>
