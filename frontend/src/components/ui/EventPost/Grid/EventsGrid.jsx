@@ -3,11 +3,12 @@ import GridItem from "./GridItem";
 import * as Utils from "../../../../Utils/Utils";
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
+import { useEvents } from "../../hooks/useEvents";
 
 const EventsGrid = ({ exclude, show = 3 }) => {
-  const [events, setEvents] = useState([]);
+  const { events } = useEvents();
 
-  useEffect(async () => {
+  /*  useEffect(async () => {
     const { data } = await Utils.api.getAllEvents();
     if (data) {
       if (exclude) {
@@ -16,7 +17,7 @@ const EventsGrid = ({ exclude, show = 3 }) => {
         setEvents(data);
       }
     }
-  }, []);
+  }, []);*/
 
   return (
     <Grid

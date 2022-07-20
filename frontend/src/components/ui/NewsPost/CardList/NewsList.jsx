@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ListItem from "./ListItem";
 import makeStyles from "@mui/styles/makeStyles";
 import { Box, Button } from "@mui/material";
-import * as Utils from "../../../../Utils/Utils";
+import { useNews } from "../../hooks/useNews";
 
 const NewsList = ({ exclude, show = 3, showMore = false }) => {
-  const [news, setNews] = useState([]);
+  const { news } = useNews();
   const [moreLength, setMoreLength] = useState(3);
 
   const useStyles = makeStyles(() => ({
-    container: {
-      gap: 24,
-      display: "flex",
-      flexWrap: "wrap",
-      maxWidth: "100%",
-    },
     showMoreBlock: {
       flex: 1,
       display: "flex",
@@ -35,15 +29,6 @@ const NewsList = ({ exclude, show = 3, showMore = false }) => {
     },
   }));
 
-  useEffect(async () => {
-    const { data } = await Utils.api.getAllNews();
-    if (exclude) {
-      setNews(data.filter((item) => item.id !== exclude));
-    } else {
-      setNews(data);
-    }
-  }, []);
-
   const showMoreHandler = () => {
     if (moreLength < news.length) {
       const nextLength =
@@ -52,15 +37,33 @@ const NewsList = ({ exclude, show = 3, showMore = false }) => {
     }
   };
 
+  console.log("exclude", exclude);
+
   const classes = useStyles();
   return (
-    <Box className={classes.container}>
+    <Box sx={{ gap: 3, display: "flex", flexWrap: "wrap", maxWidth: "100%" }}>
       {news.length > 0 &&
         news
           .slice(0, show === "all" ? news.length : show)
           .slice(0, moreLength)
           .map((article, index) => (
-            <ListItem key={article.attributes.Title + index} data={article} />
+            <>
+              {exclude ? (
+                <>
+                  {exclude !== article.id && (
+                    <ListItem
+                      key={article.attributes.Title + index}
+                      data={article}
+                    />
+                  )}
+                </>
+              ) : (
+                <ListItem
+                  key={article.attributes.Title + index}
+                  data={article}
+                />
+              )}
+            </>
           ))}
       {showMore && (
         <div className={classes.showMoreBlock}>

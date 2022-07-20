@@ -5,14 +5,16 @@ import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import { useMatch } from "react-router";
 import * as Utils from "../../../../Utils/Utils";
+import { useEvents } from "../../hooks/useEvents";
 
 const EventsList = ({ exclude }) => {
-  const [events, setEvents] = useState(null);
+  //  const [events, setEvents] = useState(null);
+  const { events } = useEvents();
   const [moreLength, setMoreLength] = useState(5);
   const matchEvent = useMatch(`/editions/:editionId`);
   const matchEvents = useMatch(`/editions`);
 
-  useEffect(async () => {
+  /*  useEffect(async () => {
     const { data } = await Utils.api.getAllEvents();
     if (data) {
       if (exclude) {
@@ -21,7 +23,7 @@ const EventsList = ({ exclude }) => {
         setEvents(data);
       }
     }
-  }, []);
+  }, []);*/
 
   const useStyles = makeStyles(() => ({
     img: {
