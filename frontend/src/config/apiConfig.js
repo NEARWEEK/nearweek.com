@@ -335,7 +335,6 @@ async function loadTwitterSpaces() {
 
 export const apiConfig = {
   getAllEditions: loadEditions,
-  getLatestEdition: loadLatestEdition,
   getLatestEditions: loadLatestEditions,
   getOneEdition: loadEdition,
   getOneArticle: loadArticle,
