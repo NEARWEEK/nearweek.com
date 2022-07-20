@@ -4,19 +4,26 @@ const rssFeed = require("../functions/createFeeds");
 
 async function getNewFeedItemsFromAPI() {
   let mapFeeds = [];
-  const { results } = await strapi.services["api::article.article"].find({
+
+  /*  const { results } = await strapi.services["api::article.article"].find({
     populate: "deep",
+  });*/
+
+  const entities = await strapi.entityService.findMany("api::article.article", {
+    sort: { createdAt: "desc" },
+    start: 0,
+    limit: 5,
   });
-  for (let article of results) {
+
+  for (let article of entities) {
     mapFeeds.push({
       title: article.Title,
       slug: "content/" + article.slug,
       date: article.createdAt,
-      image: article.Thumbnail?.url || null,
       content: article.Body,
     });
   }
-  return mapFeeds.sort((o1, o2) => new Date(o1.date) - new Date(o2.date));
+  return mapFeeds;
 }
 
 async function main() {
