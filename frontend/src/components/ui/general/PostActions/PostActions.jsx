@@ -1,6 +1,4 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { Box, Button, IconButton } from "@mui/material";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import TelegramIcon from "@mui/icons-material/Telegram";
@@ -118,31 +116,12 @@ const PostActions = () => {
       {!isSignedIn && (
         <Box className={classes.postActions}>
           <Box>
-            <Button
-              className={[classes.button, classes.twitterBtn].join(" ")}
-              variant="contained"
-              disableElevation
-              onClick={handleTwitterButton}
-              startIcon={<TwitterIcon />}
-            >
-              <span
-                className={[
-                  classes.buttonText,
-                  isSignedIn ? "text-hidden" : "",
-                ].join(" ")}
-              >
-                TWITTER
-              </span>
-            </Button>
-            <Button
-              className={[classes.button, classes.telegramBtn].join(" ")}
-              variant="contained"
-              disableElevation
-              onClick={handleTelegramButton}
-              startIcon={<TelegramIcon />}
-            >
-              <span className={classes.buttonText}>TELEGRAM</span>
-            </Button>
+            <IconButton aria-label="twitter" onClick={handleTwitterButton}>
+              <TwitterIcon />
+            </IconButton>
+            <IconButton aria-label="telegram" onClick={handleTelegramButton}>
+              <TelegramIcon />
+            </IconButton>
             {/*            <Button
               className={[classes.button, classes.discordBtn].join(" ")}
               variant="contained"

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Box, Container, Grid, useMediaQuery, useTheme } from "@mui/material";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
 import Section from "../components/ui/general/Section/Section";
