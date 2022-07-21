@@ -2,12 +2,8 @@ import makeStyles from "@mui/styles/makeStyles";
 
 const styles = (theme) => ({
   container: {
-    marginRight: theme.spacing(4),
-    marginLeft: theme.spacing(4),
-    [theme.breakpoints.down("lg")]: {
-      marginRight: theme.spacing(2),
-      marginLeft: theme.spacing(2),
-    },
+    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
   header: {
     borderBottom: "1px solid #ccc",
