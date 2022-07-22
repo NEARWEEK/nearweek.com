@@ -1,9 +1,23 @@
-'use strict';
+"use strict";
 
 /**
  * job router.
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::job.job');
+module.exports = {
+  routes: [
+    {
+      method: "GET",
+      path: "/jobs",
+      handler: "job.find",
+      config: {
+        policies: [],
+      },
+    },
+    {
+      method: "GET",
+      path: "/jobs/slug",
+      handler: "job.findBySlug",
+    },
+  ],
+};

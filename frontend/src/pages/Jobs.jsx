@@ -1,21 +1,28 @@
 import Navbar from "../components/ui/Navbar/Navbar";
-import { Box, Container, Typography, Button, IconButton } from "@mui/material";
+import {
+  Checkbox,
+  Stack,
+  FormControl,
+  Box,
+  Container,
+  Typography,
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardMedia,
+  Pagination,
+  FormLabel,
+  FormGroup,
+  Link,
+  FormControlLabel,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { apiConfig as api } from "../config/apiConfig";
 import SectionHeader from "../components/ui/general/Section/SectionHeader/SectionHeader";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import NoLogo from "../images/nologo.jpg";
 import { getEventDay, getTimeAgo } from "../Utils/Utils";
-import Pagination from "@mui/material/Pagination";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Stack from "@mui/material/Stack";
 
 function usePagination(data, itemsPerPage) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -295,7 +302,7 @@ const Jobs = () => {
                     job.attributes.job_company.data[0].attributes.Logo.data
                       ?.attributes.url || NoLogo
                   }
-                  alt="Live from space album cover"
+                  alt="Job"
                 />
                 <Box
                   sx={{
@@ -329,7 +336,12 @@ const Jobs = () => {
                         {job.attributes.job_company.data[0].attributes.Name}
                       </Typography>
                       <Typography component="div" variant="h5">
-                        {job.attributes.Title}
+                        <Link
+                          href={`/jobs/${job.attributes.slug}`}
+                          color="inherit"
+                        >
+                          {job.attributes.Title}
+                        </Link>
                       </Typography>
                       <Stack
                         direction="row"

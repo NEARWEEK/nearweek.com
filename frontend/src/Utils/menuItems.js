@@ -19,10 +19,10 @@ export const menuItems = [
     name: "Audio",
     link: "/audio-spaces",
   },*/
-  /*  {
+  {
     name: "Near Jobs",
     link: "/jobs",
-  },*/
+  },
   /*  {
     name: "Widgets",
     link: "/widgets",
