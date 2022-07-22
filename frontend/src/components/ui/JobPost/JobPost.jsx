@@ -85,6 +85,12 @@ const JobPost = () => {
     );
   };
 
+  const handleApply = (url) => {
+    if (!url) return;
+    url = url.match(/^http[s]?:\/\//) ? url : "https://" + url;
+    window.open(url, "_blank");
+  };
+
   const classes = useStyles();
   return (
     <>
@@ -114,6 +120,7 @@ const JobPost = () => {
                       sx={{ mt: 3, mb: 3 }}
                       variant="contained"
                       disableElevation
+                      onClick={() => handleApply(job.attributes.apply_link)}
                     >
                       Apply now
                     </Button>
@@ -144,6 +151,7 @@ const JobPost = () => {
                     sx={{ mt: 3, mb: 3 }}
                     variant="contained"
                     disableElevation
+                    onClick={() => handleApply(job.attributes.apply_link)}
                   >
                     Apply now
                   </Button>
