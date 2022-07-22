@@ -180,6 +180,18 @@ async function loadArticle(articleId) {
   }
 }
 
+async function loadJob(slug) {
+  try {
+    const response = await fetch(
+      `/api/jobs/slug?populate=deep&filters[slug]=${slug}`,
+      options
+    );
+    return await response.json();
+  } catch (e) {
+    console.log("Error load article:", e);
+  }
+}
+
 async function createArticle(data) {
   const newArticle = await axios({
     method: "POST",
@@ -363,6 +375,7 @@ export const apiConfig = {
   getAudio: loadAudio,
   getAudioCategories: loadAudioCategories,
   getJobs: loadJobs,
+  getJob: loadJob,
   getJobTypes: loadJobTypes,
   getJobDepartments: loadJobDepartments,
   getJobOccupations: loadJobOccupations,
