@@ -11,6 +11,9 @@ async function getNewFeedItemsFromAPI() {
 
   const entities = await strapi.entityService.findMany("api::article.article", {
     sort: { createdAt: "desc" },
+    populate: {
+      categories: true,
+    },
     start: 0,
     limit: 5,
   });
@@ -21,6 +24,7 @@ async function getNewFeedItemsFromAPI() {
       slug: "content/" + article.slug,
       date: article.createdAt,
       content: article.Body,
+      category: article.categories.map((category) => category.Name),
     });
   }
   return mapFeeds;

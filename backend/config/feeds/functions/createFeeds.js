@@ -49,6 +49,9 @@ function buildFeed(posts) {
               _cdata: postContent,
             },
           },
+          ...post.category.map((item) => {
+            return { category: item };
+          }),
         ],
       };
 
